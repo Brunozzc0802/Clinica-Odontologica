@@ -1,1 +1,1 @@
-# Clinica-Odontol-gica
+# Clinica-Odontologica

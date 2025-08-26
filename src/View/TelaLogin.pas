@@ -13,9 +13,10 @@ type
         TFormLogin = class(TForm)
                 pnlLogin: TPanel;
                 imgLogin: TImage;
-                Edit1: TEdit;
+    edUsuario: TEdit;
                 edSenha: TEdit;
                 btnEntrar: TImage;
+    imgLogo: TImage;
         private
                 { Private declarations }
         public

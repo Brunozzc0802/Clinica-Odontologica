@@ -7,27 +7,50 @@ uses
         System.Classes, Vcl.Graphics,
         Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
         Vcl.Imaging.pngimage,
-        Vcl.StdCtrls;
+        Vcl.StdCtrls,TelaPrincipal;
 
 type
         TFormLogin = class(TForm)
-                pnlLogin: TPanel;
-                imgLogin: TImage;
-    edUsuario: TEdit;
-                edSenha: TEdit;
-                btnEntrar: TImage;
-    imgLogo: TImage;
-        private
-                { Private declarations }
-        public
-                { Public declarations }
-        end;
+        pnlLogin: TPanel;
+        imgLogin: TImage;
+        edUsuario: TEdit;
+        edSenha: TEdit;
+        btnEntrar: TImage;
+        imgLogo: TImage;
+        pnlTelaPrincipal: TPanel;
+        imgFundo: TImage;
+        FundoLateral: TImage;
+    Image2: TImage;
+        procedure btnEntrarClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    private
+      { Private declarations }
+    public
+      { Public declarations }
+    end;
 
-var
-        FormLogin: TFormLogin;
+  var
+   FormLogin: TFormLogin;
 
 implementation
 
 {$R *.dfm}
+
+procedure TFormLogin.btnEntrarClick(Sender: TObject);
+  begin
+    if (edUsuario.Text = '') or (edSenha.Text = '') then begin
+      ShowMessage('Preencha Todos Os Campos');
+      pnlTelaPrincipal.Visible := false;
+      pnlLogin.Visible := True;
+    end else begin
+      ShowMessage('Login Efetuado Com Sucesso');
+      pnlLogin.Visible := False;
+      pnlTelaPrincipal.Visible := True;
+    end;
+  end;
+procedure TFormLogin.FormCreate(Sender: TObject);
+  begin
+    pnlTelaPrincipal.Visible := False;
+  end;
 
 end.

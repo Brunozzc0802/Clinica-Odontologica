@@ -14,24 +14,20 @@ type
         pnlLogin: TPanel;
         edUsuario: TEdit;
         pnlTelaPrincipal: TPanel;
-    imgLogoFundo: TImage;
-        FundoLateral: TImage;
-        btnUsuarios: TImage;
         linhaUsuarios: TLabel;
-    btnPacientes: TImage;
-        linhaPacientes: TLabel;
-    btnProfissionais: TImage;
-        linhaProfissionais: TLabel;
-    btnConsultas: TImage;
-        linhaConsultas: TLabel;
     pnlFormLogin: TPanel;
     btnEntrar: TPanel;
     imgFundo: TImage;
     pnlAzul: TPanel;
     logo: TImage;
-    lblLogin: TLabel;
+    lblRealizeSeu: TLabel;
     edSenha: TEdit;
     CheckBox1: TCheckBox;
+    pnlAzulPrincipal: TPanel;
+    imgLogoPrincipal: TImage;
+    pnlFundoLateral: TPanel;
+    lblLogin: TLabel;
+    linhaPacientes: TLabel;
         procedure btnEntrarClick(Sender: TObject);
         procedure FormCreate(Sender: TObject);
     procedure btnEntrarMouseEnter(Sender: TObject);
@@ -74,7 +70,9 @@ procedure TFormLogin.btnEntrarMouseLeave(Sender: TObject);
 
 procedure TFormLogin.FormCreate(Sender: TObject);
   begin
+    lblLogin.font.Color := $00C97D16;
     pnlTelaPrincipal.Visible := False;
+
   end;
 
 end.

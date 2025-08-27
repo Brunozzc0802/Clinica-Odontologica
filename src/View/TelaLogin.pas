@@ -28,6 +28,7 @@ type
     pnlFundoLateral: TPanel;
     lblLogin: TLabel;
     linhaPacientes: TLabel;
+    linhaProfissionais: TLabel;
         procedure btnEntrarClick(Sender: TObject);
         procedure FormCreate(Sender: TObject);
     procedure btnEntrarMouseEnter(Sender: TObject);

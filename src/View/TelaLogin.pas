@@ -18,11 +18,18 @@ type
         btnEntrar: TImage;
         imgLogo: TImage;
         pnlTelaPrincipal: TPanel;
-        imgFundo: TImage;
+    imgLogoFundo: TImage;
         FundoLateral: TImage;
-    Image2: TImage;
+        btnUsuarios: TImage;
+        linhaUsuarios: TLabel;
+    btnPacientes: TImage;
+        linhaPacientes: TLabel;
+    btnProfissionais: TImage;
+        linhaProfissionais: TLabel;
+    btnConsultas: TImage;
+        linhaConsultas: TLabel;
         procedure btnEntrarClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
+        procedure FormCreate(Sender: TObject);
     private
       { Private declarations }
     public

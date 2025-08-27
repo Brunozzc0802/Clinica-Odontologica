@@ -19,8 +19,6 @@ object FormLogin: TFormLogin
     Height = 613
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 1010
-    ExplicitHeight = 616
     DesignSize = (
       1087
       613)
@@ -702,6 +700,7 @@ object FormLogin: TFormLogin
       Top = 2
       Width = 648
       Height = 614
+      Anchors = [akTop, akRight, akBottom]
       Picture.Data = {
         0954506E67496D61676589504E470D0A1A0A0000000D49484452000002890000
         026108060000002DC02ACE000000017352474200AECE1CE90000000467414D41
@@ -2689,7 +2688,6 @@ object FormLogin: TFormLogin
       AutoSize = False
       TabOrder = 0
       TextHint = 'Digite Seu Nome:'
-      ExplicitLeft = 665
     end
     object edSenha: TEdit
       Left = 685
@@ -2701,7 +2699,6 @@ object FormLogin: TFormLogin
       PasswordChar = '*'
       TabOrder = 1
       TextHint = 'Digite Sua Senha:'
-      ExplicitLeft = 666
     end
   end
   object pnlTelaPrincipal: TPanel

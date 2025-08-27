@@ -7,7 +7,7 @@ uses
         System.Classes, Vcl.Graphics,
         Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
         Vcl.Imaging.pngimage,
-        Vcl.StdCtrls,TelaPrincipal;
+        Vcl.StdCtrls;
 
 type
         TFormLogin = class(TForm)

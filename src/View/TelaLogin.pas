@@ -7,16 +7,12 @@ uses
         System.Classes, Vcl.Graphics,
         Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
         Vcl.Imaging.pngimage,
-        Vcl.StdCtrls;
+        Vcl.StdCtrls, Vcl.Imaging.jpeg;
 
 type
         TFormLogin = class(TForm)
         pnlLogin: TPanel;
-        imgLogin: TImage;
         edUsuario: TEdit;
-        edSenha: TEdit;
-        btnEntrar: TImage;
-        imgLogo: TImage;
         pnlTelaPrincipal: TPanel;
     imgLogoFundo: TImage;
         FundoLateral: TImage;
@@ -28,8 +24,18 @@ type
         linhaProfissionais: TLabel;
     btnConsultas: TImage;
         linhaConsultas: TLabel;
+    pnlFormLogin: TPanel;
+    btnEntrar: TPanel;
+    imgFundo: TImage;
+    pnlAzul: TPanel;
+    logo: TImage;
+    lblLogin: TLabel;
+    edSenha: TEdit;
+    CheckBox1: TCheckBox;
         procedure btnEntrarClick(Sender: TObject);
         procedure FormCreate(Sender: TObject);
+    procedure btnEntrarMouseEnter(Sender: TObject);
+    procedure btnEntrarMouseLeave(Sender: TObject);
     private
       { Private declarations }
     public
@@ -55,6 +61,17 @@ procedure TFormLogin.btnEntrarClick(Sender: TObject);
       pnlTelaPrincipal.Visible := True;
     end;
   end;
+
+procedure TFormLogin.btnEntrarMouseEnter(Sender: TObject);
+  begin
+         btnEntrar.Color := $00A76812;
+  end;
+
+procedure TFormLogin.btnEntrarMouseLeave(Sender: TObject);
+  begin
+    btnEntrar.Color := $00DB8817;
+  end;
+
 procedure TFormLogin.FormCreate(Sender: TObject);
   begin
     pnlTelaPrincipal.Visible := False;

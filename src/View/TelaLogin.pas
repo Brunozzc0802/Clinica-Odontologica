@@ -29,6 +29,9 @@ type
     lblLogin: TLabel;
     linhaPacientes: TLabel;
     linhaProfissionais: TLabel;
+    linhaConsultas: TLabel;
+    linhaProcedimentos: TLabel;
+    linhaRelatorios: TLabel;
         procedure btnEntrarClick(Sender: TObject);
         procedure FormCreate(Sender: TObject);
     procedure btnEntrarMouseEnter(Sender: TObject);

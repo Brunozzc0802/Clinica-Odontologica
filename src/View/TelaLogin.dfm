@@ -19,9 +19,6 @@ object FormLogin: TFormLogin
     Height = 863
     Align = alClient
     TabOrder = 0
-    ExplicitLeft = -8
-    ExplicitWidth = 1034
-    ExplicitHeight = 683
     DesignSize = (
       1403
       863)
@@ -838,15 +835,18 @@ object FormLogin: TFormLogin
       Color = 14539739
       ParentBackground = False
       TabOrder = 0
-      ExplicitLeft = 628
       DesignSize = (
         425
         541)
       object lblRealizeSeu: TLabel
-        Left = 104
-        Top = 37
-        Width = 226
+        AlignWithMargins = True
+        Left = 4
+        Top = 11
+        Width = 417
         Height = 60
+        Margins.Top = 10
+        Align = alTop
+        Alignment = taCenter
         Caption = 'Realize Seu'
         Color = clLime
         Font.Charset = ANSI_CHARSET
@@ -856,12 +856,19 @@ object FormLogin: TFormLogin
         Font.Style = []
         ParentColor = False
         ParentFont = False
+        ExplicitLeft = -7
+        ExplicitTop = 0
+        ExplicitWidth = 423
       end
       object lblLogin: TLabel
-        Left = 168
-        Top = 87
-        Width = 106
+        AlignWithMargins = True
+        Left = 4
+        Top = 75
+        Width = 417
         Height = 60
+        Margins.Top = 1
+        Align = alTop
+        Alignment = taCenter
         Caption = 'Login'
         Color = clLime
         Font.Charset = ANSI_CHARSET
@@ -872,6 +879,8 @@ object FormLogin: TFormLogin
         ParentColor = False
         ParentFont = False
         Transparent = True
+        ExplicitLeft = -4
+        ExplicitTop = 166
       end
       object btnEntrar: TPanel
         AlignWithMargins = True
@@ -925,7 +934,7 @@ object FormLogin: TFormLogin
       object CheckBox1: TCheckBox
         Left = 24
         Top = 435
-        Width = 113
+        Width = 121
         Height = 17
         Caption = 'Salvar Credenciais'
         Color = 14387223
@@ -942,8 +951,6 @@ object FormLogin: TFormLogin
       Color = 13204758
       ParentBackground = False
       TabOrder = 1
-      ExplicitWidth = 528
-      ExplicitHeight = 644
       DesignSize = (
         924
         861)
@@ -2680,8 +2687,6 @@ object FormLogin: TFormLogin
     Height = 863
     Align = alClient
     TabOrder = 1
-    ExplicitLeft = -1
-    ExplicitHeight = 860
     DesignSize = (
       1403
       863)
@@ -2699,11 +2704,16 @@ object FormLogin: TFormLogin
       TabOrder = 0
       ExplicitLeft = 309
       object imgLogoPrincipal: TImage
-        Left = 775
-        Top = 367
-        Width = 297
-        Height = 274
-        Margins.Bottom = 300
+        AlignWithMargins = True
+        Left = 101
+        Top = 51
+        Width = 941
+        Height = 755
+        Margins.Left = 100
+        Margins.Top = 50
+        Margins.Right = 50
+        Margins.Bottom = 50
+        Align = alClient
         Center = True
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000013F0000
@@ -4420,6 +4430,10 @@ object FormLogin: TFormLogin
           C8312891935F8E1C39062572F2CB9123C7A0444E7E3972E41894C8C92F478E1C
           831239F9E5C89163502227BF1C39720C4AE4E49723478E41899CFC72E4C83128
           91935F8E1C390625FE3FF554A820DEE964570000000049454E44AE426082}
+        ExplicitLeft = 751
+        ExplicitTop = 367
+        ExplicitWidth = 297
+        ExplicitHeight = 274
       end
     end
     object pnlFundoLateral: TPanel
@@ -4431,7 +4445,6 @@ object FormLogin: TFormLogin
       Color = 8142341
       ParentBackground = False
       TabOrder = 1
-      ExplicitHeight = 856
       object linhaUsuarios: TLabel
         AlignWithMargins = True
         Left = 26
@@ -4450,8 +4463,8 @@ object FormLogin: TFormLogin
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
-        ExplicitTop = 73
-        ExplicitHeight = 27
+        ExplicitWidth = 258
+        ExplicitHeight = 21
       end
       object linhaPacientes: TLabel
         AlignWithMargins = True
@@ -4471,7 +4484,6 @@ object FormLogin: TFormLogin
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
-        ExplicitTop = 166
         ExplicitHeight = 21
       end
       object linhaProfissionais: TLabel
@@ -4492,8 +4504,70 @@ object FormLogin: TFormLogin
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
-        ExplicitTop = 253
+        ExplicitTop = 265
+      end
+      object linhaConsultas: TLabel
+        AlignWithMargins = True
+        Left = 26
+        Top = 321
+        Width = 252
+        Height = 47
+        Margins.Left = 25
+        Margins.Top = 320
+        Margins.Right = 25
+        Margins.Bottom = 490
+        Align = alClient
+        Caption = '------------------------------------------'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitTop = 236
+        ExplicitHeight = 21
+      end
+      object linhaProcedimentos: TLabel
+        AlignWithMargins = True
+        Left = 26
+        Top = 401
+        Width = 252
+        Height = 37
+        Margins.Left = 25
+        Margins.Top = 400
+        Margins.Right = 25
+        Margins.Bottom = 420
+        Align = alClient
+        Caption = '------------------------------------------'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitTop = 403
         ExplicitHeight = 27
+      end
+      object linhaRelatorios: TLabel
+        AlignWithMargins = True
+        Left = 26
+        Top = 481
+        Width = 252
+        Height = 47
+        Margins.Left = 25
+        Margins.Top = 480
+        Margins.Right = 25
+        Margins.Bottom = 330
+        Align = alClient
+        Caption = '------------------------------------------'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        ExplicitTop = 411
+        ExplicitHeight = 21
       end
     end
   end

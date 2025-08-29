@@ -856,9 +856,7 @@ object FormLogin: TFormLogin
         Font.Style = []
         ParentColor = False
         ParentFont = False
-        ExplicitLeft = -7
-        ExplicitTop = 0
-        ExplicitWidth = 423
+        ExplicitWidth = 226
       end
       object lblLogin: TLabel
         AlignWithMargins = True
@@ -879,8 +877,7 @@ object FormLogin: TFormLogin
         ParentColor = False
         ParentFont = False
         Transparent = True
-        ExplicitLeft = -4
-        ExplicitTop = 166
+        ExplicitWidth = 106
       end
       object btnEntrar: TPanel
         AlignWithMargins = True
@@ -4430,10 +4427,8 @@ object FormLogin: TFormLogin
           C8312891935F8E1C39062572F2CB9123C7A0444E7E3972E41894C8C92F478E1C
           831239F9E5C89163502227BF1C39720C4AE4E49723478E41899CFC72E4C83128
           91935F8E1C390625FE3FF554A820DEE964570000000049454E44AE426082}
-        ExplicitLeft = 751
-        ExplicitTop = 367
-        ExplicitWidth = 297
-        ExplicitHeight = 274
+        ExplicitLeft = 125
+        ExplicitTop = 59
       end
     end
     object pnlFundoLateral: TPanel
@@ -4448,11 +4443,11 @@ object FormLogin: TFormLogin
       object linhaUsuarios: TLabel
         AlignWithMargins = True
         Left = 26
-        Top = 71
+        Top = 76
         Width = 252
-        Height = 37
+        Height = 32
         Margins.Left = 25
-        Margins.Top = 70
+        Margins.Top = 75
         Margins.Right = 25
         Margins.Bottom = 750
         Align = alClient
@@ -4463,17 +4458,18 @@ object FormLogin: TFormLogin
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
+        ExplicitTop = 71
         ExplicitWidth = 258
         ExplicitHeight = 21
       end
       object linhaPacientes: TLabel
         AlignWithMargins = True
         Left = 26
-        Top = 156
+        Top = 161
         Width = 252
-        Height = 32
+        Height = 27
         Margins.Left = 25
-        Margins.Top = 155
+        Margins.Top = 160
         Margins.Right = 25
         Margins.Bottom = 670
         Align = alClient
@@ -4484,16 +4480,17 @@ object FormLogin: TFormLogin
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
+        ExplicitTop = 156
         ExplicitHeight = 21
       end
       object linhaProfissionais: TLabel
         AlignWithMargins = True
         Left = 26
-        Top = 241
+        Top = 246
         Width = 252
-        Height = 37
+        Height = 32
         Margins.Left = 25
-        Margins.Top = 240
+        Margins.Top = 245
         Margins.Right = 25
         Margins.Bottom = 580
         Align = alClient
@@ -4504,16 +4501,17 @@ object FormLogin: TFormLogin
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
-        ExplicitTop = 265
+        ExplicitTop = 241
+        ExplicitHeight = 21
       end
       object linhaConsultas: TLabel
         AlignWithMargins = True
         Left = 26
-        Top = 321
+        Top = 333
         Width = 252
-        Height = 47
+        Height = 35
         Margins.Left = 25
-        Margins.Top = 320
+        Margins.Top = 332
         Margins.Right = 25
         Margins.Bottom = 490
         Align = alClient
@@ -4524,17 +4522,17 @@ object FormLogin: TFormLogin
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
-        ExplicitTop = 236
-        ExplicitHeight = 21
+        ExplicitLeft = 30
+        ExplicitTop = 340
       end
       object linhaProcedimentos: TLabel
         AlignWithMargins = True
         Left = 26
-        Top = 401
+        Top = 418
         Width = 252
-        Height = 37
+        Height = 20
         Margins.Left = 25
-        Margins.Top = 400
+        Margins.Top = 417
         Margins.Right = 25
         Margins.Bottom = 420
         Align = alClient
@@ -4545,17 +4543,17 @@ object FormLogin: TFormLogin
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
-        ExplicitTop = 403
-        ExplicitHeight = 27
+        ExplicitTop = 401
+        ExplicitHeight = 21
       end
       object linhaRelatorios: TLabel
         AlignWithMargins = True
         Left = 26
-        Top = 481
+        Top = 504
         Width = 252
-        Height = 47
+        Height = 24
         Margins.Left = 25
-        Margins.Top = 480
+        Margins.Top = 503
         Margins.Right = 25
         Margins.Bottom = 330
         Align = alClient
@@ -4566,8 +4564,9 @@ object FormLogin: TFormLogin
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
-        ExplicitTop = 411
-        ExplicitHeight = 21
+        ExplicitLeft = 30
+        ExplicitTop = 501
+        ExplicitHeight = 27
       end
     end
   end

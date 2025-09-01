@@ -7,7 +7,7 @@ uses
         System.Classes, Vcl.Graphics,
         Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
         Vcl.Imaging.pngimage,
-        Vcl.StdCtrls, Vcl.Imaging.jpeg,uControllerUsuarios;
+        Vcl.StdCtrls, Vcl.Imaging.jpeg,uControllerUsuarios,uUsuario;
 
 type
         TFormLogin = class(TForm)
@@ -54,17 +54,26 @@ implementation
 {$R *.dfm}
 
 procedure TFormLogin.btnEntrarClick(Sender: TObject);
+  var Usuario: TUsuario;
+      Controller: TUsuarioController;
   begin
-    if (edUsuario.Text = '') or (edSenha.Text = '') then begin
-      ShowMessage('Preencha Todos Os Campos');
-      pnlTelaPrincipal.Visible := false;
-      pnlLogin.Visible := True;
-    end else begin
-      ShowMessage('Login Efetuado Com Sucesso');
-      pnlLogin.Visible := False;
-      pnlTelaPrincipal.Visible := True;
+    Usuario := TUsuario.Create;
+    Controller := TUsuarioController.Create;
+    try
+      Usuario.Nome := edUsuario.Text;
+      Usuario.Senha := edSenha.Text;
+      if Controller.ValidarLogin(Usuario) then begin
+        ShowMessage('Login Efetuado com sucesso');
+        pnlLogin.Visible := False;
+        pnlTelaPrincipal.Visible := True;
+      end else
+        ShowMessage('Usuário ou senha incorretos!');
+    finally
+      Usuario.Free;
+      Controller.Free;
     end;
   end;
+
 
 procedure TFormLogin.btnEntrarMouseEnter(Sender: TObject);
   begin

@@ -37,7 +37,7 @@ function TUsuarioController.ValidarLogin(AUsuario: TUsuario): Boolean;
     FDQuery := TFDQuery.Create(nil);
   try
     FDQuery.Connection := AConexao.Connection;
-    FDQuery.SQL.Text := 'SELECT * FROM usuarios WHERE login = :nome AND senha = :senha';
+    FDQuery.SQL.Text := 'SELECT * FROM usuarios WHERE nome = :nome AND senha = :senha';
     FDQuery.ParamByName('nome').AsString := AUsuario.Nome;
     FDQuery.ParamByName('senha').AsString := AUsuario.Senha;
     FDQuery.Open;

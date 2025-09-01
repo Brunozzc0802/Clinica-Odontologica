@@ -2,7 +2,6 @@ unit uConexao;
 
 interface
 
-
 uses
   FireDAC.Comp.Client, FireDAC.Stan.Def, FireDAC.Stan.Async, FireDAC.DApt;
 
@@ -30,15 +29,14 @@ constructor TConexao.Create;
   begin
     AConnection := TFDConnection.Create(nil);
     Connection.DriverName := 'PG';
-    with AConnection.Params do
-  begin
+  with AConnection.Params do begin
     Values['Database'] := 'clinicia_odontologica';
     Values['User_Name'] := 'postgres';
     Values['Password'] := 'root';
     Values['Server'] := 'localhost';
     Values['Port'] := '5432';
   end;
-  AConnection.Connected := True;
+    AConnection.Connected := True;
   end;
 
 destructor TConexao.Destroy;

@@ -16,13 +16,12 @@ type
         pnlTelaPrincipal: TPanel;
         linhaUsuarios: TLabel;
     pnlFormLogin: TPanel;
-    btnEntrar: TPanel;
     imgFundo: TImage;
     pnlAzul: TPanel;
     logo: TImage;
     lblRealizeSeu: TLabel;
     edSenha: TEdit;
-    CheckBox1: TCheckBox;
+    cbSalvarCredenciais: TCheckBox;
     pnlAzulPrincipal: TPanel;
     imgLogoPrincipal: TImage;
     pnlFundoLateral: TPanel;
@@ -32,10 +31,14 @@ type
     linhaConsultas: TLabel;
     linhaProcedimentos: TLabel;
     linhaRelatorios: TLabel;
+    linhaFinal: TLabel;
+    btnEncerrarSistema: TImage;
+    btnEntrar: TPanel;
         procedure btnEntrarClick(Sender: TObject);
         procedure FormCreate(Sender: TObject);
     procedure btnEntrarMouseEnter(Sender: TObject);
     procedure btnEntrarMouseLeave(Sender: TObject);
+    procedure btnEncerrarSistemaClick(Sender: TObject);
     private
       { Private declarations }
     public
@@ -64,7 +67,7 @@ procedure TFormLogin.btnEntrarClick(Sender: TObject);
 
 procedure TFormLogin.btnEntrarMouseEnter(Sender: TObject);
   begin
-         btnEntrar.Color := $00A76812;
+         btnEntrar.Color := $00C87C15;
   end;
 
 procedure TFormLogin.btnEntrarMouseLeave(Sender: TObject);
@@ -77,6 +80,11 @@ procedure TFormLogin.FormCreate(Sender: TObject);
     lblLogin.font.Color := $00C97D16;
     pnlTelaPrincipal.Visible := False;
 
+  end;
+
+procedure TFormLogin.btnEncerrarSistemaClick(Sender: TObject);
+  begin
+    Close;
   end;
 
 end.

@@ -10,7 +10,7 @@ uses
     AConnection: TFDConnection;
     public
     constructor Create;
-    destructor Destroy;
+    destructor Destroy; override;
     function Connection: TFDConnection;
   end;
 
@@ -42,6 +42,7 @@ constructor TConexao.Create;
 destructor TConexao.Destroy;
   begin
     AConnection.Free;
+    inherited;
   end;
 
 end.

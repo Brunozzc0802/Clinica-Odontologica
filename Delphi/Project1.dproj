@@ -129,6 +129,7 @@
         </DCCReference>
         <DCCReference Include="..\src\Model\uConexao.pas"/>
         <DCCReference Include="..\src\Model\uUsuario.pas"/>
+        <DCCReference Include="..\src\Controller\uControllerUsuarios.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -34,7 +34,7 @@ type
         linhaFinal: TLabel;
         btnEncerrarSistema: TImage;
         btnEntrar: TPanel;
-    btnUsuarios: TImage;
+        btnUsuarios: TImage;
         procedure btnEntrarClick(Sender: TObject);
         procedure FormCreate(Sender: TObject);
         procedure btnEntrarMouseEnter(Sender: TObject);

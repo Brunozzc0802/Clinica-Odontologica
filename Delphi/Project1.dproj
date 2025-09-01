@@ -127,6 +127,7 @@
             <Form>FormLogin</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\src\Model\uConexao.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

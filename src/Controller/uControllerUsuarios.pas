@@ -3,48 +3,49 @@ unit uControllerUsuarios;
 interface
 
 uses
-  uUsuario, uConexao, FireDAC.Comp.Client, System.SysUtils;
+  uUsuario, FireDAC.Comp.Client, System.SysUtils;
 
 type
   TUsuarioController = class
   private
-    AConexao: TConexao;
   public
-    constructor Create;
-    destructor Destroy; override;
-    function ValidarLogin(AUsuario: TUsuario):Boolean;
+    ControllerConexao: TFDConnection;
+    constructor Create(AConexao: TFDConnection);
+    function ValidarLogin(Nome, Senha: string): TUsuario;
   end;
 
 implementation
 
 { TUsuarioController }
 
-constructor TUsuarioController.Create;
-  begin
-    AConexao := TConexao.Create;
-  end;
-
-destructor TUsuarioController.Destroy;
-  begin
-    AConexao.free;
-    inherited;
-  end;
-
-function TUsuarioController.ValidarLogin(AUsuario: TUsuario): Boolean;
-  var
-    FDQuery: TFDQuery;
-  begin
-    FDQuery := TFDQuery.Create(nil);
-  try
-    FDQuery.Connection := AConexao.Connection;
-    FDQuery.SQL.Text := 'SELECT * FROM usuarios WHERE nome = :nome AND senha = :senha';
-    FDQuery.ParamByName('nome').AsString := AUsuario.Nome;
-    FDQuery.ParamByName('senha').AsString := AUsuario.Senha;
-    FDQuery.Open;
-    Result := not FDQuery.Eof;
-  finally
-    FDQuery.Free;
-  end;
+constructor TUsuarioController.Create(AConexao: TFDConnection);
+begin
+  ControllerConexao := AConexao;
 end;
 
+function TUsuarioController.ValidarLogin(Nome, Senha: string): TUsuario;
+var
+  Query: TFDQuery;
+begin
+  Result := nil;
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := ControllerConexao;
+    Query.SQL.Text := 'SELECT * FROM usuarios WHERE nome=:nome AND senha=:senha AND ativo=true';
+    Query.ParamByName('nome').AsString := Nome;
+    Query.ParamByName('senha').AsString := Senha;
+    Query.Open;
+
+    if not Query.IsEmpty then
+    begin
+      Result := TUsuario.Create;
+      Result.Nome := Query.FieldByName('nome').AsString;
+      Result.Senha := Query.FieldByName('senha').AsString;
+    end;
+
+  finally
+    Query.Free;
+  end;
+end;
 end.
+

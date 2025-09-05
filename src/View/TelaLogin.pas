@@ -42,28 +42,30 @@ type
         lblCadastroForm: TLabel;
         edUsuarioCadastro: TEdit;
         edSenhaCadastro: TEdit;
-        btnCadastrar: TPanel;
         pnlAzulCadastro: TPanel;
         imgLogoCadastro: TImage;
         edEmailCadastro: TEdit;
         edCpfCadastro: TEdit;
-    lblNTemLogin: TLabel;
-    lblCadastrarLog: TLabel;
-    lblJaTemLoginFCadastro: TLabel;
-    lblEntrarFCadastro: TLabel;
+        lblNTemLogin: TLabel;
+        lblCadastrarLog: TLabel;
+        lblJaTemLoginFCadastro: TLabel;
+        lblEntrarFCadastro: TLabel;
+    btnCadastrar: TPanel;
         procedure btnEntrarClick(Sender: TObject);
         procedure FormCreate(Sender: TObject);
         procedure btnEntrarMouseEnter(Sender: TObject);
         procedure btnEntrarMouseLeave(Sender: TObject);
         procedure btnEncerrarSistemaClick(Sender: TObject);
         procedure lblCadastrarLogMouseEnter(Sender: TObject);
-    procedure lblCadastrarLogMouseLeave(Sender: TObject);
-    procedure lblCadastrarLogClick(Sender: TObject);
-    procedure btnCadastrarMouseEnter(Sender: TObject);
-    procedure btnCadastrarMouseLeave(Sender: TObject);
-    procedure lblEntrarFCadastroMouseEnter(Sender: TObject);
-    procedure lblEntrarFCadastroMouseLeave(Sender: TObject);
-    procedure lblEntrarFCadastroClick(Sender: TObject);
+        procedure lblCadastrarLogMouseLeave(Sender: TObject);
+        procedure lblCadastrarLogClick(Sender: TObject);
+        procedure btnCadastrarMouseEnter(Sender: TObject);
+        procedure btnCadastrarMouseLeave(Sender: TObject);
+        procedure lblEntrarFCadastroMouseEnter(Sender: TObject);
+        procedure lblEntrarFCadastroMouseLeave(Sender: TObject);
+        procedure lblEntrarFCadastroClick(Sender: TObject);
+        procedure btnCadastrarClick(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
     private
       { Private declarations }
     public
@@ -77,6 +79,27 @@ implementation
 
 {$R *.dfm}
 
+
+//criação do form
+procedure TFormLogin.FormCreate(Sender: TObject);
+  begin
+    lblEntrarFCadastro.Font.Color := $00C97D16;
+    lblCadastroForm.Font.Color := $00C97D16;
+    lblCadastrarLog.Font.Color := $00C97D16;
+    lblLogin.font.Color := $00C97D16;
+    pnlTelaPrincipal.Visible := False;
+    pnlCadastro.Visible := False;
+  end;
+
+procedure TFormLogin.FormKeyPress(Sender: TObject; var Key: Char);
+    begin
+  if Key = #13 then begin
+    Key := #0;
+    SelectNext(ActiveControl, True, True);
+  end;
+end;
+
+//codigos de login
 procedure TFormLogin.btnEntrarClick(Sender: TObject);
   var
   Controller: TUsuarioController;
@@ -108,16 +131,6 @@ procedure TFormLogin.btnEntrarMouseLeave(Sender: TObject);
     btnEntrar.Color := $00DB8817;
   end;
 
-procedure TFormLogin.FormCreate(Sender: TObject);
-  begin
-    lblEntrarFCadastro.Font.Color := $00C97D16;
-    lblCadastroForm.Font.Color := $00C97D16;
-    lblCadastrarLog.Font.Color := $00C97D16;
-    lblLogin.font.Color := $00C97D16;
-    pnlTelaPrincipal.Visible := False;
-    pnlCadastro.Visible := False;
-  end;
-
 procedure TFormLogin.lblCadastrarLogClick(Sender: TObject);
   begin
     pnlLogin.Visible := false;
@@ -141,6 +154,8 @@ procedure TFormLogin.lblEntrarFCadastroClick(Sender: TObject);
     pnlCadastro.Visible := false;
   end;
 
+//Codigos de form cadastro
+
 procedure TFormLogin.lblEntrarFCadastroMouseEnter(Sender: TObject);
   begin
     lblEntrarFCadastro.Font.Color := $00965C10;
@@ -149,6 +164,18 @@ procedure TFormLogin.lblEntrarFCadastroMouseEnter(Sender: TObject);
 procedure TFormLogin.lblEntrarFCadastroMouseLeave(Sender: TObject);
   begin
     lblEntrarFCadastro.Font.Color := $00C97D16;
+  end;
+
+procedure TFormLogin.btnCadastrarClick(Sender: TObject);
+  begin
+    if (edUsuarioCadastro.Text = '') or (edSenhaCadastro.Text = '') or (edEmailCadastro.Text = '') or (edCpfCadastro.Text = '')
+      then begin
+        ShowMessage('Preencha todos os campos');
+        exit;
+      end else
+        ShowMessage('Cadastro concluido com sucesso');
+        pnlCadastro.Visible := false;
+        pnlLogin.Visible := True;
   end;
 
 procedure TFormLogin.btnCadastrarMouseEnter(Sender: TObject);
@@ -160,6 +187,7 @@ procedure TFormLogin.btnCadastrarMouseLeave(Sender: TObject);
   begin
     btnCadastrar.Color := $00DB8817;
   end;
+// codigos da tela principal
 
 procedure TFormLogin.btnEncerrarSistemaClick(Sender: TObject);
   begin

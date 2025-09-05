@@ -10,8 +10,10 @@ object FormLogin: TFormLogin
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  KeyPreview = True
   Position = poDesigned
   OnCreate = FormCreate
+  OnKeyPress = FormKeyPress
   TextHeight = 15
   object pnlCadastro: TPanel
     Left = 0
@@ -822,7 +824,6 @@ object FormLogin: TFormLogin
         9E5973652DED2EA00398022C7AB1C6638F60154000000000010A800002AD4000
         000007FFD9}
       ExplicitLeft = -5
-      ExplicitTop = 2
     end
     object pnlFormCadastro: TPanel
       Left = 26
@@ -874,7 +875,7 @@ object FormLogin: TFormLogin
         ParentColor = False
         ParentFont = False
         Transparent = True
-        ExplicitTop = 49
+        ExplicitWidth = 180
       end
       object lblJaTemLoginFCadastro: TLabel
         Left = 24
@@ -910,7 +911,7 @@ object FormLogin: TFormLogin
         Anchors = [akTop, akRight]
         AutoSize = False
         TabOrder = 0
-        TextHint = 'Crie Um Nome:'
+        TextHint = 'Digite Seu Nome:'
       end
       object edSenhaCadastro: TEdit
         Left = 24
@@ -924,28 +925,6 @@ object FormLogin: TFormLogin
         TabOrder = 1
         TextHint = 'Crie Uma Senha:'
       end
-      object btnCadastrar: TPanel
-        AlignWithMargins = True
-        Left = 24
-        Top = 468
-        Width = 377
-        Height = 43
-        Margins.Left = 23
-        Margins.Top = 330
-        Margins.Right = 23
-        Margins.Bottom = 35
-        Align = alClient
-        BevelOuter = bvNone
-        BevelWidth = 2
-        Caption = 'Cadastrar'
-        Color = 14387223
-        ParentBackground = False
-        TabOrder = 2
-        OnClick = btnEntrarClick
-        OnMouseEnter = btnCadastrarMouseEnter
-        OnMouseLeave = btnCadastrarMouseLeave
-        ExplicitHeight = 38
-      end
       object edEmailCadastro: TEdit
         Left = 24
         Top = 270
@@ -953,7 +932,7 @@ object FormLogin: TFormLogin
         Height = 41
         Anchors = [akTop, akRight]
         AutoSize = False
-        TabOrder = 3
+        TabOrder = 2
         TextHint = 'Digite Seu Email:'
       end
       object edCpfCadastro: TEdit
@@ -963,8 +942,33 @@ object FormLogin: TFormLogin
         Height = 41
         Anchors = [akTop, akRight]
         AutoSize = False
-        TabOrder = 4
+        TabOrder = 3
         TextHint = 'Digite Seu CPF:'
+      end
+      object btnCadastrar: TPanel
+        AlignWithMargins = True
+        Left = 24
+        Top = 473
+        Width = 377
+        Height = 43
+        Cursor = crHandPoint
+        Margins.Left = 23
+        Margins.Top = 335
+        Margins.Right = 23
+        Margins.Bottom = 30
+        Align = alClient
+        BevelOuter = bvNone
+        BevelWidth = 2
+        Caption = 'Cadastrar'
+        Color = 14387223
+        ParentBackground = False
+        TabOrder = 4
+        OnClick = btnCadastrarClick
+        OnMouseEnter = btnEntrarMouseEnter
+        OnMouseLeave = btnEntrarMouseLeave
+        ExplicitLeft = 32
+        ExplicitTop = 476
+        ExplicitHeight = 53
       end
     end
     object pnlAzulCadastro: TPanel

@@ -3143,10 +3143,11 @@ object FormLogin: TFormLogin
         9E5973652DED2EA00398022C7AB1C6638F60154000000000010A800002AD4000
         000007FFD9}
       ExplicitLeft = 675
+      ExplicitTop = -2
     end
     object pnlFormLogin: TPanel
-      Left = 709
-      Top = 247
+      Left = 704
+      Top = 207
       Width = 425
       Height = 541
       Anchors = [akTop, akRight]
@@ -3195,15 +3196,67 @@ object FormLogin: TFormLogin
         ParentColor = False
         ParentFont = False
         Transparent = True
-        ExplicitWidth = 106
+        ExplicitTop = 114
       end
-      object edUsuario: TEdit
+      object ShapeNome: TShape
         Left = 24
-        Top = 324
+        Top = 304
+        Width = 377
+        Height = 49
+        Shape = stRoundRect
+      end
+      object ShapeSenha: TShape
+        Left = 24
+        Top = 376
+        Width = 377
+        Height = 49
+        Shape = stRoundRect
+      end
+      object btnEntrar: TShape
+        Left = 24
+        Top = 448
         Width = 377
         Height = 41
+        Cursor = crHandPoint
+        Brush.Color = 13204758
+        Shape = stRoundRect
+        OnMouseEnter = btnEntrarMouseEnter
+        OnMouseLeave = btnEntrarMouseLeave
+      end
+      object lblEntrar: TLabel
+        AlignWithMargins = True
+        Left = 251
+        Top = 459
+        Width = -77
+        Height = 17
+        Cursor = crHandPoint
+        Margins.Left = 250
+        Margins.Top = 316
+        Margins.Right = 250
+        Margins.Bottom = 64
+        Align = alClient
+        Alignment = taCenter
+        Caption = 'Entrar'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+        ExplicitTop = 460
+        ExplicitWidth = 37
+      end
+      object edUsuario: TEdit
+        Left = 32
+        Top = 312
+        Width = 361
+        Height = 33
         Anchors = [akTop, akRight]
         AutoSize = False
+        BevelEdges = []
+        BevelInner = bvNone
+        BevelOuter = bvNone
+        BorderStyle = bsNone
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
@@ -3214,13 +3267,14 @@ object FormLogin: TFormLogin
         TextHint = 'Digite Seu Nome:'
       end
       object edSenha: TEdit
-        Left = 24
-        Top = 380
-        Width = 377
-        Height = 41
+        Left = 32
+        Top = 384
+        Width = 361
+        Height = 33
         Anchors = [akTop, akRight]
         AutoSelect = False
         AutoSize = False
+        BorderStyle = bsNone
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
@@ -3230,37 +3284,6 @@ object FormLogin: TFormLogin
         PasswordChar = '*'
         TabOrder = 1
         TextHint = 'Digite Sua Senha:'
-      end
-      object cbSalvarCredenciais: TCheckBox
-        Left = 24
-        Top = 427
-        Width = 129
-        Height = 17
-        Caption = 'Salvar Credenciais'
-        Color = 14387223
-        ParentColor = False
-        TabOrder = 2
-      end
-      object btnEntrar: TPanel
-        AlignWithMargins = True
-        Left = 24
-        Top = 463
-        Width = 377
-        Height = 37
-        Cursor = crHandPoint
-        Margins.Left = 23
-        Margins.Top = 320
-        Margins.Right = 23
-        Margins.Bottom = 40
-        Align = alClient
-        BevelOuter = bvNone
-        BevelWidth = 2
-        Caption = 'Entrar'
-        Color = 14387223
-        ParentBackground = False
-        TabOrder = 3
-        OnMouseEnter = btnEntrarMouseEnter
-        OnMouseLeave = btnEntrarMouseLeave
       end
     end
     object pnlAzul: TPanel
@@ -3272,8 +3295,6 @@ object FormLogin: TFormLogin
       Color = 13204758
       ParentBackground = False
       TabOrder = 1
-      ExplicitLeft = -5
-      ExplicitTop = 0
       DesignSize = (
         677
         863)

@@ -20,7 +20,6 @@ type
         pnlAzul: TPanel;
         lblRealizeSeu: TLabel;
         edSenha: TEdit;
-        cbSalvarCredenciais: TCheckBox;
         pnlAzulPrincipal: TPanel;
         imgLogoPrincipal: TImage;
         pnlFundoLateral: TPanel;
@@ -32,9 +31,12 @@ type
         linhaRelatorios: TLabel;
         linhaFinal: TLabel;
         btnEncerrarSistema: TImage;
-        btnEntrar: TPanel;
         btnUsuarios: TImage;
         imgLogoLogin: TImage;
+    ShapeNome: TShape;
+    ShapeSenha: TShape;
+    btnEntrar: TShape;
+    lblEntrar: TLabel;
         procedure FormCreate(Sender: TObject);
         procedure btnEntrarMouseEnter(Sender: TObject);
         procedure btnEntrarMouseLeave(Sender: TObject);
@@ -54,12 +56,12 @@ implementation
 
 procedure TFormLogin.btnEntrarMouseEnter(Sender: TObject);
   begin
-    btnEntrar.Color := $00C87C15;
+    btnEntrar.brush.Color := $00C87C15;
   end;
 
 procedure TFormLogin.btnEntrarMouseLeave(Sender: TObject);
   begin
-    btnEntrar.Color := $00DB8817;
+    btnEntrar.brush.Color := $00DB8817;
   end;
 
 procedure TFormLogin.FormCreate(Sender: TObject);

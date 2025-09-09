@@ -7,7 +7,7 @@ uses
         System.Classes, Vcl.Graphics,
         Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
         Vcl.Imaging.pngimage,
-        Vcl.StdCtrls, Vcl.Imaging.jpeg,uControllerUsuarios,uUsuario;
+        Vcl.StdCtrls, Vcl.Imaging.jpeg;
 
 type
         TFormLogin = class(TForm)
@@ -18,7 +18,6 @@ type
         pnlFormLogin: TPanel;
         imgFundo: TImage;
         pnlAzul: TPanel;
-        logo: TImage;
         lblRealizeSeu: TLabel;
         edSenha: TEdit;
         cbSalvarCredenciais: TCheckBox;
@@ -35,11 +34,14 @@ type
         btnEncerrarSistema: TImage;
         btnEntrar: TPanel;
         btnUsuarios: TImage;
-        procedure btnEntrarClick(Sender: TObject);
+        lblNtemLogin: TLabel;
+        lblCadastrar: TLabel;
         procedure FormCreate(Sender: TObject);
         procedure btnEntrarMouseEnter(Sender: TObject);
         procedure btnEntrarMouseLeave(Sender: TObject);
         procedure btnEncerrarSistemaClick(Sender: TObject);
+    procedure lblCadastrarMouseEnter(Sender: TObject);
+    procedure lblCadastrarMouseLeave(Sender: TObject);
     private
       { Private declarations }
     public
@@ -53,27 +55,6 @@ implementation
 
 {$R *.dfm}
 
-procedure TFormLogin.btnEntrarClick(Sender: TObject);
-  var
-  Controller: TUsuarioController;
-  Usuario: TUsuario;
-  begin
-    Controller := TUsuarioController.Create(nil);
-  try
-    Usuario := Controller.ValidarLogin(edUsuario.Text, edSenha.Text);
-    if Assigned(Usuario) then
-    begin
-      ShowMessage('Login efetuado com sucesso! Bem-vindo, ' + Usuario.Nome);
-      Usuario.Free;
-    end
-    else
-      ShowMessage('Usuário ou senha incorretos!');
-  finally
-    Controller.Free;
-  end;
-  end;
-
-
 procedure TFormLogin.btnEntrarMouseEnter(Sender: TObject);
   begin
          btnEntrar.Color := $00C87C15;
@@ -86,9 +67,20 @@ procedure TFormLogin.btnEntrarMouseLeave(Sender: TObject);
 
 procedure TFormLogin.FormCreate(Sender: TObject);
   begin
+    lblCadastrar.font.Color := $00B77213;
     lblLogin.font.Color := $00C97D16;
     pnlTelaPrincipal.Visible := False;
 
+  end;
+
+procedure TFormLogin.lblCadastrarMouseEnter(Sender: TObject);
+  begin
+    lblCadastrar.font.Color := $007E4F0E;
+  end;
+
+procedure TFormLogin.lblCadastrarMouseLeave(Sender: TObject);
+  begin
+    lblCadastrar.font.Color := $00B77213;
   end;
 
 procedure TFormLogin.btnEncerrarSistemaClick(Sender: TObject);

@@ -2,10 +2,7 @@ program Project1;
 
 uses
   Vcl.Forms,
-  TelaLogin in '..\src\View\TelaLogin.pas' {FormLogin},
-  uUsuario in '..\src\Model\uUsuario.pas',
-  uControllerUsuarios in '..\src\Controller\uControllerUsuarios.pas',
-  uConexao in '..\src\Infraestrutura\uConexao.pas';
+  TelaLogin in '..\src\View\TelaLogin.pas' {FormLogin};
 
 {$R *.res}
 

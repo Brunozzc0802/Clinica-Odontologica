@@ -12,18 +12,13 @@ uses
 type
         TFormLogin = class(TForm)
         pnlLogin: TPanel;
-        edUsuario: TEdit;
         pnlTelaPrincipal: TPanel;
         linhaUsuarios: TLabel;
-        pnlFormLogin: TPanel;
         imgFundo: TImage;
         pnlAzul: TPanel;
-        lblRealizeSeu: TLabel;
-        edSenha: TEdit;
         pnlAzulPrincipal: TPanel;
         imgLogoPrincipal: TImage;
         pnlFundoLateral: TPanel;
-        lblLogin: TLabel;
         linhaPacientes: TLabel;
         linhaProfissionais: TLabel;
         linhaConsultas: TLabel;
@@ -33,14 +28,27 @@ type
         btnEncerrarSistema: TImage;
         btnUsuarios: TImage;
         imgLogoLogin: TImage;
-    ShapeNome: TShape;
-    ShapeSenha: TShape;
-    btnEntrar: TShape;
-    lblEntrar: TLabel;
+        pnlFormLogin: TPanel;
+        lblRealizeSeu: TLabel;
+        lblLogin: TLabel;
+        ShapeNome: TShape;
+        ShapeSenha: TShape;
+        btnEntrar: TShape;
+        lblEntrar: TLabel;
+        edUsuario: TEdit;
+        edSenha: TEdit;
+        bordaDoForm: TPanel;
         procedure FormCreate(Sender: TObject);
         procedure btnEntrarMouseEnter(Sender: TObject);
         procedure btnEntrarMouseLeave(Sender: TObject);
         procedure btnEncerrarSistemaClick(Sender: TObject);
+        procedure edUsuarioKeyDown(Sender: TObject; var Key: Word;
+          Shift: TShiftState);
+        procedure edSenhaKeyDown(Sender: TObject; var Key: Word;
+          Shift: TShiftState);
+        procedure ValidarLogin;
+        procedure btnEntrarMouseUp(Sender: TObject; Button: TMouseButton;
+          Shift: TShiftState; X, Y: Integer);
     private
       { Private declarations }
     public
@@ -54,14 +62,48 @@ implementation
 
 {$R *.dfm}
 
+
+procedure TFormLogin.ValidarLogin;
+  begin
+    if (edUsuario.Text = '') or (edSenha.Text = '') then begin
+      ShowMessage('Preencha Todos os campos');
+      edUsuario.SetFocus;
+    end else if (edUsuario.Text = 'admin') and (edSenha.Text = '1234') then begin
+      ShowMessage('Login efetuado com sucesso');
+      pnlLogin.Visible := False;
+      pnlTelaPrincipal.Visible := True;
+  end;
+end;
+
 procedure TFormLogin.btnEntrarMouseEnter(Sender: TObject);
   begin
-    btnEntrar.brush.Color := $00C87C15;
+    btnEntrar.brush.Color := $00C27814;
   end;
 
 procedure TFormLogin.btnEntrarMouseLeave(Sender: TObject);
   begin
     btnEntrar.brush.Color := $00DB8817;
+  end;
+
+procedure TFormLogin.btnEntrarMouseUp(Sender: TObject; Button: TMouseButton;Shift: TShiftState; X, Y: Integer);
+  begin
+    ValidarLogin;
+  end;
+
+procedure TFormLogin.edUsuarioKeyDown(Sender: TObject; var Key: Word;Shift: TShiftState);
+  begin
+    if Key = VK_RETURN then begin
+      Key := 0;
+      edSenha.SetFocus;
+    end;
+  end;
+
+procedure TFormLogin.edSenhaKeyDown(Sender: TObject; var Key: Word;Shift: TShiftState);
+  begin
+    if Key = VK_RETURN then begin
+      Key := 0;
+      ValidarLogin;
+    end;
   end;
 
 procedure TFormLogin.FormCreate(Sender: TObject);
@@ -73,6 +115,8 @@ procedure TFormLogin.FormCreate(Sender: TObject);
 
 procedure TFormLogin.btnEncerrarSistemaClick(Sender: TObject);
   begin
+    ShowMessage('Encerrando sistema');
+    Sleep(800);
     Close;
   end;
 

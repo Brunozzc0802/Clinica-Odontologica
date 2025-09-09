@@ -10,6 +10,7 @@ object FormLogin: TFormLogin
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  KeyPreview = True
   Position = poDesigned
   OnCreate = FormCreate
   TextHeight = 15
@@ -3142,149 +3143,7 @@ object FormLogin: TFormLogin
         050005000005A000A00000A0004F000A002CF20004EF6003BC9A8000000F9FCF
         9E5973652DED2EA00398022C7AB1C6638F60154000000000010A800002AD4000
         000007FFD9}
-      ExplicitLeft = 675
-      ExplicitTop = -2
-    end
-    object pnlFormLogin: TPanel
-      Left = 704
-      Top = 207
-      Width = 425
-      Height = 541
-      Anchors = [akTop, akRight]
-      Color = 14539739
-      ParentBackground = False
-      TabOrder = 0
-      DesignSize = (
-        425
-        541)
-      object lblRealizeSeu: TLabel
-        AlignWithMargins = True
-        Left = 4
-        Top = 16
-        Width = 417
-        Height = 60
-        Margins.Top = 15
-        Align = alTop
-        Alignment = taCenter
-        Caption = 'Realize Seu'
-        Color = clLime
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Height = -48
-        Font.Name = 'Impact'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        ExplicitWidth = 226
-      end
-      object lblLogin: TLabel
-        AlignWithMargins = True
-        Left = 4
-        Top = 80
-        Width = 417
-        Height = 60
-        Margins.Top = 1
-        Align = alTop
-        Alignment = taCenter
-        Caption = 'Login'
-        Color = clLime
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -48
-        Font.Name = 'Impact'
-        Font.Style = []
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-        ExplicitTop = 114
-      end
-      object ShapeNome: TShape
-        Left = 24
-        Top = 304
-        Width = 377
-        Height = 49
-        Shape = stRoundRect
-      end
-      object ShapeSenha: TShape
-        Left = 24
-        Top = 376
-        Width = 377
-        Height = 49
-        Shape = stRoundRect
-      end
-      object btnEntrar: TShape
-        Left = 24
-        Top = 448
-        Width = 377
-        Height = 41
-        Cursor = crHandPoint
-        Brush.Color = 13204758
-        Shape = stRoundRect
-        OnMouseEnter = btnEntrarMouseEnter
-        OnMouseLeave = btnEntrarMouseLeave
-      end
-      object lblEntrar: TLabel
-        AlignWithMargins = True
-        Left = 251
-        Top = 459
-        Width = -77
-        Height = 17
-        Cursor = crHandPoint
-        Margins.Left = 250
-        Margins.Top = 316
-        Margins.Right = 250
-        Margins.Bottom = 64
-        Align = alClient
-        Alignment = taCenter
-        Caption = 'Entrar'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -13
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
-        ParentFont = False
-        ExplicitTop = 460
-        ExplicitWidth = 37
-      end
-      object edUsuario: TEdit
-        Left = 32
-        Top = 312
-        Width = 361
-        Height = 33
-        Anchors = [akTop, akRight]
-        AutoSize = False
-        BevelEdges = []
-        BevelInner = bvNone
-        BevelOuter = bvNone
-        BorderStyle = bsNone
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Arial'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 0
-        TextHint = 'Digite Seu Nome:'
-      end
-      object edSenha: TEdit
-        Left = 32
-        Top = 384
-        Width = 361
-        Height = 33
-        Anchors = [akTop, akRight]
-        AutoSelect = False
-        AutoSize = False
-        BorderStyle = bsNone
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -12
-        Font.Name = 'Arial'
-        Font.Style = []
-        ParentFont = False
-        PasswordChar = '*'
-        TabOrder = 1
-        TextHint = 'Digite Sua Senha:'
-      end
+      ExplicitLeft = 679
     end
     object pnlAzul: TPanel
       Left = 1
@@ -3294,13 +3153,13 @@ object FormLogin: TFormLogin
       Align = alClient
       Color = 13204758
       ParentBackground = False
-      TabOrder = 1
+      TabOrder = 0
       DesignSize = (
         677
         863)
       object imgLogoLogin: TImage
-        Left = 132
-        Top = 272
+        Left = 124
+        Top = 259
         Width = 318
         Height = 291
         Anchors = [akLeft, akTop, akRight, akBottom]
@@ -5020,6 +4879,176 @@ object FormLogin: TFormLogin
           C8312891935F8E1C39062572F2CB9123C7A0444E7E3972E41894C8C92F478E1C
           831239F9E5C89163502227BF1C39720C4AE4E49723478E41899CFC72E4C83128
           91935F8E1C390625FE3FF554A820DEE964570000000049454E44AE426082}
+      end
+    end
+    object bordaDoForm: TPanel
+      Left = 696
+      Top = 266
+      Width = 441
+      Height = 583
+      Anchors = [akTop, akRight]
+      Caption = 'bordaDoForm'
+      Color = clBackground
+      ParentBackground = False
+      TabOrder = 1
+      object pnlFormLogin: TPanel
+        AlignWithMargins = True
+        Left = 2
+        Top = 2
+        Width = 437
+        Height = 579
+        Margins.Left = 1
+        Margins.Top = 1
+        Margins.Right = 1
+        Margins.Bottom = 1
+        Align = alClient
+        Alignment = taLeftJustify
+        BevelEdges = []
+        BevelOuter = bvNone
+        Color = 14539739
+        ParentBackground = False
+        TabOrder = 0
+        DesignSize = (
+          437
+          579)
+        object lblRealizeSeu: TLabel
+          AlignWithMargins = True
+          Left = 3
+          Top = 15
+          Width = 431
+          Height = 60
+          Margins.Top = 15
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'Realize Seu'
+          Color = clLime
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -48
+          Font.Name = 'Impact'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+          ExplicitLeft = 4
+          ExplicitTop = 16
+          ExplicitWidth = 226
+        end
+        object lblLogin: TLabel
+          AlignWithMargins = True
+          Left = 3
+          Top = 79
+          Width = 431
+          Height = 60
+          Margins.Top = 1
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'Login'
+          Color = clLime
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -48
+          Font.Name = 'Impact'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
+          Transparent = True
+          ExplicitLeft = 4
+          ExplicitTop = 80
+          ExplicitWidth = 106
+        end
+        object ShapeNome: TShape
+          Left = 24
+          Top = 308
+          Width = 377
+          Height = 49
+          Shape = stRoundRect
+        end
+        object ShapeSenha: TShape
+          Left = 24
+          Top = 376
+          Width = 377
+          Height = 49
+          Shape = stRoundRect
+        end
+        object btnEntrar: TShape
+          Left = 24
+          Top = 448
+          Width = 377
+          Height = 41
+          Cursor = crHandPoint
+          Brush.Color = 14387223
+          Shape = stRoundRect
+          OnMouseEnter = btnEntrarMouseEnter
+          OnMouseLeave = btnEntrarMouseLeave
+          OnMouseUp = btnEntrarMouseUp
+        end
+        object lblEntrar: TLabel
+          AlignWithMargins = True
+          Left = 250
+          Top = 458
+          Width = -63
+          Height = 57
+          Cursor = crHandPoint
+          Margins.Left = 250
+          Margins.Top = 316
+          Margins.Right = 250
+          Margins.Bottom = 64
+          Align = alClient
+          Alignment = taCenter
+          Caption = 'Entrar'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ExplicitLeft = 251
+          ExplicitTop = 459
+          ExplicitWidth = 37
+          ExplicitHeight = 17
+        end
+        object edUsuario: TEdit
+          AlignWithMargins = True
+          Left = 30
+          Top = 312
+          Width = 367
+          Height = 37
+          Margins.Left = 30
+          Margins.Top = 170
+          Margins.Right = 40
+          Margins.Bottom = 230
+          Align = alClient
+          AutoSize = False
+          BorderStyle = bsNone
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 0
+          TextHint = 'Digite Seu Usuario:'
+          OnKeyDown = edUsuarioKeyDown
+        end
+        object edSenha: TEdit
+          Left = 32
+          Top = 383
+          Width = 347
+          Height = 33
+          Anchors = [akTop, akRight]
+          AutoSize = False
+          BorderStyle = bsNone
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          PasswordChar = '*'
+          TabOrder = 1
+          TextHint = 'Digite Sua Senha:'
+          OnKeyDown = edSenhaKeyDown
+        end
       end
     end
   end

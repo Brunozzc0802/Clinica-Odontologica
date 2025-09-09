@@ -34,14 +34,11 @@ type
         btnEncerrarSistema: TImage;
         btnEntrar: TPanel;
         btnUsuarios: TImage;
-        lblNtemLogin: TLabel;
-        lblCadastrar: TLabel;
+        imgLogoLogin: TImage;
         procedure FormCreate(Sender: TObject);
         procedure btnEntrarMouseEnter(Sender: TObject);
         procedure btnEntrarMouseLeave(Sender: TObject);
         procedure btnEncerrarSistemaClick(Sender: TObject);
-    procedure lblCadastrarMouseEnter(Sender: TObject);
-    procedure lblCadastrarMouseLeave(Sender: TObject);
     private
       { Private declarations }
     public
@@ -57,7 +54,7 @@ implementation
 
 procedure TFormLogin.btnEntrarMouseEnter(Sender: TObject);
   begin
-         btnEntrar.Color := $00C87C15;
+    btnEntrar.Color := $00C87C15;
   end;
 
 procedure TFormLogin.btnEntrarMouseLeave(Sender: TObject);
@@ -67,20 +64,9 @@ procedure TFormLogin.btnEntrarMouseLeave(Sender: TObject);
 
 procedure TFormLogin.FormCreate(Sender: TObject);
   begin
-    lblCadastrar.font.Color := $00B77213;
     lblLogin.font.Color := $00C97D16;
     pnlTelaPrincipal.Visible := False;
 
-  end;
-
-procedure TFormLogin.lblCadastrarMouseEnter(Sender: TObject);
-  begin
-    lblCadastrar.font.Color := $007E4F0E;
-  end;
-
-procedure TFormLogin.lblCadastrarMouseLeave(Sender: TObject);
-  begin
-    lblCadastrar.font.Color := $00B77213;
   end;
 
 procedure TFormLogin.btnEncerrarSistemaClick(Sender: TObject);

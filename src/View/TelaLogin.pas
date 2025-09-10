@@ -7,7 +7,8 @@ uses
         System.Classes, Vcl.Graphics,
         Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
         Vcl.Imaging.pngimage,
-        Vcl.StdCtrls, Vcl.Imaging.jpeg;
+        Vcl.StdCtrls, Vcl.Imaging.jpeg, Vcl.Buttons, System.ImageList,
+        Vcl.ImgList;
 
 type
         TFormLogin = class(TForm)
@@ -38,6 +39,8 @@ type
         edUsuario: TEdit;
         edSenha: TEdit;
         bordaDoForm: TPanel;
+    ImgOlhoFechado: TImage;
+    ImgOlhoAberto: TImage;
         procedure FormCreate(Sender: TObject);
         procedure btnEntrarMouseEnter(Sender: TObject);
         procedure btnEntrarMouseLeave(Sender: TObject);
@@ -49,6 +52,8 @@ type
         procedure ValidarLogin;
         procedure btnEntrarMouseUp(Sender: TObject; Button: TMouseButton;
           Shift: TShiftState; X, Y: Integer);
+    procedure ImgOlhoFechadoClick(Sender: TObject);
+    procedure ImgOlhoAbertoClick(Sender: TObject);
     private
       { Private declarations }
     public
@@ -72,6 +77,8 @@ procedure TFormLogin.ValidarLogin;
       ShowMessage('Login efetuado com sucesso');
       pnlLogin.Visible := False;
       pnlTelaPrincipal.Visible := True;
+  end else begin
+      ShowMessage('Usuário ou senha incorretos');
   end;
 end;
 
@@ -108,9 +115,24 @@ procedure TFormLogin.edSenhaKeyDown(Sender: TObject; var Key: Word;Shift: TShift
 
 procedure TFormLogin.FormCreate(Sender: TObject);
   begin
+    ImgOlhoAberto.Visible := false;
     lblLogin.font.Color := $00C97D16;
     pnlTelaPrincipal.Visible := False;
 
+  end;
+
+procedure TFormLogin.ImgOlhoAbertoClick(Sender: TObject);
+  begin
+    edSenha.PasswordChar := '*';
+    imgOlhoFechado.Visible := True;
+    imgOlhoAberto.Visible := False;
+  end;
+
+procedure TFormLogin.ImgOlhoFechadoClick(Sender: TObject);
+  begin
+    edSenha.PasswordChar := #0;
+    imgOlhoAberto.Visible := True;
+    imgOlhoFechado.Visible := False;
   end;
 
 procedure TFormLogin.btnEncerrarSistemaClick(Sender: TObject);

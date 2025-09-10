@@ -11,10 +11,10 @@ uses
   FireDAC.DApt, FireDAC.Comp.DataSet;
 
 type
-  TDataModule1 = class(TDataModule)
-    FDConnection: TFDConnection;
+  TdmConexao = class(TDataModule)
     FDPhysPgDriverLink: TFDPhysPgDriverLink;
     FDQueryUsuario: TFDQuery;
+    FDConnection: TFDConnection;
   private
     { Private declarations }
   public
@@ -22,12 +22,13 @@ type
   end;
 
 var
-  DataModule1: TDataModule1;
+  dmConexao: TdmConexao;
 
 implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
 
 end.

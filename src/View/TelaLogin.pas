@@ -8,7 +8,7 @@ uses
         Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
         Vcl.Imaging.pngimage,
         Vcl.StdCtrls, Vcl.Imaging.jpeg, Vcl.Buttons, System.ImageList,
-        Vcl.ImgList;
+        Vcl.ImgList, uUsuarioController,uConexao;
 
 type
         TFormLogin = class(TForm)
@@ -26,8 +26,6 @@ type
         linhaProcedimentos: TLabel;
         linhaRelatorios: TLabel;
         linhaFinal: TLabel;
-        btnEncerrarSistema: TImage;
-        btnUsuarios: TImage;
         imgLogoLogin: TImage;
         pnlFormLogin: TPanel;
         lblRealizeSeu: TLabel;
@@ -39,21 +37,58 @@ type
         edUsuario: TEdit;
         edSenha: TEdit;
         bordaDoForm: TPanel;
-    ImgOlhoFechado: TImage;
-    ImgOlhoAberto: TImage;
+        ImgOlhoFechado: TImage;
+        ImgOlhoAberto: TImage;
+    lblUsuarios: TLabel;
+        pnlUser: TPanel;
+    pnlPacientes: TPanel;
+    ImgPacientes: TImage;
+    lblPacientes: TLabel;
+    pnlProfissionais: TPanel;
+    iconProfissionais: TImage;
+    lblProfissionais: TLabel;
+    pnlConsultas: TPanel;
+    imgConsultas: TImage;
+    lblConsultas: TLabel;
+    pnlProcedimentos: TPanel;
+    imgProcedimentos: TImage;
+    lblProcedimentos: TLabel;
+    pnlEncerrarSistema: TPanel;
+    imgSair: TImage;
+    lblEncerrarSistema: TLabel;
+    pnlRelatorios: TPanel;
+    ImgRelatorios: TImage;
+    lblRelatorios: TLabel;
         procedure FormCreate(Sender: TObject);
         procedure btnEntrarMouseEnter(Sender: TObject);
         procedure btnEntrarMouseLeave(Sender: TObject);
         procedure btnEncerrarSistemaClick(Sender: TObject);
-        procedure edUsuarioKeyDown(Sender: TObject; var Key: Word;
-          Shift: TShiftState);
-        procedure edSenhaKeyDown(Sender: TObject; var Key: Word;
-          Shift: TShiftState);
+        procedure edUsuarioKeyDown(Sender: TObject; var Key: Word;Shift: TShiftState);
+        procedure edSenhaKeyDown(Sender: TObject; var Key: Word;Shift: TShiftState);
         procedure ValidarLogin;
-        procedure btnEntrarMouseUp(Sender: TObject; Button: TMouseButton;
-          Shift: TShiftState; X, Y: Integer);
-    procedure ImgOlhoFechadoClick(Sender: TObject);
-    procedure ImgOlhoAbertoClick(Sender: TObject);
+        procedure btnEntrarMouseUp(Sender: TObject; Button: TMouseButton;Shift: TShiftState; X, Y: Integer);
+        procedure ImgOlhoFechadoClick(Sender: TObject);
+        procedure ImgOlhoAbertoClick(Sender: TObject);
+        procedure pnlUserMouseEnter(Sender: TObject);
+        procedure pnlUserMouseLeave(Sender: TObject);
+        procedure pnlPacientesMouseEnter(Sender: TObject);
+        procedure pnlPacientesMouseLeave(Sender: TObject);
+        procedure pnlProfissionaisMouseEnter(Sender: TObject);
+        procedure pnlProfissionaisMouseLeave(Sender: TObject);
+        procedure pnlConsultasMouseLeave(Sender: TObject);
+        procedure pnlConsultasMouseEnter(Sender: TObject);
+        procedure pnlProcedimentosMouseEnter(Sender: TObject);
+        procedure pnlProcedimentosMouseLeave(Sender: TObject);
+    procedure pnlRelatoriosMouseLeave(Sender: TObject);
+    procedure pnlRelatoriosMouseEnter(Sender: TObject);
+    procedure pnlEncerrarSistemaMouseEnter(Sender: TObject);
+    procedure pnlEncerrarSistemaMouseLeave(Sender: TObject);
+    procedure lblPacientesMouseEnter(Sender: TObject);
+    procedure lblPacientesMouseLeave(Sender: TObject);
+    procedure lblProfissionaisMouseEnter(Sender: TObject);
+    procedure lblProfissionaisMouseLeave(Sender: TObject);
+
+
     private
       { Private declarations }
     public
@@ -69,17 +104,33 @@ implementation
 
 
 procedure TFormLogin.ValidarLogin;
-  begin
-    if (edUsuario.Text = '') or (edSenha.Text = '') then begin
-      ShowMessage('Preencha Todos os campos');
-      edUsuario.SetFocus;
-    end else if (edUsuario.Text = 'admin') and (edSenha.Text = '1234') then begin
-      ShowMessage('Login efetuado com sucesso');
-      pnlLogin.Visible := False;
-      pnlTelaPrincipal.Visible := True;
-  end else begin
-      ShowMessage('Usuário ou senha incorretos');
-  end;
+//var
+//  UsuarioCtrl: TUsuarioController;
+begin
+//  // 1. Garante que a conexão está aberta
+//  if not dmConexao.FDConnection.Connected then
+//  begin
+//    try
+//      dmConexao.FDConnection.Connected := True;
+//    except
+//      on E: Exception do
+//      begin
+//        ShowMessage('Erro ao conectar ao banco: ' + E.Message);
+//        Exit;
+//      end;
+//    end;
+//  end;
+//
+//  // 2. Cria controller e verifica usuário
+//  UsuarioCtrl := TUsuarioController.Create;
+//  try
+//    if UsuarioCtrl.VerificarUsuario(edUsuario.Text, edSenha.Text) then
+//      ShowMessage('Login efetuado com sucesso!')
+//    else
+//      ShowMessage('Usuário ou senha incorretos!');
+//  finally
+//    UsuarioCtrl.Free;
+//  end;
 end;
 
 procedure TFormLogin.btnEntrarMouseEnter(Sender: TObject);
@@ -115,10 +166,9 @@ procedure TFormLogin.edSenhaKeyDown(Sender: TObject; var Key: Word;Shift: TShift
 
 procedure TFormLogin.FormCreate(Sender: TObject);
   begin
-    ImgOlhoAberto.Visible := false;
-    lblLogin.font.Color := $00C97D16;
-    pnlTelaPrincipal.Visible := False;
-
+//    ImgOlhoAberto.Visible := false;
+//    lblLogin.font.Color := $00C97D16;
+//    pnlTelaPrincipal.Visible := False;
   end;
 
 procedure TFormLogin.ImgOlhoAbertoClick(Sender: TObject);
@@ -133,6 +183,97 @@ procedure TFormLogin.ImgOlhoFechadoClick(Sender: TObject);
     edSenha.PasswordChar := #0;
     imgOlhoAberto.Visible := True;
     imgOlhoFechado.Visible := False;
+  end;
+
+
+procedure TFormLogin.lblPacientesMouseEnter(Sender: TObject);
+  begin
+     pnlPacientes.Color := $00F78B2B;
+  end;
+
+procedure TFormLogin.lblPacientesMouseLeave(Sender: TObject);
+  begin
+    pnlPacientes.Color := $007C3E05;
+  end;
+
+procedure TFormLogin.lblProfissionaisMouseEnter(Sender: TObject);
+  begin
+     pnlProfissionais.Color := $00F78B2B;
+  end;
+
+procedure TFormLogin.lblProfissionaisMouseLeave(Sender: TObject);
+  begin
+    pnlProfissionais.Color := $007C3E05;
+  end;
+
+procedure TFormLogin.pnlConsultasMouseEnter(Sender: TObject);
+  begin
+    pnlConsultas.Color := $00F78B2B;
+  end;
+
+procedure TFormLogin.pnlConsultasMouseLeave(Sender: TObject);
+  begin
+    pnlConsultas.Color := $007C3E05;
+  end;
+
+procedure TFormLogin.pnlEncerrarSistemaMouseEnter(Sender: TObject);
+  begin
+    pnlEncerrarSistema.Color := $00F78B2B;
+  end;
+
+procedure TFormLogin.pnlEncerrarSistemaMouseLeave(Sender: TObject);
+  begin
+    pnlEncerrarSistema.Color := $007C3E05;
+  end;
+
+procedure TFormLogin.pnlPacientesMouseEnter(Sender: TObject);
+  begin
+    pnlPacientes.Color := $00F78B2B;
+  end;
+
+procedure TFormLogin.pnlPacientesMouseLeave(Sender: TObject);
+  begin
+    pnlPacientes.Color := $007C3E05;
+  end;
+
+procedure TFormLogin.pnlProcedimentosMouseEnter(Sender: TObject);
+  begin
+    pnlProcedimentos.Color := $00F78B2B;
+  end;
+
+procedure TFormLogin.pnlProcedimentosMouseLeave(Sender: TObject);
+  begin
+    pnlProcedimentos.Color := $007C3E05;
+  end;
+
+procedure TFormLogin.pnlProfissionaisMouseEnter(Sender: TObject);
+  begin
+    pnlProfissionais.Color := $00F78B2B;
+  end;
+
+procedure TFormLogin.pnlProfissionaisMouseLeave(Sender: TObject);
+  begin
+    pnlProfissionais.Color := $007C3E05;
+  end;
+
+procedure TFormLogin.pnlRelatoriosMouseEnter(Sender: TObject);
+  begin
+    pnlRelatorios.Color := $00F78B2B;
+  end;
+
+procedure TFormLogin.pnlRelatoriosMouseLeave(Sender: TObject);
+  begin
+    pnlRelatorios.Color := $007C3E05;
+  end;
+
+procedure TFormLogin.pnlUserMouseEnter(Sender: TObject);
+  begin
+    pnlUser.Color := $00F78B2B;
+  end;
+
+procedure TFormLogin.pnlUserMouseLeave(Sender: TObject);
+  begin
+    pnlUser.Color := $007C3E05;
   end;
 
 procedure TFormLogin.btnEncerrarSistemaClick(Sender: TObject);

@@ -128,11 +128,12 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\src\Model\uConexao.pas">
-            <Form>DataModule1</Form>
+            <Form>dmConexao</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="..\src\Model\uUsuario.pas"/>
+        <DCCReference Include="..\src\Controller\uUsuarioController.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

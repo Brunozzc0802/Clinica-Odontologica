@@ -8,7 +8,7 @@ uses
         Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
         Vcl.Imaging.pngimage,
         Vcl.StdCtrls, Vcl.Imaging.jpeg, Vcl.Buttons, System.ImageList,
-        Vcl.ImgList,uConexao;
+        Vcl.ImgList,uConexao, TelaUsuarios;
 
 type
         TFormLogin = class(TForm)
@@ -103,12 +103,15 @@ type
         procedure lblProcedimentosMouseLeave(Sender: TObject);
         procedure ImgRelatoriosMouseEnter(Sender: TObject);
         procedure ImgRelatoriosMouseLeave(Sender: TObject);
-    procedure lblRelatoriosMouseEnter(Sender: TObject);
-    procedure lblRelatoriosMouseLeave(Sender: TObject);
-    procedure imgSairMouseEnter(Sender: TObject);
-    procedure imgSairMouseLeave(Sender: TObject);
-    procedure lblEncerrarSistemaMouseEnter(Sender: TObject);
-    procedure lblEncerrarSistemaMouseLeave(Sender: TObject);
+        procedure lblRelatoriosMouseEnter(Sender: TObject);
+        procedure lblRelatoriosMouseLeave(Sender: TObject);
+        procedure imgSairMouseEnter(Sender: TObject);
+        procedure imgSairMouseLeave(Sender: TObject);
+        procedure lblEncerrarSistemaMouseEnter(Sender: TObject);
+        procedure lblEncerrarSistemaMouseLeave(Sender: TObject);
+        procedure pnlUserClick(Sender: TObject);
+    procedure lblUsuariosClick(Sender: TObject);
+    procedure iconUserClick(Sender: TObject);
 
 
     private
@@ -165,6 +168,11 @@ procedure TFormLogin.iconProfissionaisMouseEnter(Sender: TObject);
 procedure TFormLogin.iconProfissionaisMouseLeave(Sender: TObject);
   begin
     pnlProfissionais.Color := $007C3E05;
+  end;
+
+procedure TFormLogin.iconUserClick(Sender: TObject);
+  begin
+    PagUsuarios.ShowModal;
   end;
 
 procedure TFormLogin.iconUserMouseEnter(Sender: TObject);
@@ -303,6 +311,11 @@ procedure TFormLogin.lblRelatoriosMouseLeave(Sender: TObject);
     pnlRelatorios.Color := $007C3E05;
   end;
 
+procedure TFormLogin.lblUsuariosClick(Sender: TObject);
+  begin
+    PagUsuarios.ShowModal;
+  end;
+
 procedure TFormLogin.lblUsuariosMouseEnter(Sender: TObject);
   begin
     PnlUser.Color := $00F78B2B;
@@ -371,6 +384,11 @@ procedure TFormLogin.pnlRelatoriosMouseEnter(Sender: TObject);
 procedure TFormLogin.pnlRelatoriosMouseLeave(Sender: TObject);
   begin
     pnlRelatorios.Color := $007C3E05;
+  end;
+
+procedure TFormLogin.pnlUserClick(Sender: TObject);
+  begin
+    PagUsuarios.ShowModal;
   end;
 
 procedure TFormLogin.pnlUserMouseEnter(Sender: TObject);

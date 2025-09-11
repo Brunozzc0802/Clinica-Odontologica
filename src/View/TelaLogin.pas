@@ -8,7 +8,7 @@ uses
         Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
         Vcl.Imaging.pngimage,
         Vcl.StdCtrls, Vcl.Imaging.jpeg, Vcl.Buttons, System.ImageList,
-        Vcl.ImgList, uUsuarioController,uConexao;
+        Vcl.ImgList,uConexao;
 
 type
         TFormLogin = class(TForm)
@@ -39,33 +39,32 @@ type
         bordaDoForm: TPanel;
         ImgOlhoFechado: TImage;
         ImgOlhoAberto: TImage;
-    lblUsuarios: TLabel;
+        lblUsuarios: TLabel;
         pnlUser: TPanel;
-    pnlPacientes: TPanel;
-    ImgPacientes: TImage;
-    lblPacientes: TLabel;
-    pnlProfissionais: TPanel;
-    iconProfissionais: TImage;
-    lblProfissionais: TLabel;
-    pnlConsultas: TPanel;
-    imgConsultas: TImage;
-    lblConsultas: TLabel;
-    pnlProcedimentos: TPanel;
-    imgProcedimentos: TImage;
-    lblProcedimentos: TLabel;
-    pnlEncerrarSistema: TPanel;
-    imgSair: TImage;
-    lblEncerrarSistema: TLabel;
-    pnlRelatorios: TPanel;
-    ImgRelatorios: TImage;
-    lblRelatorios: TLabel;
+        pnlPacientes: TPanel;
+        ImgPacientes: TImage;
+        lblPacientes: TLabel;
+        pnlProfissionais: TPanel;
+        iconProfissionais: TImage;
+        lblProfissionais: TLabel;
+        pnlConsultas: TPanel;
+        imgConsultas: TImage;
+        lblConsultas: TLabel;
+        pnlProcedimentos: TPanel;
+        imgProcedimentos: TImage;
+        lblProcedimentos: TLabel;
+        pnlEncerrarSistema: TPanel;
+        imgSair: TImage;
+        lblEncerrarSistema: TLabel;
+        pnlRelatorios: TPanel;
+        ImgRelatorios: TImage;
+        lblRelatorios: TLabel;
         procedure FormCreate(Sender: TObject);
         procedure btnEntrarMouseEnter(Sender: TObject);
         procedure btnEntrarMouseLeave(Sender: TObject);
         procedure btnEncerrarSistemaClick(Sender: TObject);
         procedure edUsuarioKeyDown(Sender: TObject; var Key: Word;Shift: TShiftState);
         procedure edSenhaKeyDown(Sender: TObject; var Key: Word;Shift: TShiftState);
-        procedure ValidarLogin;
         procedure btnEntrarMouseUp(Sender: TObject; Button: TMouseButton;Shift: TShiftState; X, Y: Integer);
         procedure ImgOlhoFechadoClick(Sender: TObject);
         procedure ImgOlhoAbertoClick(Sender: TObject);
@@ -79,14 +78,14 @@ type
         procedure pnlConsultasMouseEnter(Sender: TObject);
         procedure pnlProcedimentosMouseEnter(Sender: TObject);
         procedure pnlProcedimentosMouseLeave(Sender: TObject);
-    procedure pnlRelatoriosMouseLeave(Sender: TObject);
-    procedure pnlRelatoriosMouseEnter(Sender: TObject);
-    procedure pnlEncerrarSistemaMouseEnter(Sender: TObject);
-    procedure pnlEncerrarSistemaMouseLeave(Sender: TObject);
-    procedure lblPacientesMouseEnter(Sender: TObject);
-    procedure lblPacientesMouseLeave(Sender: TObject);
-    procedure lblProfissionaisMouseEnter(Sender: TObject);
-    procedure lblProfissionaisMouseLeave(Sender: TObject);
+        procedure pnlRelatoriosMouseLeave(Sender: TObject);
+        procedure pnlRelatoriosMouseEnter(Sender: TObject);
+        procedure pnlEncerrarSistemaMouseEnter(Sender: TObject);
+        procedure pnlEncerrarSistemaMouseLeave(Sender: TObject);
+        procedure lblPacientesMouseEnter(Sender: TObject);
+        procedure lblPacientesMouseLeave(Sender: TObject);
+        procedure lblProfissionaisMouseEnter(Sender: TObject);
+        procedure lblProfissionaisMouseLeave(Sender: TObject);
 
 
     private
@@ -102,36 +101,6 @@ implementation
 
 {$R *.dfm}
 
-
-procedure TFormLogin.ValidarLogin;
-//var
-//  UsuarioCtrl: TUsuarioController;
-begin
-//  // 1. Garante que a conexão está aberta
-//  if not dmConexao.FDConnection.Connected then
-//  begin
-//    try
-//      dmConexao.FDConnection.Connected := True;
-//    except
-//      on E: Exception do
-//      begin
-//        ShowMessage('Erro ao conectar ao banco: ' + E.Message);
-//        Exit;
-//      end;
-//    end;
-//  end;
-//
-//  // 2. Cria controller e verifica usuário
-//  UsuarioCtrl := TUsuarioController.Create;
-//  try
-//    if UsuarioCtrl.VerificarUsuario(edUsuario.Text, edSenha.Text) then
-//      ShowMessage('Login efetuado com sucesso!')
-//    else
-//      ShowMessage('Usuário ou senha incorretos!');
-//  finally
-//    UsuarioCtrl.Free;
-//  end;
-end;
 
 procedure TFormLogin.btnEntrarMouseEnter(Sender: TObject);
   begin

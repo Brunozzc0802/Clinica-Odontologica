@@ -133,7 +133,6 @@
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="..\src\Model\uUsuario.pas"/>
-        <DCCReference Include="..\src\Controller\uUsuarioController.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -4,8 +4,7 @@ uses
   Vcl.Forms,
   TelaLogin in '..\src\View\TelaLogin.pas' {FormLogin},
   uConexao in '..\src\Model\uConexao.pas' {dmConexao: TDataModule},
-  uUsuario in '..\src\Model\uUsuario.pas',
-  uUsuarioController in '..\src\Controller\uUsuarioController.pas';
+  uUsuario in '..\src\Model\uUsuario.pas';
 
 {$R *.res}
 

@@ -8,7 +8,7 @@ uses
         Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
         Vcl.Imaging.pngimage,
         Vcl.StdCtrls, Vcl.Imaging.jpeg, Vcl.Buttons, System.ImageList,
-        Vcl.ImgList,uConexao, TelaUsuarios;
+        Vcl.ImgList,uConexao,TelaUsuarios;
 
 type
         TFormLogin = class(TForm)
@@ -110,8 +110,8 @@ type
         procedure lblEncerrarSistemaMouseEnter(Sender: TObject);
         procedure lblEncerrarSistemaMouseLeave(Sender: TObject);
         procedure pnlUserClick(Sender: TObject);
-    procedure lblUsuariosClick(Sender: TObject);
-    procedure iconUserClick(Sender: TObject);
+        procedure lblUsuariosClick(Sender: TObject);
+        procedure iconUserClick(Sender: TObject);
 
 
     private
@@ -388,6 +388,7 @@ procedure TFormLogin.pnlRelatoriosMouseLeave(Sender: TObject);
 
 procedure TFormLogin.pnlUserClick(Sender: TObject);
   begin
+    pnlUser.Color := $00F78B2B;
     PagUsuarios.ShowModal;
   end;
 

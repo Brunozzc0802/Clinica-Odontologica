@@ -3,7 +3,7 @@ object PagUsuarios: TPagUsuarios
   Top = 166
   BorderStyle = bsNone
   Caption = 'Usu'#225'rios'
-  ClientHeight = 660
+  ClientHeight = 644
   ClientWidth = 994
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -15,7 +15,7 @@ object PagUsuarios: TPagUsuarios
   OnCreate = FormCreate
   DesignSize = (
     994
-    660)
+    644)
   TextHeight = 15
   object bordaCabecalhoUsuarios: TPanel
     Left = 0
@@ -84,18 +84,19 @@ object PagUsuarios: TPagUsuarios
   object pnlFundoLateral: TPanel
     Left = 2
     Top = 42
-    Width = 304
-    Height = 892
+    Width = 247
+    Height = 876
     Anchors = [akLeft, akTop, akBottom]
     Color = 8142341
     ParentBackground = False
     TabOrder = 1
+    ExplicitHeight = 872
     object linhaUsuarios: TLabel
       AlignWithMargins = True
       Left = 2
       Top = 66
-      Width = 300
-      Height = 45
+      Width = 243
+      Height = 29
       Margins.Left = 1
       Margins.Top = 65
       Margins.Right = 1
@@ -117,8 +118,8 @@ object PagUsuarios: TPagUsuarios
       AlignWithMargins = True
       Left = 2
       Top = 148
-      Width = 300
-      Height = 73
+      Width = 243
+      Height = 57
       Margins.Left = 1
       Margins.Top = 147
       Margins.Right = 1
@@ -140,8 +141,8 @@ object PagUsuarios: TPagUsuarios
       AlignWithMargins = True
       Left = 2
       Top = 320
-      Width = 300
-      Height = 81
+      Width = 243
+      Height = 65
       Margins.Left = 1
       Margins.Top = 319
       Margins.Right = 1
@@ -163,8 +164,8 @@ object PagUsuarios: TPagUsuarios
       AlignWithMargins = True
       Left = 2
       Top = 401
-      Width = 300
-      Height = 70
+      Width = 243
+      Height = 54
       Margins.Left = 1
       Margins.Top = 400
       Margins.Right = 1
@@ -186,8 +187,8 @@ object PagUsuarios: TPagUsuarios
       AlignWithMargins = True
       Left = 2
       Top = 481
-      Width = 300
-      Height = 80
+      Width = 243
+      Height = 64
       Margins.Left = 1
       Margins.Top = 480
       Margins.Right = 1
@@ -209,8 +210,8 @@ object PagUsuarios: TPagUsuarios
       AlignWithMargins = True
       Left = 2
       Top = 556
-      Width = 300
-      Height = 55
+      Width = 243
+      Height = 39
       Margins.Left = 1
       Margins.Top = 555
       Margins.Right = 1
@@ -232,8 +233,8 @@ object PagUsuarios: TPagUsuarios
       AlignWithMargins = True
       Left = 2
       Top = 232
-      Width = 300
-      Height = 79
+      Width = 243
+      Height = 63
       Margins.Left = 1
       Margins.Top = 231
       Margins.Right = 1
@@ -251,20 +252,20 @@ object PagUsuarios: TPagUsuarios
       ExplicitWidth = 510
       ExplicitHeight = 21
     end
-    object pnlUser: TPanel
-      Left = 2
-      Top = 1
+    object pnlUsuarios: TPanel
+      Left = 1
+      Top = 4
       Width = 302
-      Height = 75
+      Height = 72
       BevelOuter = bvNone
       Color = 8142341
       ParentBackground = False
       TabOrder = 0
       object iconUser: TImage
-        Left = 8
+        Left = 5
         Top = 8
-        Width = 65
-        Height = 64
+        Width = 63
+        Height = 67
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D49484452000000700000
           00680806000000296574BD000000097048597300000EC300000EC301C76FA864
@@ -543,15 +544,14 @@ object PagUsuarios: TPagUsuarios
       end
       object lblUsuarios: TLabel
         AlignWithMargins = True
-        Left = 100
-        Top = 23
-        Width = 92
-        Height = 29
+        Left = 84
+        Top = 24
+        Width = 77
+        Height = 25
         Margins.Left = 100
         Margins.Top = 23
         Margins.Right = 110
         Margins.Bottom = 23
-        Align = alClient
         Caption = 'Usu'#225'rios'
         Color = clCream
         Font.Charset = ANSI_CHARSET
@@ -561,8 +561,6 @@ object PagUsuarios: TPagUsuarios
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
-        ExplicitWidth = 77
-        ExplicitHeight = 25
       end
     end
     object pnlPacientes: TPanel
@@ -574,17 +572,18 @@ object PagUsuarios: TPagUsuarios
       Color = 8142341
       ParentBackground = False
       TabOrder = 1
+      OnMouseEnter = pnlPacientesMouseEnter
+      OnMouseLeave = pnlPacientesMouseLeave
       object lblPacientes: TLabel
         AlignWithMargins = True
-        Left = 100
-        Top = 27
-        Width = 94
-        Height = 23
+        Left = 84
+        Top = 24
+        Width = 83
+        Height = 25
         Margins.Left = 100
         Margins.Top = 27
         Margins.Right = 108
         Margins.Bottom = 25
-        Align = alClient
         Caption = 'Pacientes'
         Color = clCream
         Font.Charset = ANSI_CHARSET
@@ -594,14 +593,14 @@ object PagUsuarios: TPagUsuarios
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
-        ExplicitWidth = 83
-        ExplicitHeight = 25
+        OnMouseEnter = lblPacientesMouseEnter
+        OnMouseLeave = lblPacientesMouseLeave
       end
       object ImgPacientes: TImage
-        Left = 1
-        Top = -3
-        Width = 86
-        Height = 81
+        Left = 5
+        Top = 7
+        Width = 67
+        Height = 68
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D49484452000000710000
           006B080600000040336D2D000028774944415478DAED7D07785CD5B5EEDAA79F
@@ -931,6 +930,8 @@ object PagUsuarios: TPagUsuarios
           48DC0FF07F0199D1B56B78E0593F0000000049454E44AE426082}
         Proportional = True
         Stretch = True
+        OnMouseEnter = ImgPacientesMouseEnter
+        OnMouseLeave = ImgPacientesMouseLeave
       end
     end
     object pnlProfissionais: TPanel
@@ -942,11 +943,13 @@ object PagUsuarios: TPagUsuarios
       Color = 8142341
       ParentBackground = False
       TabOrder = 2
+      OnMouseEnter = pnlProfissionaisMouseEnter
+      OnMouseLeave = pnlProfissionaisMouseLeave
       object iconProfissionais: TImage
         Left = 5
-        Top = 3
-        Width = 73
-        Height = 75
+        Top = 10
+        Width = 63
+        Height = 62
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000007A0000
           00770806000000CCC7543A00002A464944415478DAED5D079C5D5599FFCEB9E7
@@ -1291,18 +1294,19 @@ object PagUsuarios: TPagUsuarios
           0049454E44AE426082}
         Proportional = True
         Stretch = True
+        OnMouseEnter = iconProfissionaisMouseEnter
+        OnMouseLeave = iconProfissionaisMouseLeave
       end
       object lblProfissionais: TLabel
         AlignWithMargins = True
-        Left = 100
-        Top = 25
-        Width = 129
-        Height = 28
+        Left = 84
+        Top = 28
+        Width = 112
+        Height = 25
         Margins.Left = 100
         Margins.Top = 25
         Margins.Right = 73
         Margins.Bottom = 25
-        Align = alClient
         Caption = 'Profissionais'
         Color = clCream
         Font.Charset = ANSI_CHARSET
@@ -1312,8 +1316,8 @@ object PagUsuarios: TPagUsuarios
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
-        ExplicitWidth = 112
-        ExplicitHeight = 25
+        OnMouseEnter = lblProfissionaisMouseEnter
+        OnMouseLeave = lblProfissionaisMouseLeave
       end
     end
     object pnlConsultas: TPanel
@@ -1325,10 +1329,12 @@ object PagUsuarios: TPagUsuarios
       Color = 8142341
       ParentBackground = False
       TabOrder = 3
+      OnMouseEnter = pnlConsultasMouseEnter
+      OnMouseLeave = pnlConsultasMouseLeave
       object lblConsultas: TLabel
         AlignWithMargins = True
-        Left = 100
-        Top = 32
+        Left = 84
+        Top = 28
         Width = 86
         Height = 25
         Margins.Left = 100
@@ -1344,12 +1350,14 @@ object PagUsuarios: TPagUsuarios
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+        OnMouseEnter = lblConsultasMouseEnter
+        OnMouseLeave = lblConsultasMouseLeave
       end
       object imgConsultas: TImage
-        Left = 8
+        Left = 7
         Top = 9
-        Width = 65
-        Height = 73
+        Width = 58
+        Height = 68
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000005D0000
           005F08060000008AB9CBC8000031514944415478DAED7D079C645595F7B92FD5
@@ -1750,6 +1758,8 @@ object PagUsuarios: TPagUsuarios
           13336AAA75495A7E0000000049454E44AE426082}
         Proportional = True
         Stretch = True
+        OnMouseEnter = imgConsultasMouseEnter
+        OnMouseLeave = imgConsultasMouseLeave
       end
     end
     object pnlProcedimentos: TPanel
@@ -1763,9 +1773,9 @@ object PagUsuarios: TPagUsuarios
       TabOrder = 4
       object imgProcedimentos: TImage
         Left = 6
-        Top = 8
-        Width = 60
-        Height = 76
+        Top = 4
+        Width = 57
+        Height = 71
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D49484452000000710000
           00710806000000E27E4CD000002BB74944415478DAED5D075C5457B39FBBF76E
@@ -2124,7 +2134,7 @@ object PagUsuarios: TPagUsuarios
       end
       object lblProcedimentos: TLabel
         AlignWithMargins = True
-        Left = 104
+        Left = 85
         Top = 25
         Width = 134
         Height = 25
@@ -2153,10 +2163,10 @@ object PagUsuarios: TPagUsuarios
       ParentBackground = False
       TabOrder = 5
       object imgSair: TImage
-        Left = 8
+        Left = 5
         Top = 7
-        Width = 60
-        Height = 57
+        Width = 51
+        Height = 50
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000006F0000
           006C08060000006451ECCE0000136F4944415478DAED5D698C1CD771AEEA7366
@@ -2321,8 +2331,8 @@ object PagUsuarios: TPagUsuarios
       end
       object lblEncerrarSistema: TLabel
         AlignWithMargins = True
-        Left = 100
-        Top = 25
+        Left = 84
+        Top = 17
         Width = 148
         Height = 25
         Margins.Left = 100
@@ -2341,8 +2351,8 @@ object PagUsuarios: TPagUsuarios
       end
     end
     object pnlRelatorios: TPanel
-      Left = 2
-      Top = 416
+      Left = 0
+      Top = 418
       Width = 302
       Height = 73
       BevelOuter = bvNone
@@ -2350,10 +2360,10 @@ object PagUsuarios: TPagUsuarios
       ParentBackground = False
       TabOrder = 6
       object ImgRelatorios: TImage
-        Left = 8
-        Top = 0
-        Width = 65
-        Height = 65
+        Left = 5
+        Top = 8
+        Width = 54
+        Height = 67
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D49484452000000770000
           00830806000000B73A848500002C734944415478DAED7D09785D47916EF559EF
@@ -2718,15 +2728,14 @@ object PagUsuarios: TPagUsuarios
       end
       object lblRelatorios: TLabel
         AlignWithMargins = True
-        Left = 100
-        Top = 20
-        Width = 102
-        Height = 28
-        Margins.Left = 100
+        Left = 86
+        Top = 23
+        Width = 89
+        Height = 25
+        Margins.Left = 87
         Margins.Top = 20
         Margins.Right = 100
         Margins.Bottom = 25
-        Align = alClient
         Caption = 'Relat'#243'rios'
         Color = clCream
         Font.Charset = ANSI_CHARSET
@@ -2736,9 +2745,27 @@ object PagUsuarios: TPagUsuarios
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
-        ExplicitWidth = 89
-        ExplicitHeight = 25
       end
     end
+  end
+  object pnlAzulPrincipal: TPanel
+    AlignWithMargins = True
+    Left = 253
+    Top = 42
+    Width = 738
+    Height = 649
+    Margins.Left = 305
+    Margins.Top = 1
+    Color = 13204758
+    ParentBackground = False
+    TabOrder = 3
+  end
+  object pnlBordaBaixoUsuarios: TPanel
+    Left = 2
+    Top = 641
+    Width = 991
+    Height = 38
+    Caption = 'pnlBordaBaixoUsuarios'
+    TabOrder = 2
   end
 end

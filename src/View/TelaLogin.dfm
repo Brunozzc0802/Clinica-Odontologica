@@ -12,6 +12,7 @@ object FormLogin: TFormLogin
   Font.Style = []
   KeyPreview = True
   Position = poDesigned
+  WindowState = wsMaximized
   OnCreate = FormCreate
   TextHeight = 15
   object pnlLogin: TPanel
@@ -2898,7 +2899,8 @@ object FormLogin: TFormLogin
       Color = 13204758
       ParentBackground = False
       TabOrder = 0
-      ExplicitLeft = 309
+      ExplicitLeft = 290
+      ExplicitTop = 1
       object imgLogoPrincipal: TImage
         AlignWithMargins = True
         Left = 101
@@ -4659,10 +4661,8 @@ object FormLogin: TFormLogin
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 9
-        ExplicitTop = 88
-        ExplicitWidth = 294
-        ExplicitHeight = 14
+        ExplicitWidth = 516
+        ExplicitHeight = 21
       end
       object linhaPacientes: TLabel
         AlignWithMargins = True
@@ -4684,8 +4684,6 @@ object FormLogin: TFormLogin
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 5
-        ExplicitTop = 161
         ExplicitWidth = 510
         ExplicitHeight = 21
       end
@@ -4709,9 +4707,7 @@ object FormLogin: TFormLogin
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 5
-        ExplicitTop = 321
-        ExplicitWidth = 294
+        ExplicitWidth = 510
         ExplicitHeight = 21
       end
       object linhaProcedimentos: TLabel
@@ -4734,8 +4730,6 @@ object FormLogin: TFormLogin
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 5
-        ExplicitTop = 420
         ExplicitWidth = 510
         ExplicitHeight = 21
       end
@@ -4759,8 +4753,6 @@ object FormLogin: TFormLogin
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 5
-        ExplicitTop = 506
         ExplicitWidth = 510
         ExplicitHeight = 21
       end
@@ -4784,8 +4776,8 @@ object FormLogin: TFormLogin
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
-        ExplicitTop = 560
-        ExplicitHeight = 20
+        ExplicitWidth = 510
+        ExplicitHeight = 21
       end
       object linhaProfissionais: TLabel
         AlignWithMargins = True
@@ -4807,14 +4799,12 @@ object FormLogin: TFormLogin
         Font.Name = 'Segoe UI'
         Font.Style = []
         ParentFont = False
-        ExplicitLeft = 5
-        ExplicitTop = 235
         ExplicitWidth = 510
         ExplicitHeight = 21
       end
       object pnlUser: TPanel
         Left = 2
-        Top = 1
+        Top = 3
         Width = 302
         Height = 75
         Cursor = crHandPoint
@@ -4827,7 +4817,7 @@ object FormLogin: TFormLogin
         OnMouseLeave = pnlUserMouseLeave
         object iconUser: TImage
           Left = 8
-          Top = 8
+          Top = 6
           Width = 65
           Height = 64
           Cursor = crHandPoint
@@ -5113,15 +5103,14 @@ object FormLogin: TFormLogin
         object lblUsuarios: TLabel
           AlignWithMargins = True
           Left = 100
-          Top = 23
-          Width = 92
+          Top = 24
+          Width = 95
           Height = 29
           Cursor = crHandPoint
           Margins.Left = 100
           Margins.Top = 23
           Margins.Right = 110
           Margins.Bottom = 23
-          Align = alClient
           Caption = 'Usu'#225'rios'
           Color = clCream
           Font.Charset = ANSI_CHARSET
@@ -5134,10 +5123,6 @@ object FormLogin: TFormLogin
           OnClick = lblUsuariosClick
           OnMouseEnter = lblUsuariosMouseEnter
           OnMouseLeave = lblUsuariosMouseLeave
-          ExplicitLeft = 108
-          ExplicitTop = 31
-          ExplicitWidth = 84
-          ExplicitHeight = 44
         end
       end
       object pnlPacientes: TPanel
@@ -5175,10 +5160,8 @@ object FormLogin: TFormLogin
           ParentFont = False
           OnMouseEnter = lblPacientesMouseEnter
           OnMouseLeave = lblPacientesMouseLeave
-          ExplicitLeft = 103
-          ExplicitTop = 30
-          ExplicitWidth = 91
-          ExplicitHeight = 26
+          ExplicitWidth = 83
+          ExplicitHeight = 25
         end
         object ImgPacientes: TImage
           Left = 1
@@ -5907,9 +5890,8 @@ object FormLogin: TFormLogin
           ParentFont = False
           OnMouseEnter = lblProfissionaisMouseEnter
           OnMouseLeave = lblProfissionaisMouseLeave
-          ExplicitLeft = 103
-          ExplicitTop = 28
-          ExplicitWidth = 126
+          ExplicitWidth = 112
+          ExplicitHeight = 25
         end
       end
       object pnlConsultas: TPanel
@@ -5929,7 +5911,7 @@ object FormLogin: TFormLogin
           Left = 100
           Top = 27
           Width = 86
-          Height = 28
+          Height = 25
           Cursor = crHandPoint
           Margins.Left = 100
           Margins.Top = 20
@@ -6735,10 +6717,10 @@ object FormLogin: TFormLogin
         end
         object lblProcedimentos: TLabel
           AlignWithMargins = True
-          Left = 104
+          Left = 101
           Top = 25
-          Width = 145
-          Height = 40
+          Width = 137
+          Height = 25
           Cursor = crHandPoint
           Margins.Left = 105
           Margins.Top = 33
@@ -6943,8 +6925,8 @@ object FormLogin: TFormLogin
           AlignWithMargins = True
           Left = 100
           Top = 20
-          Width = 158
-          Height = 26
+          Width = 148
+          Height = 25
           Cursor = crHandPoint
           Margins.Left = 100
           Margins.Top = 20
@@ -7368,9 +7350,8 @@ object FormLogin: TFormLogin
           ParentFont = False
           OnMouseEnter = lblRelatoriosMouseEnter
           OnMouseLeave = lblRelatoriosMouseLeave
-          ExplicitLeft = 103
-          ExplicitTop = 28
-          ExplicitHeight = 29
+          ExplicitWidth = 89
+          ExplicitHeight = 25
         end
       end
     end

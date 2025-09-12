@@ -4,7 +4,7 @@ object PagUsuarios: TPagUsuarios
   BorderStyle = bsNone
   Caption = 'Usu'#225'rios'
   ClientHeight = 644
-  ClientWidth = 994
+  ClientWidth = 995
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,7 +14,7 @@ object PagUsuarios: TPagUsuarios
   Position = poDesigned
   OnCreate = FormCreate
   DesignSize = (
-    994
+    995
     644)
   TextHeight = 15
   object bordaCabecalhoUsuarios: TPanel
@@ -90,7 +90,6 @@ object PagUsuarios: TPagUsuarios
     Color = 8142341
     ParentBackground = False
     TabOrder = 1
-    ExplicitHeight = 872
     object linhaUsuarios: TLabel
       AlignWithMargins = True
       Left = 2
@@ -1771,6 +1770,8 @@ object PagUsuarios: TPagUsuarios
       Color = 8142341
       ParentBackground = False
       TabOrder = 4
+      OnMouseEnter = pnlProcedimentosMouseEnter
+      OnMouseLeave = pnlProcedimentosMouseLeave
       object imgProcedimentos: TImage
         Left = 6
         Top = 4
@@ -2131,6 +2132,8 @@ object PagUsuarios: TPagUsuarios
           3210BF00FA1FB1DDF1719AE066A90000000049454E44AE426082}
         Proportional = True
         Stretch = True
+        OnMouseEnter = imgProcedimentosMouseEnter
+        OnMouseLeave = imgProcedimentosMouseLeave
       end
       object lblProcedimentos: TLabel
         AlignWithMargins = True
@@ -2151,6 +2154,8 @@ object PagUsuarios: TPagUsuarios
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+        OnMouseEnter = lblProcedimentosMouseEnter
+        OnMouseLeave = lblProcedimentosMouseLeave
       end
     end
     object pnlEncerrarSistema: TPanel
@@ -2162,6 +2167,9 @@ object PagUsuarios: TPagUsuarios
       Color = 8142341
       ParentBackground = False
       TabOrder = 5
+      OnClick = pnlEncerrarSistemaClick
+      OnMouseEnter = pnlEncerrarSistemaMouseEnter
+      OnMouseLeave = pnlEncerrarSistemaMouseLeave
       object imgSair: TImage
         Left = 5
         Top = 7
@@ -2328,18 +2336,21 @@ object PagUsuarios: TPagUsuarios
           C10396F703760000000049454E44AE426082}
         Proportional = True
         Stretch = True
+        OnClick = imgSairClick
+        OnMouseEnter = imgSairMouseEnter
+        OnMouseLeave = imgSairMouseLeave
       end
       object lblEncerrarSistema: TLabel
         AlignWithMargins = True
         Left = 84
         Top = 17
-        Width = 148
+        Width = 54
         Height = 25
         Margins.Left = 100
         Margins.Top = 20
         Margins.Right = 47
         Margins.Bottom = 25
-        Caption = 'Encerrar Sistema'
+        Caption = 'Voltar'
         Color = clCream
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
@@ -2348,6 +2359,9 @@ object PagUsuarios: TPagUsuarios
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+        OnClick = lblEncerrarSistemaClick
+        OnMouseEnter = lblEncerrarSistemaMouseEnter
+        OnMouseLeave = lblEncerrarSistemaMouseLeave
       end
     end
     object pnlRelatorios: TPanel
@@ -2359,9 +2373,11 @@ object PagUsuarios: TPagUsuarios
       Color = 8142341
       ParentBackground = False
       TabOrder = 6
+      OnMouseEnter = pnlRelatoriosMouseEnter
+      OnMouseLeave = pnlRelatoriosMouseLeave
       object ImgRelatorios: TImage
-        Left = 5
-        Top = 8
+        Left = 6
+        Top = 6
         Width = 54
         Height = 67
         Picture.Data = {
@@ -2725,6 +2741,8 @@ object PagUsuarios: TPagUsuarios
           FF0F3020C4BF307768760000000049454E44AE426082}
         Proportional = True
         Stretch = True
+        OnMouseEnter = ImgRelatoriosMouseEnter
+        OnMouseLeave = ImgRelatoriosMouseLeave
       end
       object lblRelatorios: TLabel
         AlignWithMargins = True
@@ -2745,14 +2763,16 @@ object PagUsuarios: TPagUsuarios
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+        OnMouseEnter = lblRelatoriosMouseEnter
+        OnMouseLeave = lblRelatoriosMouseLeave
       end
     end
   end
   object pnlAzulPrincipal: TPanel
     AlignWithMargins = True
-    Left = 253
+    Left = 252
     Top = 42
-    Width = 738
+    Width = 740
     Height = 649
     Margins.Left = 305
     Margins.Top = 1

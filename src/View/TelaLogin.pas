@@ -112,6 +112,14 @@ type
         procedure pnlUserClick(Sender: TObject);
         procedure lblUsuariosClick(Sender: TObject);
         procedure iconUserClick(Sender: TObject);
+    procedure btnEntrarContextPopup(Sender: TObject; MousePos: TPoint;
+      var Handled: Boolean);
+    procedure lblEntrarClick(Sender: TObject);
+    procedure btnEntrarMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure pnlEncerrarSistemaClick(Sender: TObject);
+    procedure lblEncerrarSistemaClick(Sender: TObject);
+    procedure imgSairClick(Sender: TObject);
 
 
     private
@@ -128,6 +136,12 @@ implementation
 {$R *.dfm}
 
 
+procedure TFormLogin.btnEntrarContextPopup(Sender: TObject; MousePos: TPoint;var Handled: Boolean);
+  begin
+    pnlLogin.Visible := False;
+    pnlTelaPrincipal.Visible := True;
+  end;
+
 procedure TFormLogin.btnEntrarMouseEnter(Sender: TObject);
   begin
     btnEntrar.brush.Color := $00C27814;
@@ -136,6 +150,15 @@ procedure TFormLogin.btnEntrarMouseEnter(Sender: TObject);
 procedure TFormLogin.btnEntrarMouseLeave(Sender: TObject);
   begin
     btnEntrar.brush.Color := $00DB8817;
+  end;
+
+procedure TFormLogin.btnEntrarMouseUp(Sender: TObject; Button: TMouseButton;
+Shift: TShiftState; X, Y: Integer);
+  begin
+    ShowMessage('Login efetuado com sucesso');
+    Sleep(500);
+    pnlLogin.Visible := False;
+    pnlTelaPrincipal.Visible := True;
   end;
 
 procedure TFormLogin.edUsuarioKeyDown(Sender: TObject; var Key: Word;Shift: TShiftState);
@@ -150,14 +173,16 @@ procedure TFormLogin.edSenhaKeyDown(Sender: TObject; var Key: Word;Shift: TShift
   begin
     if Key = VK_RETURN then begin
       Key := 0;
+      pnlLogin.Visible := False;
+      pnlTelaPrincipal.Visible := True;
     end;
   end;
 
 procedure TFormLogin.FormCreate(Sender: TObject);
   begin
-//    ImgOlhoAberto.Visible := false;
-//    lblLogin.font.Color := $00C97D16;
-//    pnlTelaPrincipal.Visible := False;
+    ImgOlhoAberto.Visible := false;
+    lblLogin.font.Color := $00C97D16;
+    pnlTelaPrincipal.Visible := False;
   end;
 
 procedure TFormLogin.iconProfissionaisMouseEnter(Sender: TObject);
@@ -172,7 +197,7 @@ procedure TFormLogin.iconProfissionaisMouseLeave(Sender: TObject);
 
 procedure TFormLogin.iconUserClick(Sender: TObject);
   begin
-    PagUsuarios.ShowModal;
+    PagUsuarios.Show;
   end;
 
 procedure TFormLogin.iconUserMouseEnter(Sender: TObject);
@@ -240,6 +265,13 @@ procedure TFormLogin.ImgRelatoriosMouseLeave(Sender: TObject);
     pnlRelatorios.Color := $007C3E05;
   end;
 
+procedure TFormLogin.imgSairClick(Sender: TObject);
+  begin
+    ShowMessage('Encerrando Sistema');
+    Sleep(500);
+    Close;
+  end;
+
 procedure TFormLogin.imgSairMouseEnter(Sender: TObject);
   begin
     pnlEncerrarSistema.Color := $00F78B2B;
@@ -260,6 +292,13 @@ procedure TFormLogin.lblConsultasMouseLeave(Sender: TObject);
     pnlConsultas.Color := $007C3E05;
   end;
 
+procedure TFormLogin.lblEncerrarSistemaClick(Sender: TObject);
+  begin
+    ShowMessage('Encerrando Sistema');
+    Sleep(500);
+    Close;
+  end;
+
 procedure TFormLogin.lblEncerrarSistemaMouseEnter(Sender: TObject);
   begin
     pnlEncerrarSistema.Color := $00F78B2B;
@@ -268,6 +307,12 @@ procedure TFormLogin.lblEncerrarSistemaMouseEnter(Sender: TObject);
 procedure TFormLogin.lblEncerrarSistemaMouseLeave(Sender: TObject);
   begin
     pnlEncerrarSistema.Color := $007C3E05;
+  end;
+
+procedure TFormLogin.lblEntrarClick(Sender: TObject);
+  begin
+    pnlLogin.Visible := False;
+    pnlTelaPrincipal.Visible := True;
   end;
 
 procedure TFormLogin.lblPacientesMouseEnter(Sender: TObject);
@@ -313,7 +358,7 @@ procedure TFormLogin.lblRelatoriosMouseLeave(Sender: TObject);
 
 procedure TFormLogin.lblUsuariosClick(Sender: TObject);
   begin
-    PagUsuarios.ShowModal;
+    PagUsuarios.Show;
   end;
 
 procedure TFormLogin.lblUsuariosMouseEnter(Sender: TObject);
@@ -334,6 +379,13 @@ procedure TFormLogin.pnlConsultasMouseEnter(Sender: TObject);
 procedure TFormLogin.pnlConsultasMouseLeave(Sender: TObject);
   begin
     pnlConsultas.Color := $007C3E05;
+  end;
+
+procedure TFormLogin.pnlEncerrarSistemaClick(Sender: TObject);
+  begin
+    ShowMessage('Encerrando sistema');
+    Sleep(500);
+    Close;
   end;
 
 procedure TFormLogin.pnlEncerrarSistemaMouseEnter(Sender: TObject);
@@ -389,7 +441,7 @@ procedure TFormLogin.pnlRelatoriosMouseLeave(Sender: TObject);
 procedure TFormLogin.pnlUserClick(Sender: TObject);
   begin
     pnlUser.Color := $00F78B2B;
-    PagUsuarios.ShowModal;
+    PagUsuarios.Show;
   end;
 
 procedure TFormLogin.pnlUserMouseEnter(Sender: TObject);

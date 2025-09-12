@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Buttons, Vcl.StdCtrls,
-  Vcl.Imaging.pngimage;
+  Vcl.Imaging.pngimage, Vcl.Imaging.jpeg, Vcl.Grids;
 
 type
   TPagUsuarios = class(TForm)
@@ -44,6 +44,21 @@ type
     lblRelatorios: TLabel;
     pnlBordaBaixoUsuarios: TPanel;
     pnlAzulPrincipal: TPanel;
+    sgUsuarios: TStringGrid;
+    pnlBotoesDireitaUsuarios: TPanel;
+    imgLogoUsuarios: TImage;
+    btnAddUsu: TPanel;
+    btnAlterarUsu: TPanel;
+    btnPesquisarUsu: TPanel;
+    btnDeletarUsu: TPanel;
+    btnCancelarUsu: TPanel;
+    lblAddUsu: TLabel;
+    lblAlterarUsu: TLabel;
+    lblPesquisar: TLabel;
+    lblDeletarUsu: TLabel;
+    lblCancelarUsu: TLabel;
+    btnRestaurarUsu: TPanel;
+    lblRestaurarUsu: TLabel;
     procedure btnXUsuariosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure pnlPacientesMouseEnter(Sender: TObject);
@@ -85,6 +100,30 @@ type
     procedure pnlEncerrarSistemaClick(Sender: TObject);
     procedure lblEncerrarSistemaClick(Sender: TObject);
     procedure imgSairClick(Sender: TObject);
+    procedure btnAddUsuMouseEnter(Sender: TObject);
+    procedure btnAddUsuMouseLeave(Sender: TObject);
+    procedure lblAddUsuMouseEnter(Sender: TObject);
+    procedure lblAddUsuMouseLeave(Sender: TObject);
+    procedure btnAlterarUsuMouseEnter(Sender: TObject);
+    procedure btnAlterarUsuMouseLeave(Sender: TObject);
+    procedure lblAlterarUsuMouseEnter(Sender: TObject);
+    procedure lblAlterarUsuMouseLeave(Sender: TObject);
+    procedure btnPesquisarUsuMouseLeave(Sender: TObject);
+    procedure btnPesquisarUsuMouseEnter(Sender: TObject);
+    procedure lblPesquisarMouseEnter(Sender: TObject);
+    procedure lblPesquisarMouseLeave(Sender: TObject);
+    procedure btnDeletarUsuMouseEnter(Sender: TObject);
+    procedure btnDeletarUsuMouseLeave(Sender: TObject);
+    procedure lblDeletarUsuMouseEnter(Sender: TObject);
+    procedure lblDeletarUsuMouseLeave(Sender: TObject);
+    procedure btnCancelarUsuMouseEnter(Sender: TObject);
+    procedure btnCancelarUsuMouseLeave(Sender: TObject);
+    procedure lblCancelarUsuMouseEnter(Sender: TObject);
+    procedure lblCancelarUsuMouseLeave(Sender: TObject);
+    procedure btnRestaurarUsuMouseEnter(Sender: TObject);
+    procedure btnRestaurarUsuMouseLeave(Sender: TObject);
+    procedure lblRestaurarUsuMouseEnter(Sender: TObject);
+    procedure lblRestaurarUsuMouseLeave(Sender: TObject);
   private
     { Private declarations }
   public
@@ -97,6 +136,66 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TPagUsuarios.btnAddUsuMouseEnter(Sender: TObject);
+  begin
+    btnAddUsu.Color := $00F78B2B;
+  end;
+
+procedure TPagUsuarios.btnAddUsuMouseLeave(Sender: TObject);
+  begin
+    btnAddUsu.Color :=  $007C3E05;
+  end;
+
+procedure TPagUsuarios.btnAlterarUsuMouseEnter(Sender: TObject);
+  begin
+    btnAlterarUsu.Color := $00F78B2B;
+  end;
+
+procedure TPagUsuarios.btnAlterarUsuMouseLeave(Sender: TObject);
+  begin
+    btnAlterarUsu.Color := $007C3E05;
+  end;
+
+procedure TPagUsuarios.btnCancelarUsuMouseEnter(Sender: TObject);
+  begin
+    btnCancelarUsu.Color := $00F78B2B;
+  end;
+
+procedure TPagUsuarios.btnCancelarUsuMouseLeave(Sender: TObject);
+  begin
+    btnCancelarUsu.Color := $007C3E05;
+  end;
+
+procedure TPagUsuarios.btnDeletarUsuMouseEnter(Sender: TObject);
+  begin
+    btnDeletarUsu.Color := $00F78B2B;
+  end;
+
+procedure TPagUsuarios.btnDeletarUsuMouseLeave(Sender: TObject);
+  begin
+    btnDeletarUsu.Color := $007C3E05;
+  end;
+
+procedure TPagUsuarios.btnPesquisarUsuMouseEnter(Sender: TObject);
+  begin
+    btnPesquisarUsu.Color := $00F78B2B;
+  end;
+
+procedure TPagUsuarios.btnPesquisarUsuMouseLeave(Sender: TObject);
+  begin
+    btnPesquisarUsu.Color := $007C3E05;
+  end;
+
+procedure TPagUsuarios.btnRestaurarUsuMouseEnter(Sender: TObject);
+  begin
+    btnRestaurarUsu.Color := $00F78B2B;
+  end;
+
+procedure TPagUsuarios.btnRestaurarUsuMouseLeave(Sender: TObject);
+  begin
+    btnRestaurarUsu.Color := $007C3E05;
+  end;
 
 procedure TPagUsuarios.btnXUsuariosClick(Sender: TObject);
   begin
@@ -174,6 +273,36 @@ procedure TPagUsuarios.imgSairMouseLeave(Sender: TObject);
     pnlEncerrarSistema.Color :=  $007C3E05;
   end;
 
+procedure TPagUsuarios.lblAddUsuMouseEnter(Sender: TObject);
+  begin
+    btnAddUsu.Color := $00F78B2B;
+  end;
+
+procedure TPagUsuarios.lblAddUsuMouseLeave(Sender: TObject);
+  begin
+    btnAddUsu.Color := $007C3E05;
+  end;
+
+procedure TPagUsuarios.lblAlterarUsuMouseEnter(Sender: TObject);
+  begin
+    btnAlterarUsu.Color :=  $00F78B2B;
+  end;
+
+procedure TPagUsuarios.lblAlterarUsuMouseLeave(Sender: TObject);
+  begin
+    btnAlterarUsu.Color := $007C3E05;
+  end;
+
+procedure TPagUsuarios.lblCancelarUsuMouseEnter(Sender: TObject);
+  begin
+    btnCancelarUsu.Color := $00F78B2B;
+  end;
+
+procedure TPagUsuarios.lblCancelarUsuMouseLeave(Sender: TObject);
+  begin
+    btnCancelarUsu.Color := $007C3E05;
+  end;
+
 procedure TPagUsuarios.lblConsultasMouseEnter(Sender: TObject);
   begin
     PnlConsultas.Color := $00F78B2B;
@@ -182,6 +311,16 @@ procedure TPagUsuarios.lblConsultasMouseEnter(Sender: TObject);
 procedure TPagUsuarios.lblConsultasMouseLeave(Sender: TObject);
   begin
     pnlConsultas.Color := $007C3E05;
+  end;
+
+procedure TPagUsuarios.lblDeletarUsuMouseEnter(Sender: TObject);
+  begin
+    btnDeletarUsu.Color := $00F78B2B;
+  end;
+
+procedure TPagUsuarios.lblDeletarUsuMouseLeave(Sender: TObject);
+  begin
+    btnDeletarUsu.Color :=  $007C3E05;
   end;
 
 procedure TPagUsuarios.lblEncerrarSistemaClick(Sender: TObject);
@@ -211,6 +350,16 @@ procedure TPagUsuarios.lblPacientesMouseLeave(Sender: TObject);
   end;
 
 
+procedure TPagUsuarios.lblPesquisarMouseEnter(Sender: TObject);
+  begin
+    btnPesquisarUsu.Color := $00F78B2B;
+  end;
+
+procedure TPagUsuarios.lblPesquisarMouseLeave(Sender: TObject);
+  begin
+    btnPesquisarUsu.Color := $007C3E05;
+  end;
+
 procedure TPagUsuarios.lblProcedimentosMouseEnter(Sender: TObject);
   begin
     pnlProcedimentos.Color := $00F78B2B;
@@ -239,6 +388,16 @@ procedure TPagUsuarios.lblRelatoriosMouseEnter(Sender: TObject);
 procedure TPagUsuarios.lblRelatoriosMouseLeave(Sender: TObject);
   begin
     pnlRelatorios.Color :=  $007C3E05;
+  end;
+
+procedure TPagUsuarios.lblRestaurarUsuMouseEnter(Sender: TObject);
+  begin
+    btnRestaurarUsu.Color := $00F78B2B;
+  end;
+
+procedure TPagUsuarios.lblRestaurarUsuMouseLeave(Sender: TObject);
+  begin
+    btnRestaurarUsu.Color := $007C3E05;
   end;
 
 procedure TPagUsuarios.pnlConsultasMouseEnter(Sender: TObject);

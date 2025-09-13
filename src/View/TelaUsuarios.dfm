@@ -3995,6 +3995,56 @@ object PagUsuarios: TPagUsuarios
       FixedRows = 0
       TabOrder = 0
     end
+    object pnlFormAddUsuarios: TPanel
+      Left = 4
+      Top = 462
+      Width = 573
+      Height = 132
+      TabOrder = 1
+      object Edit1: TEdit
+        Left = 8
+        Top = 8
+        Width = 153
+        Height = 33
+        AutoSize = False
+        TabOrder = 0
+        TextHint = 'Digite o nome de usu'#225'rio:'
+      end
+      object Edit2: TEdit
+        Left = 184
+        Top = 7
+        Width = 153
+        Height = 34
+        AutoSize = False
+        TabOrder = 1
+        TextHint = 'Digite a senha:'
+      end
+      object ComboBox1: TComboBox
+        Left = 360
+        Top = 8
+        Width = 97
+        Height = 23
+        Style = csDropDownList
+        TabOrder = 2
+        TextHint = 'Ativo'
+        Items.Strings = (
+          'Sim'
+          'N'#227'o')
+      end
+      object ComboBox2: TComboBox
+        Left = 472
+        Top = 8
+        Width = 96
+        Height = 23
+        Style = csDropDownList
+        TabOrder = 3
+        TextHint = 'Grupo'
+        Items.Strings = (
+          'Adminstrador'
+          'Recepcionista'
+          'Profissional')
+      end
+    end
   end
   object pnlBordaBaixoUsuarios: TPanel
     Left = 2

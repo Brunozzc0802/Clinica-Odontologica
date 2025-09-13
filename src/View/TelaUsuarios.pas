@@ -59,6 +59,11 @@ type
     lblCancelarUsu: TLabel;
     btnRestaurarUsu: TPanel;
     lblRestaurarUsu: TLabel;
+    pnlFormAddUsuarios: TPanel;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    ComboBox1: TComboBox;
+    ComboBox2: TComboBox;
     procedure btnXUsuariosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure pnlPacientesMouseEnter(Sender: TObject);

@@ -57,13 +57,15 @@ type
     lblPesquisar: TLabel;
     lblDeletarUsu: TLabel;
     lblCancelarUsu: TLabel;
-    btnRestaurarUsu: TPanel;
-    lblRestaurarUsu: TLabel;
     pnlFormAddUsuarios: TPanel;
-    Edit1: TEdit;
+    edUsuario: TEdit;
     Edit2: TEdit;
-    ComboBox1: TComboBox;
-    ComboBox2: TComboBox;
+    cbAtivo: TComboBox;
+    cbGrupo: TComboBox;
+    Shape1: TShape;
+    btnRestaurarUsu: TPanel;
+    lblRestaurar: TLabel;
+    Label1: TLabel;
     procedure btnXUsuariosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure pnlPacientesMouseEnter(Sender: TObject);
@@ -129,6 +131,8 @@ type
     procedure btnRestaurarUsuMouseLeave(Sender: TObject);
     procedure lblRestaurarUsuMouseEnter(Sender: TObject);
     procedure lblRestaurarUsuMouseLeave(Sender: TObject);
+    procedure btnAddUsuClick(Sender: TObject);
+    procedure lblAddUsuClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -141,6 +145,11 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TPagUsuarios.btnAddUsuClick(Sender: TObject);
+  begin
+    pnlFormAddUsuarios.Visible := True;
+  end;
 
 procedure TPagUsuarios.btnAddUsuMouseEnter(Sender: TObject);
   begin
@@ -209,6 +218,8 @@ procedure TPagUsuarios.btnXUsuariosClick(Sender: TObject);
 procedure TPagUsuarios.FormCreate(Sender: TObject);
   begin
     pnlUsuarios.Color := $00F78B2B;
+
+    pnlFormAddUsuarios.Visible := False;
 
     //Configurações sg
     sgUsuarios.Cells[0,0] := 'Cód';
@@ -288,6 +299,11 @@ procedure TPagUsuarios.imgSairMouseEnter(Sender: TObject);
 procedure TPagUsuarios.imgSairMouseLeave(Sender: TObject);
   begin
     pnlEncerrarSistema.Color :=  $007C3E05;
+  end;
+
+procedure TPagUsuarios.lblAddUsuClick(Sender: TObject);
+  begin
+    pnlFormAddUsuarios.Visible := True;
   end;
 
 procedure TPagUsuarios.lblAddUsuMouseEnter(Sender: TObject);

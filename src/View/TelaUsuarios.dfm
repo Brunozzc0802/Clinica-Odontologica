@@ -2792,9 +2792,9 @@ object PagUsuarios: TPagUsuarios
     TabOrder = 3
     object imgLogoUsuarios: TImage
       AlignWithMargins = True
-      Left = 600
+      Left = 584
       Top = 469
-      Width = 129
+      Width = 145
       Height = 127
       Margins.Left = 100
       Margins.Top = 50
@@ -3996,14 +3996,53 @@ object PagUsuarios: TPagUsuarios
       TabOrder = 0
     end
     object pnlFormAddUsuarios: TPanel
-      Left = 4
+      Left = 12
       Top = 462
-      Width = 573
+      Width = 557
       Height = 132
+      BevelOuter = bvNone
+      Color = clWhite
+      ParentBackground = False
       TabOrder = 1
-      object Edit1: TEdit
+      object Shape1: TShape
         Left = 8
-        Top = 8
+        Top = 64
+        Width = 537
+        Height = 33
+        Brush.Color = 8142341
+        Shape = stRoundRect
+      end
+      object Label1: TLabel
+        AlignWithMargins = True
+        Left = 35
+        Top = 70
+        Width = 487
+        Height = 52
+        Cursor = crHandPoint
+        Margins.Left = 35
+        Margins.Top = 70
+        Margins.Right = 35
+        Margins.Bottom = 10
+        Align = alClient
+        Alignment = taCenter
+        Caption = 'Adicionar'
+        Color = clCream
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        OnMouseEnter = lblRestaurarUsuMouseEnter
+        OnMouseLeave = lblRestaurarUsuMouseEnter
+        ExplicitLeft = 43
+        ExplicitTop = 66
+        ExplicitHeight = 112
+      end
+      object edUsuario: TEdit
+        Left = 9
+        Top = 7
         Width = 153
         Height = 33
         AutoSize = False
@@ -4011,16 +4050,16 @@ object PagUsuarios: TPagUsuarios
         TextHint = 'Digite o nome de usu'#225'rio:'
       end
       object Edit2: TEdit
-        Left = 184
+        Left = 176
         Top = 7
-        Width = 153
+        Width = 145
         Height = 34
         AutoSize = False
         TabOrder = 1
         TextHint = 'Digite a senha:'
       end
-      object ComboBox1: TComboBox
-        Left = 360
+      object cbAtivo: TComboBox
+        Left = 336
         Top = 8
         Width = 97
         Height = 23
@@ -4031,8 +4070,8 @@ object PagUsuarios: TPagUsuarios
           'Sim'
           'N'#227'o')
       end
-      object ComboBox2: TComboBox
-        Left = 472
+      object cbGrupo: TComboBox
+        Left = 447
         Top = 8
         Width = 96
         Height = 23
@@ -4069,6 +4108,7 @@ object PagUsuarios: TPagUsuarios
       Color = 8142341
       ParentBackground = False
       TabOrder = 0
+      OnClick = btnAddUsuClick
       OnMouseEnter = btnAddUsuMouseEnter
       OnMouseLeave = btnAddUsuMouseLeave
       object lblAddUsu: TLabel
@@ -4093,6 +4133,7 @@ object PagUsuarios: TPagUsuarios
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+        OnClick = lblAddUsuClick
         OnMouseEnter = lblAddUsuMouseEnter
         OnMouseLeave = lblAddUsuMouseLeave
         ExplicitWidth = 59
@@ -4266,7 +4307,7 @@ object PagUsuarios: TPagUsuarios
       TabOrder = 5
       OnMouseEnter = btnRestaurarUsuMouseEnter
       OnMouseLeave = btnRestaurarUsuMouseLeave
-      object lblRestaurarUsu: TLabel
+      object lblRestaurar: TLabel
         AlignWithMargins = True
         Left = 36
         Top = 11
@@ -4289,7 +4330,7 @@ object PagUsuarios: TPagUsuarios
         ParentColor = False
         ParentFont = False
         OnMouseEnter = lblRestaurarUsuMouseEnter
-        OnMouseLeave = lblRestaurarUsuMouseLeave
+        OnMouseLeave = lblRestaurarUsuMouseEnter
         ExplicitWidth = 58
         ExplicitHeight = 17
       end

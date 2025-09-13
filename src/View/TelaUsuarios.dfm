@@ -227,8 +227,8 @@ object PagUsuarios: TPagUsuarios
       Font.Style = []
       ParentColor = False
       ParentFont = False
-      ExplicitLeft = 6
-      ExplicitTop = 557
+      ExplicitWidth = 510
+      ExplicitHeight = 21
     end
     object linhaProfissionais: TLabel
       AlignWithMargins = True
@@ -3988,8 +3988,9 @@ object PagUsuarios: TPagUsuarios
       Top = 6
       Width = 573
       Height = 450
-      ColCount = 6
-      DefaultColWidth = 93
+      ColCount = 4
+      DefaultColWidth = 100
+      FixedCols = 0
       RowCount = 2
       FixedRows = 0
       TabOrder = 0
@@ -4044,10 +4045,8 @@ object PagUsuarios: TPagUsuarios
         ParentFont = False
         OnMouseEnter = lblAddUsuMouseEnter
         OnMouseLeave = lblAddUsuMouseLeave
-        ExplicitLeft = 101
-        ExplicitTop = 5
-        ExplicitWidth = -75
-        ExplicitHeight = -7
+        ExplicitWidth = 59
+        ExplicitHeight = 17
       end
     end
     object btnAlterarUsu: TPanel

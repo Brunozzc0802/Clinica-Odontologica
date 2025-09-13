@@ -204,6 +204,18 @@ procedure TPagUsuarios.btnXUsuariosClick(Sender: TObject);
 procedure TPagUsuarios.FormCreate(Sender: TObject);
   begin
     pnlUsuarios.Color := $00F78B2B;
+
+    //Configurações sg
+    sgUsuarios.Cells[0,0] := 'Cód';
+    sgUsuarios.Cells[1,0] := 'Nome de Usuário';
+    sgUsuarios.Cells[2,0] := 'Ativo';
+    sgUsuarios.Cells[3,0] := 'Grupo';
+
+    sgUsuarios.ColWidths[0] := 50;
+    sgUsuarios.ColWidths[1] := 150;
+    sgUsuarios.ColWidths[2] := 50;
+    sgUsuarios.ColWidths[3] := 100;
+
   end;
 
 procedure TPagUsuarios.iconProfissionaisMouseEnter(Sender: TObject);

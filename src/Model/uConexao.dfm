@@ -19,8 +19,8 @@ object dmConexao: TdmConexao
       'Database = clinica_odontologica'
       'Server = localhost'
       'Port = 5432'
-      'User_Name=postgres')
-    LoginPrompt = False
+      'User_Name=postgres'
+      'Password = root')
     Left = 160
     Top = 88
   end

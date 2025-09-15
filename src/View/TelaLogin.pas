@@ -8,7 +8,7 @@ uses
         Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
         Vcl.Imaging.pngimage,
         Vcl.StdCtrls, Vcl.Imaging.jpeg, Vcl.Buttons, System.ImageList,
-        Vcl.ImgList,uConexao,TelaUsuarios;
+        Vcl.ImgList,uConexao,TelaUsuarios,uUsuarioController;
 
 type
         TFormLogin = class(TForm)
@@ -32,8 +32,6 @@ type
         lblLogin: TLabel;
         ShapeNome: TShape;
         ShapeSenha: TShape;
-        btnEntrar: TShape;
-        lblEntrar: TLabel;
         edUsuario: TEdit;
         edSenha: TEdit;
         bordaDoForm: TPanel;
@@ -59,6 +57,8 @@ type
         ImgRelatorios: TImage;
         lblRelatorios: TLabel;
         imgConsultas: TImage;
+    btnEntrar: TPanel;
+    lblEntrar: TLabel;
         procedure FormCreate(Sender: TObject);
         procedure btnEntrarMouseEnter(Sender: TObject);
         procedure btnEntrarMouseLeave(Sender: TObject);
@@ -82,8 +82,6 @@ type
         procedure pnlEncerrarSistemaMouseEnter(Sender: TObject);
         procedure pnlEncerrarSistemaMouseLeave(Sender: TObject);
         procedure pnlUserClick(Sender: TObject);
-        procedure btnEntrarContextPopup(Sender: TObject; MousePos: TPoint;var Handled: Boolean);
-        procedure btnEntrarMouseUp(Sender: TObject; Button: TMouseButton;Shift: TShiftState; X, Y: Integer);
         procedure pnlEncerrarSistemaClick(Sender: TObject);
 
     private
@@ -99,32 +97,14 @@ implementation
 
 {$R *.dfm}
 
-
-procedure TFormLogin.btnEntrarContextPopup(Sender: TObject; MousePos: TPoint;var Handled: Boolean);
-  begin
-    pnlLogin.Visible := False;
-    pnlFundoLateral.Visible := True;
-    pnlTelaPrincipal.Visible := True;
-  end;
-
 procedure TFormLogin.btnEntrarMouseEnter(Sender: TObject);
   begin
-    btnEntrar.brush.Color := $00C27814;
+    btnEntrar.Color := $00B06D13;
   end;
 
 procedure TFormLogin.btnEntrarMouseLeave(Sender: TObject);
   begin
-    btnEntrar.brush.Color := $00DB8817;
-  end;
-
-procedure TFormLogin.btnEntrarMouseUp(Sender: TObject; Button: TMouseButton;
-Shift: TShiftState; X, Y: Integer);
-  begin
-    ShowMessage('Login efetuado com sucesso');
-    Sleep(800);
-    pnlLogin.Visible := False;
-    pnlFundoLateral.Visible := True;
-    pnlTelaPrincipal.Visible := True;
+    btnEntrar.Color := $00C97D16;
   end;
 
 procedure TFormLogin.edUsuarioKeyDown(Sender: TObject; var Key: Word;Shift: TShiftState);
@@ -139,9 +119,6 @@ procedure TFormLogin.edSenhaKeyDown(Sender: TObject; var Key: Word;Shift: TShift
   begin
     if Key = VK_RETURN then begin
       Key := 0;
-      pnlLogin.Visible := False;
-      pnlFundoLateral.Visible := True;
-      pnlTelaPrincipal.Visible := True;
     end;
   end;
 

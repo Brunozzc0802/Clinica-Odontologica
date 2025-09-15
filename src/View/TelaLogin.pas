@@ -139,6 +139,7 @@ implementation
 procedure TFormLogin.btnEntrarContextPopup(Sender: TObject; MousePos: TPoint;var Handled: Boolean);
   begin
     pnlLogin.Visible := False;
+    pnlFundoLateral.Visible := True;
     pnlTelaPrincipal.Visible := True;
   end;
 
@@ -156,8 +157,9 @@ procedure TFormLogin.btnEntrarMouseUp(Sender: TObject; Button: TMouseButton;
 Shift: TShiftState; X, Y: Integer);
   begin
     ShowMessage('Login efetuado com sucesso');
-    Sleep(500);
+    Sleep(800);
     pnlLogin.Visible := False;
+    pnlFundoLateral.Visible := True;
     pnlTelaPrincipal.Visible := True;
   end;
 
@@ -174,13 +176,15 @@ procedure TFormLogin.edSenhaKeyDown(Sender: TObject; var Key: Word;Shift: TShift
     if Key = VK_RETURN then begin
       Key := 0;
       pnlLogin.Visible := False;
+      pnlFundoLateral.Visible := True;
       pnlTelaPrincipal.Visible := True;
     end;
   end;
 
 procedure TFormLogin.FormCreate(Sender: TObject);
   begin
-    ImgOlhoAberto.Visible := false;
+    pnlFundoLateral.Visible := False;
+    ImgOlhoAberto.Visible := False;
     lblLogin.font.Color := $00C97D16;
     pnlTelaPrincipal.Visible := False;
   end;
@@ -440,7 +444,6 @@ procedure TFormLogin.pnlRelatoriosMouseLeave(Sender: TObject);
 
 procedure TFormLogin.pnlUserClick(Sender: TObject);
   begin
-    pnlUser.Color := $00F78B2B;
     PagUsuarios.Show;
   end;
 

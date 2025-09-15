@@ -59,13 +59,15 @@ type
     lblCancelarUsu: TLabel;
     pnlFormAddUsuarios: TPanel;
     edUsuario: TEdit;
-    Edit2: TEdit;
+    edSenhaUsuario: TEdit;
     cbAtivo: TComboBox;
     cbGrupo: TComboBox;
-    Shape1: TShape;
     btnRestaurarUsu: TPanel;
     lblRestaurar: TLabel;
-    Label1: TLabel;
+    btnPermissoes: TPanel;
+    lblPermissoes: TLabel;
+    btnAdicionarUsuario: TPanel;
+    lblAdiconaFUsuario: TLabel;
     procedure btnXUsuariosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure pnlPacientesMouseEnter(Sender: TObject);
@@ -133,6 +135,14 @@ type
     procedure lblRestaurarUsuMouseLeave(Sender: TObject);
     procedure btnAddUsuClick(Sender: TObject);
     procedure lblAddUsuClick(Sender: TObject);
+    procedure btnAdicionarUsuarioMouseEnter(Sender: TObject);
+    procedure btnAdicionarUsuarioMouseLeave(Sender: TObject);
+    procedure lblAdiconaFUsuarioMouseEnter(Sender: TObject);
+    procedure lblAdiconaFUsuarioMouseLeave(Sender: TObject);
+    procedure btnPermissoesMouseEnter(Sender: TObject);
+    procedure btnPermissoesMouseLeave(Sender: TObject);
+    procedure lblPermissoesMouseEnter(Sender: TObject);
+    procedure lblPermissoesMouseLeave(Sender: TObject);
   private
     { Private declarations }
   public
@@ -159,6 +169,16 @@ procedure TPagUsuarios.btnAddUsuMouseEnter(Sender: TObject);
 procedure TPagUsuarios.btnAddUsuMouseLeave(Sender: TObject);
   begin
     btnAddUsu.Color :=  $007C3E05;
+  end;
+
+procedure TPagUsuarios.btnAdicionarUsuarioMouseEnter(Sender: TObject);
+  begin
+    btnAdicionarUsuario.Color := $00C46106;
+  end;
+
+procedure TPagUsuarios.btnAdicionarUsuarioMouseLeave(Sender: TObject);
+  begin
+    btnAdicionarUsuario.Color := $007C3E05;
   end;
 
 procedure TPagUsuarios.btnAlterarUsuMouseEnter(Sender: TObject);
@@ -191,6 +211,16 @@ procedure TPagUsuarios.btnDeletarUsuMouseLeave(Sender: TObject);
     btnDeletarUsu.Color := $007C3E05;
   end;
 
+procedure TPagUsuarios.btnPermissoesMouseEnter(Sender: TObject);
+  begin
+    btnPermissoes.Color := $00F78B2B;
+  end;
+
+procedure TPagUsuarios.btnPermissoesMouseLeave(Sender: TObject);
+  begin
+    btnPermissoes.Color :=  $007C3E05;
+  end;
+
 procedure TPagUsuarios.btnPesquisarUsuMouseEnter(Sender: TObject);
   begin
     btnPesquisarUsu.Color := $00F78B2B;
@@ -215,6 +245,7 @@ procedure TPagUsuarios.btnXUsuariosClick(Sender: TObject);
   begin
     Close;
   end;
+
 procedure TPagUsuarios.FormCreate(Sender: TObject);
   begin
     pnlUsuarios.Color := $00F78B2B;
@@ -316,6 +347,16 @@ procedure TPagUsuarios.lblAddUsuMouseLeave(Sender: TObject);
     btnAddUsu.Color := $007C3E05;
   end;
 
+procedure TPagUsuarios.lblAdiconaFUsuarioMouseEnter(Sender: TObject);
+  begin
+    btnAdicionarUsuario.Color := $00C46106;
+  end;
+
+procedure TPagUsuarios.lblAdiconaFUsuarioMouseLeave(Sender: TObject);
+  begin
+    btnAdicionarUsuario.Color := $007C3E05;
+  end;
+
 procedure TPagUsuarios.lblAlterarUsuMouseEnter(Sender: TObject);
   begin
     btnAlterarUsu.Color :=  $00F78B2B;
@@ -382,6 +423,16 @@ procedure TPagUsuarios.lblPacientesMouseLeave(Sender: TObject);
     pnlPacientes.Color := $007C3E05;
   end;
 
+
+procedure TPagUsuarios.lblPermissoesMouseEnter(Sender: TObject);
+  begin
+    btnPermissoes.Color := $00F78B2B;
+  end;
+
+procedure TPagUsuarios.lblPermissoesMouseLeave(Sender: TObject);
+  begin
+    btnPermissoes.Color := $007C3E05;
+  end;
 
 procedure TPagUsuarios.lblPesquisarMouseEnter(Sender: TObject);
   begin

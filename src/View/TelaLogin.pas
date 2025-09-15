@@ -8,7 +8,7 @@ uses
         Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
         Vcl.Imaging.pngimage,
         Vcl.StdCtrls, Vcl.Imaging.jpeg, Vcl.Buttons, System.ImageList,
-        Vcl.ImgList,uConexao,TelaUsuarios,uUsuarioController;
+        Vcl.ImgList,uConexao,TelaUsuarios;
 
 type
         TFormLogin = class(TForm)
@@ -83,6 +83,7 @@ type
         procedure pnlEncerrarSistemaMouseLeave(Sender: TObject);
         procedure pnlUserClick(Sender: TObject);
         procedure pnlEncerrarSistemaClick(Sender: TObject);
+    procedure btnEntrarClick(Sender: TObject);
 
     private
       { Private declarations }
@@ -96,6 +97,13 @@ type
 implementation
 
 {$R *.dfm}
+
+procedure TFormLogin.btnEntrarClick(Sender: TObject);
+  begin
+    pnlTelaPrincipal.Visible := True;
+    pnlLogin.Visible := False;
+    pnlFundoLateral.Visible := True;
+  end;
 
 procedure TFormLogin.btnEntrarMouseEnter(Sender: TObject);
   begin

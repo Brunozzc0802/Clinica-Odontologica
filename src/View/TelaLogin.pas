@@ -58,7 +58,7 @@ type
         pnlRelatorios: TPanel;
         ImgRelatorios: TImage;
         lblRelatorios: TLabel;
-    imgConsultas: TImage;
+        imgConsultas: TImage;
         procedure FormCreate(Sender: TObject);
         procedure btnEntrarMouseEnter(Sender: TObject);
         procedure btnEntrarMouseLeave(Sender: TObject);
@@ -81,46 +81,10 @@ type
         procedure pnlRelatoriosMouseEnter(Sender: TObject);
         procedure pnlEncerrarSistemaMouseEnter(Sender: TObject);
         procedure pnlEncerrarSistemaMouseLeave(Sender: TObject);
-        procedure lblPacientesMouseEnter(Sender: TObject);
-        procedure lblPacientesMouseLeave(Sender: TObject);
-        procedure lblProfissionaisMouseEnter(Sender: TObject);
-        procedure lblProfissionaisMouseLeave(Sender: TObject);
-        procedure iconUserMouseEnter(Sender: TObject);
-        procedure iconUserMouseLeave(Sender: TObject);
-        procedure lblUsuariosMouseEnter(Sender: TObject);
-        procedure lblUsuariosMouseLeave(Sender: TObject);
-        procedure ImgPacientesMouseEnter(Sender: TObject);
-        procedure ImgPacientesMouseLeave(Sender: TObject);
-        procedure iconProfissionaisMouseEnter(Sender: TObject);
-        procedure iconProfissionaisMouseLeave(Sender: TObject);
-        procedure imgConsultasMouseEnter(Sender: TObject);
-        procedure imgConsultasMouseLeave(Sender: TObject);
-        procedure lblConsultasMouseEnter(Sender: TObject);
-        procedure lblConsultasMouseLeave(Sender: TObject);
-        procedure imgProcedimentosMouseEnter(Sender: TObject);
-        procedure imgProcedimentosMouseLeave(Sender: TObject);
-        procedure lblProcedimentosMouseEnter(Sender: TObject);
-        procedure lblProcedimentosMouseLeave(Sender: TObject);
-        procedure ImgRelatoriosMouseEnter(Sender: TObject);
-        procedure ImgRelatoriosMouseLeave(Sender: TObject);
-        procedure lblRelatoriosMouseEnter(Sender: TObject);
-        procedure lblRelatoriosMouseLeave(Sender: TObject);
-        procedure imgSairMouseEnter(Sender: TObject);
-        procedure imgSairMouseLeave(Sender: TObject);
-        procedure lblEncerrarSistemaMouseEnter(Sender: TObject);
-        procedure lblEncerrarSistemaMouseLeave(Sender: TObject);
         procedure pnlUserClick(Sender: TObject);
-        procedure lblUsuariosClick(Sender: TObject);
-        procedure iconUserClick(Sender: TObject);
-    procedure btnEntrarContextPopup(Sender: TObject; MousePos: TPoint;
-      var Handled: Boolean);
-    procedure lblEntrarClick(Sender: TObject);
-    procedure btnEntrarMouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure pnlEncerrarSistemaClick(Sender: TObject);
-    procedure lblEncerrarSistemaClick(Sender: TObject);
-    procedure imgSairClick(Sender: TObject);
-
+        procedure btnEntrarContextPopup(Sender: TObject; MousePos: TPoint;var Handled: Boolean);
+        procedure btnEntrarMouseUp(Sender: TObject; Button: TMouseButton;Shift: TShiftState; X, Y: Integer);
+        procedure pnlEncerrarSistemaClick(Sender: TObject);
 
     private
       { Private declarations }
@@ -189,41 +153,6 @@ procedure TFormLogin.FormCreate(Sender: TObject);
     pnlTelaPrincipal.Visible := False;
   end;
 
-procedure TFormLogin.iconProfissionaisMouseEnter(Sender: TObject);
-  begin
-    pnlProfissionais.Color := $00F78B2B;
-  end;
-
-procedure TFormLogin.iconProfissionaisMouseLeave(Sender: TObject);
-  begin
-    pnlProfissionais.Color := $007C3E05;
-  end;
-
-procedure TFormLogin.iconUserClick(Sender: TObject);
-  begin
-    PagUsuarios.Show;
-  end;
-
-procedure TFormLogin.iconUserMouseEnter(Sender: TObject);
-  begin
-    pnlUser.Color := $00F78B2B;
-  end;
-
-procedure TFormLogin.iconUserMouseLeave(Sender: TObject);
-  begin
-    pnlUser.color := $007C3E05;
-  end;
-
-procedure TFormLogin.imgConsultasMouseEnter(Sender: TObject);
-  begin
-    pnlConsultas.Color := $00F78B2B;
-  end;
-
-procedure TFormLogin.imgConsultasMouseLeave(Sender: TObject);
-  begin
-    pnlConsultas.Color := $007C3E05;
-  end;
-
 procedure TFormLogin.ImgOlhoAbertoClick(Sender: TObject);
   begin
     edSenha.PasswordChar := '*';
@@ -238,143 +167,6 @@ procedure TFormLogin.ImgOlhoFechadoClick(Sender: TObject);
     imgOlhoFechado.Visible := False;
   end;
 
-
-procedure TFormLogin.ImgPacientesMouseEnter(Sender: TObject);
-  begin
-    pnlPacientes.Color := $00F78B2B;
-  end;
-
-procedure TFormLogin.ImgPacientesMouseLeave(Sender: TObject);
-  begin
-    pnlPacientes.Color := $007C3E05;
-  end;
-
-procedure TFormLogin.imgProcedimentosMouseEnter(Sender: TObject);
-  begin
-    pnlProcedimentos.Color := $00F78B2B;
-  end;
-
-procedure TFormLogin.imgProcedimentosMouseLeave(Sender: TObject);
-  begin
-    pnlProcedimentos.Color := $007C3E05;
-  end;
-
-procedure TFormLogin.ImgRelatoriosMouseEnter(Sender: TObject);
-  begin
-    pnlRelatorios.Color := $00F78B2B;
-  end;
-
-procedure TFormLogin.ImgRelatoriosMouseLeave(Sender: TObject);
-  begin
-    pnlRelatorios.Color := $007C3E05;
-  end;
-
-procedure TFormLogin.imgSairClick(Sender: TObject);
-  begin
-    ShowMessage('Encerrando Sistema');
-    Sleep(500);
-    Close;
-  end;
-
-procedure TFormLogin.imgSairMouseEnter(Sender: TObject);
-  begin
-    pnlEncerrarSistema.Color := $00F78B2B;
-  end;
-
-procedure TFormLogin.imgSairMouseLeave(Sender: TObject);
-  begin
-    pnlEncerrarSistema.Color := $007C3E05;
-  end;
-
-procedure TFormLogin.lblConsultasMouseEnter(Sender: TObject);
-  begin
-    pnlConsultas.Color := $00F78B2B;
-  end;
-
-procedure TFormLogin.lblConsultasMouseLeave(Sender: TObject);
-  begin
-    pnlConsultas.Color := $007C3E05;
-  end;
-
-procedure TFormLogin.lblEncerrarSistemaClick(Sender: TObject);
-  begin
-    ShowMessage('Encerrando Sistema');
-    Sleep(500);
-    Close;
-  end;
-
-procedure TFormLogin.lblEncerrarSistemaMouseEnter(Sender: TObject);
-  begin
-    pnlEncerrarSistema.Color := $00F78B2B;
-  end;
-
-procedure TFormLogin.lblEncerrarSistemaMouseLeave(Sender: TObject);
-  begin
-    pnlEncerrarSistema.Color := $007C3E05;
-  end;
-
-procedure TFormLogin.lblEntrarClick(Sender: TObject);
-  begin
-    pnlLogin.Visible := False;
-    pnlTelaPrincipal.Visible := True;
-  end;
-
-procedure TFormLogin.lblPacientesMouseEnter(Sender: TObject);
-  begin
-     pnlPacientes.Color := $00F78B2B;
-  end;
-
-procedure TFormLogin.lblPacientesMouseLeave(Sender: TObject);
-  begin
-    pnlPacientes.Color := $007C3E05;
-  end;
-
-procedure TFormLogin.lblProcedimentosMouseEnter(Sender: TObject);
-  begin
-    pnlProcedimentos.Color := $00F78B2B;
-  end;
-
-procedure TFormLogin.lblProcedimentosMouseLeave(Sender: TObject);
-  begin
-    pnlProcedimentos.Color := $007C3E05;
-  end;
-
-procedure TFormLogin.lblProfissionaisMouseEnter(Sender: TObject);
-  begin
-     pnlProfissionais.Color := $00F78B2B;
-  end;
-
-procedure TFormLogin.lblProfissionaisMouseLeave(Sender: TObject);
-  begin
-    pnlProfissionais.Color := $007C3E05;
-  end;
-
-
-procedure TFormLogin.lblRelatoriosMouseEnter(Sender: TObject);
-  begin
-    pnlRelatorios.Color := $00F78B2B;
-  end;
-
-procedure TFormLogin.lblRelatoriosMouseLeave(Sender: TObject);
-  begin
-    pnlRelatorios.Color := $007C3E05;
-  end;
-
-procedure TFormLogin.lblUsuariosClick(Sender: TObject);
-  begin
-    PagUsuarios.Show;
-  end;
-
-procedure TFormLogin.lblUsuariosMouseEnter(Sender: TObject);
-  begin
-    PnlUser.Color := $00F78B2B;
-  end;
-
-procedure TFormLogin.lblUsuariosMouseLeave(Sender: TObject);
-  begin
-    PnlUser.Color := $007C3E05;
-  end;
-
 procedure TFormLogin.pnlConsultasMouseEnter(Sender: TObject);
   begin
     pnlConsultas.Color := $00F78B2B;
@@ -387,10 +179,16 @@ procedure TFormLogin.pnlConsultasMouseLeave(Sender: TObject);
 
 procedure TFormLogin.pnlEncerrarSistemaClick(Sender: TObject);
   begin
-    ShowMessage('Encerrando sistema');
+     if MessageDlg('Deseja Encerrar o Sistema', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    ShowMessage('Encerrando Sistema');
     Sleep(500);
     Close;
+  end else
+  begin
+    showMessage('O sistema continuará aberto');
   end;
+end;
 
 procedure TFormLogin.pnlEncerrarSistemaMouseEnter(Sender: TObject);
   begin

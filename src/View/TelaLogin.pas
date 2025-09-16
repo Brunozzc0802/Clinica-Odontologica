@@ -8,7 +8,7 @@ uses
         Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
         Vcl.Imaging.pngimage,
         Vcl.StdCtrls, Vcl.Imaging.jpeg, Vcl.Buttons, System.ImageList,
-        Vcl.ImgList,TelaUsuarios;
+        Vcl.ImgList,TelaUsuarios,uUsuarios,uUsuariosController;
 
 type
         TFormLogin = class(TForm)
@@ -83,6 +83,7 @@ type
         procedure pnlEncerrarSistemaMouseLeave(Sender: TObject);
         procedure pnlUserClick(Sender: TObject);
         procedure pnlEncerrarSistemaClick(Sender: TObject);
+    procedure btnEntrarClick(Sender: TObject);
 
     private
       { Private declarations }
@@ -96,6 +97,29 @@ type
 implementation
 
 {$R *.dfm}
+
+procedure TFormLogin.btnEntrarClick(Sender: TObject);
+//  var
+//  Usuario: TUsuario;
+begin
+//  Usuario := TUsuario.Create;
+//  try
+//    Usuario.Nome := edUsuario.Text;
+//    Usuario.Senha := edSenha.Text;
+//
+//    if TUsuarioController.UsuarioExiste(Usuario) then
+//    begin
+//      ShowMessage('Login efetuado com sucesso!');
+      pnlLogin.Visible := False;
+      pnlTelaPrincipal.Visible := True;
+      pnlFundoLateral.visible:= True;
+//    end
+//    else
+//      ShowMessage('Usuário ou senha inválidos!');
+//  finally
+//    Usuario.Free;
+//  end;
+end;
 
 procedure TFormLogin.btnEntrarMouseEnter(Sender: TObject);
   begin

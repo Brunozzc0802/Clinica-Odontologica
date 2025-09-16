@@ -5,7 +5,8 @@ uses
   TelaLogin in '..\src\View\TelaLogin.pas' {FormLogin},
   TelaUsuarios in '..\src\View\TelaUsuarios.pas' {PagUsuarios},
   uUsuarios in '..\src\Model\uUsuarios.pas',
-  uUsuarioConexao in '..\src\Model\uUsuarioConexao.pas' {dmUsuarios: TDataModule};
+  uUsuarioConexao in '..\src\Model\uUsuarioConexao.pas' {dmUsuarios: TDataModule},
+  uUsuariosController in '..\src\Controller\uUsuariosController.pas';
 
 {$R *.res}
 

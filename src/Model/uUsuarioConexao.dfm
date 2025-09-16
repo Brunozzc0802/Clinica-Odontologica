@@ -1,11 +1,10 @@
 object dmUsuarios: TdmUsuarios
-  Height = 480
-  Width = 640
+  Height = 202
+  Width = 345
   object FDConnection1: TFDConnection
     Params.Strings = (
       'DriverID=PG'
       'Database = clinica_odontologica'
-      'Password = root'
       'Server = localhost'
       'Port = 5432'
       'User_Name=postgres')

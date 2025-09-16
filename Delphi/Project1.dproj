@@ -138,6 +138,7 @@
         </DCCReference>
         <DCCReference Include="..\src\Model\uUsuarios.pas"/>
         <DCCReference Include="..\src\Repository\uUsuarioRepository.pas"/>
+        <DCCReference Include="..\src\Service\uUsuarioService.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

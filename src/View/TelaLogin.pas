@@ -8,7 +8,7 @@ uses
         Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
         Vcl.Imaging.pngimage,
         Vcl.StdCtrls, Vcl.Imaging.jpeg, Vcl.Buttons, System.ImageList,
-        Vcl.ImgList,uConexao,TelaUsuarios;
+        Vcl.ImgList,uConexaoUsuario,TelaUsuarios, uUsuarioController;
 
 type
         TFormLogin = class(TForm)
@@ -124,6 +124,7 @@ procedure TFormLogin.edSenhaKeyDown(Sender: TObject; var Key: Word;Shift: TShift
 
 procedure TFormLogin.FormCreate(Sender: TObject);
   begin
+
     pnlFundoLateral.Visible := False;
     ImgOlhoAberto.Visible := False;
     lblLogin.font.Color := $00C97D16;

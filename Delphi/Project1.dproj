@@ -131,14 +131,7 @@
             <Form>PagUsuarios</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\src\DataModule\uConexaoUsuario.pas">
-            <Form>dmUsuarios</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TDataModule</DesignClass>
-        </DCCReference>
         <DCCReference Include="..\src\Model\uUsuarios.pas"/>
-        <DCCReference Include="..\src\Repository\uUsuarioRepository.pas"/>
-        <DCCReference Include="..\src\Service\uUsuarioService.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

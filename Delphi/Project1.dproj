@@ -127,15 +127,14 @@
             <Form>FormLogin</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\src\Model\uConexao.pas">
-            <Form>dmConexao</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TDataModule</DesignClass>
-        </DCCReference>
-        <DCCReference Include="..\src\Model\uUsuario.pas"/>
         <DCCReference Include="..\src\View\TelaUsuarios.pas">
             <Form>PagUsuarios</Form>
             <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\src\DataModule\uConexaoUsuario.pas">
+            <Form>DataModule1</Form>
+            <FormType>dfm</FormType>
+            <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>

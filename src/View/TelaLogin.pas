@@ -57,8 +57,8 @@ type
         ImgRelatorios: TImage;
         lblRelatorios: TLabel;
         imgConsultas: TImage;
-    btnEntrar: TPanel;
-    lblEntrar: TLabel;
+        btnEntrar: TPanel;
+        lblEntrar: TLabel;
         procedure FormCreate(Sender: TObject);
         procedure btnEntrarMouseEnter(Sender: TObject);
         procedure btnEntrarMouseLeave(Sender: TObject);
@@ -83,7 +83,6 @@ type
         procedure pnlEncerrarSistemaMouseLeave(Sender: TObject);
         procedure pnlUserClick(Sender: TObject);
         procedure pnlEncerrarSistemaClick(Sender: TObject);
-    procedure btnEntrarClick(Sender: TObject);
 
     private
       { Private declarations }
@@ -97,13 +96,6 @@ type
 implementation
 
 {$R *.dfm}
-
-procedure TFormLogin.btnEntrarClick(Sender: TObject);
-  begin
-    pnlTelaPrincipal.Visible := True;
-    pnlLogin.Visible := False;
-    pnlFundoLateral.Visible := True;
-  end;
 
 procedure TFormLogin.btnEntrarMouseEnter(Sender: TObject);
   begin

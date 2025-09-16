@@ -4,7 +4,7 @@ object PagUsuarios: TPagUsuarios
   BorderStyle = bsNone
   Caption = 'Usu'#225'rios'
   ClientHeight = 645
-  ClientWidth = 704
+  ClientWidth = 702
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -39,12 +39,11 @@ object PagUsuarios: TPagUsuarios
       Color = 11293958
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 691
       object btnXUsuarios: TSpeedButton
         AlignWithMargins = True
-        Left = 657
+        Left = 664
         Top = 8
-        Width = 31
+        Width = 24
         Height = 24
         Cursor = crHandPoint
         Margins.Left = 10
@@ -52,29 +51,53 @@ object PagUsuarios: TPagUsuarios
         Margins.Right = 10
         Margins.Bottom = 6
         Align = alRight
-        Caption = 'X'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -15
         Font.Name = 'Segoe UI'
         Font.Style = []
+        Glyph.Data = {
+          36030000424D3603000000000000360000002800000010000000100000000100
+          18000000000000030000C20E0000C20E00000000000000000000848484232323
+          767676FDFDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFC
+          FC7070702323238B8B8B0B0B0B000000000000646464FDFDFDFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFCFCFC5C5C5C0000000000000E0E0E666666000000
+          000000000000646464FDFDFDFFFFFFFFFFFFFFFFFFFFFFFFFCFCFC5C5C5C0000
+          00000000000000616161FCFCFC5C5C5C000000000000000000626262FDFDFDFF
+          FFFFFFFFFFFCFCFC5E5E5E000000000000000000535353FAFAFAFFFFFFFCFCFC
+          5C5C5C000000000000000000626262FDFDFDFCFCFC5E5E5E0000000000000000
+          00535353FAFAFAFFFFFFFFFFFFFFFFFFFCFCFC5C5C5C00000000000000000061
+          61615D5D5D000000000000000000545454FAFAFAFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFCFCFC5C5C5C000000000000000000000000000000000000545454FBFB
+          FBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFC5B5B5B00000000
+          0000000000000000545454FBFBFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFCFCFC5D5D5D000000000000000000000000606060FDFDFDFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFC5E5E5E00000000000000
+          0000000000000000000000626262FDFDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FCFCFC5E5E5E0000000000000000005656565B5B5B0000000000000000006262
+          62FDFDFDFFFFFFFFFFFFFFFFFFFCFCFC5E5E5E000000000000000000585858FB
+          FBFBFCFCFC5C5C5C000000000000000000626262FDFDFDFFFFFFFCFCFC5E5E5E
+          000000000000000000585858FBFBFBFFFFFFFFFFFFFCFCFC5C5C5C0000000000
+          00000000626262FDFDFD6C6C6C000000000000000000606060FDFDFDFFFFFFFF
+          FFFFFFFFFFFFFFFFFCFCFC5A5A5A0000000000000000007878781F1F1F000000
+          000000616161FDFDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFC5A5A
+          5A0000000000003232329F9F9F222222727272FDFDFDFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFC6F6F6F2D2D2DB2B2B2}
         ParentFont = False
         OnClick = btnXUsuariosClick
-        ExplicitLeft = 784
-        ExplicitTop = 5
-        ExplicitHeight = 20
+        ExplicitLeft = 660
       end
       object lblTituloUsuarios: TLabel
         Left = 16
         Top = 8
-        Width = 59
-        Height = 20
+        Width = 78
+        Height = 23
         Caption = 'Usuarios'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
-        Font.Height = -15
-        Font.Name = 'Segoe UI Semibold'
-        Font.Style = [fsBold, fsItalic]
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = [fsItalic]
         ParentFont = False
       end
     end
@@ -87,7 +110,7 @@ object PagUsuarios: TPagUsuarios
     Height = 649
     Margins.Left = 305
     Margins.Top = 1
-    Color = 13204758
+    Color = 8142341
     ParentBackground = False
     TabOrder = 2
     object imgLogoUsuarios1: TImage
@@ -2481,10 +2504,9 @@ object PagUsuarios: TPagUsuarios
       Top = 8
       Width = 525
       Height = 442
-      ColCount = 4
       DefaultColWidth = 100
       FixedCols = 0
-      RowCount = 2
+      RowCount = 1
       FixedRows = 0
       TabOrder = 0
     end
@@ -2776,8 +2798,8 @@ object PagUsuarios: TPagUsuarios
         ParentFont = False
         OnMouseEnter = btnPermissoesMouseEnter
         OnMouseLeave = btnPermissoesMouseLeave
-        ExplicitLeft = 36
-        ExplicitWidth = 77
+        ExplicitWidth = 69
+        ExplicitHeight = 17
       end
     end
     object btnLimparUsu: TPanel
@@ -2854,7 +2876,8 @@ object PagUsuarios: TPagUsuarios
         ParentFont = False
         OnMouseEnter = btnSairUsuMouseEnter
         OnMouseLeave = btnSairUsuMouseLeave
-        ExplicitTop = 7
+        ExplicitWidth = 23
+        ExplicitHeight = 17
       end
     end
   end
@@ -2931,10 +2954,10 @@ object PagUsuarios: TPagUsuarios
       Color = 8142341
       ParentBackground = False
       TabOrder = 4
+      OnClick = btnAdicionarUsuarioClick
       OnMouseEnter = btnAdicionarUsuarioMouseEnter
       OnMouseLeave = btnAdicionarUsuarioMouseLeave
-      ExplicitWidth = 500
-      ExplicitHeight = 20
+      ExplicitTop = 68
       object lblAdiconaFUsuario: TLabel
         AlignWithMargins = True
         Left = 221
@@ -2957,12 +2980,11 @@ object PagUsuarios: TPagUsuarios
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+        OnClick = btnAdicionarUsuarioClick
         OnMouseEnter = btnAdicionarUsuarioMouseEnter
         OnMouseLeave = btnAdicionarUsuarioMouseLeave
-        ExplicitLeft = 333
-        ExplicitTop = -2
-        ExplicitWidth = 78
-        ExplicitHeight = 234
+        ExplicitWidth = 59
+        ExplicitHeight = 17
       end
     end
   end

@@ -68,6 +68,7 @@ type
     procedure btnLimparUsuMouseLeave(Sender: TObject);
     procedure btnSairUsuMouseEnter(Sender: TObject);
     procedure btnSairUsuMouseLeave(Sender: TObject);
+    procedure btnAdicionarUsuarioClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -89,14 +90,15 @@ procedure TPagUsuarios.FormCreate(Sender: TObject);
     //Configurações sg
     sgUsuarios.Cells[0,0] := 'Cód';
     sgUsuarios.Cells[1,0] := 'Nome de Usuário';
-    sgUsuarios.Cells[2,0] := 'Ativo';
-    sgUsuarios.Cells[3,0] := 'Grupo';
+    sgUsuarios.Cells[2,0] := 'Senha';
+    sgUsuarios.Cells[3,0] := 'Ativo';
+    sgUsuarios.Cells[4,0] := 'Grupo';
 
     sgUsuarios.ColWidths[0] := 50;
     sgUsuarios.ColWidths[1] := 150;
-    sgUsuarios.ColWidths[2] := 50;
-    sgUsuarios.ColWidths[3] := 100;
-
+    sgUsuarios.ColWidths[2] := 100;
+    sgUsuarios.ColWidths[3] := 50;
+    sgUsuarios.ColWidths[4] := 100;
   end;
 
 procedure TPagUsuarios.btnAddUsuClick(Sender: TObject);
@@ -114,6 +116,27 @@ procedure TPagUsuarios.btnAddUsuMouseEnter(Sender: TObject);
 procedure TPagUsuarios.btnAddUsuMouseLeave(Sender: TObject);
   begin
     btnAddUsu.Color :=  $007C3E05;
+  end;
+
+procedure TPagUsuarios.btnAdicionarUsuarioClick(Sender: TObject);
+  var novaLinha: Integer;
+  begin
+
+  if (edUsuario.Text = '') or (edSenhaUsuario.Text = '') then begin
+    showMessage('Os campos nome ou senha estão vazios');
+  end else
+  novaLinha := sgUsuarios.rowCount;
+  sgUsuarios.RowCount := novaLinha +1;
+
+  SgUsuarios.Cells[1, novaLinha] := edUsuario.Text;
+  sgUsuarios.Cells[2, novaLinha] := edSenhaUsuario.Text;
+  sgUsuarios.Cells[3, novaLinha] := cbAtivo.Text;
+  sgUsuarios.Cells[4, novaLinha] := cbGrupo.Text;
+
+
+  edUsuario.Clear;
+  edSenhaUsuario.Clear;
+
   end;
 
 procedure TPagUsuarios.btnAdicionarUsuarioMouseEnter(Sender: TObject);

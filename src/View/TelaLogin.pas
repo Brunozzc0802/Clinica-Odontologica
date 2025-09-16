@@ -8,7 +8,7 @@ uses
         Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
         Vcl.Imaging.pngimage,
         Vcl.StdCtrls, Vcl.Imaging.jpeg, Vcl.Buttons, System.ImageList,
-        Vcl.ImgList,uConexaoUsuario,TelaUsuarios, uUsuarioController;
+        Vcl.ImgList,TelaUsuarios;
 
 type
         TFormLogin = class(TForm)

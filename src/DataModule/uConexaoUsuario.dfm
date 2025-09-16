@@ -1,7 +1,7 @@
-object DataModule1: TDataModule1
+object dmUsuarios: TdmUsuarios
   Height = 196
   Width = 425
-  object FDConnection1: TFDConnection
+  object FDConnectionUsuarios: TFDConnection
     Params.Strings = (
       'DriverID=PG'
       'Database = clinica_odontologica '
@@ -18,6 +18,11 @@ object DataModule1: TDataModule1
       'C:\Users\Bruno Tesser\Desktop\Clinica odontologica alves\Clinica' +
       '-Odontologica\Delphi\Win32\Debug\libpq.dll'
     Left = 336
+    Top = 40
+  end
+  object FDQueryUsuarios: TFDQuery
+    Connection = FDConnectionUsuarios
+    Left = 192
     Top = 40
   end
 end

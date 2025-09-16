@@ -4,7 +4,8 @@ uses
   Vcl.Forms,
   TelaLogin in '..\src\View\TelaLogin.pas' {FormLogin},
   TelaUsuarios in '..\src\View\TelaUsuarios.pas' {PagUsuarios},
-  uConexaoUsuario in '..\src\DataModule\uConexaoUsuario.pas' {DataModule1: TDataModule};
+  uConexaoUsuario in '..\src\DataModule\uConexaoUsuario.pas' {dmUsuarios: TDataModule},
+  uUsuarios in '..\src\Model\uUsuarios.pas';
 
 {$R *.res}
 
@@ -13,7 +14,7 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TFormLogin, FormLogin);
   Application.CreateForm(TPagUsuarios, PagUsuarios);
-  Application.CreateForm(TDataModule1, DataModule1);
+  Application.CreateForm(TdmUsuarios, dmUsuarios);
   Application.Run;
 
 end.

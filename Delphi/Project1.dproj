@@ -132,10 +132,11 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\src\DataModule\uConexaoUsuario.pas">
-            <Form>DataModule1</Form>
+            <Form>dmUsuarios</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
+        <DCCReference Include="..\src\Model\uUsuarios.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

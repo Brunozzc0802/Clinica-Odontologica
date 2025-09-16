@@ -69,6 +69,9 @@ type
     procedure btnSairUsuMouseEnter(Sender: TObject);
     procedure btnSairUsuMouseLeave(Sender: TObject);
     procedure btnAdicionarUsuarioClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure edUsuarioKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -81,6 +84,13 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TPagUsuarios.FormClose(Sender: TObject; var Action: TCloseAction);
+  begin
+    pnlFormAddUsuarios.Visible := False;
+    imgLogoUsuarios2.Visible := False;
+    imgLogoUsuarios1.Visible := True;
+  end;
 
 procedure TPagUsuarios.FormCreate(Sender: TObject);
   begin
@@ -106,6 +116,7 @@ procedure TPagUsuarios.btnAddUsuClick(Sender: TObject);
     pnlFormAddUsuarios.Visible := True;
     imgLogoUsuarios1.Visible := False;
     imgLogoUsuarios2.Visible := True;
+    edUsuario.SetFocus;
   end;
 
 procedure TPagUsuarios.btnAddUsuMouseEnter(Sender: TObject);
@@ -119,23 +130,40 @@ procedure TPagUsuarios.btnAddUsuMouseLeave(Sender: TObject);
   end;
 
 procedure TPagUsuarios.btnAdicionarUsuarioClick(Sender: TObject);
-  var novaLinha: Integer;
+  var novaLinha, cod: Integer;
   begin
 
-  if (edUsuario.Text = '') or (edSenhaUsuario.Text = '') then begin
-    showMessage('Os campos nome ou senha estão vazios');
-  end else
+  if (edUsuario.Text = '') and (edSenhaUsuario.Text = '') then begin
+    ShowMessage('Preencha os campos nome e senha');
+    exit;
+    end;
+    if (edUsuario.Text = '') then begin
+      showMessage('Preencha o campo nome');
+      edUsuario.SetFocus;
+      exit;
+    end else if (edSenhaUsuario.Text = '') then begin
+      ShowMessage('Preencha o campo senha');
+      edSenhaUsuario.setfocus;
+      exit;
+    end else
   novaLinha := sgUsuarios.rowCount;
   sgUsuarios.RowCount := novaLinha +1;
 
+  cod := novaLinha;
+
+  SgUsuarios.Cells[0, novaLinha] := IntToStr(cod);
   SgUsuarios.Cells[1, novaLinha] := edUsuario.Text;
   sgUsuarios.Cells[2, novaLinha] := edSenhaUsuario.Text;
   sgUsuarios.Cells[3, novaLinha] := cbAtivo.Text;
   sgUsuarios.Cells[4, novaLinha] := cbGrupo.Text;
 
 
+
   edUsuario.Clear;
   edSenhaUsuario.Clear;
+  cbAtivo.Clear;
+  cbGrupo.Clear;
+  edUsuario.SetFocus;
 
   end;
 
@@ -240,4 +268,20 @@ procedure TPagUsuarios.btnXUsuariosClick(Sender: TObject);
   begin
     Close;
   end;
+procedure TPagUsuarios.edUsuarioKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+  begin
+
+    if (edUsuario.Text = '') then begin
+      showMessage('Preencha o campo nome');
+      edUsuario.SetFocus;
+      exit;
+    end;
+
+    if Key = VK_RETURN then begin
+      key := 0;
+      edSenhausuario.setfocus;
+    end;
+
+  end;
+
 end.

@@ -4,7 +4,7 @@ object PagUsuarios: TPagUsuarios
   BorderStyle = bsNone
   Caption = 'Usu'#225'rios'
   ClientHeight = 645
-  ClientWidth = 702
+  ClientWidth = 703
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,6 +12,7 @@ object PagUsuarios: TPagUsuarios
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesigned
+  OnClose = FormClose
   OnCreate = FormCreate
   TextHeight = 15
   object bordaCabecalhoUsuarios: TPanel
@@ -115,11 +116,11 @@ object PagUsuarios: TPagUsuarios
     TabOrder = 2
     object imgLogoUsuarios1: TImage
       AlignWithMargins = True
-      Left = 280
+      Left = 273
       Top = 467
       Width = 153
       Height = 127
-      Margins.Left = 100
+      Margins.Left = 1000
       Margins.Top = 50
       Margins.Right = 50
       Margins.Bottom = 50
@@ -2882,9 +2883,9 @@ object PagUsuarios: TPagUsuarios
     end
   end
   object pnlFormAddUsuarios: TPanel
-    Left = 13
+    Left = 10
     Top = 503
-    Width = 522
+    Width = 525
     Height = 132
     BevelOuter = bvNone
     Color = 15395562
@@ -2905,6 +2906,7 @@ object PagUsuarios: TPagUsuarios
       ParentFont = False
       TabOrder = 0
       TextHint = 'Digite o nome de usu'#225'rio:'
+      OnKeyDown = edUsuarioKeyDown
     end
     object edSenhaUsuario: TEdit
       Left = 168
@@ -2944,7 +2946,7 @@ object PagUsuarios: TPagUsuarios
       AlignWithMargins = True
       Left = 10
       Top = 65
-      Width = 499
+      Width = 502
       Height = 31
       Margins.Left = 10
       Margins.Top = 65
@@ -2957,12 +2959,12 @@ object PagUsuarios: TPagUsuarios
       OnClick = btnAdicionarUsuarioClick
       OnMouseEnter = btnAdicionarUsuarioMouseEnter
       OnMouseLeave = btnAdicionarUsuarioMouseLeave
-      ExplicitTop = 68
+      ExplicitWidth = 499
       object lblAdiconaFUsuario: TLabel
         AlignWithMargins = True
         Left = 221
         Top = 6
-        Width = 77
+        Width = 80
         Height = 18
         Cursor = crHandPoint
         Margins.Left = 220

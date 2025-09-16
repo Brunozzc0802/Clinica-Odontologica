@@ -53,12 +53,12 @@ type
         lblRelatorios: TLabel;
         btnEntrar: TPanel;
         lblEntrar: TLabel;
-    imgPacientes: TImage;
-    imgProfissionais: TImage;
-    imgConsultas: TImage;
-    imgRelatorios: TImage;
-    imgProcedimentos: TImage;
-    imgEncerrarSistema: TImage;
+        imgPacientes: TImage;
+        imgProfissionais: TImage;
+        imgConsultas: TImage;
+        imgRelatorios: TImage;
+        imgProcedimentos: TImage;
+        imgEncerrarSistema: TImage;
         procedure FormCreate(Sender: TObject);
         procedure btnEntrarMouseEnter(Sender: TObject);
         procedure btnEntrarMouseLeave(Sender: TObject);
@@ -148,7 +148,6 @@ procedure TFormLogin.edSenhaKeyDown(Sender: TObject; var Key: Word;Shift: TShift
 
 procedure TFormLogin.FormCreate(Sender: TObject);
   begin
-
     pnlFundoLateral.Visible := False;
     ImgOlhoAberto.Visible := False;
     lblLogin.font.Color := $00C97D16;

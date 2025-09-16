@@ -40,25 +40,25 @@ type
         lblUsuarios: TLabel;
         pnlUser: TPanel;
         pnlPacientes: TPanel;
-        ImgPacientes: TImage;
         lblPacientes: TLabel;
         pnlProfissionais: TPanel;
-        iconProfissionais: TImage;
         lblProfissionais: TLabel;
         pnlConsultas: TPanel;
         lblConsultas: TLabel;
         pnlProcedimentos: TPanel;
-        imgProcedimentos: TImage;
         lblProcedimentos: TLabel;
         pnlEncerrarSistema: TPanel;
-        imgSair: TImage;
         lblEncerrarSistema: TLabel;
         pnlRelatorios: TPanel;
-        ImgRelatorios: TImage;
         lblRelatorios: TLabel;
-        imgConsultas: TImage;
         btnEntrar: TPanel;
         lblEntrar: TLabel;
+    imgPacientes: TImage;
+    imgProfissionais: TImage;
+    imgConsultas: TImage;
+    imgRelatorios: TImage;
+    imgProcedimentos: TImage;
+    imgEncerrarSistema: TImage;
         procedure FormCreate(Sender: TObject);
         procedure btnEntrarMouseEnter(Sender: TObject);
         procedure btnEntrarMouseLeave(Sender: TObject);
@@ -83,7 +83,7 @@ type
         procedure pnlEncerrarSistemaMouseLeave(Sender: TObject);
         procedure pnlUserClick(Sender: TObject);
         procedure pnlEncerrarSistemaClick(Sender: TObject);
-    procedure btnEntrarClick(Sender: TObject);
+        procedure btnEntrarClick(Sender: TObject);
 
     private
       { Private declarations }
@@ -168,6 +168,7 @@ procedure TFormLogin.ImgOlhoFechadoClick(Sender: TObject);
     imgOlhoAberto.Visible := True;
     imgOlhoFechado.Visible := False;
   end;
+
 
 procedure TFormLogin.pnlConsultasMouseEnter(Sender: TObject);
   begin

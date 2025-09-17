@@ -4,7 +4,7 @@ object PagUsuarios: TPagUsuarios
   BorderStyle = bsNone
   Caption = 'Usu'#225'rios'
   ClientHeight = 645
-  ClientWidth = 703
+  ClientWidth = 1148
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -2889,7 +2889,7 @@ object PagUsuarios: TPagUsuarios
   object pnlFormAddUsuarios: TPanel
     Left = 10
     Top = 503
-    Width = 525
+    Width = 527
     Height = 132
     BevelOuter = bvNone
     Color = 15395562
@@ -2950,7 +2950,7 @@ object PagUsuarios: TPagUsuarios
       AlignWithMargins = True
       Left = 10
       Top = 65
-      Width = 502
+      Width = 504
       Height = 31
       Margins.Left = 10
       Margins.Top = 65
@@ -2963,11 +2963,12 @@ object PagUsuarios: TPagUsuarios
       OnClick = btnAdicionarUsuarioClick
       OnMouseEnter = btnAdicionarUsuarioMouseEnter
       OnMouseLeave = btnAdicionarUsuarioMouseLeave
+      ExplicitWidth = 502
       object lblAdiconaFUsuario: TLabel
         AlignWithMargins = True
         Left = 221
         Top = 6
-        Width = 80
+        Width = 82
         Height = 18
         Cursor = crHandPoint
         Margins.Left = 220

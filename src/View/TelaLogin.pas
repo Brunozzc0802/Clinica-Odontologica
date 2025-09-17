@@ -145,10 +145,10 @@ procedure TFormLogin.edSenhaKeyDown(Sender: TObject; var Key: Word;Shift: TShift
 
 procedure TFormLogin.FormCreate(Sender: TObject);
   begin
-    pnlFundoLateral.Visible := False;
-    ImgOlhoAberto.Visible := False;
-    lblLogin.font.Color := $00C97D16;
-    pnlTelaPrincipal.Visible := False;
+//    pnlFundoLateral.Visible := False;
+//    ImgOlhoAberto.Visible := False;
+//    lblLogin.font.Color := $00C97D16;
+//    pnlTelaPrincipal.Visible := False;
   end;
 
 procedure TFormLogin.ImgOlhoAbertoClick(Sender: TObject);

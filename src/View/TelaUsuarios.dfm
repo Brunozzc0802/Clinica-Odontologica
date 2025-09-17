@@ -86,7 +86,6 @@ object PagUsuarios: TPagUsuarios
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFCFCFC6F6F6F2D2D2DB2B2B2}
         ParentFont = False
         OnClick = btnXUsuariosClick
-        ExplicitLeft = 660
       end
       object lblTituloUsuarios: TLabel
         Left = 16
@@ -2564,48 +2563,8 @@ object PagUsuarios: TPagUsuarios
         OnClick = btnAddUsuClick
         OnMouseEnter = btnAddUsuMouseEnter
         OnMouseLeave = btnAddUsuMouseLeave
-        ExplicitTop = 15
-      end
-      object btnAddNovo: TPanel
-        Left = 0
-        Top = 0
-        Width = 137
-        Height = 41
-        Cursor = crHandPoint
-        Color = 16223019
-        ParentBackground = False
-        TabOrder = 0
-        OnClick = btnAddUsuClick
-        OnMouseEnter = btnAddUsuMouseEnter
-        OnMouseLeave = btnAddUsuMouseLeave
-        object Label1: TLabel
-          AlignWithMargins = True
-          Left = 36
-          Top = 11
-          Width = 65
-          Height = 19
-          Cursor = crHandPoint
-          Margins.Left = 35
-          Margins.Top = 10
-          Margins.Right = 35
-          Margins.Bottom = 10
-          Align = alClient
-          Alignment = taCenter
-          Caption = 'Adicionar'
-          Color = clCream
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -13
-          Font.Name = 'Segoe UI'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          OnClick = btnAddUsuClick
-          OnMouseEnter = btnAddUsuMouseEnter
-          OnMouseLeave = btnAddUsuMouseLeave
-          ExplicitWidth = 59
-          ExplicitHeight = 17
-        end
+        ExplicitWidth = 59
+        ExplicitHeight = 17
       end
     end
     object btnAlterarUsu: TPanel
@@ -3032,6 +2991,47 @@ object PagUsuarios: TPagUsuarios
         ExplicitWidth = 59
         ExplicitHeight = 17
       end
+    end
+  end
+  object btnAddNovo: TPanel
+    Left = 549
+    Top = 54
+    Width = 137
+    Height = 41
+    Cursor = crHandPoint
+    Color = 16223019
+    ParentBackground = False
+    TabOrder = 5
+    OnClick = btnAddUsuClick
+    OnMouseEnter = btnAddUsuMouseEnter
+    OnMouseLeave = btnAddUsuMouseLeave
+    object Label2: TLabel
+      AlignWithMargins = True
+      Left = 36
+      Top = 11
+      Width = 65
+      Height = 19
+      Cursor = crHandPoint
+      Margins.Left = 35
+      Margins.Top = 10
+      Margins.Right = 35
+      Margins.Bottom = 10
+      Align = alClient
+      Alignment = taCenter
+      Caption = 'Adicionar'
+      Color = clCream
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      OnClick = btnAddUsuClick
+      OnMouseEnter = btnAddUsuMouseEnter
+      OnMouseLeave = btnAddUsuMouseLeave
+      ExplicitWidth = 59
+      ExplicitHeight = 17
     end
   end
 end

@@ -45,7 +45,7 @@ type
     btnSairUsu: TPanel;
     lblSair: TLabel;
     btnAddNovo: TPanel;
-    Label1: TLabel;
+    Label2: TLabel;
     procedure btnXUsuariosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnAddUsuMouseEnter(Sender: TObject);
@@ -107,17 +107,17 @@ procedure TPagUsuarios.FormCreate(Sender: TObject);
     btnAddNovo.Visible := False;
 
   //configurações grid\\
-  sgUsuarios.Cells[0,0] := 'Cód';
+  sgUsuarios.Cells[0,0] := 'Código';
   sgUsuarios.Cells[1,0] := 'Nome de Usuário';
   sgUsuarios.Cells[2,0] := 'Senha';
   sgUsuarios.Cells[3,0] := 'Ativo';
   sgUsuarios.Cells[4,0] := 'Grupo';
 
-  sgUsuarios.ColWidths[0] := 50;
+  sgUsuarios.ColWidths[0] := 60;
   sgUsuarios.ColWidths[1] := 150;
-  sgUsuarios.ColWidths[2] := 100;
-  sgUsuarios.ColWidths[3] := 50;
-  sgUsuarios.ColWidths[4] := 100;
+  sgUsuarios.ColWidths[2] := 110;
+  sgUsuarios.ColWidths[3] := 70;
+  sgUsuarios.ColWidths[4] := 127;
   end;
 
 procedure TPagUsuarios.sgUsuariosDrawCell(Sender: TObject; ACol, ARow: LongInt;Rect: TRect; State: TGridDrawState);
@@ -191,6 +191,7 @@ procedure TPagUsuarios.btnAdicionarUsuarioClick(Sender: TObject);
 //click cancelar adicionar usuario\\
 procedure TPagUsuarios.btnCancelarUsuClick(Sender: TObject);
   begin
+    btnAddNovo.visible := false;
     pnlFormAddUsuarios.Visible := False;
     imgLogoUsuarios1.Visible := True;
     imgLogoUsuarios2.Visible := False;

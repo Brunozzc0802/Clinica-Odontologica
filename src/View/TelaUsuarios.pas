@@ -44,6 +44,8 @@ type
     lblLimpar: TLabel;
     btnSairUsu: TPanel;
     lblSair: TLabel;
+    btnAddNovo: TPanel;
+    Label1: TLabel;
     procedure btnXUsuariosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnAddUsuMouseEnter(Sender: TObject);
@@ -102,7 +104,9 @@ procedure TPagUsuarios.FormCreate(Sender: TObject);
   begin
     pnlFormAddUsuarios.Visible := False;
     imgLogoUsuarios2.Visible := False;
+    btnAddNovo.Visible := False;
 
+  //configurações grid\\
   sgUsuarios.Cells[0,0] := 'Cód';
   sgUsuarios.Cells[1,0] := 'Nome de Usuário';
   sgUsuarios.Cells[2,0] := 'Senha';
@@ -225,6 +229,7 @@ procedure TPagUsuarios.btnLimparUsuClick(Sender: TObject);
 
 procedure TPagUsuarios.btnAddUsuClick(Sender: TObject);
   begin
+    btnAddNovo.Visible := True;
     pnlFormAddUsuarios.Visible := True;
     imgLogoUsuarios2.Visible := True;
     imgLogoUsuarios1.Visible := False;

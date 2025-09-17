@@ -58,7 +58,6 @@ type
     procedure btnCancelarUsuMouseLeave(Sender: TObject);
     procedure btnRestaurarUsuMouseEnter(Sender: TObject);
     procedure btnRestaurarUsuMouseLeave(Sender: TObject);
-    procedure btnAddUsuClick(Sender: TObject);
     procedure btnAdicionarUsuarioMouseEnter(Sender: TObject);
     procedure btnAdicionarUsuarioMouseLeave(Sender: TObject);
     procedure btnPermissoesMouseEnter(Sender: TObject);
@@ -76,6 +75,7 @@ type
     procedure btnLimparUsuClick(Sender: TObject);
     procedure sgUsuariosDrawCell(Sender: TObject; ACol, ARow: LongInt;
       Rect: TRect; State: TGridDrawState);
+    procedure btnAddUsuClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -118,28 +118,34 @@ procedure TPagUsuarios.FormCreate(Sender: TObject);
 
 procedure TPagUsuarios.sgUsuariosDrawCell(Sender: TObject; ACol, ARow: LongInt;Rect: TRect; State: TGridDrawState);
 var
-  texto: string;
+  TextToDraw: string;
+  BGColor: TColor;
 begin
-  // Cabeçalho ou asteriscos
-  if ARow = 0 then
-    texto := sgUsuarios.Cells[ACol, ARow] // cabeçalho normal
-  else if ACol = 2 then
-    texto := StringOfChar('*', Length(sgUsuarios.Cells[ACol, ARow])) // senha oculta
+  // Define a cor de fundo dependendo se está selecionado
+  if gdSelected in State then
+    BGColor := clHighlight  // azul padrão do Windows
   else
-    texto := sgUsuarios.Cells[ACol, ARow];
+    BGColor := clWindow;    // fundo normal
 
-  // Desenha a célula
+  // Preenche o fundo
+  sgUsuarios.Canvas.Brush.Color := BGColor;
   sgUsuarios.Canvas.FillRect(Rect);
-  sgUsuarios.Canvas.TextRect(Rect, Rect.Left + 3, Rect.Top + 3, texto);
+
+  // Define a cor do texto dependendo se está selecionado
+  if gdSelected in State then
+    sgUsuarios.Canvas.Font.Color := clHighlightText
+  else
+    sgUsuarios.Canvas.Font.Color := clWindowText;
+
+  // Substitui por * se for a coluna de senha e não for cabeçalho
+  if (ARow > 0) and (ACol = 2) then
+    TextToDraw := StringOfChar('*', Length(sgUsuarios.Cells[ACol, ARow]))
+  else
+    TextToDraw := sgUsuarios.Cells[ACol, ARow];
+
+  // Desenha o texto
+  sgUsuarios.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2, TextToDraw);
 end;
-//botao de adicionar usuarios lateral\\
-procedure TPagUsuarios.btnAddUsuClick(Sender: TObject);
-  begin
-    pnlFormAddUsuarios.Visible := True;
-    imgLogoUsuarios1.Visible := False;
-    imgLogoUsuarios2.Visible := True;
-    edUsuario.SetFocus;
-  end;
 
 //click do botao adicionar usuario\\
 procedure TPagUsuarios.btnAdicionarUsuarioClick(Sender: TObject);
@@ -172,8 +178,8 @@ procedure TPagUsuarios.btnAdicionarUsuarioClick(Sender: TObject);
 
   edUsuario.Clear;
   edSenhaUsuario.Clear;
-  cbAtivo.Clear;
-  cbGrupo.Clear;
+  cbAtivo.ItemIndex := -1;
+  cbGrupo.ItemIndex := -1;
   edUsuario.SetFocus;
 
   end;
@@ -212,8 +218,17 @@ procedure TPagUsuarios.btnLimparUsuClick(Sender: TObject);
   begin
     edUsuario.Clear;
     edSenhaUsuario.Clear;
-    cbAtivo.Clear;
-    cbGrupo.Clear ;
+    cbAtivo.ItemIndex := -1;
+    cbGrupo.ItemIndex := -1;
+    edUsuario.SetFocus;
+  end;
+
+procedure TPagUsuarios.btnAddUsuClick(Sender: TObject);
+  begin
+    pnlFormAddUsuarios.Visible := True;
+    imgLogoUsuarios2.Visible := True;
+    imgLogoUsuarios1.Visible := False;
+    edUsuario.SetFocus;
   end;
 
 //animação de hover nos botões\\

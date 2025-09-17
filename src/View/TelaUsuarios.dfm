@@ -2564,8 +2564,7 @@ object PagUsuarios: TPagUsuarios
         OnClick = btnAddUsuClick
         OnMouseEnter = btnAddUsuMouseEnter
         OnMouseLeave = btnAddUsuMouseLeave
-        ExplicitWidth = 59
-        ExplicitHeight = 17
+        ExplicitTop = 15
       end
     end
     object btnAlterarUsu: TPanel
@@ -2838,6 +2837,7 @@ object PagUsuarios: TPagUsuarios
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+        OnClick = btnLimparUsuClick
         OnMouseEnter = btnLimparUsuMouseEnter
         OnMouseLeave = btnLimparUsuMouseLeave
         ExplicitWidth = 43

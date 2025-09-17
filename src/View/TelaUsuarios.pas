@@ -72,6 +72,10 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure edUsuarioKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure btnSairUsuClick(Sender: TObject);
+    procedure btnLimparUsuClick(Sender: TObject);
+    procedure sgUsuariosDrawCell(Sender: TObject; ACol, ARow: LongInt;
+      Rect: TRect; State: TGridDrawState);
   private
     { Private declarations }
   public
@@ -85,6 +89,7 @@ implementation
 
 {$R *.dfm}
 
+//ação de fechar o formulario\\
 procedure TPagUsuarios.FormClose(Sender: TObject; var Action: TCloseAction);
   begin
     pnlFormAddUsuarios.Visible := False;
@@ -92,25 +97,42 @@ procedure TPagUsuarios.FormClose(Sender: TObject; var Action: TCloseAction);
     imgLogoUsuarios1.Visible := True;
   end;
 
+//criação do formulario\\
 procedure TPagUsuarios.FormCreate(Sender: TObject);
   begin
-
     pnlFormAddUsuarios.Visible := False;
     imgLogoUsuarios2.Visible := False;
-    //Configurações sg
-    sgUsuarios.Cells[0,0] := 'Cód';
-    sgUsuarios.Cells[1,0] := 'Nome de Usuário';
-    sgUsuarios.Cells[2,0] := 'Senha';
-    sgUsuarios.Cells[3,0] := 'Ativo';
-    sgUsuarios.Cells[4,0] := 'Grupo';
 
-    sgUsuarios.ColWidths[0] := 50;
-    sgUsuarios.ColWidths[1] := 150;
-    sgUsuarios.ColWidths[2] := 100;
-    sgUsuarios.ColWidths[3] := 50;
-    sgUsuarios.ColWidths[4] := 100;
+  sgUsuarios.Cells[0,0] := 'Cód';
+  sgUsuarios.Cells[1,0] := 'Nome de Usuário';
+  sgUsuarios.Cells[2,0] := 'Senha';
+  sgUsuarios.Cells[3,0] := 'Ativo';
+  sgUsuarios.Cells[4,0] := 'Grupo';
+
+  sgUsuarios.ColWidths[0] := 50;
+  sgUsuarios.ColWidths[1] := 150;
+  sgUsuarios.ColWidths[2] := 100;
+  sgUsuarios.ColWidths[3] := 50;
+  sgUsuarios.ColWidths[4] := 100;
   end;
 
+procedure TPagUsuarios.sgUsuariosDrawCell(Sender: TObject; ACol, ARow: LongInt;Rect: TRect; State: TGridDrawState);
+var
+  texto: string;
+begin
+  // Cabeçalho ou asteriscos
+  if ARow = 0 then
+    texto := sgUsuarios.Cells[ACol, ARow] // cabeçalho normal
+  else if ACol = 2 then
+    texto := StringOfChar('*', Length(sgUsuarios.Cells[ACol, ARow])) // senha oculta
+  else
+    texto := sgUsuarios.Cells[ACol, ARow];
+
+  // Desenha a célula
+  sgUsuarios.Canvas.FillRect(Rect);
+  sgUsuarios.Canvas.TextRect(Rect, Rect.Left + 3, Rect.Top + 3, texto);
+end;
+//botao de adicionar usuarios lateral\\
 procedure TPagUsuarios.btnAddUsuClick(Sender: TObject);
   begin
     pnlFormAddUsuarios.Visible := True;
@@ -119,16 +141,7 @@ procedure TPagUsuarios.btnAddUsuClick(Sender: TObject);
     edUsuario.SetFocus;
   end;
 
-procedure TPagUsuarios.btnAddUsuMouseEnter(Sender: TObject);
-  begin
-    btnAddUsu.Color := $00F78B2B;
-  end;
-
-procedure TPagUsuarios.btnAddUsuMouseLeave(Sender: TObject);
-  begin
-    btnAddUsu.Color :=  $007C3E05;
-  end;
-
+//click do botao adicionar usuario\\
 procedure TPagUsuarios.btnAdicionarUsuarioClick(Sender: TObject);
   var novaLinha, cod: Integer;
   begin
@@ -157,8 +170,6 @@ procedure TPagUsuarios.btnAdicionarUsuarioClick(Sender: TObject);
   sgUsuarios.Cells[3, novaLinha] := cbAtivo.Text;
   sgUsuarios.Cells[4, novaLinha] := cbGrupo.Text;
 
-
-
   edUsuario.Clear;
   edSenhaUsuario.Clear;
   cbAtivo.Clear;
@@ -167,26 +178,7 @@ procedure TPagUsuarios.btnAdicionarUsuarioClick(Sender: TObject);
 
   end;
 
-procedure TPagUsuarios.btnAdicionarUsuarioMouseEnter(Sender: TObject);
-  begin
-    btnAdicionarUsuario.Color := $00C46106;
-  end;
-
-procedure TPagUsuarios.btnAdicionarUsuarioMouseLeave(Sender: TObject);
-  begin
-    btnAdicionarUsuario.Color := $007C3E05;
-  end;
-
-procedure TPagUsuarios.btnAlterarUsuMouseEnter(Sender: TObject);
-  begin
-    btnAlterarUsu.Color := $00F78B2B;
-  end;
-
-procedure TPagUsuarios.btnAlterarUsuMouseLeave(Sender: TObject);
-  begin
-    btnAlterarUsu.Color := $007C3E05;
-  end;
-
+//click cancelar adicionar usuario\\
 procedure TPagUsuarios.btnCancelarUsuClick(Sender: TObject);
   begin
     pnlFormAddUsuarios.Visible := False;
@@ -194,6 +186,37 @@ procedure TPagUsuarios.btnCancelarUsuClick(Sender: TObject);
     imgLogoUsuarios2.Visible := False;
   end;
 
+//botao de X\\
+procedure TPagUsuarios.btnXUsuariosClick(Sender: TObject);
+  begin
+    Close;
+  end;
+
+//comando para quando apertar enter\\
+procedure TPagUsuarios.edUsuarioKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+  begin
+      if Key = VK_RETURN then begin
+      key := 0;
+      edSenhausuario.setfocus;
+    end;
+  end;
+
+//Click do botao sair\\
+procedure TPagUsuarios.btnSairUsuClick(Sender: TObject);
+  begin
+    Close;
+  end;
+
+//Click do botao limpar\\
+procedure TPagUsuarios.btnLimparUsuClick(Sender: TObject);
+  begin
+    edUsuario.Clear;
+    edSenhaUsuario.Clear;
+    cbAtivo.Clear;
+    cbGrupo.Clear ;
+  end;
+
+//animação de hover nos botões\\
 procedure TPagUsuarios.btnCancelarUsuMouseEnter(Sender: TObject);
   begin
     btnCancelarUsu.Color := $00F78B2B;
@@ -264,24 +287,34 @@ procedure TPagUsuarios.btnSairUsuMouseLeave(Sender: TObject);
     btnSairUsu.Color := $007C3E05;
   end;
 
-procedure TPagUsuarios.btnXUsuariosClick(Sender: TObject);
+procedure TPagUsuarios.btnAdicionarUsuarioMouseEnter(Sender: TObject);
   begin
-    Close;
+    btnAdicionarUsuario.Color := $00C46106;
   end;
-procedure TPagUsuarios.edUsuarioKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+
+procedure TPagUsuarios.btnAdicionarUsuarioMouseLeave(Sender: TObject);
   begin
+    btnAdicionarUsuario.Color := $007C3E05;
+  end;
 
-    if (edUsuario.Text = '') then begin
-      showMessage('Preencha o campo nome');
-      edUsuario.SetFocus;
-      exit;
-    end;
+procedure TPagUsuarios.btnAlterarUsuMouseEnter(Sender: TObject);
+  begin
+    btnAlterarUsu.Color := $00F78B2B;
+  end;
 
-    if Key = VK_RETURN then begin
-      key := 0;
-      edSenhausuario.setfocus;
-    end;
+procedure TPagUsuarios.btnAlterarUsuMouseLeave(Sender: TObject);
+  begin
+    btnAlterarUsu.Color := $007C3E05;
+  end;
 
+procedure TPagUsuarios.btnAddUsuMouseEnter(Sender: TObject);
+  begin
+    btnAddUsu.Color := $00F78B2B;
+  end;
+
+procedure TPagUsuarios.btnAddUsuMouseLeave(Sender: TObject);
+  begin
+    btnAddUsu.Color :=  $007C3E05;
   end;
 
 end.

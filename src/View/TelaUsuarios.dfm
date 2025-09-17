@@ -2510,6 +2510,7 @@ object PagUsuarios: TPagUsuarios
       RowCount = 1
       FixedRows = 0
       TabOrder = 0
+      OnDrawCell = sgUsuariosDrawCell
     end
   end
   object pnlBordaBaixoUsuarios: TPanel
@@ -2812,6 +2813,7 @@ object PagUsuarios: TPagUsuarios
       Color = 8142341
       ParentBackground = False
       TabOrder = 7
+      OnClick = btnLimparUsuClick
       OnMouseEnter = btnLimparUsuMouseEnter
       OnMouseLeave = btnLimparUsuMouseLeave
       object lblLimpar: TLabel
@@ -2851,6 +2853,7 @@ object PagUsuarios: TPagUsuarios
       Color = 8142341
       ParentBackground = False
       TabOrder = 8
+      OnClick = btnSairUsuClick
       OnMouseEnter = btnSairUsuMouseEnter
       OnMouseLeave = btnSairUsuMouseLeave
       object lblSair: TLabel
@@ -2875,6 +2878,7 @@ object PagUsuarios: TPagUsuarios
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+        OnClick = btnSairUsuClick
         OnMouseEnter = btnSairUsuMouseEnter
         OnMouseLeave = btnSairUsuMouseLeave
         ExplicitWidth = 23
@@ -2959,7 +2963,6 @@ object PagUsuarios: TPagUsuarios
       OnClick = btnAdicionarUsuarioClick
       OnMouseEnter = btnAdicionarUsuarioMouseEnter
       OnMouseLeave = btnAdicionarUsuarioMouseLeave
-      ExplicitWidth = 499
       object lblAdiconaFUsuario: TLabel
         AlignWithMargins = True
         Left = 221

@@ -2207,8 +2207,8 @@ object FormLogin: TFormLogin
           ExplicitHeight = 25
         end
         object imgProfissionais: TImage
-          Left = 9
-          Top = 7
+          Left = 4
+          Top = 5
           Width = 65
           Height = 64
           Cursor = crHandPoint
@@ -2594,10 +2594,10 @@ object FormLogin: TFormLogin
           OnMouseLeave = pnlEncerrarSistemaMouseLeave
         end
         object imgEncerrarSistema: TImage
-          Left = 8
-          Top = 3
-          Width = 57
-          Height = 61
+          Left = 5
+          Top = 7
+          Width = 56
+          Height = 54
           Cursor = crHandPoint
           Picture.Data = {
             0954506E67496D61676589504E470D0A1A0A0000000D49484452000000400000
@@ -5368,7 +5368,7 @@ object FormLogin: TFormLogin
         object ImgOlhoFechado: TImage
           AlignWithMargins = True
           Left = 352
-          Top = 385
+          Top = 388
           Width = 41
           Height = 24
           Cursor = crHandPoint
@@ -6051,7 +6051,7 @@ object FormLogin: TFormLogin
         object ImgOlhoAberto: TImage
           AlignWithMargins = True
           Left = 352
-          Top = 385
+          Top = 388
           Width = 40
           Height = 24
           Cursor = crHandPoint

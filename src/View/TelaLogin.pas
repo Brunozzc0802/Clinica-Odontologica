@@ -99,26 +99,22 @@ implementation
 {$R *.dfm}
 
 procedure TFormLogin.btnEntrarClick(Sender: TObject);
-//  var
-//  Usuario: TUsuario;
+var
+  UserController: TUsuarioController;
 begin
-//  Usuario := TUsuario.Create;
-//  try
-//    Usuario.Nome := edUsuario.Text;
-//    Usuario.Senha := edSenha.Text;
-//
-//    if TUsuarioController.UsuarioExiste(Usuario) then
-//    begin
-//      ShowMessage('Login efetuado com sucesso!');
+  UserController := TUsuarioController.Create;
+  try
+    if UserController.VerificarUsuario(edUsuario.Text, edSenha.Text) then
+    begin
+      ShowMessage('Login efetuado com sucesso!');
       pnlLogin.Visible := False;
       pnlTelaPrincipal.Visible := True;
-      pnlFundoLateral.visible:= True;
-//    end
-//    else
-//      ShowMessage('Usuário ou senha inválidos!');
-//  finally
-//    Usuario.Free;
-//  end;
+      pnlFundoLateral.Visible := True;
+    end else
+      ShowMessage('Usuário ou senha inválidos.');
+  finally
+    UserController.Free;
+  end;
 end;
 
 procedure TFormLogin.btnEntrarMouseEnter(Sender: TObject);
@@ -143,6 +139,7 @@ procedure TFormLogin.edSenhaKeyDown(Sender: TObject; var Key: Word;Shift: TShift
   begin
     if Key = VK_RETURN then begin
       Key := 0;
+      btnEntrarClick(nil);
     end;
   end;
 

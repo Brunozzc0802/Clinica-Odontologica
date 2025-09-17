@@ -1,13 +1,15 @@
 object dmUsuarios: TdmUsuarios
-  Height = 202
-  Width = 345
+  Height = 240
+  Width = 497
   object FDConnection1: TFDConnection
     Params.Strings = (
       'DriverID=PG'
-      'Database = clinica_odontologica'
-      'Server = localhost'
-      'Port = 5432'
-      'User_Name=postgres')
+      'Server=localhost'
+      'Port=5432'
+      'Database=clinica_odontologica'
+      'User_Name=postgres'
+      'Password=root')
+    Connected = True
     Left = 88
     Top = 88
   end
@@ -16,6 +18,11 @@ object dmUsuarios: TdmUsuarios
       'C:\Users\Bruno Tesser\Desktop\Clinica odontologica alves\Clinica' +
       '-Odontologica\Delphi\Win32\Debug\libpq.dll'
     Left = 217
+    Top = 88
+  end
+  object FDQuery1: TFDQuery
+    Connection = FDConnection1
+    Left = 336
     Top = 88
   end
 end

@@ -6,7 +6,8 @@ uses
   TelaUsuarios in '..\src\View\TelaUsuarios.pas' {PagUsuarios},
   uUsuarios in '..\src\Model\uUsuarios.pas',
   uUsuarioConexao in '..\src\Model\uUsuarioConexao.pas' {dmUsuarios: TDataModule},
-  uUsuariosController in '..\src\Controller\uUsuariosController.pas';
+  uUsuariosController in '..\src\Controller\uUsuariosController.pas',
+  uUsuarioRepository in '..\src\Repository\uUsuarioRepository.pas';
 
 {$R *.res}
 

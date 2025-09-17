@@ -1,35 +1,31 @@
 unit uUsuariosController;
 
 interface
+
 uses
-  uUsuarios, System.SysUtils, FireDAC.Comp.Client, uUsuarioConexao,FireDAC.Phys.PG,
-  FireDAC.Phys.PGDef,FireDAC.DApt;
+  uUsuarios, uUsuarioRepository;
 
 type
   TUsuarioController = class
   public
-    class function UsuarioExiste(const Usuario: TUsuario): Boolean;
+    function VerificarUsuario(const Nome, Senha: string): Boolean;
   end;
 
 implementation
 
 { TUsuarioController }
 
-class function TUsuarioController.UsuarioExiste(const Usuario: TUsuario): Boolean;
+function TUsuarioController.VerificarUsuario(const Nome, Senha: string): Boolean;
 var
-  FDQuery: TFDQuery;
+  Usuario: TUsuario;
 begin
-  FDQuery := TFDQuery.Create(nil);
+  Usuario := TUsuario.Create;
   try
-    FDQuery.Connection := dmUsuarios.FDConnection1;
-    FDQuery.SQL.Text := 'SELECT 1 FROM usuarios WHERE nome = :nome AND senha = :senha';
-    FDQuery.ParamByName('nome').AsString := Usuario.Nome;
-    FDQuery.ParamByName('senha').AsString := Usuario.Senha;
-    FDQuery.Open;
-
-    Result := not FDQuery.IsEmpty;
+    Usuario.Nome := Nome;
+    Usuario.Senha := Senha;
+    Result := TUsuarioRepository.VerificarUsuario(Usuario);
   finally
-    FDQuery.Free;
+    Usuario.Free;
   end;
 end;
 

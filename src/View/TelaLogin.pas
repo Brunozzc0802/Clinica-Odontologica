@@ -145,10 +145,7 @@ procedure TFormLogin.edSenhaKeyDown(Sender: TObject; var Key: Word;Shift: TShift
 
 procedure TFormLogin.FormCreate(Sender: TObject);
   begin
-//    pnlFundoLateral.Visible := False;
-//    ImgOlhoAberto.Visible := False;
-//    lblLogin.font.Color := $00C97D16;
-//    pnlTelaPrincipal.Visible := False;
+    lblLogin.font.Color := $00C97D16;
   end;
 
 procedure TFormLogin.ImgOlhoAbertoClick(Sender: TObject);
@@ -178,7 +175,7 @@ procedure TFormLogin.pnlConsultasMouseLeave(Sender: TObject);
 
 procedure TFormLogin.pnlEncerrarSistemaClick(Sender: TObject);
   begin
-     if MessageDlg('Deseja Encerrar o Sistema', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  if MessageDlg('Deseja Encerrar o Sistema', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
   begin
     ShowMessage('Encerrando Sistema');
     Sleep(500);

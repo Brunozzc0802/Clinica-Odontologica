@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Buttons, Vcl.StdCtrls,
-  Vcl.Imaging.pngimage, Vcl.Imaging.jpeg, Vcl.Grids;
+  Vcl.Imaging.pngimage, Vcl.Imaging.jpeg, Vcl.Grids, Vcl.WinXCtrls;
 
 type
   TPagUsuarios = class(TForm)
@@ -46,6 +46,9 @@ type
     lblSair: TLabel;
     btnAddNovo: TPanel;
     Label2: TLabel;
+    pesquisarUsuario: TSearchBox;
+    btnNovoPesquisar: TPanel;
+    Label1: TLabel;
     procedure btnXUsuariosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnAddUsuMouseEnter(Sender: TObject);
@@ -78,6 +81,7 @@ type
     procedure sgUsuariosDrawCell(Sender: TObject; ACol, ARow: LongInt;
       Rect: TRect; State: TGridDrawState);
     procedure btnAddUsuClick(Sender: TObject);
+    procedure btnPesquisarUsuClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -191,10 +195,22 @@ procedure TPagUsuarios.btnAdicionarUsuarioClick(Sender: TObject);
 //click cancelar adicionar usuario\\
 procedure TPagUsuarios.btnCancelarUsuClick(Sender: TObject);
   begin
+    btnNovoPesquisar.Visible := False;
     btnAddNovo.visible := false;
     pnlFormAddUsuarios.Visible := False;
     imgLogoUsuarios1.Visible := True;
     imgLogoUsuarios2.Visible := False;
+
+    if pesquisarUsuario.Visible then
+  begin
+    // Voltar grid para posição original
+    sgUsuarios.Top := sgUsuarios.Top - (pesquisarUsuario.Height + 5);
+    sgUsuarios.Height := sgUsuarios.Height + (pesquisarUsuario.Height + 5);
+
+    // Esconder a barra de pesquisa
+    pesquisarUsuario.Visible := False;
+  end;
+
   end;
 
 //botao de X\\
@@ -230,6 +246,7 @@ procedure TPagUsuarios.btnLimparUsuClick(Sender: TObject);
 
 procedure TPagUsuarios.btnAddUsuClick(Sender: TObject);
   begin
+    btnNovoPesquisar.Visible := False;
     btnAddNovo.Visible := True;
     pnlFormAddUsuarios.Visible := True;
     imgLogoUsuarios2.Visible := True;
@@ -277,6 +294,27 @@ procedure TPagUsuarios.btnPermissoesMouseLeave(Sender: TObject);
   begin
     btnPermissoes.Color :=  $007C3E05;
   end;
+
+procedure TPagUsuarios.btnPesquisarUsuClick(Sender: TObject);
+begin
+  btnAddNovo.Visible := False;
+  btnNovoPesquisar.Visible := True;
+  pnlFormAddUsuarios.Visible := false;
+  imgLogoUsuarios2.Visible := false;
+  imgLogoUsuarios1.Visible := True;
+
+  if not pesquisarUsuario.Visible then
+  begin
+    // Mostrar barra de pesquisa
+    pesquisarUsuario.Visible := True;
+
+    // Mover o grid para baixo
+    sgUsuarios.Top := pesquisarUsuario.Top + pesquisarUsuario.Height + 8;
+    sgUsuarios.Height := sgUsuarios.Height - (pesquisarUsuario.Height + 8);
+
+    pesquisarUsuario.SetFocus;
+  end;
+end;
 
 procedure TPagUsuarios.btnPesquisarUsuMouseEnter(Sender: TObject);
   begin

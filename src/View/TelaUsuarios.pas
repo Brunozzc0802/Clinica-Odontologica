@@ -231,6 +231,7 @@ procedure TPagUsuarios.edUsuarioKeyDown(Sender: TObject; var Key: Word; Shift: T
 //Click do botao sair\\
 procedure TPagUsuarios.btnSairUsuClick(Sender: TObject);
   begin
+    Sleep(500);
     Close;
   end;
 

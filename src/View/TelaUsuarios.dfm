@@ -2515,7 +2515,7 @@ object PagUsuarios: TPagUsuarios
       Left = 8
       Top = 8
       Width = 525
-      Height = 27
+      Height = 23
       TabOrder = 1
       TextHint = 'Pesquisar'
       Visible = False
@@ -3057,7 +3057,6 @@ object PagUsuarios: TPagUsuarios
       OnClick = btnAdicionarUsuarioClick
       OnMouseEnter = btnAdicionarUsuarioMouseEnter
       OnMouseLeave = btnAdicionarUsuarioMouseLeave
-      ExplicitWidth = 504
       object lblAdiconaFUsuario: TLabel
         AlignWithMargins = True
         Left = 221

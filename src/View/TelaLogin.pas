@@ -59,6 +59,10 @@ type
         imgRelatorios: TImage;
         imgProcedimentos: TImage;
         imgEncerrarSistema: TImage;
+    footerPrincipal: TPanel;
+    lblBemVindo: TLabel;
+    Timer1: TTimer;
+    lblDataHora: TLabel;
         procedure FormCreate(Sender: TObject);
         procedure btnEntrarMouseEnter(Sender: TObject);
         procedure btnEntrarMouseLeave(Sender: TObject);
@@ -84,6 +88,7 @@ type
         procedure pnlUserClick(Sender: TObject);
         procedure pnlEncerrarSistemaClick(Sender: TObject);
         procedure btnEntrarClick(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
 
     private
       { Private declarations }
@@ -110,6 +115,7 @@ begin
       pnlLogin.Visible := False;
       pnlTelaPrincipal.Visible := True;
       pnlFundoLateral.Visible := True;
+      lblBemVindo.Caption := 'Bem Vindo,' + ' ' + edUsuario.Text + '!';
     end else
       ShowMessage('Usuário ou senha inválidos.');
   finally
@@ -249,6 +255,11 @@ procedure TFormLogin.pnlUserMouseEnter(Sender: TObject);
 procedure TFormLogin.pnlUserMouseLeave(Sender: TObject);
   begin
     pnlUser.Color := $007C3E05;
+  end;
+
+procedure TFormLogin.Timer1Timer(Sender: TObject);
+  begin
+    lblDataHora.Caption := FormatDateTime('dd/mm/yyyy hh:nn:ss', Now);
   end;
 
 procedure TFormLogin.btnEncerrarSistemaClick(Sender: TObject);

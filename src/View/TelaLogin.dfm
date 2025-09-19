@@ -3990,19 +3990,24 @@ object FormLogin: TFormLogin
       Left = 279
       Top = 2
       Width = 874
-      Height = 859
+      Height = 858
       Margins.Left = 278
       Margins.Top = 1
       Align = alClient
       Color = 13204758
       ParentBackground = False
       TabOrder = 0
+      ExplicitLeft = 282
+      ExplicitHeight = 859
+      DesignSize = (
+        874
+        858)
       object imgLogoPrincipal: TImage
         AlignWithMargins = True
         Left = 101
         Top = 51
         Width = 722
-        Height = 757
+        Height = 756
         Margins.Left = 100
         Margins.Top = 50
         Margins.Right = 50
@@ -5726,24 +5731,70 @@ object FormLogin: TFormLogin
           91935F8E1C390625FE3FF554A820DEE964570000000049454E44AE426082}
         ExplicitLeft = 96
         ExplicitWidth = 725
+        ExplicitHeight = 757
+      end
+      object footerPrincipal: TPanel
+        Left = 0
+        Top = 824
+        Width = 877
+        Height = 41
+        Anchors = [akLeft, akRight, akBottom]
+        BevelOuter = bvSpace
+        BevelWidth = 2
+        Color = 8142341
+        ParentBackground = False
+        TabOrder = 0
+        ExplicitTop = 825
+        object lblBemVindo: TLabel
+          Left = 30
+          Top = 7
+          Width = 4
+          Height = 15
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -15
+          Font.Name = 'Segoe UI Semibold'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblDataHora: TLabel
+          AlignWithMargins = True
+          Left = 818
+          Top = 7
+          Width = 32
+          Height = 26
+          Margins.Top = 5
+          Margins.Right = 25
+          Margins.Bottom = 6
+          Align = alRight
+          Caption = 'hora'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -15
+          Font.Name = 'Segoe UI Semibold'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ExplicitHeight = 27
+        end
       end
     end
     object pnlFundoLateral: TPanel
       Left = 4
       Top = 2
       Width = 273
-      Height = 860
+      Height = 859
       Anchors = [akLeft, akTop, akBottom]
       Color = 8142341
       ParentBackground = False
       TabOrder = 1
       Visible = False
+      ExplicitHeight = 860
       object linhaUsuarios: TLabel
         AlignWithMargins = True
         Left = 2
         Top = 66
         Width = 269
-        Height = 13
+        Height = 12
         Margins.Left = 1
         Margins.Top = 65
         Margins.Right = 1
@@ -5766,7 +5817,7 @@ object FormLogin: TFormLogin
         Left = 2
         Top = 148
         Width = 269
-        Height = 41
+        Height = 40
         Margins.Left = 1
         Margins.Top = 147
         Margins.Right = 1
@@ -5789,7 +5840,7 @@ object FormLogin: TFormLogin
         Left = 2
         Top = 320
         Width = 269
-        Height = 49
+        Height = 48
         Margins.Left = 1
         Margins.Top = 319
         Margins.Right = 1
@@ -5812,7 +5863,7 @@ object FormLogin: TFormLogin
         Left = 2
         Top = 401
         Width = 269
-        Height = 38
+        Height = 37
         Margins.Left = 1
         Margins.Top = 400
         Margins.Right = 1
@@ -5835,7 +5886,7 @@ object FormLogin: TFormLogin
         Left = 2
         Top = 481
         Width = 269
-        Height = 48
+        Height = 47
         Margins.Left = 1
         Margins.Top = 480
         Margins.Right = 1
@@ -5858,7 +5909,7 @@ object FormLogin: TFormLogin
         Left = 2
         Top = 556
         Width = 269
-        Height = 23
+        Height = 22
         Margins.Left = 1
         Margins.Top = 555
         Margins.Right = 1
@@ -5881,7 +5932,7 @@ object FormLogin: TFormLogin
         Left = 2
         Top = 232
         Width = 269
-        Height = 47
+        Height = 46
         Margins.Left = 1
         Margins.Top = 231
         Margins.Right = 1
@@ -6696,5 +6747,10 @@ object FormLogin: TFormLogin
         end
       end
     end
+  end
+  object Timer1: TTimer
+    OnTimer = Timer1Timer
+    Left = 815
+    Top = 755
   end
 end

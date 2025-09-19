@@ -14,8 +14,8 @@ object dmUsuarios: TdmUsuarios
   end
   object FDPhysPgDriverLink1: TFDPhysPgDriverLink
     VendorLib = 
-      'C:\Users\alves.4948\Desktop\projeto empresa clinica\Clinica-Odon' +
-      'tologica\Delphi\Win32\Debug\libpq.dll'
+      'C:\Users\alves.4948\Desktop\CLINICA PROJETO\Clinica-Odontologica' +
+      '\lib\libpq.dll'
     Left = 217
     Top = 88
   end

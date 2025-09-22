@@ -88,8 +88,7 @@ type
         procedure pnlUserClick(Sender: TObject);
         procedure pnlEncerrarSistemaClick(Sender: TObject);
         procedure btnEntrarClick(Sender: TObject);
-    procedure Timer1Timer(Sender: TObject);
-
+        procedure Timer1Timer(Sender: TObject);
     private
       { Private declarations }
     public
@@ -108,6 +107,12 @@ var
   UserController: TUsuarioController;
 begin
   UserController := TUsuarioController.Create;
+
+  if (edUsuario.Text = '') or (edSenha.Text = '') then begin
+    ShowMessage('Preencha todos os campos');
+    edUsuario.SetFocus;
+    exit;
+  end;
   try
     if UserController.VerificarUsuario(edUsuario.Text, edSenha.Text) then
     begin

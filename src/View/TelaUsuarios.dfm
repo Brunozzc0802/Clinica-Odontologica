@@ -2627,6 +2627,7 @@ object PagUsuarios: TPagUsuarios
       Color = 8142341
       ParentBackground = False
       TabOrder = 1
+      OnClick = btnAlterarUsuClick
       OnMouseEnter = btnAlterarUsuMouseEnter
       OnMouseLeave = btnAlterarUsuMouseLeave
       object lblAlterarUsu: TLabel
@@ -2655,6 +2656,46 @@ object PagUsuarios: TPagUsuarios
         OnMouseLeave = btnAlterarUsuMouseLeave
         ExplicitWidth = 42
         ExplicitHeight = 17
+      end
+      object btnAlterarNovo: TPanel
+        Left = 0
+        Top = 0
+        Width = 137
+        Height = 41
+        Cursor = crHandPoint
+        Color = 16223019
+        ParentBackground = False
+        TabOrder = 0
+        Visible = False
+        OnMouseEnter = btnAlterarUsuMouseEnter
+        OnMouseLeave = btnAlterarUsuMouseLeave
+        object Label3: TLabel
+          AlignWithMargins = True
+          Left = 36
+          Top = 11
+          Width = 65
+          Height = 19
+          Cursor = crHandPoint
+          Margins.Left = 35
+          Margins.Top = 10
+          Margins.Right = 35
+          Margins.Bottom = 10
+          Align = alClient
+          Alignment = taCenter
+          Caption = 'Alterar'
+          Color = clCream
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          OnMouseEnter = btnAlterarUsuMouseEnter
+          OnMouseLeave = btnAlterarUsuMouseLeave
+          ExplicitWidth = 42
+          ExplicitHeight = 17
+        end
       end
     end
     object btnPesquisarUsu: TPanel
@@ -3025,8 +3066,8 @@ object PagUsuarios: TPagUsuarios
       TabOrder = 2
       TextHint = 'Ativo'
       Items.Strings = (
-        'Sim'
-        'N'#227'o')
+        'True'
+        'False')
     end
     object cbGrupo: TComboBox
       Left = 420

@@ -50,6 +50,8 @@ type
     pesquisarUsuario: TSearchBox;
     btnNovoPesquisar: TPanel;
     Label1: TLabel;
+    btnAlterarNovo: TPanel;
+    Label3: TLabel;
     procedure btnXUsuariosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnAddUsuMouseEnter(Sender: TObject);
@@ -85,6 +87,7 @@ type
     procedure btnPesquisarUsuClick(Sender: TObject);
     procedure CarregarUsuarios;
     procedure FormShow(Sender: TObject);
+    procedure btnAlterarUsuClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -138,6 +141,7 @@ end;
 //ação de fechar o formulario\\
 procedure TPagUsuarios.FormClose(Sender: TObject; var Action: TCloseAction);
   begin
+    btnAddNovo.visible := false;
     pnlFormAddUsuarios.Visible := False;
     imgLogoUsuarios2.Visible := False;
     imgLogoUsuarios1.Visible := True;
@@ -240,6 +244,7 @@ procedure TPagUsuarios.btnAdicionarUsuarioClick(Sender: TObject);
 //click cancelar adicionar usuario\\
 procedure TPagUsuarios.btnCancelarUsuClick(Sender: TObject);
   begin
+    btnAlterarNovo.Visible := False;
     btnNovoPesquisar.Visible := False;
     btnAddNovo.visible := false;
     pnlFormAddUsuarios.Visible := False;
@@ -400,6 +405,11 @@ procedure TPagUsuarios.btnAdicionarUsuarioMouseEnter(Sender: TObject);
 procedure TPagUsuarios.btnAdicionarUsuarioMouseLeave(Sender: TObject);
   begin
     btnAdicionarUsuario.Color := $007C3E05;
+  end;
+
+procedure TPagUsuarios.btnAlterarUsuClick(Sender: TObject);
+  begin
+    btnAlterarNovo.Visible := True;
   end;
 
 procedure TPagUsuarios.btnAlterarUsuMouseEnter(Sender: TObject);

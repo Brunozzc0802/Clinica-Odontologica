@@ -14,6 +14,7 @@ object PagUsuarios: TPagUsuarios
   Position = poDesigned
   OnClose = FormClose
   OnCreate = FormCreate
+  OnShow = FormShow
   TextHeight = 15
   object bordaCabecalhoUsuarios: TPanel
     Left = 0

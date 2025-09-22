@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Buttons, Vcl.StdCtrls,
-  Vcl.Imaging.pngimage, Vcl.Imaging.jpeg, Vcl.Grids, Vcl.WinXCtrls;
+  Vcl.Imaging.pngimage, Vcl.Imaging.jpeg, Vcl.Grids, Vcl.WinXCtrls, uUsuariosController, uUsuarios,
+  System.Generics.Collections;
 
 type
   TPagUsuarios = class(TForm)
@@ -82,6 +83,8 @@ type
       Rect: TRect; State: TGridDrawState);
     procedure btnAddUsuClick(Sender: TObject);
     procedure btnPesquisarUsuClick(Sender: TObject);
+    procedure CarregarUsuarios;
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -94,6 +97,43 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TPagUsuarios.CarregarUsuarios;
+var
+  Controller: TUsuarioController;
+  Lista: TObjectList<TUsuario>;
+  I: Integer;
+begin
+  Controller := TUsuarioController.Create;
+  try
+    Lista := Controller.BuscarTodos;
+
+    sgUsuarios.RowCount := Lista.Count + 1;
+
+    // Cabeçalho
+    sgUsuarios.Cells[0, 0] := 'ID';
+    sgUsuarios.Cells[1, 0] := 'Nome de Usuário';
+    sgUsuarios.Cells[2, 0] := 'Senha';
+    sgUsuarios.Cells[3, 0] := 'Ativo';
+    sgUsuarios.Cells[4, 0] := 'Grupo';
+
+    // Dados
+    for I := 0 to Lista.Count - 1 do
+    begin
+      sgUsuarios.Cells[0, I + 1] := IntToStr(I + 1);
+      sgUsuarios.Cells[1, I + 1] := Lista[I].Nome;
+      sgUsuarios.Cells[2, I + 1] := Lista[I].Senha;
+      sgUsuarios.Cells[3, I + 1] := BoolToStr(Lista[I].Ativo, True);
+      sgUsuarios.Cells[4, I + 1] := Lista[I].Grupo;
+    end;
+
+    Lista.Free;
+  finally
+    Controller.Free;
+  end;
+end;
+
+
 
 //ação de fechar o formulario\\
 procedure TPagUsuarios.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -122,6 +162,11 @@ procedure TPagUsuarios.FormCreate(Sender: TObject);
   sgUsuarios.ColWidths[2] := 110;
   sgUsuarios.ColWidths[3] := 70;
   sgUsuarios.ColWidths[4] := 127;
+  end;
+
+procedure TPagUsuarios.FormShow(Sender: TObject);
+  begin
+    CarregarUsuarios;
   end;
 
 procedure TPagUsuarios.sgUsuariosDrawCell(Sender: TObject; ACol, ARow: LongInt;Rect: TRect; State: TGridDrawState);

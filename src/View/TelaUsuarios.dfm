@@ -2516,7 +2516,7 @@ object PagUsuarios: TPagUsuarios
       Left = 8
       Top = 8
       Width = 525
-      Height = 23
+      Height = 25
       TabOrder = 1
       TextHint = 'Pesquisar'
       Visible = False
@@ -2652,6 +2652,7 @@ object PagUsuarios: TPagUsuarios
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+        OnClick = btnAlterarUsuClick
         OnMouseEnter = btnAlterarUsuMouseEnter
         OnMouseLeave = btnAlterarUsuMouseLeave
         ExplicitWidth = 42
@@ -2693,8 +2694,7 @@ object PagUsuarios: TPagUsuarios
           ParentFont = False
           OnMouseEnter = btnAlterarUsuMouseEnter
           OnMouseLeave = btnAlterarUsuMouseLeave
-          ExplicitWidth = 42
-          ExplicitHeight = 17
+          ExplicitTop = 7
         end
       end
     end
@@ -3023,7 +3023,7 @@ object PagUsuarios: TPagUsuarios
     end
   end
   object pnlFormAddUsuarios: TPanel
-    Left = 10
+    Left = 8
     Top = 505
     Width = 525
     Height = 132
@@ -3049,16 +3049,22 @@ object PagUsuarios: TPagUsuarios
       OnKeyDown = edUsuarioKeyDown
     end
     object edSenhaUsuario: TEdit
-      Left = 168
+      Left = 163
       Top = 10
-      Width = 145
+      Width = 142
       Height = 31
       AutoSize = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 1
       TextHint = 'Digite a senha:'
     end
     object cbAtivo: TComboBox
-      Left = 328
+      Left = 317
       Top = 10
       Width = 81
       Height = 23
@@ -3070,9 +3076,9 @@ object PagUsuarios: TPagUsuarios
         'False')
     end
     object cbGrupo: TComboBox
-      Left = 420
+      Left = 410
       Top = 10
-      Width = 90
+      Width = 100
       Height = 23
       Style = csDropDownList
       TabOrder = 3
@@ -3099,7 +3105,7 @@ object PagUsuarios: TPagUsuarios
       OnClick = btnAdicionarUsuarioClick
       OnMouseEnter = btnAdicionarUsuarioMouseEnter
       OnMouseLeave = btnAdicionarUsuarioMouseLeave
-      object lblAdiconaFUsuario: TLabel
+      object lblAdicionarUsuario: TLabel
         AlignWithMargins = True
         Left = 221
         Top = 6
@@ -3125,6 +3131,54 @@ object PagUsuarios: TPagUsuarios
         OnMouseEnter = btnAdicionarUsuarioMouseEnter
         OnMouseLeave = btnAdicionarUsuarioMouseLeave
         ExplicitWidth = 59
+        ExplicitHeight = 17
+      end
+    end
+    object btnConfirmarAlteracoes: TPanel
+      AlignWithMargins = True
+      Left = 10
+      Top = 65
+      Width = 502
+      Height = 31
+      Margins.Left = 10
+      Margins.Top = 65
+      Margins.Right = 13
+      Margins.Bottom = 36
+      Align = alClient
+      Color = 8142341
+      ParentBackground = False
+      TabOrder = 5
+      Visible = False
+      OnClick = btnConfirmarAlteracoesClick
+      OnMouseEnter = btnConfirmarAlteracoesMouseEnter
+      OnMouseLeave = btnConfirmarAlteracoesMouseLeave
+      ExplicitTop = 66
+      object lblConfirmarAlteracoes: TLabel
+        AlignWithMargins = True
+        Left = 191
+        Top = 6
+        Width = 140
+        Height = 18
+        Cursor = crHandPoint
+        Margins.Left = 190
+        Margins.Top = 5
+        Margins.Right = 170
+        Margins.Bottom = 6
+        Align = alClient
+        Alignment = taCenter
+        Caption = 'Confirmar Altera'#231#245'es'
+        Color = clCream
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        OnMouseEnter = btnAdicionarUsuarioMouseEnter
+        OnMouseLeave = btnAdicionarUsuarioMouseLeave
+        ExplicitLeft = 221
+        ExplicitWidth = 130
         ExplicitHeight = 17
       end
     end

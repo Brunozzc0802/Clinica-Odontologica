@@ -196,8 +196,7 @@ procedure TFormLogin.pnlEncerrarSistemaClick(Sender: TObject);
     ShowMessage('Encerrando Sistema');
     Sleep(500);
     Close;
-  end else
-  begin
+  end else begin
     showMessage('O sistema continuará aberto');
   end;
 end;

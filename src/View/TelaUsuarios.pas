@@ -99,7 +99,7 @@ type
   private
     UsuarioIdalterar: Integer;
     UsuarioLista: TObjectList<TUsuario>;
-    procedure FiltrarUsuarios(const Filtro: string);
+    procedure PesquisarUsuarios(const Filtro: string);
     { Private declarations }
   public
     { Public declarations }
@@ -114,7 +114,7 @@ implementation
 
 
 //Função que mostra os dados do banco no grid\\
-procedure TPagUsuarios.FiltrarUsuarios(const Filtro: string);
+procedure TPagUsuarios.PesquisarUsuarios(const Filtro: string);
 var
   I, Linha: Integer;
   Usuario: TUsuario;
@@ -178,8 +178,7 @@ end;
 //ação de fechar o formulario\\
 procedure TPagUsuarios.FormClose(Sender: TObject; var Action: TCloseAction);
   begin
-    if Assigned(UsuarioLista) then
-    UsuarioLista.Free;
+    FreeAndNil(UsuarioLista);
     btnAddNovo.visible := false;
     pnlFormAddUsuarios.Visible := False;
     imgLogoUsuarios2.Visible := False;
@@ -216,37 +215,38 @@ procedure TPagUsuarios.FormShow(Sender: TObject);
 
 procedure TPagUsuarios.pesquisarUsuarioChange(Sender: TObject);
   begin
-     FiltrarUsuarios(pesquisarUsuario.Text);
+     PesquisarUsuarios(pesquisarUsuario.Text);
   end;
 
 //color de fundo do grid\\
-procedure TPagUsuarios.sgUsuariosDrawCell(Sender: TObject; ACol, ARow: LongInt;Rect: TRect; State: TGridDrawState);
+procedure TPagUsuarios.sgUsuariosDrawCell(Sender: TObject; ACol, ARow: LongInt;
+  Rect: TRect; State: TGridDrawState);
 var
   TextToDraw: string;
   BGColor: TColor;
   begin
     if gdSelected in State then begin
       BGColor := clHighlight
-    end else
-      BGColor := clWindow;
-
-  // Preenche o fundo
-  sgUsuarios.Canvas.Brush.Color := BGColor;
-  sgUsuarios.Canvas.FillRect(Rect);
-
-  // Define a cor do texto dependendo se está selecionado
-  if gdSelected in State then begin
+  end else
+    BGColor := clWindow;
+    sgUsuarios.Canvas.Brush.Color := BGColor;
+    sgUsuarios.Canvas.FillRect(Rect);
+  if gdSelected in State then
     sgUsuarios.Canvas.Font.Color := clHighlightText
-  end else
+  else
     sgUsuarios.Canvas.Font.Color := clWindowText;
-
-  // Substitui por * se for a coluna de senha e não for cabeçalho
-  if (ARow > 0) and (ACol = 2) then begin
-    TextToDraw := StringOfChar('*', Length(sgUsuarios.Cells[ACol, ARow]))
-  end else
+  if (ARow > 0) and Assigned(UsuarioLista) and (ARow <= UsuarioLista.Count) then
+  begin
+    if ACol = 2 then
+      TextToDraw := StringOfChar('*', Length(sgUsuarios.Cells[ACol, ARow]))
+    else
+      TextToDraw := sgUsuarios.Cells[ACol, ARow];
+  end
+  else
     TextToDraw := sgUsuarios.Cells[ACol, ARow];
-    sgUsuarios.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2, TextToDraw);
-  end;
+
+  sgUsuarios.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2, TextToDraw);
+end;
 
 //click do botao adicionar usuario\\
 procedure TPagUsuarios.btnAdicionarUsuarioClick(Sender: TObject);
@@ -379,7 +379,8 @@ begin
   finally
     Controller.Free;
   end;
-end;
+  end;
+
 
 
 procedure TPagUsuarios.btnConfirmarAlteracoesMouseEnter(Sender: TObject);
@@ -398,6 +399,8 @@ var
   Usuario: TUsuario;
   Controller: TUsuarioController;
 begin
+  if not Assigned(UsuarioLista) then Exit;
+
   Linha := sgUsuarios.Row;
   if Linha > 0 then begin
     Usuario := TUsuario.Create;

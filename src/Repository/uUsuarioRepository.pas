@@ -11,6 +11,7 @@ type
   public
     class function VerificarUsuario(const Usuario: TUsuario): Boolean;
     class function ListarTodos: TObjectList<TUsuario>;
+    procedure Adicionar(AUsuario: TUsuario);
   end;
 
 implementation
@@ -32,6 +33,22 @@ begin
   end;
 end;
 
+procedure TUsuarioRepository.Adicionar(AUsuario: TUsuario);
+begin
+ with dmUsuarios.FDQuery1 do
+begin
+  SQL.Clear;
+  SQL.Add('INSERT INTO usuarios (id, nome, senha, ativo, grupo) ');
+  SQL.Add('VALUES (:id,:nome, :senha, :ativo, :grupo)');
+  ParamByName('nome').AsString  := AUsuario.Nome;
+  ParamByName('senha').AsString := AUsuario.Senha;
+  ParamByName('ativo').AsBoolean := AUsuario.Ativo;
+  ParamByName('grupo').AsString := AUsuario.Grupo;
+  ExecSQL;
+end;
+
+end;
+
 class function TUsuarioRepository.ListarTodos: TObjectList<TUsuario>;
 var
   Usuario: TUsuario;
@@ -44,6 +61,7 @@ begin
 
     while not Eof do begin
       Usuario := TUsuario.Create;
+      Usuario.Id := FieldByName('id').AsInteger;
       Usuario.Nome  := FieldByName('nome').AsString;
       Usuario.Senha := FieldByName('senha').AsString;
       Usuario.Ativo := FieldByName('ativo').AsBoolean;

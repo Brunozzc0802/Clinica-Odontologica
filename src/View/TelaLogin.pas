@@ -116,7 +116,7 @@ begin
   try
     if UserController.VerificarUsuario(edUsuario.Text, edSenha.Text) then
     begin
-      ShowMessage('Login efetuado com sucesso!');
+      Sleep(300);
       pnlLogin.Visible := False;
       pnlTelaPrincipal.Visible := True;
       pnlFundoLateral.Visible := True;

@@ -2516,7 +2516,7 @@ object PagUsuarios: TPagUsuarios
       Left = 8
       Top = 8
       Width = 525
-      Height = 25
+      Height = 23
       TabOrder = 1
       TextHint = 'Pesquisar'
       Visible = False
@@ -2694,7 +2694,8 @@ object PagUsuarios: TPagUsuarios
           ParentFont = False
           OnMouseEnter = btnAlterarUsuMouseEnter
           OnMouseLeave = btnAlterarUsuMouseLeave
-          ExplicitTop = 7
+          ExplicitWidth = 42
+          ExplicitHeight = 17
         end
       end
     end
@@ -3152,7 +3153,6 @@ object PagUsuarios: TPagUsuarios
       OnClick = btnConfirmarAlteracoesClick
       OnMouseEnter = btnConfirmarAlteracoesMouseEnter
       OnMouseLeave = btnConfirmarAlteracoesMouseLeave
-      ExplicitTop = 66
       object lblConfirmarAlteracoes: TLabel
         AlignWithMargins = True
         Left = 191
@@ -3177,7 +3177,6 @@ object PagUsuarios: TPagUsuarios
         ParentFont = False
         OnMouseEnter = btnAdicionarUsuarioMouseEnter
         OnMouseLeave = btnAdicionarUsuarioMouseLeave
-        ExplicitLeft = 221
         ExplicitWidth = 130
         ExplicitHeight = 17
       end

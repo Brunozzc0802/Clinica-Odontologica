@@ -115,31 +115,36 @@ var
 begin
   Controller := TUsuarioController.Create;
   try
-    Lista := Controller.BuscarTodos;
+    Lista := Controller.BuscarTodos; // cria e preenche a lista a partir do banco
+    try
+      // Cabeçalho
+      sgUsuarios.Cells[0, 0] := 'ID';
+      sgUsuarios.Cells[1, 0] := 'Nome de Usuário';
+      sgUsuarios.Cells[2, 0] := 'Senha';
+      sgUsuarios.Cells[3, 0] := 'Ativo';
+      sgUsuarios.Cells[4, 0] := 'Grupo';
 
-    sgUsuarios.RowCount := Lista.Count + 1;
+      sgUsuarios.RowCount := Lista.Count + 1;
 
-    // Cabeçalho
-    sgUsuarios.Cells[0, 0] := 'ID';
-    sgUsuarios.Cells[1, 0] := 'Nome de Usuário';
-    sgUsuarios.Cells[2, 0] := 'Senha';
-    sgUsuarios.Cells[3, 0] := 'Ativo';
-    sgUsuarios.Cells[4, 0] := 'Grupo';
+      // Dados
+      for I := 0 to Lista.Count - 1 do
+      begin
+        sgUsuarios.Cells[0, I + 1] := IntToStr(Lista[I].Id); // usa o ID real do banco
+        sgUsuarios.Cells[1, I + 1] := Lista[I].Nome;
+        sgUsuarios.Cells[2, I + 1] := Lista[I].Senha;
+        sgUsuarios.Cells[3, I + 1] := BoolToStr(Lista[I].Ativo, True);
+        sgUsuarios.Cells[4, I + 1] := Lista[I].Grupo;
+      end;
 
-    // Dados
-    for I := 0 to Lista.Count - 1 do
-    begin
-      sgUsuarios.Cells[0, I + 1] := IntToStr(I + 1);
-      sgUsuarios.Cells[1, I + 1] := Lista[I].Nome;
-      sgUsuarios.Cells[2, I + 1] := Lista[I].Senha;
-      sgUsuarios.Cells[3, I + 1] := BoolToStr(Lista[I].Ativo, True);
-      sgUsuarios.Cells[4, I + 1] := Lista[I].Grupo;
+    finally
+      Lista.Free;
     end;
-    Lista.Free;
+
   finally
     Controller.Free;
   end;
 end;
+
 
 
 
@@ -213,40 +218,54 @@ end;
 
 //click do botao adicionar usuario\\
 procedure TPagUsuarios.btnAdicionarUsuarioClick(Sender: TObject);
-  var novaLinha, cod: Integer;
+var
+  Ativo: Boolean;
+  Controller: TUsuarioController;
+begin
+  // Validações
+  if (edUsuario.Text = '') and (edSenhaUsuario.Text = '') then
   begin
-
-  if (edUsuario.Text = '') and (edSenhaUsuario.Text = '') then begin
     ShowMessage('Preencha os campos nome e senha');
-    exit;
-    end;
-    if (edUsuario.Text = '') then begin
-      showMessage('Preencha o campo nome');
-      edUsuario.SetFocus;
-      exit;
-    end else if (edSenhaUsuario.Text = '') then begin
-      ShowMessage('Preencha o campo senha');
-      edSenhaUsuario.setfocus;
-      exit;
-    end else
-  novaLinha := sgUsuarios.rowCount;
-  sgUsuarios.RowCount := novaLinha +1;
+    Exit;
+  end;
 
-  cod := novaLinha;
+  if (edUsuario.Text = '') then
+  begin
+    ShowMessage('Preencha o campo nome');
+    edUsuario.SetFocus;
+    Exit;
+  end;
 
-  SgUsuarios.Cells[0, novaLinha] := IntToStr(cod);
-  SgUsuarios.Cells[1, novaLinha] := edUsuario.Text;
-  sgUsuarios.Cells[2, novaLinha] := edSenhaUsuario.Text;
-  sgUsuarios.Cells[3, novaLinha] := cbAtivo.Text;
-  sgUsuarios.Cells[4, novaLinha] := cbGrupo.Text;
+  if (edSenhaUsuario.Text = '') then
+  begin
+    ShowMessage('Preencha o campo senha');
+    edSenhaUsuario.SetFocus;
+    Exit;
+  end;
 
+  // Converte ativo (exemplo: índice 0 = Ativo, 1 = Inativo)
+  Ativo := cbAtivo.ItemIndex = 0;
+  Controller := TUsuarioController.Create;
+  try
+    // Salva no banco
+    Controller.AdicionarUsuario(edUsuario.Text, edSenhaUsuario.Text, cbGrupo.Text, Ativo);
+  finally
+    Controller.Free;
+  end;
+
+  // Atualiza grid
+  CarregarUsuarios;
+
+  // Limpa formulário
   edUsuario.Clear;
   edSenhaUsuario.Clear;
   cbAtivo.ItemIndex := -1;
   cbGrupo.ItemIndex := -1;
   edUsuario.SetFocus;
 
-  end;
+  ShowMessage('Usuário adicionado com sucesso!');
+end;
+
 
 //click cancelar adicionar usuario\\
 procedure TPagUsuarios.btnCancelarUsuClick(Sender: TObject);

@@ -12,6 +12,7 @@ type
     function BuscarTodos: TObjectList<TUsuario>;
     procedure AdicionarUsuario(const Nome, Senha, Grupo: string; Ativo: Boolean);
     procedure AlterarUsuario(const Id: Integer; const Nome, Senha, Grupo: string; Ativo: Boolean);
+    procedure DeletarUsuario(AUsuario: TUsuario);
   end;
 
 implementation
@@ -93,6 +94,20 @@ begin
     Usuario.Free;
   end;
 end;
+
+procedure TUsuarioController.DeletarUsuario(AUsuario: TUsuario);
+var
+  RepoUsu: TUsuarioRepository;
+begin
+  RepoUsu := TUsuarioRepository.Create;
+  try
+    AUsuario.Ativo := False;
+    RepoUsu.Alterar(AUsuario);
+  finally
+    RepoUsu.Free;
+  end;
+end;
+
 
 end.
 

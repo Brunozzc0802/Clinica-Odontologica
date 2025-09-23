@@ -2792,6 +2792,7 @@ object PagUsuarios: TPagUsuarios
       Color = 8142341
       ParentBackground = False
       TabOrder = 3
+      OnClick = btnDeletarUsuClick
       OnMouseEnter = btnDeletarUsuMouseEnter
       OnMouseLeave = btnDeletarUsuMouseLeave
       object lblDeletarUsu: TLabel

@@ -94,6 +94,7 @@ type
     procedure btnConfirmarAlteracoesMouseEnter(Sender: TObject);
     procedure btnConfirmarAlteracoesMouseLeave(Sender: TObject);
     procedure pesquisarUsuarioChange(Sender: TObject);
+    procedure btnDeletarUsuClick(Sender: TObject);
   private
     UsuarioIdalterar: Integer;
     UsuarioLista: TObjectList<TUsuario>;
@@ -389,6 +390,38 @@ procedure TPagUsuarios.btnConfirmarAlteracoesMouseLeave(Sender: TObject);
   begin
     btnConfirmarAlteracoes.Color := $007C3E05;
   end;
+
+procedure TPagUsuarios.btnDeletarUsuClick(Sender: TObject);
+var
+  Linha: Integer;
+  Usuario: TUsuario;
+  Controller: TUsuarioController;
+begin
+  Linha := sgUsuarios.Row;
+  if Linha > 0 then begin
+    Usuario := TUsuario.Create;
+    try
+      Usuario.Id    := StrToInt(sgUsuarios.Cells[0, Linha]);
+      Usuario.Nome  := sgUsuarios.Cells[1, Linha];
+      Usuario.Senha := sgUsuarios.Cells[2, Linha];
+      Usuario.Ativo := True;
+      Usuario.Grupo := sgUsuarios.Cells[4, Linha];
+
+      Controller := TUsuarioController.Create;
+      try
+        Controller.DeletarUsuario(Usuario);
+        CarregarUsuarios;
+        ShowMessage('Usuário deletado com sucesso!');
+      finally
+        Controller.Free;
+      end;
+    finally
+      Usuario.Free;
+    end;
+  end
+  else
+    ShowMessage('Selecione um usuário para deletar.');
+end;
 
 procedure TPagUsuarios.btnDeletarUsuMouseEnter(Sender: TObject);
   begin

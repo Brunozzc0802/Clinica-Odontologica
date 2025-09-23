@@ -93,8 +93,11 @@ type
     procedure btnConfirmarAlteracoesClick(Sender: TObject);
     procedure btnConfirmarAlteracoesMouseEnter(Sender: TObject);
     procedure btnConfirmarAlteracoesMouseLeave(Sender: TObject);
+    procedure pesquisarUsuarioChange(Sender: TObject);
   private
     UsuarioIdalterar: Integer;
+    UsuarioLista: TObjectList<TUsuario>;
+    procedure FiltrarUsuarios(const Filtro: string);
     { Private declarations }
   public
     { Public declarations }
@@ -107,51 +110,74 @@ implementation
 
 {$R *.dfm}
 
+
 //Função que mostra os dados do banco no grid\\
+procedure TPagUsuarios.FiltrarUsuarios(const Filtro: string);
+var
+  I, Linha: Integer;
+  Usuario: TUsuario;
+  TextoFiltro: string;
+begin
+  if not Assigned(UsuarioLista) then Exit;
+  sgUsuarios.ColCount := 5;   // garante colunas
+  sgUsuarios.RowCount := 1;   // só cabeçalho
+  Linha := 1;
+  TextoFiltro := LowerCase(Filtro);
+  for I := 0 to UsuarioLista.Count - 1 do begin
+    Usuario := UsuarioLista[I];
+    // Se o filtro estiver vazio ou o nome conter o texto
+    if (Filtro = '') or (Pos(TextoFiltro, LowerCase(Usuario.Nome)) > 0) then
+    begin
+      sgUsuarios.RowCount := Linha + 1;
+      sgUsuarios.Cells[0, Linha] := Usuario.Id.ToString;
+      sgUsuarios.Cells[1, Linha] := Usuario.Nome;
+      sgUsuarios.Cells[2, Linha] := Usuario.Senha;
+      sgUsuarios.Cells[3, Linha] := BoolToStr(Usuario.Ativo, True);
+      sgUsuarios.Cells[4, Linha] := Usuario.Grupo;
+      Inc(Linha);
+    end;
+  end;
+end;
+
+//função que carrega os usuarios no grid\\
 procedure TPagUsuarios.CarregarUsuarios;
 var
   Controller: TUsuarioController;
-  Lista: TObjectList<TUsuario>;
   I: Integer;
 begin
   Controller := TUsuarioController.Create;
   try
-    Lista := Controller.BuscarTodos; // cria e preenche a lista a partir do banco
-    try
-      // Cabeçalho
-      sgUsuarios.Cells[0, 0] := 'ID';
-      sgUsuarios.Cells[1, 0] := 'Nome de Usuário';
-      sgUsuarios.Cells[2, 0] := 'Senha';
-      sgUsuarios.Cells[3, 0] := 'Ativo';
-      sgUsuarios.Cells[4, 0] := 'Grupo';
+    if Assigned(UsuarioLista) then
+      UsuarioLista.Free;
+    UsuarioLista := Controller.BuscarTodos;
 
-      sgUsuarios.RowCount := Lista.Count + 1;
+    // Cabeçalho
+    sgUsuarios.Cells[0, 0] := 'ID';
+    sgUsuarios.Cells[1, 0] := 'Nome de Usuário';
+    sgUsuarios.Cells[2, 0] := 'Senha';
+    sgUsuarios.Cells[3, 0] := 'Ativo';
+    sgUsuarios.Cells[4, 0] := 'Grupo';
+    sgUsuarios.RowCount := UsuarioLista.Count + 1;
 
-      // Dados
-      for I := 0 to Lista.Count - 1 do
-      begin
-        sgUsuarios.Cells[0, I + 1] := IntToStr(Lista[I].Id); // usa o ID real do banco
-        sgUsuarios.Cells[1, I + 1] := Lista[I].Nome;
-        sgUsuarios.Cells[2, I + 1] := Lista[I].Senha;
-        sgUsuarios.Cells[3, I + 1] := BoolToStr(Lista[I].Ativo, True);
-        sgUsuarios.Cells[4, I + 1] := Lista[I].Grupo;
-      end;
-
-    finally
-      Lista.Free;
+    for I := 0 to UsuarioLista.Count - 1 do
+    begin
+      sgUsuarios.Cells[0, I + 1] := IntToStr(UsuarioLista[I].Id);
+      sgUsuarios.Cells[1, I + 1] := UsuarioLista[I].Nome;
+      sgUsuarios.Cells[2, I + 1] := UsuarioLista[I].Senha;
+      sgUsuarios.Cells[3, I + 1] := BoolToStr(UsuarioLista[I].Ativo, True);
+      sgUsuarios.Cells[4, I + 1] := UsuarioLista[I].Grupo;
     end;
-
   finally
     Controller.Free;
   end;
 end;
 
 
-
-
 //ação de fechar o formulario\\
 procedure TPagUsuarios.FormClose(Sender: TObject; var Action: TCloseAction);
   begin
+    if Assigned(UsuarioLista) then
+    UsuarioLista.Free;
     btnAddNovo.visible := false;
     pnlFormAddUsuarios.Visible := False;
     imgLogoUsuarios2.Visible := False;
@@ -161,6 +187,7 @@ procedure TPagUsuarios.FormClose(Sender: TObject; var Action: TCloseAction);
 //criação do formulario\\
 procedure TPagUsuarios.FormCreate(Sender: TObject);
   begin
+    pesquisarUsuario.OnChange := pesquisarUsuarioChange;
     pnlFormAddUsuarios.Visible := False;
     imgLogoUsuarios2.Visible := False;
     btnAddNovo.Visible := False;
@@ -183,6 +210,11 @@ procedure TPagUsuarios.FormCreate(Sender: TObject);
 procedure TPagUsuarios.FormShow(Sender: TObject);
   begin
     CarregarUsuarios;
+  end;
+
+procedure TPagUsuarios.pesquisarUsuarioChange(Sender: TObject);
+  begin
+     FiltrarUsuarios(pesquisarUsuario.Text);
   end;
 
 //color de fundo do grid\\
@@ -399,15 +431,10 @@ begin
   imgLogoUsuarios2.Visible := false;
   imgLogoUsuarios1.Visible := True;
 
-  if not pesquisarUsuario.Visible then
-  begin
-    // Mostrar barra de pesquisa
+  if not pesquisarUsuario.Visible then begin
     pesquisarUsuario.Visible := True;
-
-    // Mover o grid para baixo
     sgUsuarios.Top := pesquisarUsuario.Top + pesquisarUsuario.Height + 8;
     sgUsuarios.Height := sgUsuarios.Height - (pesquisarUsuario.Height + 8);
-
     pesquisarUsuario.SetFocus;
   end;
 end;

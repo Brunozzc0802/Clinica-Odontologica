@@ -2520,6 +2520,7 @@ object PagUsuarios: TPagUsuarios
       TabOrder = 1
       TextHint = 'Pesquisar'
       Visible = False
+      OnChange = pesquisarUsuarioChange
     end
   end
   object pnlBordaBaixoUsuarios: TPanel

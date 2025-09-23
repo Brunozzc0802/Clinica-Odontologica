@@ -3176,8 +3176,8 @@ object PagUsuarios: TPagUsuarios
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
-        OnMouseEnter = btnAdicionarUsuarioMouseEnter
-        OnMouseLeave = btnAdicionarUsuarioMouseLeave
+        OnMouseEnter = btnConfirmarAlteracoesClick
+        OnMouseLeave = btnConfirmarAlteracoesClick
         ExplicitWidth = 130
         ExplicitHeight = 17
       end

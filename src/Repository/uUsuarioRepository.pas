@@ -40,7 +40,7 @@ begin
   Result := TObjectList<TUsuario>.Create(True);
   with dmUsuarios.FDQuery1 do begin
     Close;
-    SQL.Text := 'SELECT id, nome, senha, ativo, grupo FROM usuarios';
+    SQL.Text := 'SELECT id, nome, senha, ativo, grupo FROM usuarios WHERE ativo = TRUE';
     Open;
 
     while not Eof do begin

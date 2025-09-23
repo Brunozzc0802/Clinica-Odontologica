@@ -180,11 +180,13 @@ procedure TFormLogin.ImgOlhoFechadoClick(Sender: TObject);
 procedure TFormLogin.pnlConsultasMouseEnter(Sender: TObject);
   begin
     pnlConsultas.Color := $00F78B2B;
+    lblconsultas.Font.Style := lblconsultas.Font.Style + [fsUnderline];
   end;
 
 procedure TFormLogin.pnlConsultasMouseLeave(Sender: TObject);
   begin
     pnlConsultas.Color := $007C3E05;
+    lblconsultas.Font.Style := lblconsultas.Font.Style - [fsUnderline];
   end;
 
 procedure TFormLogin.pnlEncerrarSistemaClick(Sender: TObject);
@@ -203,51 +205,61 @@ end;
 procedure TFormLogin.pnlEncerrarSistemaMouseEnter(Sender: TObject);
   begin
     pnlEncerrarSistema.Color := $00F78B2B;
+    lblEncerrarSistema.Font.Style := lblEncerrarSistema.Font.Style + [fsUnderline];
   end;
 
 procedure TFormLogin.pnlEncerrarSistemaMouseLeave(Sender: TObject);
   begin
     pnlEncerrarSistema.Color := $007C3E05;
+    lblEncerrarSistema.Font.Style := lblEncerrarSistema.Font.Style - [fsUnderline];
   end;
 
 procedure TFormLogin.pnlPacientesMouseEnter(Sender: TObject);
   begin
     pnlPacientes.Color := $00F78B2B;
+    lblPacientes.Font.Style := lblPacientes.Font.Style + [fsUnderline];
   end;
 
 procedure TFormLogin.pnlPacientesMouseLeave(Sender: TObject);
   begin
     pnlPacientes.Color := $007C3E05;
+    lblPacientes.Font.Style := lblPacientes.Font.Style - [fsUnderline];
   end;
 
 procedure TFormLogin.pnlProcedimentosMouseEnter(Sender: TObject);
   begin
     pnlProcedimentos.Color := $00F78B2B;
+    lblProcedimentos.Font.Style := lblProcedimentos.Font.Style + [fsUnderline];
   end;
 
 procedure TFormLogin.pnlProcedimentosMouseLeave(Sender: TObject);
   begin
     pnlProcedimentos.Color := $007C3E05;
+    lblProcedimentos.Font.Style := lblProcedimentos.Font.Style - [fsUnderline];
   end;
 
 procedure TFormLogin.pnlProfissionaisMouseEnter(Sender: TObject);
   begin
     pnlProfissionais.Color := $00F78B2B;
+    lblProfissionais.Font.Style := lblProfissionais.Font.Style + [fsUnderline];
   end;
 
 procedure TFormLogin.pnlProfissionaisMouseLeave(Sender: TObject);
   begin
     pnlProfissionais.Color := $007C3E05;
+    lblProfissionais.Font.Style := lblProfissionais.Font.Style - [fsUnderline];
   end;
 
 procedure TFormLogin.pnlRelatoriosMouseEnter(Sender: TObject);
   begin
     pnlRelatorios.Color := $00F78B2B;
+    lblRelatorios.Font.Style := lblRelatorios.Font.Style + [fsUnderline];
   end;
 
 procedure TFormLogin.pnlRelatoriosMouseLeave(Sender: TObject);
   begin
     pnlRelatorios.Color := $007C3E05;
+    lblRelatorios.Font.Style := lblRelatorios.Font.Style - [fsUnderline];
   end;
 
 procedure TFormLogin.pnlUserClick(Sender: TObject);
@@ -258,11 +270,13 @@ procedure TFormLogin.pnlUserClick(Sender: TObject);
 procedure TFormLogin.pnlUserMouseEnter(Sender: TObject);
   begin
     pnlUser.Color := $00F78B2B;
+    lblUsuarios.Font.Style := lblUsuarios.Font.Style + [fsUnderline];
   end;
 
 procedure TFormLogin.pnlUserMouseLeave(Sender: TObject);
   begin
     pnlUser.Color := $007C3E05;
+    lblUsuarios.Font.Style := lblUsuarios.Font.Style - [fsUnderline];
   end;
 
 procedure TFormLogin.Timer1Timer(Sender: TObject);

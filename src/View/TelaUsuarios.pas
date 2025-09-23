@@ -11,7 +11,6 @@ uses
 type
   TPagUsuarios = class(TForm)
     pnlCabecalho: TPanel;
-    btnXUsuarios: TSpeedButton;
     bordaCabecalhoUsuarios: TPanel;
     lblTituloUsuarios: TLabel;
     pnlBordaBaixoUsuarios: TPanel;
@@ -54,6 +53,8 @@ type
     Label3: TLabel;
     lblConfirmarAlteracoes: TLabel;
     btnConfirmarAlteracoes: TPanel;
+    iconUserTelaUsuarios: TImage;
+    btnXUsuarios: TImage;
     procedure btnXUsuariosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnAddUsuMouseEnter(Sender: TObject);

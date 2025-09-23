@@ -105,24 +105,27 @@ implementation
 procedure TFormLogin.btnEntrarClick(Sender: TObject);
 var
   UserController: TUsuarioController;
+  Msg: string;
 begin
   UserController := TUsuarioController.Create;
-
-  if (edUsuario.Text = '') or (edSenha.Text = '') then begin
-    ShowMessage('Preencha todos os campos');
-    edUsuario.SetFocus;
-    exit;
-  end;
   try
-    if UserController.VerificarUsuario(edUsuario.Text, edSenha.Text) then
+    if (edUsuario.Text = '') or (edSenha.Text = '') then
+    begin
+      ShowMessage('Preencha todos os campos');
+      edUsuario.SetFocus;
+      Exit;
+    end;
+
+    if UserController.VerificarUsuario(edUsuario.Text, edSenha.Text, Msg) then
     begin
       Sleep(300);
       pnlLogin.Visible := False;
       pnlTelaPrincipal.Visible := True;
       pnlFundoLateral.Visible := True;
-      lblBemVindo.Caption := 'Bem Vindo,' + ' ' + edUsuario.Text + '!';
-    end else
-      ShowMessage('Usuário ou senha inválidos.');
+      lblBemVindo.Caption := 'Bem Vindo, ' + edUsuario.Text + '!';
+    end
+    else
+      ShowMessage(Msg);
   finally
     UserController.Free;
   end;

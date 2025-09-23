@@ -9,7 +9,7 @@ uses
 type
   TUsuarioRepository = class
   public
-    class function VerificarUsuario(const Usuario: TUsuario): Boolean;
+    class function VerificarUsuario(const Nome, Senha: string): TUsuario;
     class function ListarTodos: TObjectList<TUsuario>;
     procedure Adicionar(AUsuario: TUsuario);
     procedure Alterar(AUsuario: TUsuario);
@@ -19,17 +19,24 @@ implementation
 
 { TUsuarioRepository }
 
-class function TUsuarioRepository.VerificarUsuario(const Usuario: TUsuario): Boolean;
+class function TUsuarioRepository.VerificarUsuario(const Nome, Senha: string): TUsuario;
 begin
-  Result := False;
+  Result := nil;
   with dmUsuarios.FDQuery1 do begin
     Close;
     SQL.Text := 'SELECT * FROM usuarios WHERE nome = :nome AND senha = :senha';
-    ParamByName('nome').AsString := Usuario.Nome;
-    ParamByName('senha').AsString := Usuario.Senha;
+    ParamByName('nome').AsString := Nome;
+    ParamByName('senha').AsString := Senha;
     Open;
 
-    Result := not IsEmpty;
+    if not IsEmpty then begin
+      Result := TUsuario.Create;
+      Result.Id := FieldByName('id').AsInteger;
+      Result.Nome := FieldByName('nome').AsString;
+      Result.Senha := FieldByName('senha').AsString;
+      Result.Ativo := FieldByName('ativo').AsBoolean;
+      Result.Grupo := FieldByName('grupo').AsString;
+    end;
   end;
 end;
 
@@ -78,8 +85,9 @@ procedure TUsuarioRepository.Alterar(AUsuario: TUsuario);
 begin
   with dmUsuarios.FDQuery1 do begin
     Close;
-    SQL.Text := 'UPDATE usuarios ' + 'SET nome = :nome, senha = :senha, ativo = :ativo, grupo = :grupo ' +
-    'WHERE id = :id';
+    SQL.Text := 'UPDATE usuarios ' +
+                'SET nome = :nome, senha = :senha, ativo = :ativo, grupo = :grupo ' +
+                'WHERE id = :id';
 
     ParamByName('id').AsInteger      := AUsuario.Id;
     ParamByName('nome').AsString     := AUsuario.Nome;

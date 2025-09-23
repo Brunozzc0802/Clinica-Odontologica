@@ -222,32 +222,29 @@ procedure TPagUsuarios.sgUsuariosDrawCell(Sender: TObject; ACol, ARow: LongInt;R
 var
   TextToDraw: string;
   BGColor: TColor;
-begin
-  // Define a cor de fundo dependendo se está selecionado
-  if gdSelected in State then
-    BGColor := clHighlight  // azul padrão do Windows
-  else
-    BGColor := clWindow;    // fundo normal
+  begin
+    if gdSelected in State then begin
+      BGColor := clHighlight
+    end else
+      BGColor := clWindow;
 
   // Preenche o fundo
   sgUsuarios.Canvas.Brush.Color := BGColor;
   sgUsuarios.Canvas.FillRect(Rect);
 
   // Define a cor do texto dependendo se está selecionado
-  if gdSelected in State then
+  if gdSelected in State then begin
     sgUsuarios.Canvas.Font.Color := clHighlightText
-  else
+  end else
     sgUsuarios.Canvas.Font.Color := clWindowText;
 
   // Substitui por * se for a coluna de senha e não for cabeçalho
-  if (ARow > 0) and (ACol = 2) then
+  if (ARow > 0) and (ACol = 2) then begin
     TextToDraw := StringOfChar('*', Length(sgUsuarios.Cells[ACol, ARow]))
-  else
+  end else
     TextToDraw := sgUsuarios.Cells[ACol, ARow];
-
-  // Desenha o texto
-  sgUsuarios.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2, TextToDraw);
-end;
+    sgUsuarios.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2, TextToDraw);
+  end;
 
 //click do botao adicionar usuario\\
 procedure TPagUsuarios.btnAdicionarUsuarioClick(Sender: TObject);

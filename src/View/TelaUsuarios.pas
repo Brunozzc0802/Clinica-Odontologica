@@ -94,6 +94,7 @@ type
     procedure btnConfirmarAlteracoesMouseEnter(Sender: TObject);
     procedure btnConfirmarAlteracoesMouseLeave(Sender: TObject);
   private
+    UsuarioIdalterar: Integer;
     { Private declarations }
   public
     { Public declarations }
@@ -219,51 +220,26 @@ end;
 //click do botao adicionar usuario\\
 procedure TPagUsuarios.btnAdicionarUsuarioClick(Sender: TObject);
 var
-  Ativo: Boolean;
   Controller: TUsuarioController;
 begin
-  // Validações
-  if (edUsuario.Text = '') and (edSenhaUsuario.Text = '') then
-  begin
-    ShowMessage('Preencha os campos nome e senha');
-    Exit;
-  end;
-
-  if (edUsuario.Text = '') then
-  begin
-    ShowMessage('Preencha o campo nome');
-    edUsuario.SetFocus;
-    Exit;
-  end;
-
-  if (edSenhaUsuario.Text = '') then
-  begin
-    ShowMessage('Preencha o campo senha');
-    edSenhaUsuario.SetFocus;
-    Exit;
-  end;
-
-  // Converte ativo (exemplo: índice 0 = Ativo, 1 = Inativo)
-  Ativo := cbAtivo.ItemIndex = 0;
   Controller := TUsuarioController.Create;
   try
-    // Salva no banco
-    Controller.AdicionarUsuario(edUsuario.Text, edSenhaUsuario.Text, cbGrupo.Text, Ativo);
+    Controller.AdicionarUsuario(
+      edUsuario.Text,
+      edSenhaUsuario.Text,
+      cbGrupo.Text,
+      cbAtivo.ItemIndex = 0
+    );
+
+    ShowMessage('Usuário adicionado com sucesso!');
+    CarregarUsuarios;
+    edUsuario.clear;
+    edSenhaUsuario.Clear;
+    cbAtivo.ItemIndex := -1;
+    cbGrupo.ItemIndex := -1;
   finally
     Controller.Free;
   end;
-
-  // Atualiza grid
-  CarregarUsuarios;
-
-  // Limpa formulário
-  edUsuario.Clear;
-  edSenhaUsuario.Clear;
-  cbAtivo.ItemIndex := -1;
-  cbGrupo.ItemIndex := -1;
-  edUsuario.SetFocus;
-
-  ShowMessage('Usuário adicionado com sucesso!');
 end;
 
 
@@ -348,33 +324,32 @@ procedure TPagUsuarios.btnCancelarUsuMouseLeave(Sender: TObject);
 
 procedure TPagUsuarios.btnConfirmarAlteracoesClick(Sender: TObject);
 var
-  linha: Integer;
+  Controller: TUsuarioController;
 begin
-  linha := sgUsuarios.Row; // Pega a linha que está selecionada
-
-  if linha <= 0 then
+  if UsuarioIdalterar = 0 then
   begin
-    ShowMessage('Selecione um usuário para alterar!');
+    ShowMessage('Nenhum usuário selecionado para alterar.');
     Exit;
   end;
+  Controller := TUsuarioController.Create;
+  try
+  Controller.AlterarUsuario(
+      UsuarioIdalterar,
+      edUsuario.Text,
+      edSenhaUsuario.Text,
+      cbGrupo.Text,
+      cbAtivo.ItemIndex = 0
+    );
 
-  showMessage('Alterações feitas com sucesso');
-
-  sgUsuarios.Cells[1, linha] := edUsuario.Text;
-  sgUsuarios.Cells[2, linha] := edSenhaUsuario.Text;
-  sgUsuarios.Cells[3, linha] := cbAtivo.Text;
-  sgUsuarios.Cells[4, linha] := cbGrupo.Text;
-
-  // Limpa o formulário
-  edUsuario.Clear;
-  edSenhaUsuario.Clear;
-  cbAtivo.ItemIndex := -1;
-  cbGrupo.ItemIndex := -1;
-  edUsuario.SetFocus;
-
-
-  btnAlterarNovo.Visible := False;
+    ShowMessage('Usuário alterado com sucesso!');
+    btnAlterarNovo.Visible := False;
+    CarregarUsuarios;
+    pnlFormAddUsuarios.Visible := False;
+  finally
+    Controller.Free;
+  end;
 end;
+
 
 procedure TPagUsuarios.btnConfirmarAlteracoesMouseEnter(Sender: TObject);
   begin
@@ -483,27 +458,37 @@ var
   grupo, ativo: string;
 begin
   linha := sgUsuarios.Row; // Pega a linha selecionada no StringGrid
-  if linha <= 0 then begin
+  if linha <= 0 then
+  begin
     ShowMessage('Selecione um usuário!');
     Exit;
   end;
+
+  // guarda o ID do usuário selecionado (coluna 0)
+  UsuarioIdalterar := StrToIntDef(sgUsuarios.Cells[0, linha], 0);
+
+  // carrega os outros campos
   edUsuario.Text := sgUsuarios.Cells[1, linha];
   edSenhaUsuario.Text := sgUsuarios.Cells[2, linha];
 
   ativo := Trim(sgUsuarios.Cells[3, linha]);
   if cbAtivo.Items.IndexOf(ativo) <> -1 then
     cbAtivo.ItemIndex := cbAtivo.Items.IndexOf(ativo)
-  else begin
+  else
+  begin
     cbAtivo.Items.Add(ativo);
     cbAtivo.ItemIndex := cbAtivo.Items.IndexOf(ativo);
   end;
+
   grupo := Trim(sgUsuarios.Cells[4, linha]);
   if cbGrupo.Items.IndexOf(grupo) <> -1 then
     cbGrupo.ItemIndex := cbGrupo.Items.IndexOf(grupo)
-  else begin
+  else
+  begin
     cbGrupo.Items.Add(grupo);
     cbGrupo.ItemIndex := cbGrupo.Items.IndexOf(grupo);
   end;
+
   // Mostra o painel e os botões
   btnAddNovo.Visible := False;
   btnAlterarNovo.Visible := True;
@@ -511,6 +496,7 @@ begin
   btnAdicionarUsuario.Visible := False;
   pnlFormAddUsuarios.Visible := True;
 end;
+
 
 
 procedure TPagUsuarios.btnAlterarUsuMouseEnter(Sender: TObject);

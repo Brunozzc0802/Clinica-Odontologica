@@ -51,10 +51,19 @@ type
     Label1: TLabel;
     btnAlterarNovo: TPanel;
     Label3: TLabel;
-    lblConfirmarAlteracoes: TLabel;
-    btnConfirmarAlteracoes: TPanel;
     iconUserTelaUsuarios: TImage;
     btnXUsuarios: TImage;
+    btnDeletarNovo: TPanel;
+    Label4: TLabel;
+    pnlRestaurar: TPanel;
+    btnRestaurarNovo: TPanel;
+    Label5: TLabel;
+    btnConfirmarAlteracoes: TPanel;
+    lblConfirmarAlteracoes: TLabel;
+    imgRestore: TImage;
+    Label6: TLabel;
+    imgXrestore: TImage;
+    sgRestore: TStringGrid;
     procedure btnXUsuariosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnAddUsuMouseEnter(Sender: TObject);
@@ -96,6 +105,10 @@ type
     procedure btnConfirmarAlteracoesMouseLeave(Sender: TObject);
     procedure pesquisarUsuarioChange(Sender: TObject);
     procedure btnDeletarUsuClick(Sender: TObject);
+    procedure btnRestaurarUsuClick(Sender: TObject);
+    procedure sgRestoreDrawCell(Sender: TObject; ACol, ARow: LongInt;
+      Rect: TRect; State: TGridDrawState);
+    procedure CarregarInativos;
   private
     UsuarioIdalterar: Integer;
     UsuarioLista: TObjectList<TUsuario>;
@@ -113,7 +126,40 @@ implementation
 {$R *.dfm}
 
 
-//Função que mostra os dados do banco no grid\\
+//função que carrega os inativos\\
+procedure TPagUsuarios.CarregarInativos;
+var
+  Controller: TUsuarioController;
+  I: Integer;
+begin
+  Controller := TUsuarioController.Create;
+  try
+    if Assigned(UsuarioLista) then
+    UsuarioLista.Free;
+    UsuarioLista := Controller.BuscarInativos;
+
+    // Cabeçalho
+    sgRestore.Cells[0, 0] := 'ID';
+    sgRestore.Cells[1, 0] := 'Nome de Usuário';
+    sgRestore.Cells[2, 0] := 'Senha';
+    sgRestore.Cells[3, 0] := 'Ativo';
+    sgRestore.Cells[4, 0] := 'Grupo';
+    sgRestore.RowCount := UsuarioLista.Count + 1;
+
+    for I := 0 to UsuarioLista.Count - 1 do
+    begin
+      sgRestore.Cells[0, I + 1] := IntToStr(UsuarioLista[I].Id);
+      sgRestore.Cells[1, I + 1] := UsuarioLista[I].Nome;
+      sgRestore.Cells[2, I + 1] := UsuarioLista[I].Senha;
+      sgRestore.Cells[3, I + 1] := BoolToStr(UsuarioLista[I].Ativo, True);
+      sgRestore.Cells[4, I + 1] := UsuarioLista[I].Grupo;
+    end;
+  finally
+    Controller.Free;
+  end;
+end;
+
+//Função que busca os usuarios na barra de pesquisa\
 procedure TPagUsuarios.PesquisarUsuarios(const Filtro: string);
 var
   I, Linha: Integer;
@@ -127,7 +173,6 @@ begin
   TextoFiltro := LowerCase(Filtro);
   for I := 0 to UsuarioLista.Count - 1 do begin
     Usuario := UsuarioLista[I];
-    // Se o filtro estiver vazio ou o nome conter o texto
     if (Filtro = '') or (Pos(TextoFiltro, LowerCase(Usuario.Nome)) > 0) then
     begin
       sgUsuarios.RowCount := Linha + 1;
@@ -184,8 +229,7 @@ procedure TPagUsuarios.FormClose(Sender: TObject; var Action: TCloseAction);
     imgLogoUsuarios2.Visible := False;
     imgLogoUsuarios1.Visible := True;
   end;
-
-//criação do formulario\\
+//criação da tela de usuarios\\
 procedure TPagUsuarios.FormCreate(Sender: TObject);
   begin
     pesquisarUsuario.OnChange := pesquisarUsuarioChange;
@@ -194,7 +238,7 @@ procedure TPagUsuarios.FormCreate(Sender: TObject);
     btnAddNovo.Visible := False;
 
   //configurações grid\\
-  sgUsuarios.Cells[0,0] := 'Código';
+  sgUsuarios.Cells[0,0] := 'ID';
   sgUsuarios.Cells[1,0] := 'Nome de Usuário';
   sgUsuarios.Cells[2,0] := 'Senha';
   sgUsuarios.Cells[3,0] := 'Ativo';
@@ -206,19 +250,46 @@ procedure TPagUsuarios.FormCreate(Sender: TObject);
   sgUsuarios.ColWidths[3] := 70;
   sgUsuarios.ColWidths[4] := 127;
   end;
-
 //chama a função para mostrar as informações do banco no grid\\
 procedure TPagUsuarios.FormShow(Sender: TObject);
   begin
     CarregarUsuarios;
   end;
-
+//Barra de pesquisa\\
 procedure TPagUsuarios.pesquisarUsuarioChange(Sender: TObject);
   begin
      PesquisarUsuarios(pesquisarUsuario.Text);
   end;
+//cor de fundo e senha em *\\
+procedure TPagUsuarios.sgRestoreDrawCell(Sender: TObject; ACol, ARow: LongInt;
+  Rect: TRect; State: TGridDrawState);
+var
+  TextToDraw: string;
+  BGColor: TColor;
+  begin
+    if gdSelected in State then begin
+      BGColor := clHighlight
+  end else
+    BGColor := clWindow;
+    sgRestore.Canvas.Brush.Color := BGColor;
+    sgRestore.Canvas.FillRect(Rect);
+  if gdSelected in State then
+    sgRestore.Canvas.Font.Color := clHighlightText
+  else
+    sgRestore.Canvas.Font.Color := clWindowText;
+  if (ARow > 0) and Assigned(UsuarioLista) and (ARow <= UsuarioLista.Count) then
+  begin
+    if ACol = 2 then
+      TextToDraw := StringOfChar('*', Length(sgRestore.Cells[ACol, ARow]))
+    else
+      TextToDraw := sgRestore.Cells[ACol, ARow];
+  end
+  else
+    TextToDraw := sgRestore.Cells[ACol, ARow];
 
-//color de fundo do grid\\
+  sgRestore.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2, TextToDraw);
+end;
+
 procedure TPagUsuarios.sgUsuariosDrawCell(Sender: TObject; ACol, ARow: LongInt;
   Rect: TRect; State: TGridDrawState);
 var
@@ -247,7 +318,6 @@ var
 
   sgUsuarios.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2, TextToDraw);
 end;
-
 //click do botao adicionar usuario\\
 procedure TPagUsuarios.btnAdicionarUsuarioClick(Sender: TObject);
 var
@@ -272,8 +342,6 @@ begin
     Controller.Free;
   end;
 end;
-
-
 //click cancelar adicionar usuario\\
 procedure TPagUsuarios.btnCancelarUsuClick(Sender: TObject);
   begin
@@ -296,13 +364,11 @@ procedure TPagUsuarios.btnCancelarUsuClick(Sender: TObject);
   end;
 
   end;
-
 //botao de X\\
 procedure TPagUsuarios.btnXUsuariosClick(Sender: TObject);
   begin
     Close;
   end;
-
 //comando para quando apertar enter\\
 procedure TPagUsuarios.edUsuarioKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   begin
@@ -311,14 +377,12 @@ procedure TPagUsuarios.edUsuarioKeyDown(Sender: TObject; var Key: Word; Shift: T
       edSenhausuario.setfocus;
     end;
   end;
-
 //Click do botao sair\\
 procedure TPagUsuarios.btnSairUsuClick(Sender: TObject);
   begin
     Sleep(500);
     Close;
   end;
-
 //Click do botao limpar\\
 procedure TPagUsuarios.btnLimparUsuClick(Sender: TObject);
   begin
@@ -328,9 +392,19 @@ procedure TPagUsuarios.btnLimparUsuClick(Sender: TObject);
     cbGrupo.ItemIndex := -1;
     edUsuario.SetFocus;
   end;
-
+//botao de adicionar dos botões laterais\\
 procedure TPagUsuarios.btnAddUsuClick(Sender: TObject);
   begin
+  if (btnAlterarNovo.Visible = True) then begin
+    edUsuario.Clear;
+    edSenhaUsuario.Clear;
+    cbAtivo.ItemIndex := -1;
+    cbGrupo.ItemIndex := -1;
+    edUsuario.SetFocus;
+    sgUsuarios.Row := 0;
+    sgUsuarios.Col := 0;
+    sgUsuarios.SetFocus;
+  end;
     btnAlterarNovo.Visible := false;
     btnConfirmarAlteracoes.Visible := false;
     btnAdicionarUsuario.Visible := True;
@@ -341,25 +415,14 @@ procedure TPagUsuarios.btnAddUsuClick(Sender: TObject);
     imgLogoUsuarios1.Visible := False;
     edUsuario.SetFocus;
   end;
-
-//animação de hover nos botões\\
-procedure TPagUsuarios.btnCancelarUsuMouseEnter(Sender: TObject);
-  begin
-    btnCancelarUsu.Color := $00F78B2B;
-  end;
-
-procedure TPagUsuarios.btnCancelarUsuMouseLeave(Sender: TObject);
-  begin
-    btnCancelarUsu.Color := $007C3E05;
-  end;
-
+//botão de confirmar alterações
 procedure TPagUsuarios.btnConfirmarAlteracoesClick(Sender: TObject);
 var
   Controller: TUsuarioController;
 begin
   if UsuarioIdalterar = 0 then
   begin
-    ShowMessage('Nenhum usuário selecionado para alterar.');
+    ShowMessage('Selecione um Usuário para alterar');
     Exit;
   end;
   Controller := TUsuarioController.Create;
@@ -379,9 +442,125 @@ begin
   finally
     Controller.Free;
   end;
+end;
+//click do botao de deletar usuario\\
+procedure TPagUsuarios.btnDeletarUsuClick(Sender: TObject);
+var
+  LinhaDelet: Integer;
+  Usuario: TUsuario;
+  ControllerDelet: TUsuarioController;
+begin
+  if not Assigned(UsuarioLista) then Exit;
+
+  LinhaDelet := sgUsuarios.Row;
+  if LinhaDelet > 0 then begin
+    Usuario := TUsuario.Create;
+    try
+      Usuario.Id    := StrToInt(sgUsuarios.Cells[0, LinhaDelet]);
+      Usuario.Nome  := sgUsuarios.Cells[1, LinhaDelet];
+      Usuario.Senha := sgUsuarios.Cells[2, LinhaDelet];
+      Usuario.Ativo := True;
+      Usuario.Grupo := sgUsuarios.Cells[4, LinhaDelet];
+
+      ControllerDelet := TUsuarioController.Create;
+      try
+        ControllerDelet.DeletarUsuario(Usuario);
+        CarregarUsuarios;
+        ShowMessage('Usuário deletado com sucesso!');
+      finally
+        ControllerDelet.Free;
+        btnDeletarNovo.Visible := False;
+      end;
+    finally
+      Usuario.Free;
+    end;
+  end
+  else
+    ShowMessage('Selecione um usuário para deletar.');
+end;
+//Click do botao de pesquisar\\
+procedure TPagUsuarios.btnPesquisarUsuClick(Sender: TObject);
+begin
+  btnAddNovo.Visible := False;
+  btnNovoPesquisar.Visible := True;
+  pnlFormAddUsuarios.Visible := false;
+  imgLogoUsuarios2.Visible := false;
+  imgLogoUsuarios1.Visible := True;
+
+  if not pesquisarUsuario.Visible then begin
+    pesquisarUsuario.Visible := True;
+    sgUsuarios.Top := pesquisarUsuario.Top + pesquisarUsuario.Height + 8;
+    sgUsuarios.Height := sgUsuarios.Height - (pesquisarUsuario.Height + 8);
+    pesquisarUsuario.SetFocus;
+  end;
+end;
+//click do botao de alterar\\
+procedure TPagUsuarios.btnAlterarUsuClick(Sender: TObject);
+var
+  linha: Integer;
+  grupo, ativo: string;
+begin
+  linha := sgUsuarios.Row; // Pega a linha selecionada no StringGrid
+  if linha <= 0 then
+  begin
+    ShowMessage('Selecione um usuário!');
+    Exit;
+  end;
+  UsuarioIdalterar := StrToIntDef(sgUsuarios.Cells[0, linha], 0);
+  edUsuario.Text := sgUsuarios.Cells[1, linha];
+  edSenhaUsuario.Text := sgUsuarios.Cells[2, linha];
+  ativo := Trim(sgUsuarios.Cells[3, linha]);
+  if cbAtivo.Items.IndexOf(ativo) <> -1 then begin
+    cbAtivo.ItemIndex := cbAtivo.Items.IndexOf(ativo)
+  end else begin
+    cbAtivo.Items.Add(ativo);
+    cbAtivo.ItemIndex := cbAtivo.Items.IndexOf(ativo);
+  end;
+  grupo := Trim(sgUsuarios.Cells[4, linha]);
+  if cbGrupo.Items.IndexOf(grupo) <> -1 then begin
+    cbGrupo.ItemIndex := cbGrupo.Items.IndexOf(grupo)
+  end else begin
+    cbGrupo.Items.Add(grupo);
+    cbGrupo.ItemIndex := cbGrupo.Items.IndexOf(grupo);
   end;
 
+  btnAddNovo.Visible := False;
+  btnAlterarNovo.Visible := True;
+  btnConfirmarAlteracoes.Visible := True;
+  btnAdicionarUsuario.Visible := False;
+  pnlFormAddUsuarios.Visible := True;
+end;
+//Click do botao de restaurar\\
+procedure TPagUsuarios.btnRestaurarUsuClick(Sender: TObject);
+  begin
+    CarregarInativos;
+    btnRestaurarNovo.Visible := True;
+    pnlRestaurar.Visible := True;
 
+    sgRestore.Cells[0,0] := 'Cod';
+    sgRestore.Cells[1,0] := 'Nome de Usuário';
+    sgRestore.Cells[2,0] := 'Senha';
+    sgRestore.Cells[3,0] := 'Ativo';
+    sgRestore.Cells[4,0] := 'Grupo';
+
+    sgRestore.ColWidths[0] := 40;
+    sgRestore.ColWidths[1] := 110;
+    sgRestore.ColWidths[2] := 85;
+    sgRestore.ColWidths[3] := 65;
+    sgRestore.ColWidths[4] := 93;
+
+  end;
+
+//ANIMAÇÃO DE HOVER NOS BOTÕES\\
+procedure TPagUsuarios.btnCancelarUsuMouseEnter(Sender: TObject);
+  begin
+    btnCancelarUsu.Color := $00F78B2B;
+  end;
+
+procedure TPagUsuarios.btnCancelarUsuMouseLeave(Sender: TObject);
+  begin
+    btnCancelarUsu.Color := $007C3E05;
+  end;
 
 procedure TPagUsuarios.btnConfirmarAlteracoesMouseEnter(Sender: TObject);
   begin
@@ -392,40 +571,6 @@ procedure TPagUsuarios.btnConfirmarAlteracoesMouseLeave(Sender: TObject);
   begin
     btnConfirmarAlteracoes.Color := $007C3E05;
   end;
-
-procedure TPagUsuarios.btnDeletarUsuClick(Sender: TObject);
-var
-  Linha: Integer;
-  Usuario: TUsuario;
-  Controller: TUsuarioController;
-begin
-  if not Assigned(UsuarioLista) then Exit;
-
-  Linha := sgUsuarios.Row;
-  if Linha > 0 then begin
-    Usuario := TUsuario.Create;
-    try
-      Usuario.Id    := StrToInt(sgUsuarios.Cells[0, Linha]);
-      Usuario.Nome  := sgUsuarios.Cells[1, Linha];
-      Usuario.Senha := sgUsuarios.Cells[2, Linha];
-      Usuario.Ativo := True;
-      Usuario.Grupo := sgUsuarios.Cells[4, Linha];
-
-      Controller := TUsuarioController.Create;
-      try
-        Controller.DeletarUsuario(Usuario);
-        CarregarUsuarios;
-        ShowMessage('Usuário deletado com sucesso!');
-      finally
-        Controller.Free;
-      end;
-    finally
-      Usuario.Free;
-    end;
-  end
-  else
-    ShowMessage('Selecione um usuário para deletar.');
-end;
 
 procedure TPagUsuarios.btnDeletarUsuMouseEnter(Sender: TObject);
   begin
@@ -456,22 +601,6 @@ procedure TPagUsuarios.btnPermissoesMouseLeave(Sender: TObject);
   begin
     btnPermissoes.Color :=  $007C3E05;
   end;
-
-procedure TPagUsuarios.btnPesquisarUsuClick(Sender: TObject);
-begin
-  btnAddNovo.Visible := False;
-  btnNovoPesquisar.Visible := True;
-  pnlFormAddUsuarios.Visible := false;
-  imgLogoUsuarios2.Visible := false;
-  imgLogoUsuarios1.Visible := True;
-
-  if not pesquisarUsuario.Visible then begin
-    pesquisarUsuario.Visible := True;
-    sgUsuarios.Top := pesquisarUsuario.Top + pesquisarUsuario.Height + 8;
-    sgUsuarios.Height := sgUsuarios.Height - (pesquisarUsuario.Height + 8);
-    pesquisarUsuario.SetFocus;
-  end;
-end;
 
 procedure TPagUsuarios.btnPesquisarUsuMouseEnter(Sender: TObject);
   begin
@@ -512,53 +641,6 @@ procedure TPagUsuarios.btnAdicionarUsuarioMouseLeave(Sender: TObject);
   begin
     btnAdicionarUsuario.Color := $007C3E05;
   end;
-
-procedure TPagUsuarios.btnAlterarUsuClick(Sender: TObject);
-var
-  linha: Integer;
-  grupo, ativo: string;
-begin
-  linha := sgUsuarios.Row; // Pega a linha selecionada no StringGrid
-  if linha <= 0 then
-  begin
-    ShowMessage('Selecione um usuário!');
-    Exit;
-  end;
-
-  // guarda o ID do usuário selecionado (coluna 0)
-  UsuarioIdalterar := StrToIntDef(sgUsuarios.Cells[0, linha], 0);
-
-  // carrega os outros campos
-  edUsuario.Text := sgUsuarios.Cells[1, linha];
-  edSenhaUsuario.Text := sgUsuarios.Cells[2, linha];
-
-  ativo := Trim(sgUsuarios.Cells[3, linha]);
-  if cbAtivo.Items.IndexOf(ativo) <> -1 then
-    cbAtivo.ItemIndex := cbAtivo.Items.IndexOf(ativo)
-  else
-  begin
-    cbAtivo.Items.Add(ativo);
-    cbAtivo.ItemIndex := cbAtivo.Items.IndexOf(ativo);
-  end;
-
-  grupo := Trim(sgUsuarios.Cells[4, linha]);
-  if cbGrupo.Items.IndexOf(grupo) <> -1 then
-    cbGrupo.ItemIndex := cbGrupo.Items.IndexOf(grupo)
-  else
-  begin
-    cbGrupo.Items.Add(grupo);
-    cbGrupo.ItemIndex := cbGrupo.Items.IndexOf(grupo);
-  end;
-
-  // Mostra o painel e os botões
-  btnAddNovo.Visible := False;
-  btnAlterarNovo.Visible := True;
-  btnConfirmarAlteracoes.Visible := True;
-  btnAdicionarUsuario.Visible := False;
-  pnlFormAddUsuarios.Visible := True;
-end;
-
-
 
 procedure TPagUsuarios.btnAlterarUsuMouseEnter(Sender: TObject);
   begin

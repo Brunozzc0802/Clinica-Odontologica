@@ -11,6 +11,7 @@ type
   public
     class function VerificarUsuario(const Nome, Senha: string): TUsuario;
     class function ListarTodos: TObjectList<TUsuario>;
+    class function ListarInativos: TObjectList<TUsuario>;
     procedure Adicionar(AUsuario: TUsuario);
     procedure Alterar(AUsuario: TUsuario);
   end;
@@ -36,6 +37,30 @@ begin
       Result.Senha := FieldByName('senha').AsString;
       Result.Ativo := FieldByName('ativo').AsBoolean;
       Result.Grupo := FieldByName('grupo').AsString;
+    end;
+  end;
+end;
+
+class function TUsuarioRepository.ListarInativos: TObjectList<TUsuario>;
+var
+  Usuario: TUsuario;
+begin
+  Result := TObjectList<TUsuario>.Create(True);
+  with dmUsuarios.FDQuery1 do begin
+    Close;
+    SQL.Text := 'SELECT id, nome, senha, ativo, grupo FROM usuarios WHERE ativo = FALSE';
+    Open;
+
+    while not Eof do begin
+      Usuario := TUsuario.Create;
+      Usuario.Id    := FieldByName('id').AsInteger;
+      Usuario.Nome  := FieldByName('nome').AsString;
+      Usuario.Senha := FieldByName('senha').AsString;
+      Usuario.Ativo := FieldByName('ativo').AsBoolean;
+      Usuario.Grupo := FieldByName('grupo').AsString;
+
+      Result.Add(Usuario);
+      Next;
     end;
   end;
 end;

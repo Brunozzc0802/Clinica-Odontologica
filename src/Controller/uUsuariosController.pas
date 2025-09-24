@@ -10,6 +10,7 @@ type
   public
     function VerificarUsuario(const Nome, Senha: string; out Msg: string): Boolean;
     function BuscarTodos: TObjectList<TUsuario>;
+    function BuscarInativos: TObjectList<TUsuario>;
     procedure AdicionarUsuario(const Nome, Senha, Grupo: string; Ativo: Boolean);
     procedure AlterarUsuario(const Id: Integer; const Nome, Senha, Grupo: string; Ativo: Boolean);
     procedure DeletarUsuario(AUsuario: TUsuario);
@@ -42,6 +43,11 @@ begin
   Msg := 'Login bem-sucedido!';
   Usuario.Free;
 end;
+
+function TUsuarioController.BuscarInativos: TObjectList<TUsuario>;
+  begin
+    Result := TUsuarioRepository.ListarInativos;
+  end;
 
 function TUsuarioController.BuscarTodos: TObjectList<TUsuario>;
 begin

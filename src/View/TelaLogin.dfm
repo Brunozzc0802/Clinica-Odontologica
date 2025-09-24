@@ -2,7 +2,7 @@ object FormLogin: TFormLogin
   Left = 0
   Top = 0
   Caption = 'FormLogin'
-  ClientHeight = 865
+  ClientHeight = 876
   ClientWidth = 1157
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -19,17 +19,18 @@ object FormLogin: TFormLogin
     Left = 0
     Top = 0
     Width = 1157
-    Height = 865
+    Height = 876
     Align = alClient
     TabOrder = 0
+    ExplicitHeight = 865
     DesignSize = (
       1157
-      865)
+      876)
     object imgFundo: TImage
       Left = 678
       Top = 1
       Width = 478
-      Height = 863
+      Height = 874
       Align = alRight
       Picture.Data = {
         0A544A504547496D61676516630000FFD8FFE000104A46494600010100004800
@@ -828,24 +829,26 @@ object FormLogin: TFormLogin
         000007FFD9}
       ExplicitLeft = 684
       ExplicitTop = -2
+      ExplicitHeight = 863
     end
     object pnlAzul: TPanel
       Left = 1
       Top = 1
       Width = 677
-      Height = 863
+      Height = 874
       Align = alClient
       Color = 13204758
       ParentBackground = False
       TabOrder = 0
+      ExplicitHeight = 863
       DesignSize = (
         677
-        863)
+        874)
       object imgLogoLogin: TImage
         Left = 124
         Top = 259
         Width = 318
-        Height = 291
+        Height = 302
         Anchors = [akLeft, akTop, akRight, akBottom]
         Center = True
         Picture.Data = {
@@ -2563,6 +2566,7 @@ object FormLogin: TFormLogin
           C8312891935F8E1C39062572F2CB9123C7A0444E7E3972E41894C8C92F478E1C
           831239F9E5C89163502227BF1C39720C4AE4E49723478E41899CFC72E4C83128
           91935F8E1C390625FE3FF554A820DEE964570000000049454E44AE426082}
+        ExplicitHeight = 291
       end
     end
     object bordaDoForm: TPanel
@@ -3333,34 +3337,36 @@ object FormLogin: TFormLogin
     Left = 0
     Top = 0
     Width = 1157
-    Height = 865
+    Height = 876
     Align = alClient
     TabOrder = 1
     Visible = False
+    ExplicitHeight = 865
     DesignSize = (
       1157
-      865)
+      876)
     object pnlAzulPrincipal: TPanel
       AlignWithMargins = True
       Left = 279
       Top = 2
       Width = 874
-      Height = 859
+      Height = 870
       Margins.Left = 278
       Margins.Top = 1
       Align = alClient
       Color = 13204758
       ParentBackground = False
       TabOrder = 0
+      ExplicitHeight = 859
       DesignSize = (
         874
-        859)
+        870)
       object imgLogoPrincipal: TImage
         AlignWithMargins = True
         Left = 101
         Top = 51
         Width = 722
-        Height = 757
+        Height = 768
         Margins.Left = 100
         Margins.Top = 50
         Margins.Right = 50
@@ -5084,10 +5090,11 @@ object FormLogin: TFormLogin
           91935F8E1C390625FE3FF554A820DEE964570000000049454E44AE426082}
         ExplicitLeft = 96
         ExplicitWidth = 725
+        ExplicitHeight = 757
       end
       object footerPrincipal: TPanel
         Left = 0
-        Top = 825
+        Top = 836
         Width = 877
         Height = 41
         Anchors = [akLeft, akRight, akBottom]
@@ -5096,6 +5103,7 @@ object FormLogin: TFormLogin
         Color = 8142341
         ParentBackground = False
         TabOrder = 0
+        ExplicitTop = 825
         object lblBemVindo: TLabel
           Left = 30
           Top = 7
@@ -5133,18 +5141,19 @@ object FormLogin: TFormLogin
       Left = 4
       Top = 2
       Width = 273
-      Height = 859
+      Height = 870
       Anchors = [akLeft, akTop, akBottom]
       Color = 8142341
       ParentBackground = False
       TabOrder = 1
       Visible = False
+      ExplicitHeight = 859
       object linhaUsuarios: TLabel
         AlignWithMargins = True
         Left = 2
         Top = 66
         Width = 269
-        Height = 12
+        Height = 23
         Margins.Left = 1
         Margins.Top = 65
         Margins.Right = 1
@@ -5167,7 +5176,7 @@ object FormLogin: TFormLogin
         Left = 2
         Top = 148
         Width = 269
-        Height = 40
+        Height = 51
         Margins.Left = 1
         Margins.Top = 147
         Margins.Right = 1
@@ -5190,7 +5199,7 @@ object FormLogin: TFormLogin
         Left = 2
         Top = 320
         Width = 269
-        Height = 48
+        Height = 59
         Margins.Left = 1
         Margins.Top = 319
         Margins.Right = 1
@@ -5213,7 +5222,7 @@ object FormLogin: TFormLogin
         Left = 2
         Top = 401
         Width = 269
-        Height = 37
+        Height = 48
         Margins.Left = 1
         Margins.Top = 400
         Margins.Right = 1
@@ -5236,7 +5245,7 @@ object FormLogin: TFormLogin
         Left = 2
         Top = 481
         Width = 269
-        Height = 47
+        Height = 58
         Margins.Left = 1
         Margins.Top = 480
         Margins.Right = 1
@@ -5259,7 +5268,7 @@ object FormLogin: TFormLogin
         Left = 2
         Top = 556
         Width = 269
-        Height = 22
+        Height = 33
         Margins.Left = 1
         Margins.Top = 555
         Margins.Right = 1
@@ -5282,7 +5291,7 @@ object FormLogin: TFormLogin
         Left = 2
         Top = 232
         Width = 269
-        Height = 46
+        Height = 57
         Margins.Left = 1
         Margins.Top = 231
         Margins.Right = 1

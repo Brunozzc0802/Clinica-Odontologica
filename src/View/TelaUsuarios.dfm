@@ -1,6 +1,6 @@
 object PagUsuarios: TPagUsuarios
-  Left = 694
-  Top = 187
+  Left = 592
+  Top = 208
   BorderStyle = bsNone
   Caption = 'Usu'#225'rios'
   ClientHeight = 645
@@ -41,7 +41,6 @@ object PagUsuarios: TPagUsuarios
       Color = 11293958
       ParentBackground = False
       TabOrder = 0
-      ExplicitTop = 1
       object lblTituloUsuarios: TLabel
         Left = 36
         Top = 7
@@ -2521,6 +2520,104 @@ object PagUsuarios: TPagUsuarios
       Visible = False
       OnChange = pesquisarUsuarioChange
     end
+    object pnlRestaurar: TPanel
+      Left = 64
+      Top = 136
+      Width = 409
+      Height = 273
+      BevelOuter = bvNone
+      Color = 8142341
+      ParentBackground = False
+      TabOrder = 2
+      Visible = False
+      object imgRestore: TImage
+        Left = 4
+        Top = 4
+        Width = 24
+        Height = 24
+        Picture.Data = {
+          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000180000
+          00180806000000E0773DF8000000097048597300000EC300000EC301C76FA864
+          0000001974455874536F667477617265007777772E696E6B73636170652E6F72
+          679BEE3C1A000002614944415478DAAD96CB4B555114C6F7CE127212595982D1
+          4013442535BA5113B1493909830611EA44ED31692C6A044DEE1F205883A2490D
+          1AE5A30649A2137B38D040F381A548F43052A1220762B7DFE2ACC33D6EBDE71E
+          1F0B3EBE7BD6EB3BEE7DF6DA5AA39648242C5406E6ACB58B2660C432A063E010
+          5801DFC03C79FF4C1AB3812671A819FC0085E037B8009A4015D8E7D42E8017E0
+          0942BD510406A1B3FA7813348293E9DE50AD1FDC42682C4CE0357426A4C957F0
+          19EC017920C789FF017588746E46E02F68070F299C76F6E504D400AE834C75CB
+          9E5C22B73BAAC01418076D148D6FF467515704C95B17AA4BF6EE34F913617BE0
+          DA530AAEA45A3B6A0F406FC07175F5927FDE15B80BDD4ED1A3858278C8FE487D
+          3134A27B24768E9A7EEB245540D94EED0289232682517F0FBAA18F0FA86BB251
+          0AA31A02A7A0217D94837864A705A4DF92491ECA6CAB8156A81CDC41F5C33645
+          46A1127D2CB53864FEF86BDC83C0C56D0AC8692E0E0AE4F3E3A33ABE2090B7A3
+          4B847397F10E47963AF31199D9A2400C7AA78FDFE993EBEFC133A8460371022D
+          5B14B86FBCD12196FC4C09C8BA776940E64F09C1D94D362F8586C16E7555D163
+          C017906592A31ED3E07B5049C2AF88CD6554BC0505EA7A49ADDC256B4645858A
+          6406442E93F8294D73F9626489FD3924FB19A36E728D80265F851E07FCCBA003
+          3C72CF07B9726E645C5F33C9F923E3BA86DC1E3F6FDD49A6B01E92CDDAEB84E6
+          8D77E1C8FD7C141C74E2F2E6B5C1BB6043011529D3370FBBE182F6CA7857E684
+          1B089D4508554375C6BBFCF73BE19FE0B92C298DFB52F58834EC10924FEF30C8
+          05AB26F96F4B225DED7F214AE087369802B20000000049454E44AE426082}
+      end
+      object Label6: TLabel
+        AlignWithMargins = True
+        Left = 32
+        Top = 6
+        Width = 58
+        Height = 17
+        Cursor = crHandPoint
+        Margins.Left = 35
+        Margins.Top = 10
+        Margins.Right = 35
+        Margins.Bottom = 10
+        Alignment = taCenter
+        Caption = 'Restaurar'
+        Color = clCream
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        OnMouseEnter = btnRestaurarUsuMouseEnter
+        OnMouseLeave = btnRestaurarUsuMouseLeave
+      end
+      object imgXrestore: TImage
+        Left = 385
+        Top = 7
+        Width = 16
+        Height = 16
+        Cursor = crHandPoint
+        Picture.Data = {
+          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
+          001008060000001FF3FF61000000097048597300000EC300000EC301C76FA864
+          0000001974455874536F667477617265007777772E696E6B73636170652E6F72
+          679BEE3C1A000001014944415478DA8D92210B0241108577B22282560D163169
+          B52A88184C16FFA141934550412C16412CB62BD74550C42078BE394618CE9DD5
+          81C7CDEDECFB766FE6284992AA736E0AE5A131111D5D20B0BF89C704BA4123C2
+          C201494BEA67A86B41C4BC864AB27460408CA4A2F679211E3347CC8036920554
+          B02086F90AF54936F82017A8073DA1155456B53B34C0015B5257F441F8941754
+          F499F98554C18238CBFC0550902594CB941EE9372BB305E0866D32D7E6E0B977
+          00D89B0031671BA6236DAC86D00FF3439A98B3201430A70D93317A47CC100A99
+          3F0D0BFD270C8890D454E12ADDDEFD31E2880127248D9039003931A08E642E8D
+          1A59E60C6426631DBE013A6F900B7B89246D0000000049454E44AE426082}
+        OnClick = btnXUsuariosClick
+      end
+      object sgRestore: TStringGrid
+        Left = 4
+        Top = 33
+        Width = 401
+        Height = 236
+        DefaultColWidth = 78
+        FixedCols = 0
+        RowCount = 1
+        FixedRows = 0
+        TabOrder = 0
+        OnDrawCell = sgRestoreDrawCell
+      end
+    end
   end
   object pnlBordaBaixoUsuarios: TPanel
     Left = 2
@@ -2821,6 +2918,47 @@ object PagUsuarios: TPagUsuarios
         ExplicitWidth = 45
         ExplicitHeight = 17
       end
+      object btnDeletarNovo: TPanel
+        Left = 0
+        Top = 0
+        Width = 137
+        Height = 41
+        Cursor = crHandPoint
+        Color = 16223019
+        ParentBackground = False
+        TabOrder = 0
+        Visible = False
+        OnClick = btnDeletarUsuClick
+        OnMouseEnter = btnDeletarUsuMouseEnter
+        OnMouseLeave = btnDeletarUsuMouseLeave
+        object Label4: TLabel
+          AlignWithMargins = True
+          Left = 36
+          Top = 11
+          Width = 65
+          Height = 19
+          Cursor = crHandPoint
+          Margins.Left = 35
+          Margins.Top = 10
+          Margins.Right = 35
+          Margins.Bottom = 10
+          Align = alClient
+          Alignment = taCenter
+          Caption = 'Deletar'
+          Color = clCream
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          OnMouseEnter = btnDeletarUsuMouseEnter
+          OnMouseLeave = btnDeletarUsuMouseLeave
+          ExplicitWidth = 45
+          ExplicitHeight = 17
+        end
+      end
     end
     object btnCancelarUsu: TPanel
       Left = 8
@@ -2872,6 +3010,7 @@ object PagUsuarios: TPagUsuarios
       Color = 8142341
       ParentBackground = False
       TabOrder = 5
+      OnClick = btnRestaurarUsuClick
       OnMouseEnter = btnRestaurarUsuMouseEnter
       OnMouseLeave = btnRestaurarUsuMouseLeave
       object lblRestaurar: TLabel
@@ -2900,6 +3039,47 @@ object PagUsuarios: TPagUsuarios
         OnMouseLeave = btnRestaurarUsuMouseLeave
         ExplicitWidth = 58
         ExplicitHeight = 17
+      end
+      object btnRestaurarNovo: TPanel
+        Left = 0
+        Top = 0
+        Width = 137
+        Height = 41
+        Cursor = crHandPoint
+        Color = 16223019
+        ParentBackground = False
+        TabOrder = 0
+        Visible = False
+        OnClick = btnRestaurarUsuClick
+        OnMouseEnter = btnRestaurarUsuMouseEnter
+        OnMouseLeave = btnRestaurarUsuMouseLeave
+        object Label5: TLabel
+          AlignWithMargins = True
+          Left = 36
+          Top = 11
+          Width = 65
+          Height = 19
+          Cursor = crHandPoint
+          Margins.Left = 35
+          Margins.Top = 10
+          Margins.Right = 35
+          Margins.Bottom = 10
+          Align = alClient
+          Alignment = taCenter
+          Caption = 'Restaurar'
+          Color = clCream
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          OnClick = btnRestaurarUsuClick
+          OnMouseEnter = btnRestaurarUsuMouseEnter
+          OnMouseLeave = btnRestaurarUsuMouseLeave
+          ExplicitTop = 15
+        end
       end
     end
     object btnPermissoes: TPanel
@@ -3107,6 +3287,7 @@ object PagUsuarios: TPagUsuarios
       OnClick = btnAdicionarUsuarioClick
       OnMouseEnter = btnAdicionarUsuarioMouseEnter
       OnMouseLeave = btnAdicionarUsuarioMouseLeave
+      ExplicitTop = 66
       object lblAdicionarUsuario: TLabel
         AlignWithMargins = True
         Left = 221
@@ -3154,6 +3335,8 @@ object PagUsuarios: TPagUsuarios
       OnClick = btnConfirmarAlteracoesClick
       OnMouseEnter = btnConfirmarAlteracoesMouseEnter
       OnMouseLeave = btnConfirmarAlteracoesMouseLeave
+      ExplicitLeft = 18
+      ExplicitTop = 73
       object lblConfirmarAlteracoes: TLabel
         AlignWithMargins = True
         Left = 191

@@ -7,13 +7,15 @@ uses
   uUsuarios in '..\src\Model\uUsuarios.pas',
   uUsuarioConexao in '..\src\Model\uUsuarioConexao.pas' {dmUsuarios: TDataModule},
   uUsuariosController in '..\src\Controller\uUsuariosController.pas',
-  uUsuarioRepository in '..\src\Repository\uUsuarioRepository.pas';
+  uUsuarioRepository in '..\src\Repository\uUsuarioRepository.pas',
+  TelaPacientes in '..\src\View\TelaPacientes.pas' {PagPacientes};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TPagPacientes, PagPacientes);
   Application.CreateForm(TPagUsuarios, PagUsuarios);
   Application.CreateForm(TFormLogin, FormLogin);
   Application.CreateForm(TdmUsuarios, dmUsuarios);

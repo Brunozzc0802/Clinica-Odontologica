@@ -141,6 +141,10 @@
         </DCCReference>
         <DCCReference Include="..\src\Controller\uUsuariosController.pas"/>
         <DCCReference Include="..\src\Repository\uUsuarioRepository.pas"/>
+        <DCCReference Include="..\src\View\TelaPacientes.pas">
+            <Form>PagPacientes</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

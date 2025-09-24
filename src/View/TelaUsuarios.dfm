@@ -103,7 +103,7 @@ object PagUsuarios: TPagUsuarios
   end
   object pnlAzulPrincipal: TPanel
     AlignWithMargins = True
-    Left = 2
+    Left = 1
     Top = 41
     Width = 698
     Height = 649
@@ -2499,7 +2499,7 @@ object PagUsuarios: TPagUsuarios
       Stretch = True
     end
     object sgUsuarios: TStringGrid
-      Left = 8
+      Left = 9
       Top = 6
       Width = 525
       Height = 442
@@ -2532,38 +2532,31 @@ object PagUsuarios: TPagUsuarios
       Visible = False
       object imgRestore: TImage
         Left = 4
-        Top = 4
-        Width = 24
-        Height = 24
+        Top = 8
+        Width = 17
+        Height = 17
         Picture.Data = {
-          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000180000
-          00180806000000E0773DF8000000097048597300000EC300000EC301C76FA864
+          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
+          001008060000001FF3FF61000000097048597300000EC300000EC301C76FA864
           0000001974455874536F667477617265007777772E696E6B73636170652E6F72
-          679BEE3C1A000002614944415478DAAD96CB4B555114C6F7CE127212595982D1
-          4013442535BA5113B1493909830611EA44ED31692C6A044DEE1F205883A2490D
-          1AE5A30649A2137B38D040F381A548F43052A1220762B7DFE2ACC33D6EBDE71E
-          1F0B3EBE7BD6EB3BEE7DF6DA5AA39648242C5406E6ACB58B2660C432A063E010
-          5801DFC03C79FF4C1AB3812671A819FC0085E037B8009A4015D8E7D42E8017E0
-          0942BD510406A1B3FA7813348293E9DE50AD1FDC42682C4CE0357426A4C957F0
-          19EC017920C789FF017588746E46E02F68070F299C76F6E504D400AE834C75CB
-          9E5C22B73BAAC01418076D148D6FF467515704C95B17AA4BF6EE34F913617BE0
-          DA530AAEA45A3B6A0F406FC07175F5927FDE15B80BDD4ED1A3858278C8FE487D
-          3134A27B24768E9A7EEB245540D94EED0289232682517F0FBAA18F0FA86BB251
-          0AA31A02A7A0217D94837864A705A4DF92491ECA6CAB8156A81CDC41F5C33645
-          46A1127D2CB53864FEF86BDC83C0C56D0AC8692E0E0AE4F3E3A33ABE2090B7A3
-          4B847397F10E47963AF31199D9A2400C7AA78FDFE993EBEFC133A8460371022D
-          5B14B86FBCD12196FC4C09C8BA776940E64F09C1D94D362F8586C16E7555D163
-          C017906592A31ED3E07B5049C2AF88CD6554BC0505EA7A49ADDC256B4645858A
-          6406442E93F8294D73F9626489FD3924FB19A36E728D80265F851E07FCCBA003
-          3C72CF07B9726E645C5F33C9F923E3BA86DC1E3F6FDD49A6B01E92CDDAEB84E6
-          8D77E1C8FD7C141C74E2F2E6B5C1BB6043011529D3370FBBE182F6CA7857E684
-          1B089D4508554375C6BBFCF73BE19FE0B92C298DFB52F58834EC10924FEF30C8
-          05AB26F96F4B225DED7F214AE087369802B20000000049454E44AE426082}
+          679BEE3C1A000001744944415478DA9D92CD2B84511487EFCD476445C68692D5
+          E423564636C8465136A4AC849585B190951AA664C1CAC84A585851B66C28FC01
+          0A25168C64E923B231643CA7F7BC7ADD4CA6B9F5F4BB1FE7FEEE3DF71E6B68E9
+          743A84F4C1B6B5F649C71D50031F7007FBACBD18A7593588217158840A188442
+          2736056B10C3E8C1359843A603C15F7008177A834668877C4842372697990C3E
+          611326097AF61D8909231BD00A37D02CE9BA2904DB2801EBC109E28AF4662DB0
+          CC7AD4372847C6A04463DF6025788380491D72A6A985ACC9A1617284B441AF65
+          5046A71F7638F1314B8325242A88C1149D0598C5209EA5410219F70D06E86CC1
+          2E063DB9A4205577AF5F1AC624F9CFE67AE4F4D7233229DF35AC5FD485492AC3
+          E6628D894082B809DF40CAF7042AE1184658BC7636D71AAF90A406642DF25348
+          1AD080EC41955E4F4E3AD7D49A8C57CA79C6AB4229E52BA38BC153E43DE66108
+          0A9C0CDE611566E4647FF2CF42C2A814E9846A19C22D1CB0F1D58DFD060FCA98
+          8BD8B5066A0000000049454E44AE426082}
       end
       object Label6: TLabel
         AlignWithMargins = True
-        Left = 32
-        Top = 6
+        Left = 24
+        Top = 7
         Width = 58
         Height = 17
         Cursor = crHandPoint
@@ -2607,7 +2600,7 @@ object PagUsuarios: TPagUsuarios
       end
       object sgRestore: TStringGrid
         Left = 4
-        Top = 33
+        Top = 37
         Width = 401
         Height = 232
         DefaultColWidth = 78
@@ -2619,9 +2612,10 @@ object PagUsuarios: TPagUsuarios
       end
       object btnCRestore: TPanel
         Left = 4
-        Top = 271
+        Top = 273
         Width = 401
-        Height = 31
+        Height = 30
+        Cursor = crHandPoint
         BevelOuter = bvNone
         Color = 16223019
         ParentBackground = False
@@ -2629,15 +2623,15 @@ object PagUsuarios: TPagUsuarios
         OnClick = btnCRestoreClick
         object lblRestore: TLabel
           AlignWithMargins = True
-          Left = 35
+          Left = 1
           Top = 5
-          Width = 331
-          Height = 16
+          Width = 399
+          Height = 24
           Cursor = crHandPoint
-          Margins.Left = 35
+          Margins.Left = 1
           Margins.Top = 5
-          Margins.Right = 35
-          Margins.Bottom = 10
+          Margins.Right = 1
+          Margins.Bottom = 1
           Align = alClient
           Alignment = taCenter
           Caption = 'Restaurar'
@@ -2652,7 +2646,8 @@ object PagUsuarios: TPagUsuarios
           OnClick = btnCRestoreClick
           OnMouseEnter = btnRestaurarUsuMouseEnter
           OnMouseLeave = btnRestaurarUsuMouseLeave
-          ExplicitTop = 8
+          ExplicitWidth = 58
+          ExplicitHeight = 17
         end
       end
     end
@@ -3116,7 +3111,8 @@ object PagUsuarios: TPagUsuarios
           OnClick = btnRestaurarUsuClick
           OnMouseEnter = btnRestaurarUsuMouseEnter
           OnMouseLeave = btnRestaurarUsuMouseLeave
-          ExplicitTop = 15
+          ExplicitWidth = 58
+          ExplicitHeight = 17
         end
       end
     end
@@ -3325,7 +3321,6 @@ object PagUsuarios: TPagUsuarios
       OnClick = btnAdicionarUsuarioClick
       OnMouseEnter = btnAdicionarUsuarioMouseEnter
       OnMouseLeave = btnAdicionarUsuarioMouseLeave
-      ExplicitTop = 66
       object lblAdicionarUsuario: TLabel
         AlignWithMargins = True
         Left = 221
@@ -3373,8 +3368,6 @@ object PagUsuarios: TPagUsuarios
       OnClick = btnConfirmarAlteracoesClick
       OnMouseEnter = btnConfirmarAlteracoesMouseEnter
       OnMouseLeave = btnConfirmarAlteracoesMouseLeave
-      ExplicitLeft = 18
-      ExplicitTop = 73
       object lblConfirmarAlteracoes: TLabel
         AlignWithMargins = True
         Left = 191

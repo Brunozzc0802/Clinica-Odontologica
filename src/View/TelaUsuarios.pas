@@ -262,6 +262,7 @@ procedure TPagUsuarios.FormShow(Sender: TObject);
 procedure TPagUsuarios.imgXrestoreClick(Sender: TObject);
   begin
     pnlRestaurar.Visible := False;
+    btnRestaurarNovo.Visible := False;
     CarregarUsuarios;
   end;
 
@@ -396,11 +397,16 @@ procedure TPagUsuarios.btnSairUsuClick(Sender: TObject);
 //Click do botao limpar\\
 procedure TPagUsuarios.btnLimparUsuClick(Sender: TObject);
   begin
-    edUsuario.Clear;
-    edSenhaUsuario.Clear;
-    cbAtivo.ItemIndex := -1;
-    cbGrupo.ItemIndex := -1;
-    edUsuario.SetFocus;
+    if pnlFormAddUsuarios.Visible = True then begin
+       edUsuario.Clear;
+       edSenhaUsuario.Clear;
+       cbAtivo.ItemIndex := -1;
+       cbGrupo.ItemIndex := -1;
+       edUsuario.SetFocus;
+    end else begin
+       ShowMessage('Nenhum campo para limpar');
+    end;
+
   end;
 //botao de adicionar dos botões laterais\\
 procedure TPagUsuarios.btnAddUsuClick(Sender: TObject);

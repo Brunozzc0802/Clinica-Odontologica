@@ -2500,7 +2500,7 @@ object PagUsuarios: TPagUsuarios
     end
     object sgUsuarios: TStringGrid
       Left = 8
-      Top = 8
+      Top = 6
       Width = 525
       Height = 442
       DefaultColWidth = 100
@@ -2522,9 +2522,9 @@ object PagUsuarios: TPagUsuarios
     end
     object pnlRestaurar: TPanel
       Left = 64
-      Top = 136
+      Top = 107
       Width = 409
-      Height = 273
+      Height = 307
       BevelOuter = bvNone
       Color = 8142341
       ParentBackground = False
@@ -2603,19 +2603,57 @@ object PagUsuarios: TPagUsuarios
           00D89B0031671BA6236DAC86D00FF3439A98B3201430A70D93317A47CC100A99
           3F0D0BFD270C8890D454E12ADDDEFD31E2880127248D9039003931A08E642E8D
           1A59E60C6426631DBE013A6F900B7B89246D0000000049454E44AE426082}
-        OnClick = btnXUsuariosClick
+        OnClick = imgXrestoreClick
       end
       object sgRestore: TStringGrid
         Left = 4
         Top = 33
         Width = 401
-        Height = 236
+        Height = 232
         DefaultColWidth = 78
         FixedCols = 0
         RowCount = 1
         FixedRows = 0
         TabOrder = 0
         OnDrawCell = sgRestoreDrawCell
+      end
+      object btnCRestore: TPanel
+        Left = 4
+        Top = 271
+        Width = 401
+        Height = 31
+        BevelOuter = bvNone
+        Color = 16223019
+        ParentBackground = False
+        TabOrder = 1
+        OnClick = btnCRestoreClick
+        object lblRestore: TLabel
+          AlignWithMargins = True
+          Left = 35
+          Top = 5
+          Width = 331
+          Height = 16
+          Cursor = crHandPoint
+          Margins.Left = 35
+          Margins.Top = 5
+          Margins.Right = 35
+          Margins.Bottom = 10
+          Align = alClient
+          Alignment = taCenter
+          Caption = 'Restaurar'
+          Color = clCream
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          OnClick = btnCRestoreClick
+          OnMouseEnter = btnRestaurarUsuMouseEnter
+          OnMouseLeave = btnRestaurarUsuMouseLeave
+          ExplicitTop = 8
+        end
       end
     end
   end

@@ -64,6 +64,8 @@ type
     Label6: TLabel;
     imgXrestore: TImage;
     sgRestore: TStringGrid;
+    btnCRestore: TPanel;
+    lblRestore: TLabel;
     procedure btnXUsuariosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnAddUsuMouseEnter(Sender: TObject);
@@ -109,6 +111,8 @@ type
     procedure sgRestoreDrawCell(Sender: TObject; ACol, ARow: LongInt;
       Rect: TRect; State: TGridDrawState);
     procedure CarregarInativos;
+    procedure btnCRestoreClick(Sender: TObject);
+    procedure imgXrestoreClick(Sender: TObject);
   private
     UsuarioIdalterar: Integer;
     UsuarioLista: TObjectList<TUsuario>;
@@ -255,6 +259,12 @@ procedure TPagUsuarios.FormShow(Sender: TObject);
   begin
     CarregarUsuarios;
   end;
+procedure TPagUsuarios.imgXrestoreClick(Sender: TObject);
+  begin
+    pnlRestaurar.Visible := False;
+    CarregarUsuarios;
+  end;
+
 //Barra de pesquisa\\
 procedure TPagUsuarios.pesquisarUsuarioChange(Sender: TObject);
   begin
@@ -405,11 +415,15 @@ procedure TPagUsuarios.btnAddUsuClick(Sender: TObject);
     sgUsuarios.Col := 0;
     sgUsuarios.SetFocus;
   end;
+    //botões de cor nova\\
     btnAlterarNovo.Visible := false;
+    btnAddNovo.Visible := True;
+    btnNovoPesquisar.Visible := False;
+    btnRestaurarNovo.Visible := false;
+
     btnConfirmarAlteracoes.Visible := false;
     btnAdicionarUsuario.Visible := True;
-    btnNovoPesquisar.Visible := False;
-    btnAddNovo.Visible := True;
+
     pnlFormAddUsuarios.Visible := True;
     imgLogoUsuarios2.Visible := True;
     imgLogoUsuarios1.Visible := False;
@@ -467,6 +481,9 @@ begin
         ControllerDelet.DeletarUsuario(Usuario);
         CarregarUsuarios;
         ShowMessage('Usuário deletado com sucesso!');
+        sgUsuarios.Row := 0;
+        sgUsuarios.Col := 0;
+        sgUsuarios.SetFocus;
       finally
         ControllerDelet.Free;
         btnDeletarNovo.Visible := False;
@@ -572,6 +589,45 @@ procedure TPagUsuarios.btnConfirmarAlteracoesMouseLeave(Sender: TObject);
     btnConfirmarAlteracoes.Color := $007C3E05;
   end;
 
+procedure TPagUsuarios.btnCRestoreClick(Sender: TObject);
+var
+  LinhaRestore: Integer;
+  Usuario: TUsuario;
+  ControllerRestore: TUsuarioController;
+begin
+  if not Assigned(UsuarioLista) then Exit;
+
+  LinhaRestore := sgRestore.Row;
+  if LinhaRestore > 0 then begin
+    Usuario := TUsuario.Create;
+    try
+      Usuario.Id    := StrToInt(sgRestore.Cells[0, LinhaRestore]);
+      Usuario.Nome  := sgRestore.Cells[1, LinhaRestore];
+      Usuario.Senha := sgRestore.Cells[2, LinhaRestore];
+      Usuario.Ativo := False;
+      Usuario.Grupo := sgRestore.Cells[4, LinhaRestore];
+
+      ControllerRestore := TUsuarioController.Create;
+      try
+        ControllerRestore.RestaurarUsuario(Usuario);
+        CarregarInativos;
+        ShowMessage('Usuário Restaurado com sucesso com sucesso!');
+      finally
+        ControllerRestore.Free;
+        pnlRestaurar.Visible := False;
+        btnRestaurarNovo.Visible := False;
+        CarregarUsuarios;
+        sgUsuarios.Row := 0;
+        sgUsuarios.Col := 0;
+        sgUsuarios.SetFocus;
+      end;
+    finally
+      Usuario.Free;
+    end;
+  end
+  else
+    ShowMessage('Selecione um usuário para Restaurar.');
+end;
 procedure TPagUsuarios.btnDeletarUsuMouseEnter(Sender: TObject);
   begin
     btnDeletarUsu.Color := $00F78B2B;

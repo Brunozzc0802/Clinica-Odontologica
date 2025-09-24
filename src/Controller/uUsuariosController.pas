@@ -14,6 +14,7 @@ type
     procedure AdicionarUsuario(const Nome, Senha, Grupo: string; Ativo: Boolean);
     procedure AlterarUsuario(const Id: Integer; const Nome, Senha, Grupo: string; Ativo: Boolean);
     procedure DeletarUsuario(AUsuario: TUsuario);
+    procedure RestaurarUsuario(AUsuario: TUsuario);
   end;
 
 implementation
@@ -114,6 +115,19 @@ begin
   end;
 end;
 
+
+procedure TUsuarioController.RestaurarUsuario(AUsuario: TUsuario);
+var
+  RepoUsu: TUsuarioRepository;
+begin
+  RepoUsu := TUsuarioRepository.Create;
+  try
+    AUsuario.Ativo := True;
+    RepoUsu.Alterar(AUsuario);
+  finally
+    RepoUsu.Free;
+  end;
+end;
 
 end.
 

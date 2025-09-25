@@ -336,6 +336,12 @@ var
 begin
   Controller := TUsuarioController.Create;
   try
+
+    if (edUsuario.Text = '') or (edSenhaUsuario.Text = '') or (cbAtivo.Text = '') then begin
+      ShowMessage('Preencha todos os campos');
+      exit;
+    end;
+
     Controller.AdicionarUsuario(
       edUsuario.Text,
       edSenhaUsuario.Text,
@@ -560,7 +566,7 @@ procedure TPagUsuarios.btnRestaurarUsuClick(Sender: TObject);
     btnRestaurarNovo.Visible := True;
     pnlRestaurar.Visible := True;
 
-    sgRestore.Cells[0,0] := 'Cod';
+    sgRestore.Cells[0,0] := 'ID';
     sgRestore.Cells[1,0] := 'Nome de Usuário';
     sgRestore.Cells[2,0] := 'Senha';
     sgRestore.Cells[3,0] := 'Ativo';
@@ -617,7 +623,7 @@ begin
       try
         ControllerRestore.RestaurarUsuario(Usuario);
         CarregarInativos;
-        ShowMessage('Usuário Restaurado com sucesso com sucesso!');
+        ShowMessage('Usuário Restaurado com sucesso!');
       finally
         ControllerRestore.Free;
         pnlRestaurar.Visible := False;
@@ -630,9 +636,9 @@ begin
     finally
       Usuario.Free;
     end;
-  end
-  else
+  end else begin
     ShowMessage('Selecione um usuário para Restaurar.');
+end;
 end;
 procedure TPagUsuarios.btnDeletarUsuMouseEnter(Sender: TObject);
   begin

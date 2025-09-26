@@ -370,17 +370,14 @@ procedure TPagUsuarios.btnCancelarUsuClick(Sender: TObject);
     imgLogoUsuarios1.Visible := True;
     imgLogoUsuarios2.Visible := False;
 
-    if pesquisarUsuario.Visible then
-  begin
-    // Voltar grid para posição original
-    sgUsuarios.Top := sgUsuarios.Top - (pesquisarUsuario.Height + 5);
-    sgUsuarios.Height := sgUsuarios.Height + (pesquisarUsuario.Height + 5);
-
-    // Esconder a barra de pesquisa
-    pesquisarUsuario.Visible := False;
-  end;
+    if pesquisarUsuario.Visible then begin
+      sgUsuarios.Top := sgUsuarios.Top - (pesquisarUsuario.Height + 5);
+      sgUsuarios.Height := sgUsuarios.Height + (pesquisarUsuario.Height + 5);
+      pesquisarUsuario.Visible := False;
+    end;
 
   end;
+
 //botao de X\\
 procedure TPagUsuarios.btnXUsuariosClick(Sender: TObject);
   begin
@@ -523,47 +520,49 @@ begin
     pesquisarUsuario.SetFocus;
   end;
 end;
+
 //click do botao de alterar\\
 procedure TPagUsuarios.btnAlterarUsuClick(Sender: TObject);
 var
   linha: Integer;
   grupo, ativo: string;
-begin
-  linha := sgUsuarios.Row; // Pega a linha selecionada no StringGrid
-  if linha <= 0 then
   begin
-    ShowMessage('Selecione um usuário!');
-    Exit;
-  end;
-  UsuarioIdalterar := StrToIntDef(sgUsuarios.Cells[0, linha], 0);
-  edUsuario.Text := sgUsuarios.Cells[1, linha];
-  edSenhaUsuario.Text := sgUsuarios.Cells[2, linha];
-  ativo := Trim(sgUsuarios.Cells[3, linha]);
-  if cbAtivo.Items.IndexOf(ativo) <> -1 then begin
-    cbAtivo.ItemIndex := cbAtivo.Items.IndexOf(ativo)
-  end else begin
-    cbAtivo.Items.Add(ativo);
-    cbAtivo.ItemIndex := cbAtivo.Items.IndexOf(ativo);
-  end;
-  grupo := Trim(sgUsuarios.Cells[4, linha]);
-  if cbGrupo.Items.IndexOf(grupo) <> -1 then begin
-    cbGrupo.ItemIndex := cbGrupo.Items.IndexOf(grupo)
-  end else begin
-    cbGrupo.Items.Add(grupo);
-    cbGrupo.ItemIndex := cbGrupo.Items.IndexOf(grupo);
-  end;
+    linha := sgUsuarios.Row;
+    if linha <= 0 then
+    begin
+      ShowMessage('Selecione um usuário!');
+      Exit;
+    end;
+    UsuarioIdalterar := StrToIntDef(sgUsuarios.Cells[0, linha], 0);
+    edUsuario.Text := sgUsuarios.Cells[1, linha];
+    edSenhaUsuario.Text := sgUsuarios.Cells[2, linha];
+    ativo := Trim(sgUsuarios.Cells[3, linha]);
+    if cbAtivo.Items.IndexOf(ativo) <> -1 then begin
+      cbAtivo.ItemIndex := cbAtivo.Items.IndexOf(ativo)
+    end else begin
+      cbAtivo.Items.Add(ativo);
+      cbAtivo.ItemIndex := cbAtivo.Items.IndexOf(ativo);
+    end;
+    grupo := Trim(sgUsuarios.Cells[4, linha]);
+    if cbGrupo.Items.IndexOf(grupo) <> -1 then begin
+      cbGrupo.ItemIndex := cbGrupo.Items.IndexOf(grupo)
+    end else begin
+      cbGrupo.Items.Add(grupo);
+      cbGrupo.ItemIndex := cbGrupo.Items.IndexOf(grupo);
+    end;
 
-  btnAddNovo.Visible := False;
-  btnAlterarNovo.Visible := True;
-  btnConfirmarAlteracoes.Visible := True;
-  btnAdicionarUsuario.Visible := False;
-  pnlFormAddUsuarios.Visible := True;
-end;
+    btnAddNovo.Visible := False;
+    btnAlterarNovo.Visible := True;
+    btnConfirmarAlteracoes.Visible := True;
+    btnAdicionarUsuario.Visible := False;
+    pnlFormAddUsuarios.Visible := True;
+  end;
 //Click do botao de restaurar\\
 procedure TPagUsuarios.btnRestaurarUsuClick(Sender: TObject);
   begin
     CarregarInativos;
     btnRestaurarNovo.Visible := True;
+    btnAddNovo.Visible := False;
     pnlRestaurar.Visible := True;
 
     sgRestore.Cells[0,0] := 'ID';

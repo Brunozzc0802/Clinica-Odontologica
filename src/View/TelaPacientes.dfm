@@ -12,6 +12,7 @@ object PagPacientes: TPagPacientes
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesigned
+  OnClose = FormClose
   OnCreate = FormCreate
   TextHeight = 15
   object bordaCabecalhoPacientes: TPanel
@@ -1310,10 +1311,10 @@ object PagPacientes: TPagPacientes
     end
     object imgLogo2: TImage
       AlignWithMargins = True
-      Left = 607
+      Left = 615
       Top = 467
-      Width = 153
-      Height = 132
+      Width = 137
+      Height = 131
       Margins.Left = 100
       Margins.Top = 50
       Margins.Right = 50
@@ -2515,10 +2516,10 @@ object PagPacientes: TPagPacientes
       TabOrder = 0
     end
     object pesquisar: TSearchBox
-      Left = 8
+      Left = 9
       Top = 6
-      Width = 593
-      Height = 25
+      Width = 592
+      Height = 23
       TabOrder = 1
       TextHint = 'Pesquisar'
       Visible = False
@@ -2540,6 +2541,7 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 0
+        OnClick = btnAddClick
         OnMouseEnter = btnAddMouseEnter
         OnMouseLeave = btnAddMouseLeave
         object lblAddUsu: TLabel
@@ -2601,6 +2603,7 @@ object PagPacientes: TPagPacientes
             Font.Style = [fsBold]
             ParentColor = False
             ParentFont = False
+            OnClick = btnAddClick
             ExplicitWidth = 59
             ExplicitHeight = 17
           end
@@ -2690,6 +2693,7 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 2
+        OnClick = btnPesquisarClick
         OnMouseEnter = btnPesquisarMouseEnter
         OnMouseLeave = btnPesquisarMouseLeave
         object lblPesquisar: TLabel
@@ -2840,6 +2844,7 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 4
+        OnClick = btnCancelarClick
         OnMouseEnter = btnCancelarMouseEnter
         OnMouseLeave = btnCancelarMouseLeave
         object lblCancelarUsu: TLabel
@@ -2980,7 +2985,6 @@ object PagPacientes: TPagPacientes
           ParentFont = False
           OnMouseEnter = btnProcedimentosMouseEnter
           OnMouseLeave = btnProcedimentosMouseLeave
-          ExplicitLeft = 31
           ExplicitWidth = 92
           ExplicitHeight = 17
         end
@@ -2994,6 +2998,7 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 7
+        OnClick = btnLimparClick
         OnMouseEnter = btnLimparMouseEnter
         OnMouseLeave = btnLimparMouseLeave
         object lblLimpar: TLabel
@@ -3018,6 +3023,7 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnLimparClick
           OnMouseEnter = btnLimparMouseEnter
           OnMouseLeave = btnLimparMouseLeave
           ExplicitWidth = 43
@@ -3033,6 +3039,7 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 8
+        OnClick = lblSairClick
         OnMouseEnter = btnSairMouseEnter
         OnMouseLeave = btnSairMouseLeave
         object lblSair: TLabel
@@ -3057,12 +3064,136 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = lblSairClick
           OnMouseEnter = btnSairMouseEnter
           OnMouseLeave = btnSairMouseLeave
-          ExplicitLeft = 27
-          ExplicitTop = 7
+          ExplicitWidth = 23
+          ExplicitHeight = 17
         end
       end
     end
+    object pnlAddPacientes: TPanel
+      Left = 9
+      Top = 462
+      Width = 592
+      Height = 147
+      Color = 15790320
+      ParentBackground = False
+      TabOrder = 3
+      Visible = False
+      object EdNomePaciente: TEdit
+        Left = 8
+        Top = 9
+        Width = 169
+        Height = 32
+        AutoSize = False
+        TabOrder = 0
+        TextHint = 'Digite o nome:'
+        OnKeyDown = EdNomePacienteKeyDown
+      end
+      object edCPF: TEdit
+        Left = 224
+        Top = 10
+        Width = 169
+        Height = 32
+        AutoSize = False
+        TabOrder = 1
+        TextHint = 'Digite o CPF:'
+        OnKeyDown = edCPFKeyDown
+      end
+      object edTelefone: TEdit
+        Left = 432
+        Top = 9
+        Width = 152
+        Height = 32
+        AutoSize = False
+        TabOrder = 2
+        TextHint = 'Digite o Telefone:'
+        OnKeyDown = edTelefoneKeyDown
+      end
+      object edCEP: TEdit
+        Left = 8
+        Top = 57
+        Width = 169
+        Height = 32
+        AutoSize = False
+        TabOrder = 3
+        TextHint = 'Digite o Cep:'
+        OnKeyDown = edCEPKeyDown
+      end
+      object edEndereco: TEdit
+        Left = 224
+        Top = 57
+        Width = 169
+        Height = 32
+        AutoSize = False
+        TabOrder = 4
+        TextHint = 'Digite o Endere'#231'o:'
+      end
+      object edDataNasc: TEdit
+        Left = 432
+        Top = 57
+        Width = 152
+        Height = 32
+        AutoSize = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 5
+        TextHint = 'Data de nascimento:'
+      end
+      object btnaddPaciente: TPanel
+        AlignWithMargins = True
+        Left = 8
+        Top = 102
+        Width = 577
+        Height = 32
+        Margins.Left = 10
+        Margins.Top = 65
+        Margins.Right = 13
+        Margins.Bottom = 36
+        Color = 8142341
+        ParentBackground = False
+        TabOrder = 6
+        OnMouseEnter = lblAddpacienteMouseEnter
+        OnMouseLeave = lblAddpacienteMouseLeave
+        object lblAddpaciente: TLabel
+          AlignWithMargins = True
+          Left = 191
+          Top = 7
+          Width = 215
+          Height = 17
+          Cursor = crHandPoint
+          Margins.Left = 190
+          Margins.Top = 6
+          Margins.Right = 170
+          Margins.Bottom = 7
+          Align = alClient
+          Alignment = taCenter
+          Caption = 'Adicionar Paciente'
+          Color = clCream
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          OnMouseEnter = lblAddpacienteMouseEnter
+          OnMouseLeave = lblAddpacienteMouseLeave
+          ExplicitTop = 8
+          ExplicitWidth = 205
+          ExplicitHeight = 21
+        end
+      end
+    end
+  end
+  object NetHTTPClient1: TNetHTTPClient
+    UserAgent = 'Embarcadero URI Client/1.0'
+    Left = 242
+    Top = 561
   end
 end

@@ -8,7 +8,8 @@ uses
   uUsuarioConexao in '..\src\Model\uUsuarioConexao.pas' {dmUsuarios: TDataModule},
   uUsuariosController in '..\src\Controller\uUsuariosController.pas',
   uUsuarioRepository in '..\src\Repository\uUsuarioRepository.pas',
-  TelaPacientes in '..\src\View\TelaPacientes.pas' {PagPacientes};
+  TelaPacientes in '..\src\View\TelaPacientes.pas' {PagPacientes},
+  uPacientes in '..\src\Model\uPacientes.pas';
 
 {$R *.res}
 

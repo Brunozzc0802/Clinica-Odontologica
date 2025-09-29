@@ -23,7 +23,7 @@ implementation
 class function TUsuarioRepository.VerificarUsuario(const Nome, Senha: string): TUsuario;
 begin
   Result := nil;
-  with dmUsuarios.FDQuery1 do begin
+  with dmUsuarios.queryUsu do begin
     Close;
     SQL.Text := 'SELECT * FROM usuarios WHERE nome = :nome AND senha = :senha';
     ParamByName('nome').AsString := Nome;
@@ -46,7 +46,7 @@ var
   Usuario: TUsuario;
 begin
   Result := TObjectList<TUsuario>.Create(True);
-  with dmUsuarios.FDQuery1 do begin
+  with dmUsuarios.queryUsu do begin
     Close;
     SQL.Text := 'SELECT id, nome, senha, ativo, grupo FROM usuarios WHERE ativo = FALSE';
     Open;
@@ -70,7 +70,7 @@ var
   Usuario: TUsuario;
 begin
   Result := TObjectList<TUsuario>.Create(True);
-  with dmUsuarios.FDQuery1 do begin
+  with dmUsuarios.queryUsu do begin
     Close;
     SQL.Text := 'SELECT id, nome, senha, ativo, grupo FROM usuarios WHERE ativo = TRUE';
     Open;
@@ -91,7 +91,7 @@ end;
 
 procedure TUsuarioRepository.Adicionar(AUsuario: TUsuario);
 begin
-  with dmUsuarios.FDQuery1 do begin
+  with dmUsuarios.queryUsu do begin
     Close;
     SQL.Text :=
       'INSERT INTO usuarios (nome, senha, ativo, grupo) ' +
@@ -108,7 +108,7 @@ end;
 
 procedure TUsuarioRepository.Alterar(AUsuario: TUsuario);
 begin
-  with dmUsuarios.FDQuery1 do begin
+  with dmUsuarios.queryUsu do begin
     Close;
     SQL.Text := 'UPDATE usuarios ' +
                 'SET nome = :nome, senha = :senha, ativo = :ativo, grupo = :grupo ' +

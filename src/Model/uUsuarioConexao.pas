@@ -13,7 +13,8 @@ type
   TdmUsuarios = class(TDataModule)
     FDConnection1: TFDConnection;
     FDPhysPgDriverLink1: TFDPhysPgDriverLink;
-    FDQuery1: TFDQuery;
+    queryUsu: TFDQuery;
+    queryPacientes: TFDQuery;
   private
     { Private declarations }
   public

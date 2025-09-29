@@ -35,8 +35,6 @@ type
     cbGrupo: TComboBox;
     btnRestaurarUsu: TPanel;
     lblRestaurar: TLabel;
-    btnPermissoes: TPanel;
-    lblPermissoes: TLabel;
     btnAdicionarUsuario: TPanel;
     lblAdicionarUsuario: TLabel;
     imgLogoUsuarios2: TImage;
@@ -82,8 +80,6 @@ type
     procedure btnRestaurarUsuMouseLeave(Sender: TObject);
     procedure btnAdicionarUsuarioMouseEnter(Sender: TObject);
     procedure btnAdicionarUsuarioMouseLeave(Sender: TObject);
-    procedure btnPermissoesMouseEnter(Sender: TObject);
-    procedure btnPermissoesMouseLeave(Sender: TObject);
     procedure btnCancelarUsuClick(Sender: TObject);
     procedure btnLimparUsuMouseEnter(Sender: TObject);
     procedure btnLimparUsuMouseLeave(Sender: TObject);
@@ -113,6 +109,7 @@ type
     procedure CarregarInativos;
     procedure btnCRestoreClick(Sender: TObject);
     procedure imgXrestoreClick(Sender: TObject);
+    procedure AdicionarUsuarios;
   private
     UsuarioIdalterar: Integer;
     UsuarioLista: TObjectList<TUsuario>;
@@ -331,34 +328,9 @@ var
 end;
 //click do botao adicionar usuario\\
 procedure TPagUsuarios.btnAdicionarUsuarioClick(Sender: TObject);
-var
-  Controller: TUsuarioController;
-begin
-  Controller := TUsuarioController.Create;
-  try
-
-    if (edUsuario.Text = '') or (edSenhaUsuario.Text = '') or (cbAtivo.Text = '') then begin
-      ShowMessage('Preencha todos os campos');
-      exit;
-    end;
-
-    Controller.AdicionarUsuario(
-      edUsuario.Text,
-      edSenhaUsuario.Text,
-      cbGrupo.Text,
-      cbAtivo.ItemIndex = 0
-    );
-
-    ShowMessage('Usuário adicionado com sucesso!');
-    CarregarUsuarios;
-    edUsuario.clear;
-    edSenhaUsuario.Clear;
-    cbAtivo.ItemIndex := -1;
-    cbGrupo.ItemIndex := -1;
-  finally
-    Controller.Free;
+  begin
+    AdicionarUsuarios;
   end;
-end;
 //click cancelar adicionar usuario\\
 procedure TPagUsuarios.btnCancelarUsuClick(Sender: TObject);
   begin
@@ -411,6 +383,36 @@ procedure TPagUsuarios.btnLimparUsuClick(Sender: TObject);
     end;
 
   end;
+procedure TPagUsuarios.AdicionarUsuarios;
+var
+  Controller: TUsuarioController;
+begin
+  Controller := TUsuarioController.Create;
+  try
+
+    if (edUsuario.Text = '') or (edSenhaUsuario.Text = '') or (cbAtivo.Text = '') then begin
+      ShowMessage('Preencha todos os campos');
+      exit;
+    end;
+
+    Controller.AdicionarUsuario(
+      edUsuario.Text,
+      edSenhaUsuario.Text,
+      cbGrupo.Text,
+      cbAtivo.ItemIndex = 0
+    );
+
+    ShowMessage('Usuário adicionado com sucesso!');
+    CarregarUsuarios;
+    edUsuario.clear;
+    edSenhaUsuario.Clear;
+    cbAtivo.ItemIndex := -1;
+    cbGrupo.ItemIndex := -1;
+  finally
+    Controller.Free;
+  end;
+end;
+
 //botao de adicionar dos botões laterais\\
 procedure TPagUsuarios.btnAddUsuClick(Sender: TObject);
   begin
@@ -657,16 +659,6 @@ procedure TPagUsuarios.btnLimparUsuMouseEnter(Sender: TObject);
 procedure TPagUsuarios.btnLimparUsuMouseLeave(Sender: TObject);
   begin
     btnLimparUsu.Color := $007C3E05;
-  end;
-
-procedure TPagUsuarios.btnPermissoesMouseEnter(Sender: TObject);
-  begin
-    btnPermissoes.Color := $00F78B2B;
-  end;
-
-procedure TPagUsuarios.btnPermissoesMouseLeave(Sender: TObject);
-  begin
-    btnPermissoes.Color :=  $007C3E05;
   end;
 
 procedure TPagUsuarios.btnPesquisarUsuMouseEnter(Sender: TObject);

@@ -3116,7 +3116,7 @@ object PagUsuarios: TPagUsuarios
         end
       end
     end
-    object btnPermissoes: TPanel
+    object btnLimparUsu: TPanel
       Left = 8
       Top = 287
       Width = 137
@@ -3125,45 +3125,6 @@ object PagUsuarios: TPagUsuarios
       Color = 8142341
       ParentBackground = False
       TabOrder = 6
-      OnMouseEnter = btnPermissoesMouseEnter
-      OnMouseLeave = btnPermissoesMouseLeave
-      object lblPermissoes: TLabel
-        AlignWithMargins = True
-        Left = 31
-        Top = 11
-        Width = 75
-        Height = 19
-        Cursor = crHandPoint
-        Margins.Left = 30
-        Margins.Top = 10
-        Margins.Right = 30
-        Margins.Bottom = 10
-        Align = alClient
-        Alignment = taCenter
-        Caption = 'Permiss'#245'es'
-        Color = clCream
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -13
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-        OnMouseEnter = btnPermissoesMouseEnter
-        OnMouseLeave = btnPermissoesMouseLeave
-        ExplicitWidth = 69
-        ExplicitHeight = 17
-      end
-    end
-    object btnLimparUsu: TPanel
-      Left = 8
-      Top = 334
-      Width = 137
-      Height = 41
-      Cursor = crHandPoint
-      Color = 8142341
-      ParentBackground = False
-      TabOrder = 7
       OnClick = btnLimparUsuClick
       OnMouseEnter = btnLimparUsuMouseEnter
       OnMouseLeave = btnLimparUsuMouseLeave
@@ -3198,13 +3159,13 @@ object PagUsuarios: TPagUsuarios
     end
     object btnSairUsu: TPanel
       Left = 8
-      Top = 381
+      Top = 334
       Width = 137
       Height = 41
       Cursor = crHandPoint
       Color = 8142341
       ParentBackground = False
-      TabOrder = 8
+      TabOrder = 7
       OnClick = btnSairUsuClick
       OnMouseEnter = btnSairUsuMouseEnter
       OnMouseLeave = btnSairUsuMouseLeave

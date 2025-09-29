@@ -97,6 +97,8 @@ type
     procedure edCEPKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure buscarCEP(const CEP: string);
     procedure FormShow(Sender: TObject);
+    procedure adicionarPaciente;
+    procedure btnaddPacienteClick(Sender: TObject);
   private
      PacientesLista: TObjectList<TPaciente>;
   public
@@ -124,11 +126,13 @@ begin
       JsonResp := TJSONObject.ParseJSONValue(Response.ContentAsString) as TJSONObject;
       try
         edEndereco.Text := JsonResp.GetValue('logradouro').Value;
+        edDataNasc.SetFocus;
       finally
         JsonResp.Free;
       end;
     end else
       ShowMessage('CEP não encontrado!');
+      edCEP.SetFocus;
   finally
     HTTP.Free;
   end;
@@ -162,9 +166,43 @@ begin
       sgPacientes.Cells[2, I + 1] := PacientesLista[I].cpf;
       sgPacientes.Cells[3, I + 1] := PacientesLista[I].telefone;
       sgPacientes.Cells[4, I + 1] := PacientesLista[I].cep;
-      sgPacientes.Cells[5, I + 1] := PacientesLista[I].dataNascimento;
+      sgPacientes.Cells[5, I + 1] := DateToStr(PacientesLista[I].DataNascimento);
       sgPacientes.Cells[6, I + 1] := PacientesLista[I].endereco;
     end;
+  finally
+    Controller.Free;
+  end;
+end;
+
+procedure TPagPacientes.adicionarPaciente;
+var
+  Controller: TPacientesController;
+begin
+  Controller := TPacientesController.Create;
+  try
+
+    if (EdNomePaciente.Text = '') or (edCPF.Text = '') or (edTelefone.Text = '') or
+    (edCEP.Text = '') or (edDataNasc.Text = '') then begin
+      ShowMessage('Preencha todos os campos');
+      exit;
+    end;
+
+    Controller.AdicionarPaciente(
+      edNomePaciente.Text,
+      edCPF.Text,
+      edTelefone.Text,
+      edCEP.Text,
+      edEndereco.Text,
+      StrToDate(edDataNasc.Text)
+    );
+    ShowMessage('Paciente adicionado com sucesso!');
+    CarregarPacientes;
+    edNomePaciente.clear;
+    edCPF.clear;
+    edTelefone.clear;
+    edCEP.clear;
+    edEndereco.clear;
+    edDataNasc.Clear;
   finally
     Controller.Free;
   end;
@@ -186,6 +224,11 @@ procedure TPagPacientes.btnAddMouseEnter(Sender: TObject);
 procedure TPagPacientes.btnAddMouseLeave(Sender: TObject);
   begin
     btnAdd.Color := $007C3E05;
+  end;
+
+procedure TPagPacientes.btnaddPacienteClick(Sender: TObject);
+  begin
+    adicionarPaciente;
   end;
 
 procedure TPagPacientes.btnAlterarMouseEnter(Sender: TObject);
@@ -324,8 +367,8 @@ procedure TPagPacientes.edCEPKeyDown(Sender: TObject; var Key: Word;
   begin
       if Key = VK_RETURN then begin
         key := 0;
-        edDataNasc.setfocus;
         buscarCep(edCep.Text);
+        edDataNasc.setfocus;
       end;
   end;
 

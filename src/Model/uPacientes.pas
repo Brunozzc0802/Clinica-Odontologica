@@ -10,7 +10,7 @@ interface
     PCpf: string;
     PTelefone: string;
     PCep: string;
-    PDataNasc: string;
+    PDataNasc: TDate;
     PEndereco: string;
     PAtivo: boolean;
   public
@@ -19,7 +19,7 @@ interface
     property Cpf: string read PCpf write PCpf;
     property Telefone: string read PTelefone write PTelefone;
     property Cep: string read PCep write PCep;
-    property DataNascimento: string read PDataNasc write PDataNasc;
+    property DataNascimento: TDate read PDataNasc write PDataNasc;
     property Endereco: string read PEndereco write PEndereco;
     property Ativo: boolean read PAtivo write PAtivo;
 

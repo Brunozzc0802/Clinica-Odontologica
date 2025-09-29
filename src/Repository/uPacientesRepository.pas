@@ -9,12 +9,32 @@ type
   TPacientesRepository = class
   public
   class function ListarTodos: TObjectList<TPaciente>;
+  procedure Adicionar(APaciente: TPaciente);
 end;
 
 implementation
 
 
 { TPacientesRepository }
+
+procedure TPacientesRepository.Adicionar(APaciente: TPaciente);
+begin
+  with dmUsuarios.queryPacientes do begin
+    Close;
+    SQL.Text :=
+      'INSERT INTO pacientes (nome, cpf, telefone, cep, endereco, data_nascimento) ' +
+      'VALUES (:nome, :cpf, :telefone, :cep, :endereco, :data_nascimento)';
+
+    ParamByName('nome').AsString   := APaciente.Nome;
+    ParamByName('cpf').AsString  := APaciente.Cpf;
+    ParamByName('telefone').AsString  := APaciente.Telefone;
+    ParamByName('cep').AsString  := APaciente.cep;
+    ParamByName('data_nascimento').AsDate  := APaciente.DataNascimento;
+    ParamByName('endereco').AsString  := APaciente.endereco;
+
+    ExecSQL;
+  end;
+end;
 
 class function TPacientesRepository.ListarTodos: TObjectList<TPaciente>;
   var
@@ -28,12 +48,12 @@ begin
 
     while not Eof do begin
       Paciente := TPaciente.Create;
-      Paciente.Id    := FieldByName('id').AsInteger;
-      Paciente.Nome  := FieldByName('nome').AsString;
+      Paciente.Id := FieldByName('id').AsInteger;
+      Paciente.Nome := FieldByName('nome').AsString;
       Paciente.Cpf := FieldByName('cpf').AsString;
       Paciente.Telefone := FieldByName('telefone').AsString;
       Paciente.Cep := FieldByName('cep').AsString;
-      Paciente.DataNascimento := FieldByName('data_nascimento').AsString;
+      Paciente.DataNascimento := FieldByName('data_nascimento').AsDateTime;
       Paciente.Endereco := FieldByName('endereco').AsString;
       Result.Add(Paciente);
       Next;

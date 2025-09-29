@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.WinXCtrls, Vcl.Grids, System.Net.URLClient,
-  System.Net.HttpClient, System.Net.HttpClientComponent, System.JSON;
+  System.Net.HttpClient, System.Net.HttpClientComponent, System.JSON,uPacientesController,uPacientes,
+  System.Generics.Collections;
 
 type
   TPagPacientes = class(TForm)
@@ -95,8 +96,9 @@ type
       Shift: TShiftState);
     procedure edCEPKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure buscarCEP(const CEP: string);
+    procedure FormShow(Sender: TObject);
   private
-    { Private declarations }
+     PacientesLista: TObjectList<TPaciente>;
   public
     { Public declarations }
   end;
@@ -131,6 +133,43 @@ begin
     HTTP.Free;
   end;
 end;
+procedure TPagPacientes.CarregarPacientes;
+  var
+  Controller: TPacientesController;
+  I: Integer;
+begin
+  Controller := TPacientesController.Create;
+  try
+    if Assigned(PacientesLista) then
+    PacientesLista.Free;
+    PacientesLista := Controller.BuscarTodos;
+
+    // Cabeçalho
+    sgPacientes.Cells[0,0] := 'ID';
+    sgPacientes.Cells[1,0] := 'Nome do Paciente';
+    sgPacientes.Cells[2,0] := 'CPF';
+    sgPacientes.Cells[3,0] := 'Telefone';
+    sgPacientes.Cells[4,0] := 'Cep';
+    sgPacientes.Cells[5,0] := 'Data de nascimento';
+    sgPacientes.Cells[6,0] := 'Endereço';
+
+    sgPacientes.RowCount := PacientesLista.Count + 1;
+
+    for I := 0 to PacientesLista.Count - 1 do
+    begin
+      sgPacientes.Cells[0, I + 1] := IntToStr(PacientesLista[I].Id);
+      sgPacientes.Cells[1, I + 1] := PacientesLista[I].Nome;
+      sgPacientes.Cells[2, I + 1] := PacientesLista[I].cpf;
+      sgPacientes.Cells[3, I + 1] := PacientesLista[I].telefone;
+      sgPacientes.Cells[4, I + 1] := PacientesLista[I].cep;
+      sgPacientes.Cells[5, I + 1] := PacientesLista[I].dataNascimento;
+      sgPacientes.Cells[6, I + 1] := PacientesLista[I].endereco;
+    end;
+  finally
+    Controller.Free;
+  end;
+end;
+
 procedure TPagPacientes.btnAddClick(Sender: TObject);
   begin
     pnlAddPacientes.Visible := True;
@@ -340,6 +379,11 @@ begin
   sgPacientes.ColWidths[5] := 155;
   sgPacientes.ColWidths[6] := 194;
 end;
+
+procedure TPagPacientes.FormShow(Sender: TObject);
+  begin
+    CarregarPacientes;
+  end;
 
 procedure TPagPacientes.lblAddpacienteMouseEnter(Sender: TObject);
   begin

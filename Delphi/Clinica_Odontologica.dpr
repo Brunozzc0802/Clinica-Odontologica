@@ -10,7 +10,8 @@ uses
   uUsuarioRepository in '..\src\Repository\uUsuarioRepository.pas',
   TelaPacientes in '..\src\View\TelaPacientes.pas' {PagPacientes},
   uPacientes in '..\src\Model\uPacientes.pas',
-  uPacientesRepository in '..\src\Repository\uPacientesRepository.pas';
+  uPacientesRepository in '..\src\Repository\uPacientesRepository.pas',
+  uPacientesController in '..\src\Controller\uPacientesController.pas';
 
 {$R *.res}
 

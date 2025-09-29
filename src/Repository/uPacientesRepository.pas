@@ -5,13 +5,14 @@ interface
 uses uUsuarioConexao,uPacientes,  System.SysUtils,
 System.Generics.Collections, FireDAC.Comp.Client;
 
-implementation
-
 type
   TPacientesRepository = class
   public
   class function ListarTodos: TObjectList<TPaciente>;
 end;
+
+implementation
+
 
 { TPacientesRepository }
 
@@ -34,7 +35,6 @@ begin
       Paciente.Cep := FieldByName('cep').AsString;
       Paciente.DataNascimento := FieldByName('data_nascimento').AsString;
       Paciente.Endereco := FieldByName('endereco').AsString;
-      Paciente.Ativo := FieldByName('ativo').AsBoolean;
       Result.Add(Paciente);
       Next;
     end;

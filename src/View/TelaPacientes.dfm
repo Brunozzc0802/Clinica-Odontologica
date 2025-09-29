@@ -3184,9 +3184,7 @@ object PagPacientes: TPagPacientes
           ParentFont = False
           OnMouseEnter = lblAddpacienteMouseEnter
           OnMouseLeave = lblAddpacienteMouseLeave
-          ExplicitTop = 8
-          ExplicitWidth = 205
-          ExplicitHeight = 21
+          ExplicitWidth = 115
         end
       end
     end

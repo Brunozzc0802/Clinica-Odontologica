@@ -87,6 +87,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btnPesquisarClick(Sender: TObject);
     procedure btnLimparClick(Sender: TObject);
+    procedure CarregarPacientes;
     procedure EdNomePacienteKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure edCPFKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);

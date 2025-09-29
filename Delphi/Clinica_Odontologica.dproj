@@ -146,6 +146,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\src\Model\uPacientes.pas"/>
+        <DCCReference Include="..\src\Repository\uPacientesRepository.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

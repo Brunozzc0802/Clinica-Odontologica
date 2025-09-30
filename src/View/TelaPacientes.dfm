@@ -2530,6 +2530,7 @@ object PagPacientes: TPagPacientes
       TabOrder = 1
       TextHint = 'Pesquisar'
       Visible = False
+      OnChange = pesquisarChange
     end
     object pnlBotoesDireitaPacientes: TPanel
       Left = 607

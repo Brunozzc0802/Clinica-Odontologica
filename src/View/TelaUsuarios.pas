@@ -197,8 +197,8 @@ begin
   TextoFiltro := LowerCase(Filtro);
   for I := 0 to UsuarioLista.Count - 1 do begin
     Usuario := UsuarioLista[I];
-    if (Filtro = '') or (Pos(TextoFiltro, LowerCase(Usuario.Nome)) > 0) then
-    begin
+    if (Filtro = '') or (Pos(TextoFiltro, LowerCase(Usuario.Nome)) > 0)
+     then begin
       sgUsuarios.RowCount := Linha + 1;
       sgUsuarios.Cells[0, Linha] := Usuario.Id.ToString;
       sgUsuarios.Cells[1, Linha] := Usuario.Nome;

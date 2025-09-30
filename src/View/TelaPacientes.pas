@@ -109,9 +109,11 @@ type
       Rect: TRect; State: TGridDrawState);
     procedure btnAlterarNovoClick(Sender: TObject);
     procedure OrdenarGrid;
+    procedure pesquisarChange(Sender: TObject);
   private
      PacienteIdalterar: Integer;
      PacientesLista: TObjectList<TPaciente>;
+     procedure PesquisarPacientes(const Filtro: string);
   public
     { Public declarations }
   end;
@@ -144,6 +146,39 @@ begin
         end;
       end;
 end;
+
+
+procedure TPagPacientes.pesquisarChange(Sender: TObject);
+  begin
+    PesquisarPacientes(pesquisar.Text);
+  end;
+
+procedure TPagPacientes.PesquisarPacientes(const Filtro: string);
+  var
+  I, Linha: Integer;
+  Paciente: TPaciente;
+  TextoFiltro: string;
+  begin
+    if not Assigned(PacientesLista) then Exit;
+    sgPacientes.ColCount := 7;
+    sgPacientes.RowCount := 1;
+    Linha := 1;
+    TextoFiltro := LowerCase(Filtro);
+    for I := 0 to PacientesLista.Count - 1 do begin
+      Paciente := PacientesLista[I];
+      if (Filtro = '') or (Pos(TextoFiltro, LowerCase(Paciente.Nome)) > 0) then begin
+      sgPacientes.RowCount := Linha + 1;
+      sgPacientes.Cells[0, Linha] := Paciente.Id.ToString;
+      sgPacientes.Cells[1, Linha] := paciente.Nome;
+      sgPacientes.Cells[2, Linha] := Paciente.Cpf;
+      sgPacientes.Cells[3, Linha] := Paciente.Telefone;
+      sgPacientes.Cells[4, Linha] := Paciente.Cep;
+      sgPacientes.Cells[5, Linha] := Paciente.Endereco;
+      sgPacientes.Cells[6, Linha] := DateToStr(Paciente.DataNascimento);
+      Inc(Linha);
+      end;
+    end;
+  end;
 procedure TPagPacientes.buscarCEP(const CEP: string);
 var
   HTTP: TNetHTTPClient;
@@ -257,6 +292,9 @@ procedure TPagPacientes.btnAddClick(Sender: TObject);
     edNomePaciente.SetFocus;
     imgLogo1.Visible := False;
     imgLogo2.Visible := True;
+    sgPacientes.Row := 0;
+    sgPacientes.Col := 0;
+    sgPacientes.SetFocus;
   end;
 
 procedure TPagPacientes.btnAddMouseEnter(Sender: TObject);
@@ -315,6 +353,7 @@ procedure TPagPacientes.btnAlterarNovoClick(Sender: TObject);
   begin
     if btnAlterarNovo.Visible = true then begin
       pnlAddPacientes.Visible := False;
+      btnAlterarNovo.Visible := False;
       imgLogo1.Visible := True;
       imgLogo2.visible := False;
     end;
@@ -332,6 +371,10 @@ procedure TPagPacientes.btnCancelarClick(Sender: TObject);
       pesquisar.Visible := False;
       btnNovoPesquisar.Visible := False;
     end;
+
+    sgPacientes.Row := 0;
+    sgPacientes.Col := 0;
+    sgPacientes.SetFocus;
 
   end;
 

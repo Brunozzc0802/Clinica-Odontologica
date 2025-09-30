@@ -113,7 +113,7 @@ object PagPacientes: TPagPacientes
   end
   object pnlAzulPrincipal: TPanel
     AlignWithMargins = True
-    Left = 2
+    Left = 1
     Top = 41
     Width = 766
     Height = 620

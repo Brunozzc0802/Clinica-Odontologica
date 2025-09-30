@@ -2511,8 +2511,8 @@ object PagUsuarios: TPagUsuarios
       OnDrawCell = sgUsuariosDrawCell
     end
     object pesquisarUsuario: TSearchBox
-      Left = 8
-      Top = 8
+      Left = 9
+      Top = 6
       Width = 525
       Height = 23
       TabOrder = 1

@@ -1319,8 +1319,8 @@ object PagPacientes: TPagPacientes
       AlignWithMargins = True
       Left = 615
       Top = 467
-      Width = 137
-      Height = 131
+      Width = 145
+      Height = 134
       Margins.Left = 100
       Margins.Top = 50
       Margins.Right = 50
@@ -2520,6 +2520,7 @@ object PagPacientes: TPagPacientes
       RowCount = 1
       FixedRows = 0
       TabOrder = 0
+      OnDrawCell = sgPacientesDrawCell
     end
     object pesquisar: TSearchBox
       Left = 9
@@ -2624,6 +2625,7 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 1
+        OnClick = btnAlterarClick
         OnMouseEnter = btnAlterarMouseEnter
         OnMouseLeave = btnAlterarMouseLeave
         object lblAlterarUsu: TLabel
@@ -2652,42 +2654,6 @@ object PagPacientes: TPagPacientes
           OnMouseLeave = btnAlterarMouseLeave
           ExplicitWidth = 42
           ExplicitHeight = 17
-        end
-        object btnAlterarNovo: TPanel
-          Left = 0
-          Top = 0
-          Width = 137
-          Height = 41
-          Cursor = crHandPoint
-          Color = 16223019
-          ParentBackground = False
-          TabOrder = 0
-          Visible = False
-          object Label3: TLabel
-            AlignWithMargins = True
-            Left = 36
-            Top = 11
-            Width = 65
-            Height = 19
-            Cursor = crHandPoint
-            Margins.Left = 35
-            Margins.Top = 10
-            Margins.Right = 35
-            Margins.Bottom = 10
-            Align = alClient
-            Alignment = taCenter
-            Caption = 'Alterar'
-            Color = clCream
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -13
-            Font.Name = 'Segoe UI'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            ExplicitWidth = 42
-            ExplicitHeight = 17
-          end
         end
       end
       object btnPesquisar: TPanel
@@ -2956,7 +2922,7 @@ object PagPacientes: TPagPacientes
           end
         end
       end
-      object btnProcedimentos: TPanel
+      object btnConsultas: TPanel
         Left = 8
         Top = 287
         Width = 137
@@ -2965,9 +2931,9 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 6
-        OnMouseEnter = btnProcedimentosMouseEnter
-        OnMouseLeave = btnProcedimentosMouseLeave
-        object lblProcedimentos: TLabel
+        OnMouseEnter = btnConsultasMouseEnter
+        OnMouseLeave = btnConsultasMouseLeave
+        object lblConsultas: TLabel
           AlignWithMargins = True
           Left = 16
           Top = 11
@@ -2980,7 +2946,7 @@ object PagPacientes: TPagPacientes
           Margins.Bottom = 10
           Align = alClient
           Alignment = taCenter
-          Caption = 'Procedimentos'
+          Caption = 'Consultas'
           Color = clCream
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
@@ -2989,9 +2955,9 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnMouseEnter = btnProcedimentosMouseEnter
-          OnMouseLeave = btnProcedimentosMouseLeave
-          ExplicitWidth = 92
+          OnMouseEnter = btnConsultasMouseEnter
+          OnMouseLeave = btnConsultasMouseLeave
+          ExplicitWidth = 60
           ExplicitHeight = 17
         end
       end
@@ -3077,10 +3043,47 @@ object PagPacientes: TPagPacientes
           ExplicitHeight = 17
         end
       end
+      object btnAlterarNovo: TPanel
+        Left = 8
+        Top = 52
+        Width = 137
+        Height = 41
+        Cursor = crHandPoint
+        Color = 16223019
+        ParentBackground = False
+        TabOrder = 9
+        Visible = False
+        OnClick = btnAlterarNovoClick
+        object Label3: TLabel
+          AlignWithMargins = True
+          Left = 36
+          Top = 11
+          Width = 65
+          Height = 19
+          Cursor = crHandPoint
+          Margins.Left = 35
+          Margins.Top = 10
+          Margins.Right = 35
+          Margins.Bottom = 10
+          Align = alClient
+          Alignment = taCenter
+          Caption = 'Alterar'
+          Color = clCream
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          ExplicitWidth = 42
+          ExplicitHeight = 17
+        end
+      end
     end
     object pnlAddPacientes: TPanel
       Left = 9
-      Top = 462
+      Top = 460
       Width = 592
       Height = 147
       Color = 15790320
@@ -3107,23 +3110,13 @@ object PagPacientes: TPagPacientes
         TextHint = 'Digite o CPF:'
         OnKeyDown = edCPFKeyDown
       end
-      object edTelefone: TEdit
-        Left = 432
-        Top = 9
-        Width = 152
-        Height = 32
-        AutoSize = False
-        TabOrder = 2
-        TextHint = 'Digite o Telefone:'
-        OnKeyDown = edTelefoneKeyDown
-      end
       object edCEP: TEdit
         Left = 8
         Top = 57
         Width = 169
         Height = 32
         AutoSize = False
-        TabOrder = 3
+        TabOrder = 2
         TextHint = 'Digite o Cep:'
         OnKeyDown = edCEPKeyDown
       end
@@ -3133,23 +3126,8 @@ object PagPacientes: TPagPacientes
         Width = 169
         Height = 32
         AutoSize = False
-        TabOrder = 4
+        TabOrder = 3
         TextHint = 'Digite o Endere'#231'o:'
-      end
-      object edDataNasc: TEdit
-        Left = 432
-        Top = 57
-        Width = 152
-        Height = 32
-        AutoSize = False
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 5
-        TextHint = 'Data de nascimento:'
       end
       object btnaddPaciente: TPanel
         AlignWithMargins = True
@@ -3163,7 +3141,7 @@ object PagPacientes: TPagPacientes
         Margins.Bottom = 36
         Color = 8142341
         ParentBackground = False
-        TabOrder = 6
+        TabOrder = 4
         OnClick = btnaddPacienteClick
         OnMouseEnter = lblAddpacienteMouseEnter
         OnMouseLeave = lblAddpacienteMouseLeave
@@ -3193,6 +3171,71 @@ object PagPacientes: TPagPacientes
           OnMouseLeave = lblAddpacienteMouseLeave
           ExplicitWidth = 115
         end
+      end
+      object btnConfirmarAlteracoes: TPanel
+        AlignWithMargins = True
+        Left = 8
+        Top = 110
+        Width = 577
+        Height = 32
+        Margins.Left = 10
+        Margins.Top = 75
+        Margins.Right = 13
+        Margins.Bottom = 36
+        Color = 8142341
+        ParentBackground = False
+        TabOrder = 5
+        Visible = False
+        OnClick = btnConfirmarAlteracoesClick
+        OnMouseEnter = btnConfirmarAlteracoesMouseEnter
+        OnMouseLeave = btnConfirmarAlteracoesMouseLeave
+        object lblConfirmarAlteracoes: TLabel
+          AlignWithMargins = True
+          Left = 191
+          Top = 6
+          Width = 215
+          Height = 19
+          Cursor = crHandPoint
+          Margins.Left = 190
+          Margins.Top = 5
+          Margins.Right = 170
+          Margins.Bottom = 6
+          Align = alClient
+          Alignment = taCenter
+          Caption = 'Confirmar Altera'#231#245'es'
+          Color = clCream
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          ExplicitLeft = 201
+          ExplicitTop = 22
+          ExplicitWidth = 205
+          ExplicitHeight = 22
+        end
+      end
+      object edDataNasc: TDateTimePicker
+        Left = 432
+        Top = 56
+        Width = 147
+        Height = 33
+        Time = 0.641822141202283100
+        TabOrder = 6
+      end
+      object edTelefone: TMaskEdit
+        Left = 432
+        Top = 9
+        Width = 147
+        Height = 32
+        EditMask = '(00) 00000-0009;1;_'
+        MaxLength = 15
+        TabOrder = 7
+        Text = '(  )      -    '
+        TextHint = 'Digite o Telefone:'
+        OnKeyDown = edTelefoneKeyDown
       end
     end
   end

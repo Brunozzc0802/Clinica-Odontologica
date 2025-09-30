@@ -110,6 +110,7 @@ type
     procedure btnCRestoreClick(Sender: TObject);
     procedure imgXrestoreClick(Sender: TObject);
     procedure AdicionarUsuarios;
+    procedure OrdenarGrid;
   private
     UsuarioIdalterar: Integer;
     UsuarioLista: TObjectList<TUsuario>;
@@ -126,6 +127,28 @@ implementation
 
 {$R *.dfm}
 
+
+//função que ordena o grid por ordem numerica crescente\\
+procedure TPagUsuarios.OrdenarGrid;
+var
+  i, j: Integer;
+  temp: string;
+begin
+  // Laço de comparação de todas as linhas (exceto a primeira se for cabeçalho)
+  for i := 1 to sgUsuarios.RowCount - 2 do
+    for j := i + 1 to sgUsuarios.RowCount - 1 do
+      if StrToIntDef(sgUsuarios.Cells[0, i], 0) > StrToIntDef(sgUsuarios.Cells[0, j], 0) then
+      begin
+        // Troca todas as colunas da linha i com a linha j
+        var k: Integer;
+        for k := 0 to sgUsuarios.ColCount - 1 do
+        begin
+          temp := sgUsuarios.Cells[k, i];
+          sgUsuarios.Cells[k, i] := sgUsuarios.Cells[k, j];
+          sgUsuarios.Cells[k, j] := temp;
+        end;
+      end;
+end;
 
 //função que carrega os inativos\\
 procedure TPagUsuarios.CarregarInativos;
@@ -196,7 +219,7 @@ begin
   Controller := TUsuarioController.Create;
   try
     if Assigned(UsuarioLista) then
-      UsuarioLista.Free;
+    UsuarioLista.Free;
     UsuarioLista := Controller.BuscarTodos;
 
     // Cabeçalho
@@ -219,7 +242,6 @@ begin
     Controller.Free;
   end;
 end;
-
 
 //ação de fechar o formulario\\
 procedure TPagUsuarios.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -268,7 +290,7 @@ procedure TPagUsuarios.pesquisarUsuarioChange(Sender: TObject);
   begin
      PesquisarUsuarios(pesquisarUsuario.Text);
   end;
-//cor de fundo e senha em *\\
+//cor de fundo e senha em * no grid de restaurar\\
 procedure TPagUsuarios.sgRestoreDrawCell(Sender: TObject; ACol, ARow: LongInt;
   Rect: TRect; State: TGridDrawState);
 var
@@ -297,7 +319,7 @@ var
 
   sgRestore.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2, TextToDraw);
 end;
-
+//cor de fundo e senha em *\\
 procedure TPagUsuarios.sgUsuariosDrawCell(Sender: TObject; ACol, ARow: LongInt;
   Rect: TRect; State: TGridDrawState);
 var
@@ -371,6 +393,7 @@ procedure TPagUsuarios.btnSairUsuClick(Sender: TObject);
   end;
 //Click do botao limpar\\
 procedure TPagUsuarios.btnLimparUsuClick(Sender: TObject);
+
   begin
     if pnlFormAddUsuarios.Visible = True then begin
        edUsuario.Clear;
@@ -383,6 +406,7 @@ procedure TPagUsuarios.btnLimparUsuClick(Sender: TObject);
     end;
 
   end;
+//Click do botão de adicionar usuarios e mandar para o banco\\
 procedure TPagUsuarios.AdicionarUsuarios;
 var
   Controller: TUsuarioController;
@@ -412,7 +436,6 @@ begin
     Controller.Free;
   end;
 end;
-
 //botao de adicionar dos botões laterais\\
 procedure TPagUsuarios.btnAddUsuClick(Sender: TObject);
   begin
@@ -522,10 +545,9 @@ begin
     pesquisarUsuario.SetFocus;
   end;
 end;
-
 //click do botao de alterar\\
 procedure TPagUsuarios.btnAlterarUsuClick(Sender: TObject);
-var
+  var
   linha: Integer;
   grupo, ativo: string;
   begin
@@ -558,7 +580,7 @@ var
     btnConfirmarAlteracoes.Visible := True;
     btnAdicionarUsuario.Visible := False;
     pnlFormAddUsuarios.Visible := True;
-  end;
+   end;
 //Click do botao de restaurar\\
 procedure TPagUsuarios.btnRestaurarUsuClick(Sender: TObject);
   begin
@@ -580,29 +602,9 @@ procedure TPagUsuarios.btnRestaurarUsuClick(Sender: TObject);
     sgRestore.ColWidths[4] := 93;
 
   end;
-
-//ANIMAÇÃO DE HOVER NOS BOTÕES\\
-procedure TPagUsuarios.btnCancelarUsuMouseEnter(Sender: TObject);
-  begin
-    btnCancelarUsu.Color := $00F78B2B;
-  end;
-
-procedure TPagUsuarios.btnCancelarUsuMouseLeave(Sender: TObject);
-  begin
-    btnCancelarUsu.Color := $007C3E05;
-  end;
-
-procedure TPagUsuarios.btnConfirmarAlteracoesMouseEnter(Sender: TObject);
-  begin
-    btnConfirmarAlteracoes.Color := $00C46106;
-  end;
-
-procedure TPagUsuarios.btnConfirmarAlteracoesMouseLeave(Sender: TObject);
-  begin
-    btnConfirmarAlteracoes.Color := $007C3E05;
-  end;
-
+//Click do botão de confirmar restaurar\\
 procedure TPagUsuarios.btnCRestoreClick(Sender: TObject);
+
 var
   LinhaRestore: Integer;
   Usuario: TUsuario;
@@ -641,6 +643,30 @@ begin
     ShowMessage('Selecione um usuário para Restaurar.');
 end;
 end;
+
+
+
+//ANIMAÇÃO DE HOVER NOS BOTÕES\\
+procedure TPagUsuarios.btnCancelarUsuMouseEnter(Sender: TObject);
+  begin
+    btnCancelarUsu.Color := $00F78B2B;
+  end;
+
+procedure TPagUsuarios.btnCancelarUsuMouseLeave(Sender: TObject);
+  begin
+    btnCancelarUsu.Color := $007C3E05;
+  end;
+
+procedure TPagUsuarios.btnConfirmarAlteracoesMouseEnter(Sender: TObject);
+  begin
+    btnConfirmarAlteracoes.Color := $00C46106;
+  end;
+
+procedure TPagUsuarios.btnConfirmarAlteracoesMouseLeave(Sender: TObject);
+  begin
+    btnConfirmarAlteracoes.Color := $007C3E05;
+  end;
+
 procedure TPagUsuarios.btnDeletarUsuMouseEnter(Sender: TObject);
   begin
     btnDeletarUsu.Color := $00F78B2B;

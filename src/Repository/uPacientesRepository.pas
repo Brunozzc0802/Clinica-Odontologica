@@ -10,6 +10,7 @@ type
   public
   class function ListarTodos: TObjectList<TPaciente>;
   procedure Adicionar(APaciente: TPaciente);
+  procedure Alterar(APaciente: TPaciente);
 end;
 
 implementation
@@ -31,6 +32,28 @@ begin
     ParamByName('cep').AsString  := APaciente.cep;
     ParamByName('data_nascimento').AsDate  := APaciente.DataNascimento;
     ParamByName('endereco').AsString  := APaciente.endereco;
+
+    ExecSQL;
+  end;
+end;
+
+procedure TPacientesRepository.Alterar(APaciente: TPaciente);
+begin
+  with dmUsuarios.queryPacientes do
+  begin
+    Close;
+    SQL.Text :=
+      'UPDATE pacientes ' + 'SET nome = :nome, ' + 'cpf = :cpf, ' + 'telefone = :telefone, ' +
+      'cep = :cep, ' + 'endereco = :endereco, ' + 'data_nascimento = :data_nascimento, ' +
+      'ativo = TRUE ' + 'WHERE id = :id';
+
+    ParamByName('id').AsInteger            := APaciente.Id;
+    ParamByName('nome').AsString           := APaciente.Nome;
+    ParamByName('cpf').AsString            := APaciente.Cpf;
+    ParamByName('telefone').AsString       := APaciente.Telefone;
+    ParamByName('cep').AsString            := APaciente.Cep;
+    ParamByName('endereco').AsString       := APaciente.Endereco;
+    ParamByName('data_nascimento').AsDate  := APaciente.DataNascimento;
 
     ExecSQL;
   end;

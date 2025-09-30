@@ -1307,8 +1307,8 @@ object PagUsuarios: TPagUsuarios
     end
     object imgLogoUsuarios2: TImage
       AlignWithMargins = True
-      Left = 539
-      Top = 462
+      Left = 540
+      Top = 460
       Width = 149
       Height = 132
       Margins.Left = 100
@@ -3200,8 +3200,8 @@ object PagUsuarios: TPagUsuarios
     end
   end
   object pnlFormAddUsuarios: TPanel
-    Left = 8
-    Top = 505
+    Left = 10
+    Top = 503
     Width = 525
     Height = 132
     BevelOuter = bvNone
@@ -3329,6 +3329,7 @@ object PagUsuarios: TPagUsuarios
       OnClick = btnConfirmarAlteracoesClick
       OnMouseEnter = btnConfirmarAlteracoesMouseEnter
       OnMouseLeave = btnConfirmarAlteracoesMouseLeave
+      ExplicitTop = 68
       object lblConfirmarAlteracoes: TLabel
         AlignWithMargins = True
         Left = 191

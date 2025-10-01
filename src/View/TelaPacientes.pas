@@ -36,8 +36,6 @@ type
     Label1: TLabel;
     btnDeletar: TPanel;
     lblDeletarUsu: TLabel;
-    btnDeletarNovo: TPanel;
-    Label4: TLabel;
     btnCancelar: TPanel;
     lblCancelarUsu: TLabel;
     btnRestaurar: TPanel;
@@ -52,7 +50,6 @@ type
     lblSair: TLabel;
     pnlAddPacientes: TPanel;
     EdNomePaciente: TEdit;
-    edCPF: TEdit;
     edCEP: TEdit;
     edEndereco: TEdit;
     btnaddPaciente: TPanel;
@@ -62,6 +59,7 @@ type
     lblConfirmarAlteracoes: TLabel;
     edDataNasc: TDateTimePicker;
     edTelefone: TMaskEdit;
+    edCPF: TMaskEdit;
     procedure btnXClick(Sender: TObject);
     procedure btnAddMouseEnter(Sender: TObject);
     procedure btnAddMouseLeave(Sender: TObject);
@@ -97,7 +95,7 @@ type
     procedure edTelefoneKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure edCEPKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure buscarCEP(const CEP: string);
+    function buscarCEP(const CEP: string): Boolean;
     procedure FormShow(Sender: TObject);
     procedure adicionarPaciente;
     procedure btnaddPacienteClick(Sender: TObject);
@@ -110,9 +108,17 @@ type
     procedure btnAlterarNovoClick(Sender: TObject);
     procedure OrdenarGrid;
     procedure pesquisarChange(Sender: TObject);
+    procedure btnAddNovoClick(Sender: TObject);
+    procedure btnNovoPesquisarClick(Sender: TObject);
+    procedure btnRestaurarNovoClick(Sender: TObject);
+    procedure ConfirmarAlteracoes(Sender: TObject);
+    procedure btnDeletarClick(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+
   private
      PacienteIdalterar: Integer;
      PacientesLista: TObjectList<TPaciente>;
+     Controller: TPacientesController;
      procedure PesquisarPacientes(const Filtro: string);
   public
     { Public declarations }
@@ -179,31 +185,9 @@ procedure TPagPacientes.PesquisarPacientes(const Filtro: string);
       end;
     end;
   end;
-procedure TPagPacientes.buscarCEP(const CEP: string);
-var
-  HTTP: TNetHTTPClient;
-  Response: IHTTPResponse;
-  JsonResp: TJSONObject;
-begin
-  HTTP := TNetHTTPClient.Create(nil);
-  try
-    Response := HTTP.Get('https://viacep.com.br/ws/' + CEP + '/json/');
-    if Response.StatusCode = 200 then
-    begin
-      JsonResp := TJSONObject.ParseJSONValue(Response.ContentAsString) as TJSONObject;
-      try
-        edEndereco.Text := JsonResp.GetValue('logradouro').Value;
-        edDataNasc.SetFocus;
-      finally
-        JsonResp.Free;
-      end;
-    end else
-      ShowMessage('CEP não encontrado!');
-      edCEP.SetFocus;
-  finally
-    HTTP.Free;
-  end;
-end;
+
+
+
 procedure TPagPacientes.CarregarPacientes;
   var
   Controller: TPacientesController;
@@ -241,190 +225,7 @@ begin
   end;
 end;
 
-procedure TPagPacientes.adicionarPaciente;
-var
-  Controller: TPacientesController;
-  DataNascimento: TDate;
-begin
-  Controller := TPacientesController.Create;
-  try
-
-    if (EdNomePaciente.Text = '') or (edCPF.Text = '') or (edTelefone.Text = '') or
-    (edCEP.Text = '') or (edDataNasc.Checked = False)
-    then begin
-      ShowMessage('Preencha todos os campos');
-      exit;
-    end;
-
-    DataNascimento := edDataNasc.Date;
-    if DataNascimento > Date then
-     begin
-      ShowMessage('Data de nascimento invalida!');
-      Exit;
-     end;
-
-
-    Controller.AdicionarPaciente(
-      edNomePaciente.Text,
-      edCPF.Text,
-      edTelefone.Text,
-      edCEP.Text,
-      edEndereco.Text,
-      edDataNasc.Date
-    );
-    ShowMessage('Paciente adicionado com sucesso!');
-    CarregarPacientes;
-    edNomePaciente.clear;
-    edCPF.clear;
-    edTelefone.clear;
-    edCEP.clear;
-    edEndereco.clear;
-    edDataNasc.Date := Date;
-    edNomePaciente.SetFocus;
-  finally
-    Controller.Free;
-  end;
-end;
-
-procedure TPagPacientes.btnAddClick(Sender: TObject);
-  begin
-    pnlAddPacientes.Visible := True;
-    edNomePaciente.SetFocus;
-    imgLogo1.Visible := False;
-    imgLogo2.Visible := True;
-    sgPacientes.Row := 0;
-    sgPacientes.Col := 0;
-    sgPacientes.SetFocus;
-  end;
-
-procedure TPagPacientes.btnAddMouseEnter(Sender: TObject);
-  begin
-    btnAdd.Color := $00F78B2B;
-  end;
-
-procedure TPagPacientes.btnAddMouseLeave(Sender: TObject);
-  begin
-    btnAdd.Color := $007C3E05;
-  end;
-
-procedure TPagPacientes.btnaddPacienteClick(Sender: TObject);
-  begin
-    adicionarPaciente;
-  end;
-
-procedure TPagPacientes.btnAlterarClick(Sender: TObject);
-var
-  linha: Integer;
-  begin
-    linha := sgPacientes.Row;
-    if linha <= 0 then
-    begin
-      ShowMessage('Selecione um paciente para alterar!');
-      Exit;
-    end;
-
-    PacienteIdalterar := StrToIntDef(sgPacientes.Cells[0, linha], 0);
-    EdNomePaciente.Text := sgPacientes.Cells[1, linha];
-    edCPF.Text := sgpacientes.Cells[2, linha];
-    edTelefone.Text := sgPacientes.Cells[3, linha];
-    edCEP.Text := sgpacientes.Cells[4, linha];
-    edDataNasc.Date := StrToDate(sgPacientes.Cells[5, linha]);
-    edendereco.Text := sgpacientes.Cells[6, linha];
-
-    btnConfirmarAlteracoes.Visible := True;
-    btnAddNovo.Visible := False;
-    btnAlterarNovo.Visible := True;
-    btnAddNovo.Visible := False;
-    pnlAddPacientes.Visible := True;
-   end;
-
-procedure TPagPacientes.btnAlterarMouseEnter(Sender: TObject);
-  begin
-    btnAlterar.Color := $00F78B2B;
-  end;
-
-procedure TPagPacientes.btnAlterarMouseLeave(Sender: TObject);
-  begin
-    btnAlterar.Color := $007C3E05;
-  end;
-
-
-procedure TPagPacientes.btnAlterarNovoClick(Sender: TObject);
-  begin
-    if btnAlterarNovo.Visible = true then begin
-      pnlAddPacientes.Visible := False;
-      btnAlterarNovo.Visible := False;
-      imgLogo1.Visible := True;
-      imgLogo2.visible := False;
-    end;
-  end;
-
-procedure TPagPacientes.btnCancelarClick(Sender: TObject);
-  begin
-    pnlAddPacientes.Visible := False;
-    imgLogo1.Visible := True;
-    imgLogo2.visible := False;
-
-    if pesquisar.Visible = True then begin
-      sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
-      sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
-      pesquisar.Visible := False;
-      btnNovoPesquisar.Visible := False;
-    end;
-
-    sgPacientes.Row := 0;
-    sgPacientes.Col := 0;
-    sgPacientes.SetFocus;
-
-  end;
-
-procedure TPagPacientes.btnCancelarMouseEnter(Sender: TObject);
-  begin
-    btnCancelar.Color := $00F78B2B;
-  end;
-
-procedure TPagPacientes.btnCancelarMouseLeave(Sender: TObject);
-  begin
-    btnCancelar.Color := $007C3E05;
-  end;
-
-procedure TPagPacientes.btnDeletarMouseEnter(Sender: TObject);
-  begin
-    btnDeletar.Color := $00F78B2B;
-  end;
-
-procedure TPagPacientes.btnDeletarMouseLeave(Sender: TObject);
-  begin
-    btnDeletar.Color := $007C3E05;
-  end;
-
-procedure TPagPacientes.btnLimparClick(Sender: TObject);
-  begin
-    if pnlAddPacientes.Visible = True then begin
-      EdNomePaciente.Clear;
-      edCPF.Clear;
-      edTelefone.Clear;
-      edCEP.Clear;
-      edEndereco.Clear;
-      edDataNasc.Date := Date;
-      edNomePaciente.SetFocus;
-    end else begin
-      ShowMessage('Não há nenhum campo para limpar');
-    end;
-
-  end;
-
-procedure TPagPacientes.btnLimparMouseEnter(Sender: TObject);
-  begin
-    btnLimpar.Color := $00F78B2B;
-  end;
-
-procedure TPagPacientes.btnLimparMouseLeave(Sender: TObject);
-  begin
-    btnLimpar.Color := $007C3E05;
-  end;
-
-procedure TPagPacientes.btnConfirmarAlteracoesClick(Sender: TObject);
+procedure TPagPacientes.ConfirmarAlteracoes(Sender: TObject);
 var
   Controller: TPacientesController;
   DataNascimento: TDate;
@@ -466,6 +267,250 @@ begin
     Controller.Free;
   end;
 end;
+
+procedure TPagPacientes.adicionarPaciente;
+var
+  Controller: TPacientesController;
+  DataNascimento: TDate;
+begin
+  Controller := TPacientesController.Create;
+  try
+
+    if (EdNomePaciente.Text = '') or (edCPF.Text = '') or (edTelefone.Text = '') or
+    (edCEP.Text = '') or (edDataNasc.Checked = False)
+    then begin
+      ShowMessage('Preencha todos os campos');
+      exit;
+    end;
+
+    DataNascimento := edDataNasc.Date;
+    if DataNascimento > Date then begin
+      ShowMessage('Data de nascimento invalida!');
+      Exit;
+    end;
+
+      Controller.AdicionarPaciente(
+      edNomePaciente.Text,
+      edCPF.Text,
+      edTelefone.Text,
+      edCEP.Text,
+      edEndereco.Text,
+      edDataNasc.Date
+    );
+    ShowMessage('Paciente adicionado com sucesso!');
+    CarregarPacientes;
+    pnlAddPacientes.Visible := False;
+    edNomePaciente.clear;
+    edCPF.clear;
+    edTelefone.clear;
+    edCEP.clear;
+    edEndereco.clear;
+    edDataNasc.Date := Date;
+  finally
+    Controller.Free;
+  end;
+end;
+
+procedure TPagPacientes.btnAddClick(Sender: TObject);
+  begin
+    if btnRestaurarNovo.Visible = True then begin
+      btnAdd.Enabled;
+      btnAlterar.Enabled;
+      btnPesquisar.Enabled;
+    end;
+
+    if btnNovoPesquisar.Visible = true  then begin
+      sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
+      sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
+      pesquisar.Visible := False;
+      btnNovoPesquisar.Visible := False;
+    end;
+
+    pnlAddPacientes.Visible := True;
+    edNomePaciente.SetFocus;
+    imgLogo1.Visible := False;
+    imgLogo2.Visible := True;
+    sgPacientes.Row := 0;
+    sgPacientes.Col := 0;
+  end;
+
+procedure TPagPacientes.btnAddMouseEnter(Sender: TObject);
+  begin
+    btnAdd.Color := $00F78B2B;
+  end;
+
+procedure TPagPacientes.btnAddMouseLeave(Sender: TObject);
+  begin
+    btnAdd.Color := $007C3E05;
+  end;
+
+procedure TPagPacientes.btnAddNovoClick(Sender: TObject);
+  begin
+    if btnaddNovo.Visible = True then begin
+      pnlAddPacientes.Visible := False;
+      btnaddNovo.Visible := false;
+    end;
+
+  end;
+
+procedure TPagPacientes.btnaddPacienteClick(Sender: TObject);
+begin
+  if not buscarCEP(edCep.Text) then
+    Exit;
+  adicionarPaciente;
+end;
+
+procedure TPagPacientes.btnAlterarClick(Sender: TObject);
+var
+  linha: Integer;
+  begin
+    linha := sgPacientes.Row;
+    if linha <= 0 then
+    begin
+      ShowMessage('Selecione um paciente para alterar!');
+      Exit;
+    end;
+
+    if btnNovoPesquisar.Visible = true  then begin
+      sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
+      sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
+      pesquisar.Visible := False;
+      btnNovoPesquisar.Visible := False;
+    end;
+
+    PacienteIdalterar := StrToIntDef(sgPacientes.Cells[0, linha], 0);
+    EdNomePaciente.Text := sgPacientes.Cells[1, linha];
+    edCPF.Text := sgpacientes.Cells[2, linha];
+    edTelefone.Text := sgPacientes.Cells[3, linha];
+    edCEP.Text := sgpacientes.Cells[4, linha];
+    edDataNasc.Date := StrToDate(sgPacientes.Cells[5, linha]);
+    edendereco.Text := sgpacientes.Cells[6, linha];
+
+    btnConfirmarAlteracoes.Visible := True;
+    btnAddNovo.Visible := False;
+    btnAlterarNovo.Visible := True;
+    btnAddNovo.Visible := False;
+    pnlAddPacientes.Visible := True;
+   end;
+
+procedure TPagPacientes.btnAlterarMouseEnter(Sender: TObject);
+  begin
+    btnAlterar.Color := $00F78B2B;
+  end;
+
+procedure TPagPacientes.btnAlterarMouseLeave(Sender: TObject);
+  begin
+    btnAlterar.Color := $007C3E05;
+  end;
+
+
+procedure TPagPacientes.btnAlterarNovoClick(Sender: TObject);
+  begin
+    if btnAlterarNovo.Visible = true then begin
+      pnlAddPacientes.Visible := False;
+      btnAlterarNovo.Visible := False;
+      imgLogo1.Visible := True;
+      imgLogo2.visible := False;
+    end;
+  end;
+
+procedure TPagPacientes.btnCancelarClick(Sender: TObject);
+  begin
+    pnlAddPacientes.Visible := False;
+    btnAlterarNovo.Visible := False;
+    imgLogo1.Visible := True;
+    imgLogo2.visible := False;
+
+    if pesquisar.Visible = True then begin
+      sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
+      sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
+      pesquisar.Visible := False;
+      btnNovoPesquisar.Visible := False;
+    end;
+
+    sgPacientes.Row := 0;
+    sgPacientes.Col := 0;
+    sgPacientes.SetFocus;
+
+  end;
+
+procedure TPagPacientes.btnCancelarMouseEnter(Sender: TObject);
+  begin
+    btnCancelar.Color := $00F78B2B;
+  end;
+
+procedure TPagPacientes.btnCancelarMouseLeave(Sender: TObject);
+  begin
+    btnCancelar.Color := $007C3E05;
+  end;
+
+procedure TPagPacientes.btnDeletarClick(Sender: TObject);
+var
+  Id: Integer;
+begin
+  Id := StrToIntDef(sgPacientes.Cells[0, sgPacientes.Row], 0); // primeira coluna = ID
+  if Id > 0 then
+  begin
+    if MessageDlg('Deseja realmente excluir este paciente?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    begin
+      Controller.DesativarPaciente(Id);
+      CarregarPacientes;
+      sgPacientes.Row := 0;
+      sgPacientes.Col := 0;
+      sgPacientes.SetFocus;
+    end;
+  end;
+end;
+
+procedure TPagPacientes.btnDeletarMouseEnter(Sender: TObject);
+  begin
+    btnDeletar.Color := $00F78B2B;
+  end;
+
+procedure TPagPacientes.btnDeletarMouseLeave(Sender: TObject);
+  begin
+    btnDeletar.Color := $007C3E05;
+  end;
+
+procedure TPagPacientes.btnLimparClick(Sender: TObject);
+  begin
+    if pnlAddPacientes.Visible = True then begin
+      EdNomePaciente.Clear;
+      edCPF.Clear;
+      edTelefone.Clear;
+      edCEP.Clear;
+      edEndereco.Clear;
+      edDataNasc.Date := Date;
+      edNomePaciente.SetFocus;
+    end;
+
+  end;
+
+procedure TPagPacientes.btnLimparMouseEnter(Sender: TObject);
+  begin
+    btnLimpar.Color := $00F78B2B;
+  end;
+
+procedure TPagPacientes.btnLimparMouseLeave(Sender: TObject);
+  begin
+    btnLimpar.Color := $007C3E05;
+  end;
+
+procedure TPagPacientes.btnNovoPesquisarClick(Sender: TObject);
+  begin
+    if btnNovoPesquisar.Visible = true  then begin
+      sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
+      sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
+      pesquisar.Visible := False;
+      btnNovoPesquisar.Visible := False;
+    end;
+
+  end;
+
+procedure TPagPacientes.btnConfirmarAlteracoesClick(Sender: TObject);
+  begin
+    ConfirmarAlteracoes(nil);
+  end;
 
 
 procedure TPagPacientes.btnConfirmarAlteracoesMouseEnter(Sender: TObject);
@@ -525,6 +570,14 @@ procedure TPagPacientes.btnRestaurarMouseLeave(Sender: TObject);
     btnRestaurar.Color := $007C3E05;
   end;
 
+procedure TPagPacientes.btnRestaurarNovoClick(Sender: TObject);
+  begin
+    if (btnrestaurarnovo.Visible = True) then begin
+
+    end;
+
+  end;
+
 procedure TPagPacientes.btnSairMouseEnter(Sender: TObject);
   begin
     btnSair.Color := $00F78B2B;
@@ -539,6 +592,45 @@ procedure TPagPacientes.btnXClick(Sender: TObject);
   begin
     close;
   end;
+
+function TPagPacientes.buscarCEP(const CEP: string): Boolean;
+var
+  HTTP: TNetHTTPClient;
+  Response: IHTTPResponse;
+  JsonResp: TJSONObject;
+begin
+  Result := False; // assume falha
+  HTTP := TNetHTTPClient.Create(nil);
+  try
+    Response := HTTP.Get('https://viacep.com.br/ws/' + CEP + '/json/');
+    if Response.StatusCode = 200 then
+    begin
+      JsonResp := TJSONObject.ParseJSONValue(Response.ContentAsString) as TJSONObject;
+      try
+        if JsonResp.GetValue('erro') <> nil then
+        begin
+          ShowMessage('CEP não encontrado!');
+          edCEP.SetFocus;
+          Exit;  // sai com Result = False
+        end;
+
+        edEndereco.Text := JsonResp.GetValue('logradouro').Value;
+        edDataNasc.SetFocus;
+        Result := True; // CEP encontrado
+      finally
+        JsonResp.Free;
+      end;
+    end
+    else
+    begin
+      ShowMessage('CEP não encontrado!');
+      edCEP.SetFocus;
+    end;
+  finally
+    HTTP.Free;
+  end;
+end;
+
 
 procedure TPagPacientes.edCEPKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
@@ -580,6 +672,7 @@ procedure TPagPacientes.edTelefoneKeyDown(Sender: TObject; var Key: Word;
 procedure TPagPacientes.FormClose(Sender: TObject; var Action: TCloseAction);
   begin
     pnlAddPacientes.Visible := False;
+    controller.Free;
   end;
 
 procedure TPagPacientes.FormCreate(Sender: TObject);
@@ -603,6 +696,11 @@ begin
   OrdenarGrid;
 
 end;
+
+procedure TPagPacientes.FormDestroy(Sender: TObject);
+  begin
+    controller.Free;
+  end;
 
 procedure TPagPacientes.FormShow(Sender: TObject);
   begin

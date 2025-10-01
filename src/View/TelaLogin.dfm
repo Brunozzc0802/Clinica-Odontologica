@@ -5470,6 +5470,7 @@ object FormLogin: TFormLogin
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = pnlPacientesClick
           OnMouseEnter = pnlPacientesMouseEnter
           OnMouseLeave = pnlPacientesMouseLeave
           ExplicitWidth = 83
@@ -5530,6 +5531,7 @@ object FormLogin: TFormLogin
             B39E00684AFC6F2D00FE03B01E705FCDE519E20000000049454E44AE426082}
           Proportional = True
           Stretch = True
+          OnClick = pnlPacientesClick
           OnMouseEnter = pnlPacientesMouseEnter
           OnMouseLeave = pnlPacientesMouseLeave
         end

@@ -51,8 +51,6 @@ type
     Label3: TLabel;
     iconUserTelaUsuarios: TImage;
     btnXUsuarios: TImage;
-    btnDeletarNovo: TPanel;
-    Label4: TLabel;
     pnlRestaurar: TPanel;
     btnRestaurarNovo: TPanel;
     Label5: TLabel;
@@ -111,6 +109,11 @@ type
     procedure imgXrestoreClick(Sender: TObject);
     procedure AdicionarUsuarios;
     procedure OrdenarGrid;
+    procedure btnAddNovoClick(Sender: TObject);
+    procedure btnAlterarNovoClick(Sender: TObject);
+    procedure btnNovoPesquisarClick(Sender: TObject);
+    procedure btnCRestoreMouseEnter(Sender: TObject);
+    procedure btnCRestoreMouseLeave(Sender: TObject);
   private
     UsuarioIdalterar: Integer;
     UsuarioLista: TObjectList<TUsuario>;
@@ -436,32 +439,54 @@ begin
     Controller.Free;
   end;
 end;
-//botao de adicionar dos botões laterais\\
+//botão de adicionar novo dos botões laterais\\
+procedure TPagUsuarios.btnAddNovoClick(Sender: TObject);
+  begin
+    if btnaddnovo.Visible = true then begin
+      pnlFormAddUsuarios.Visible := false;
+      btnAddNovo.Visible := false;
+      imgLogoUsuarios1.Visible := True;
+      imgLogoUsuarios2.visible := False;
+    end;
+
+  end;
+//botão de adicionar dos botões laterais\\
 procedure TPagUsuarios.btnAddUsuClick(Sender: TObject);
   begin
-  if (btnAlterarNovo.Visible = True) then begin
-    edUsuario.Clear;
-    edSenhaUsuario.Clear;
-    cbAtivo.ItemIndex := -1;
-    cbGrupo.ItemIndex := -1;
-    edUsuario.SetFocus;
-    sgUsuarios.Row := 0;
-    sgUsuarios.Col := 0;
-    sgUsuarios.SetFocus;
-  end;
-    //botões de cor nova\\
-    btnAlterarNovo.Visible := false;
-    btnAddNovo.Visible := True;
-    btnNovoPesquisar.Visible := False;
-    btnRestaurarNovo.Visible := false;
+    if pnlRestaurar.Visible = true then begin
+      pnlRestaurar.Visible := False;
+      btnRestaurarNovo.Visible := false;
+    end;
 
-    btnConfirmarAlteracoes.Visible := false;
-    btnAdicionarUsuario.Visible := True;
+    if (btnAlterarNovo.Visible = True) then begin
+      edUsuario.Clear;
+      edSenhaUsuario.Clear;
+      cbAtivo.ItemIndex := -1;
+      cbGrupo.ItemIndex := -1;
+      edUsuario.SetFocus;
+      sgUsuarios.Row := 0;
+      sgUsuarios.Col := 0;
+      sgUsuarios.SetFocus;
 
-    pnlFormAddUsuarios.Visible := True;
-    imgLogoUsuarios2.Visible := True;
-    imgLogoUsuarios1.Visible := False;
-    edUsuario.SetFocus;
+    if btnNovoPesquisar.Visible = true  then begin
+        sgUsuarios.Top := sgUsuarios.Top - (pesquisarUsuario.Height + 5);
+        sgUsuarios.Height := sgUsuarios.Height + (pesquisarUsuario.Height + 5);
+        pesquisarUsuario.Visible := False;
+        btnNovoPesquisar.Visible := False;
+      end;
+
+    end;
+
+      btnAlterarNovo.Visible := false;
+      btnAddNovo.Visible := True;
+      btnNovoPesquisar.Visible := False;
+      btnRestaurarNovo.Visible := false;
+      btnConfirmarAlteracoes.Visible := false;
+      btnAdicionarUsuario.Visible := True;
+      pnlFormAddUsuarios.Visible := True;
+      imgLogoUsuarios2.Visible := True;
+      imgLogoUsuarios1.Visible := False;
+      edUsuario.SetFocus;
   end;
 //botão de confirmar alterações
 procedure TPagUsuarios.btnConfirmarAlteracoesClick(Sender: TObject);
@@ -520,7 +545,6 @@ begin
         sgUsuarios.SetFocus;
       finally
         ControllerDelet.Free;
-        btnDeletarNovo.Visible := False;
       end;
     finally
       Usuario.Free;
@@ -531,32 +555,60 @@ begin
 end;
 //Click do botao de pesquisar\\
 procedure TPagUsuarios.btnPesquisarUsuClick(Sender: TObject);
-begin
-  btnAddNovo.Visible := False;
-  btnNovoPesquisar.Visible := True;
-  pnlFormAddUsuarios.Visible := false;
-  imgLogoUsuarios2.Visible := false;
-  imgLogoUsuarios1.Visible := True;
+  begin
+    if pnlRestaurar.Visible = true then begin
+      pnlRestaurar.Visible := False;
+      btnRestaurarNovo.Visible := false;
+    end;
 
-  if not pesquisarUsuario.Visible then begin
-    pesquisarUsuario.Visible := True;
-    sgUsuarios.Top := pesquisarUsuario.Top + pesquisarUsuario.Height + 8;
-    sgUsuarios.Height := sgUsuarios.Height - (pesquisarUsuario.Height + 8);
-    pesquisarUsuario.SetFocus;
+    btnAddNovo.Visible := False;
+    btnAlterarNovo.Visible := false;
+    btnNovoPesquisar.Visible := True;
+    pnlFormAddUsuarios.Visible := false;
+    imgLogoUsuarios2.Visible := false;
+    imgLogoUsuarios1.Visible := True;
+
+    if not pesquisarUsuario.Visible then begin
+      pesquisarUsuario.Visible := True;
+      sgUsuarios.Top := pesquisarUsuario.Top + pesquisarUsuario.Height + 8;
+      sgUsuarios.Height := sgUsuarios.Height - (pesquisarUsuario.Height + 8);
+      pesquisarUsuario.SetFocus;
+    end;
   end;
-end;
 //click do botao de alterar\\
+procedure TPagUsuarios.btnAlterarNovoClick(Sender: TObject);
+  begin
+    if btnAlterarNovo.Visible = true then begin
+      pnlFormAddUsuarios.Visible := False;
+      btnAlterarNovo.Visible := False;
+      imgLogoUsuarios1.Visible := True;
+      imgLogoUsuarios2.visible := False;
+    end;
+  end;
+
 procedure TPagUsuarios.btnAlterarUsuClick(Sender: TObject);
   var
   linha: Integer;
   grupo, ativo: string;
   begin
+    if pnlRestaurar.Visible = true then begin
+      pnlRestaurar.Visible := False;
+      btnRestaurarNovo.Visible := false;
+    end;
+
     linha := sgUsuarios.Row;
-    if linha <= 0 then
-    begin
+    if linha <= 0 then begin
       ShowMessage('Selecione um usuário!');
       Exit;
     end;
+
+    if btnNovoPesquisar.Visible = true  then begin
+      sgUsuarios.Top := sgUsuarios.Top - (pesquisarUsuario.Height + 5);
+      sgUsuarios.Height := sgUsuarios.Height + (pesquisarUsuario.Height + 5);
+      pesquisarUsuario.Visible := False;
+      btnNovoPesquisar.Visible := False;
+    end;
+
     UsuarioIdalterar := StrToIntDef(sgUsuarios.Cells[0, linha], 0);
     edUsuario.Text := sgUsuarios.Cells[1, linha];
     edSenhaUsuario.Text := sgUsuarios.Cells[2, linha];
@@ -576,6 +628,8 @@ procedure TPagUsuarios.btnAlterarUsuClick(Sender: TObject);
     end;
 
     btnAddNovo.Visible := False;
+    btnRestaurarNovo.Visible := false;
+
     btnAlterarNovo.Visible := True;
     btnConfirmarAlteracoes.Visible := True;
     btnAdicionarUsuario.Visible := False;
@@ -584,9 +638,22 @@ procedure TPagUsuarios.btnAlterarUsuClick(Sender: TObject);
 //Click do botao de restaurar\\
 procedure TPagUsuarios.btnRestaurarUsuClick(Sender: TObject);
   begin
-    CarregarInativos;
+    if pnlFormAddUsuarios.Visible = True then begin
+      pnlFormAddUsuarios.Visible := false;
+    end;
+
+
+    if btnNovoPesquisar.Visible = true  then begin
+      sgUsuarios.Top := sgUsuarios.Top - (pesquisarUsuario.Height + 5);
+      sgUsuarios.Height := sgUsuarios.Height + (pesquisarUsuario.Height + 5);
+      pesquisarUsuario.Visible := False;
+      btnNovoPesquisar.Visible := False;
+    end;
+
     btnRestaurarNovo.Visible := True;
+    CarregarInativos;
     btnAddNovo.Visible := False;
+    btnAlterarNovo.Visible := false;
     pnlRestaurar.Visible := True;
 
     sgRestore.Cells[0,0] := 'ID';
@@ -646,6 +713,16 @@ end;
 
 
 
+procedure TPagUsuarios.btnCRestoreMouseEnter(Sender: TObject);
+  begin
+    btnCRestore.Color := $00F8973F;
+  end;
+
+procedure TPagUsuarios.btnCRestoreMouseLeave(Sender: TObject);
+  begin
+    btnCrestore.Color := $00F78B2B;
+  end;
+
 //ANIMAÇÃO DE HOVER NOS BOTÕES\\
 procedure TPagUsuarios.btnCancelarUsuMouseEnter(Sender: TObject);
   begin
@@ -685,6 +762,16 @@ procedure TPagUsuarios.btnLimparUsuMouseEnter(Sender: TObject);
 procedure TPagUsuarios.btnLimparUsuMouseLeave(Sender: TObject);
   begin
     btnLimparUsu.Color := $007C3E05;
+  end;
+
+procedure TPagUsuarios.btnNovoPesquisarClick(Sender: TObject);
+  begin
+    if btnNovoPesquisar.Visible = true  then begin
+      sgUsuarios.Top := sgUsuarios.Top - (pesquisarUsuario.Height + 5);
+      sgUsuarios.Height := sgUsuarios.Height + (pesquisarUsuario.Height + 5);
+      pesquisarUsuario.Visible := False;
+      btnNovoPesquisar.Visible := False;
+    end;
   end;
 
 procedure TPagUsuarios.btnPesquisarUsuMouseEnter(Sender: TObject);

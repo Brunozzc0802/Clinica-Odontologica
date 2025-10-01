@@ -2621,6 +2621,8 @@ object PagUsuarios: TPagUsuarios
         ParentBackground = False
         TabOrder = 1
         OnClick = btnCRestoreClick
+        OnMouseEnter = btnCRestoreMouseEnter
+        OnMouseLeave = btnCRestoreMouseLeave
         object lblRestore: TLabel
           AlignWithMargins = True
           Left = 1
@@ -2644,8 +2646,8 @@ object PagUsuarios: TPagUsuarios
           ParentColor = False
           ParentFont = False
           OnClick = btnCRestoreClick
-          OnMouseEnter = btnRestaurarUsuMouseEnter
-          OnMouseLeave = btnRestaurarUsuMouseLeave
+          OnMouseEnter = btnCRestoreMouseEnter
+          OnMouseLeave = btnCRestoreMouseLeave
           ExplicitWidth = 58
           ExplicitHeight = 17
         end
@@ -2715,7 +2717,7 @@ object PagUsuarios: TPagUsuarios
         Color = 16223019
         ParentBackground = False
         TabOrder = 0
-        OnClick = btnAddUsuClick
+        OnClick = btnAddNovoClick
         OnMouseEnter = btnAddUsuMouseEnter
         OnMouseLeave = btnAddUsuMouseLeave
         object Label2: TLabel
@@ -2740,7 +2742,7 @@ object PagUsuarios: TPagUsuarios
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnAddUsuClick
+          OnClick = btnAddNovoClick
           OnMouseEnter = btnAddUsuMouseEnter
           OnMouseLeave = btnAddUsuMouseLeave
           ExplicitWidth = 59
@@ -2798,6 +2800,7 @@ object PagUsuarios: TPagUsuarios
         ParentBackground = False
         TabOrder = 0
         Visible = False
+        OnClick = btnAlterarNovoClick
         OnMouseEnter = btnAlterarUsuMouseEnter
         OnMouseLeave = btnAlterarUsuMouseLeave
         object Label3: TLabel
@@ -2879,7 +2882,7 @@ object PagUsuarios: TPagUsuarios
         ParentBackground = False
         TabOrder = 0
         Visible = False
-        OnClick = btnPesquisarUsuClick
+        OnClick = btnNovoPesquisarClick
         OnMouseEnter = btnPesquisarUsuMouseEnter
         OnMouseLeave = btnPesquisarUsuMouseLeave
         object Label1: TLabel
@@ -2950,47 +2953,6 @@ object PagUsuarios: TPagUsuarios
         OnMouseLeave = btnDeletarUsuMouseLeave
         ExplicitWidth = 45
         ExplicitHeight = 17
-      end
-      object btnDeletarNovo: TPanel
-        Left = 0
-        Top = 0
-        Width = 137
-        Height = 41
-        Cursor = crHandPoint
-        Color = 16223019
-        ParentBackground = False
-        TabOrder = 0
-        Visible = False
-        OnClick = btnDeletarUsuClick
-        OnMouseEnter = btnDeletarUsuMouseEnter
-        OnMouseLeave = btnDeletarUsuMouseLeave
-        object Label4: TLabel
-          AlignWithMargins = True
-          Left = 36
-          Top = 11
-          Width = 65
-          Height = 19
-          Cursor = crHandPoint
-          Margins.Left = 35
-          Margins.Top = 10
-          Margins.Right = 35
-          Margins.Bottom = 10
-          Align = alClient
-          Alignment = taCenter
-          Caption = 'Deletar'
-          Color = clCream
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -13
-          Font.Name = 'Segoe UI'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          OnMouseEnter = btnDeletarUsuMouseEnter
-          OnMouseLeave = btnDeletarUsuMouseLeave
-          ExplicitWidth = 45
-          ExplicitHeight = 17
-        end
       end
     end
     object btnCancelarUsu: TPanel
@@ -3068,6 +3030,7 @@ object PagUsuarios: TPagUsuarios
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+        OnClick = btnRestaurarUsuClick
         OnMouseEnter = btnRestaurarUsuMouseEnter
         OnMouseLeave = btnRestaurarUsuMouseLeave
         ExplicitWidth = 58
@@ -3083,7 +3046,6 @@ object PagUsuarios: TPagUsuarios
         ParentBackground = False
         TabOrder = 0
         Visible = False
-        OnClick = btnRestaurarUsuClick
         OnMouseEnter = btnRestaurarUsuMouseEnter
         OnMouseLeave = btnRestaurarUsuMouseLeave
         object Label5: TLabel
@@ -3108,7 +3070,6 @@ object PagUsuarios: TPagUsuarios
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnRestaurarUsuClick
           OnMouseEnter = btnRestaurarUsuMouseEnter
           OnMouseLeave = btnRestaurarUsuMouseLeave
           ExplicitWidth = 58

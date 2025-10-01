@@ -14,6 +14,7 @@ object PagPacientes: TPagPacientes
   Position = poDesigned
   OnClose = FormClose
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
   TextHeight = 15
   object bordaCabecalhoPacientes: TPanel
@@ -2574,6 +2575,7 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnAddClick
           OnMouseEnter = btnAddMouseEnter
           OnMouseLeave = btnAddMouseLeave
           ExplicitWidth = 59
@@ -2589,6 +2591,7 @@ object PagPacientes: TPagPacientes
           ParentBackground = False
           TabOrder = 0
           Visible = False
+          OnClick = btnAddNovoClick
           object Label2: TLabel
             AlignWithMargins = True
             Left = 36
@@ -2611,7 +2614,7 @@ object PagPacientes: TPagPacientes
             Font.Style = [fsBold]
             ParentColor = False
             ParentFont = False
-            OnClick = btnAddClick
+            OnClick = btnAddNovoClick
             ExplicitWidth = 59
             ExplicitHeight = 17
           end
@@ -2651,6 +2654,7 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnAlterarClick
           OnMouseEnter = btnAlterarMouseEnter
           OnMouseLeave = btnAlterarMouseLeave
           ExplicitWidth = 42
@@ -2691,6 +2695,7 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnPesquisarClick
           OnMouseEnter = btnPesquisarMouseEnter
           OnMouseLeave = btnPesquisarMouseLeave
           ExplicitWidth = 59
@@ -2706,6 +2711,7 @@ object PagPacientes: TPagPacientes
           ParentBackground = False
           TabOrder = 0
           Visible = False
+          OnClick = btnNovoPesquisarClick
           object Label1: TLabel
             AlignWithMargins = True
             Left = 36
@@ -2728,6 +2734,7 @@ object PagPacientes: TPagPacientes
             Font.Style = [fsBold]
             ParentColor = False
             ParentFont = False
+            OnClick = btnNovoPesquisarClick
             ExplicitWidth = 59
             ExplicitHeight = 17
           end
@@ -2742,6 +2749,7 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 3
+        OnClick = btnDeletarClick
         OnMouseEnter = btnDeletarMouseEnter
         OnMouseLeave = btnDeletarMouseLeave
         object lblDeletarUsu: TLabel
@@ -2770,42 +2778,6 @@ object PagPacientes: TPagPacientes
           OnMouseLeave = btnDeletarMouseLeave
           ExplicitWidth = 45
           ExplicitHeight = 17
-        end
-        object btnDeletarNovo: TPanel
-          Left = 0
-          Top = 0
-          Width = 137
-          Height = 41
-          Cursor = crHandPoint
-          Color = 16223019
-          ParentBackground = False
-          TabOrder = 0
-          Visible = False
-          object Label4: TLabel
-            AlignWithMargins = True
-            Left = 36
-            Top = 11
-            Width = 65
-            Height = 19
-            Cursor = crHandPoint
-            Margins.Left = 35
-            Margins.Top = 10
-            Margins.Right = 35
-            Margins.Bottom = 10
-            Align = alClient
-            Alignment = taCenter
-            Caption = 'Deletar'
-            Color = clCream
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -13
-            Font.Name = 'Segoe UI'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            ExplicitWidth = 45
-            ExplicitHeight = 17
-          end
         end
       end
       object btnCancelar: TPanel
@@ -2842,6 +2814,7 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnCancelarClick
           OnMouseEnter = btnCancelarMouseEnter
           OnMouseLeave = btnCancelarMouseLeave
           ExplicitWidth = 52
@@ -3077,6 +3050,7 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnAlterarNovoClick
           ExplicitWidth = 42
           ExplicitHeight = 17
         end
@@ -3101,23 +3075,13 @@ object PagPacientes: TPagPacientes
         TextHint = 'Digite o nome:'
         OnKeyDown = EdNomePacienteKeyDown
       end
-      object edCPF: TEdit
-        Left = 224
-        Top = 10
-        Width = 169
-        Height = 32
-        AutoSize = False
-        TabOrder = 1
-        TextHint = 'Digite o CPF:'
-        OnKeyDown = edCPFKeyDown
-      end
       object edCEP: TEdit
         Left = 8
         Top = 57
         Width = 169
         Height = 32
         AutoSize = False
-        TabOrder = 2
+        TabOrder = 1
         TextHint = 'Digite o Cep:'
         OnKeyDown = edCEPKeyDown
       end
@@ -3127,14 +3091,14 @@ object PagPacientes: TPagPacientes
         Width = 169
         Height = 32
         AutoSize = False
-        TabOrder = 3
+        TabOrder = 2
         TextHint = 'Digite o Endere'#231'o:'
       end
       object btnaddPaciente: TPanel
         AlignWithMargins = True
         Left = 8
-        Top = 109
-        Width = 577
+        Top = 100
+        Width = 571
         Height = 32
         Margins.Left = 10
         Margins.Top = 65
@@ -3142,7 +3106,7 @@ object PagPacientes: TPagPacientes
         Margins.Bottom = 36
         Color = 8142341
         ParentBackground = False
-        TabOrder = 4
+        TabOrder = 3
         OnClick = btnaddPacienteClick
         OnMouseEnter = lblAddpacienteMouseEnter
         OnMouseLeave = lblAddpacienteMouseLeave
@@ -3150,7 +3114,7 @@ object PagPacientes: TPagPacientes
           AlignWithMargins = True
           Left = 191
           Top = 7
-          Width = 215
+          Width = 209
           Height = 17
           Cursor = crHandPoint
           Margins.Left = 190
@@ -3176,8 +3140,8 @@ object PagPacientes: TPagPacientes
       object btnConfirmarAlteracoes: TPanel
         AlignWithMargins = True
         Left = 8
-        Top = 110
-        Width = 577
+        Top = 100
+        Width = 571
         Height = 32
         Margins.Left = 10
         Margins.Top = 75
@@ -3185,7 +3149,7 @@ object PagPacientes: TPagPacientes
         Margins.Bottom = 36
         Color = 8142341
         ParentBackground = False
-        TabOrder = 5
+        TabOrder = 4
         Visible = False
         OnClick = btnConfirmarAlteracoesClick
         OnMouseEnter = btnConfirmarAlteracoesMouseEnter
@@ -3194,7 +3158,7 @@ object PagPacientes: TPagPacientes
           AlignWithMargins = True
           Left = 191
           Top = 6
-          Width = 215
+          Width = 209
           Height = 19
           Cursor = crHandPoint
           Margins.Left = 190
@@ -3212,10 +3176,8 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          ExplicitLeft = 201
-          ExplicitTop = 22
-          ExplicitWidth = 205
-          ExplicitHeight = 22
+          ExplicitWidth = 130
+          ExplicitHeight = 17
         end
       end
       object edDataNasc: TDateTimePicker
@@ -3223,20 +3185,33 @@ object PagPacientes: TPagPacientes
         Top = 56
         Width = 147
         Height = 33
+        Date = 45931.000000000000000000
         Time = 0.641822141202283100
-        TabOrder = 6
+        TabOrder = 5
       end
       object edTelefone: TMaskEdit
         Left = 432
         Top = 9
         Width = 147
-        Height = 32
+        Height = 23
         EditMask = '(00) 00000-0009;1;_'
         MaxLength = 15
-        TabOrder = 7
+        TabOrder = 6
         Text = '(  )      -    '
         TextHint = 'Digite o Telefone:'
         OnKeyDown = edTelefoneKeyDown
+      end
+      object edCPF: TMaskEdit
+        Left = 224
+        Top = 9
+        Width = 168
+        Height = 23
+        EditMask = '000.000.000-00;0;_'
+        MaxLength = 14
+        TabOrder = 7
+        Text = ''
+        TextHint = 'Digite o CPF:'
+        OnKeyDown = edCPFKeyDown
       end
     end
   end

@@ -11,6 +11,7 @@ type
   class function ListarTodos: TObjectList<TPaciente>;
   procedure Adicionar(APaciente: TPaciente);
   procedure Alterar(APaciente: TPaciente);
+  procedure DesativarPaciente(const Id: Integer);
 end;
 
 implementation
@@ -58,6 +59,17 @@ begin
     ExecSQL;
   end;
 end;
+
+procedure TPacientesRepository.DesativarPaciente(const Id: Integer);
+  begin
+    with dmUsuarios.queryPacientes do
+    begin
+      Close;
+      SQL.Text := 'UPDATE pacientes SET ativo = FALSE WHERE id = :id';
+      ParamByName('id').AsInteger := Id;
+      ExecSQL;
+    end;
+  end;
 
 class function TPacientesRepository.ListarTodos: TObjectList<TPaciente>;
   var

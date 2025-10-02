@@ -24,36 +24,57 @@ implementation
 function TUsuarioController.VerificarUsuario(const Nome, Senha: string; out Msg: string): Boolean;
 var
   Usuario: TUsuario;
+  RepoUsu: TUsuarioRepository;
 begin
   Result := False;
   Msg := '';
-  Usuario := TUsuarioRepository.VerificarUsuario(Nome, Senha);
-  if Usuario = nil then begin
-    Msg := 'Usuário ou senha inválidos.';
-    Exit;
-  end;
+  RepoUsu := TUsuarioRepository.Create;
+  try
+    Usuario := RepoUsu.VerificarUsuario(Nome, Senha);
+    if Usuario = nil then
+    begin
+      Msg := 'Usuário ou senha inválidos.';
+      Exit;
+    end;
 
-  if not Usuario.Ativo then begin
-    Msg := 'Esté Usuário Está Inativo';
+    if not Usuario.Ativo then
+    begin
+      Msg := 'Este usuário está inativo';
+      Usuario.Free;
+      Exit;
+    end;
+
+    Result := True;
+    Msg := 'Login bem-sucedido!';
     Usuario.Free;
-    Exit;
+  finally
+    RepoUsu.Free;
   end;
-
-  // Login bem-sucedido
-  Result := True;
-  Msg := 'Login bem-sucedido!';
-  Usuario.Free;
 end;
 
 function TUsuarioController.BuscarInativos: TObjectList<TUsuario>;
+var
+RepoUsu: TUsuarioRepository;
   begin
-    Result := TUsuarioRepository.ListarInativos;
+    RepoUsu := TUsuarioRepository.Create;
+    try
+      Result := RepoUsu.ListarInativos;
+    finally
+      RepoUsu.Free;
+    end;
   end;
 
 function TUsuarioController.BuscarTodos: TObjectList<TUsuario>;
-begin
-  Result := TUsuarioRepository.ListarTodos;
-end;
+var
+RepoUsu: TUsuarioRepository;
+  begin
+    RepoUsu := TUsuarioRepository.Create;
+    try
+      Result := RepoUsu.ListarTodos;
+    finally
+      RepoUsu.Free;
+    end;
+  end;
 
 procedure TUsuarioController.AdicionarUsuario(const Nome, Senha, Grupo: string; Ativo: Boolean);
 var

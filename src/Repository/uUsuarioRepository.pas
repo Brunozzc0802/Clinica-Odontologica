@@ -9,9 +9,9 @@ uses
 type
   TUsuarioRepository = class
   public
-    class function VerificarUsuario(const Nome, Senha: string): TUsuario;
-    class function ListarTodos: TObjectList<TUsuario>;
-    class function ListarInativos: TObjectList<TUsuario>;
+    function VerificarUsuario(const Nome, Senha: string): TUsuario;
+    function ListarTodos: TObjectList<TUsuario>;
+    function ListarInativos: TObjectList<TUsuario>;
     procedure Adicionar(AUsuario: TUsuario);
     procedure Alterar(AUsuario: TUsuario);
   end;
@@ -20,17 +20,19 @@ implementation
 
 { TUsuarioRepository }
 
-class function TUsuarioRepository.VerificarUsuario(const Nome, Senha: string): TUsuario;
+function TUsuarioRepository.VerificarUsuario(const Nome, Senha: string): TUsuario;
 begin
   Result := nil;
-  with dmUsuarios.queryUsu do begin
+  with dmUsuarios.queryUsu do
+  begin
     Close;
     SQL.Text := 'SELECT * FROM usuarios WHERE nome = :nome AND senha = :senha';
     ParamByName('nome').AsString := Nome;
     ParamByName('senha').AsString := Senha;
     Open;
 
-    if not IsEmpty then begin
+    if not IsEmpty then
+    begin
       Result := TUsuario.Create;
       Result.Id := FieldByName('id').AsInteger;
       Result.Nome := FieldByName('nome').AsString;
@@ -41,48 +43,50 @@ begin
   end;
 end;
 
-class function TUsuarioRepository.ListarInativos: TObjectList<TUsuario>;
+function TUsuarioRepository.ListarInativos: TObjectList<TUsuario>;
 var
   Usuario: TUsuario;
 begin
   Result := TObjectList<TUsuario>.Create(True);
-  with dmUsuarios.queryUsu do begin
+  with dmUsuarios.queryUsu do
+  begin
     Close;
     SQL.Text := 'SELECT id, nome, senha, ativo, grupo FROM usuarios WHERE ativo = FALSE';
     Open;
 
-    while not Eof do begin
+    while not Eof do
+    begin
       Usuario := TUsuario.Create;
-      Usuario.Id    := FieldByName('id').AsInteger;
-      Usuario.Nome  := FieldByName('nome').AsString;
+      Usuario.Id := FieldByName('id').AsInteger;
+      Usuario.Nome := FieldByName('nome').AsString;
       Usuario.Senha := FieldByName('senha').AsString;
       Usuario.Ativo := FieldByName('ativo').AsBoolean;
       Usuario.Grupo := FieldByName('grupo').AsString;
-
       Result.Add(Usuario);
       Next;
     end;
   end;
 end;
 
-class function TUsuarioRepository.ListarTodos: TObjectList<TUsuario>;
+function TUsuarioRepository.ListarTodos: TObjectList<TUsuario>;
 var
   Usuario: TUsuario;
 begin
   Result := TObjectList<TUsuario>.Create(True);
-  with dmUsuarios.queryUsu do begin
+  with dmUsuarios.queryUsu do
+  begin
     Close;
     SQL.Text := 'SELECT id, nome, senha, ativo, grupo FROM usuarios WHERE ativo = TRUE';
     Open;
 
-    while not Eof do begin
+    while not Eof do
+    begin
       Usuario := TUsuario.Create;
-      Usuario.Id    := FieldByName('id').AsInteger;
-      Usuario.Nome  := FieldByName('nome').AsString;
+      Usuario.Id := FieldByName('id').AsInteger;
+      Usuario.Nome := FieldByName('nome').AsString;
       Usuario.Senha := FieldByName('senha').AsString;
       Usuario.Ativo := FieldByName('ativo').AsBoolean;
       Usuario.Grupo := FieldByName('grupo').AsString;
-
       Result.Add(Usuario);
       Next;
     end;

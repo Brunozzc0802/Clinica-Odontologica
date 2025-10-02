@@ -3290,7 +3290,6 @@ object PagUsuarios: TPagUsuarios
       OnClick = btnConfirmarAlteracoesClick
       OnMouseEnter = btnConfirmarAlteracoesMouseEnter
       OnMouseLeave = btnConfirmarAlteracoesMouseLeave
-      ExplicitTop = 68
       object lblConfirmarAlteracoes: TLabel
         AlignWithMargins = True
         Left = 191

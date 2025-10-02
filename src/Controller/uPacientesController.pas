@@ -72,11 +72,18 @@ var
   end;
 
 function TPacientesController.BuscarTodos: TObjectList<TPaciente>;
-  begin
-    Result := TPacientesRepository.ListarTodos;
+var
+  RepoPaci: TPacientesRepository;
+begin
+  RepoPaci := TPacientesRepository.Create;
+  try
+    Result := RepoPaci.ListarTodos;
+  finally
+    RepoPaci.Free;
   end;
+end;
 
-// ---------------- Novo método ----------------
+
 procedure TPacientesController.DesativarPaciente(const Id: Integer);
 var
   RepoPaci: TPacientesRepository;

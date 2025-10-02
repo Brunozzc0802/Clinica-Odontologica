@@ -355,6 +355,10 @@ end;
 procedure TPagUsuarios.btnAdicionarUsuarioClick(Sender: TObject);
   begin
     AdicionarUsuarios;
+    btnAddNovo.Visible := False;
+    pnlFormAddUsuarios.Visible := false;
+    imgLogoUsuarios1.Visible := True;
+    imgLogoUsuarios2.Visible := False;
   end;
 //click cancelar adicionar usuario\\
 procedure TPagUsuarios.btnCancelarUsuClick(Sender: TObject);
@@ -422,19 +426,20 @@ begin
       exit;
     end;
 
-    Controller.AdicionarUsuario(
+      Controller.AdicionarUsuario(
       edUsuario.Text,
       edSenhaUsuario.Text,
       cbGrupo.Text,
       cbAtivo.ItemIndex = 0
-    );
+      );
 
-    ShowMessage('Usuário adicionado com sucesso!');
-    CarregarUsuarios;
-    edUsuario.clear;
-    edSenhaUsuario.Clear;
-    cbAtivo.ItemIndex := -1;
-    cbGrupo.ItemIndex := -1;
+
+      ShowMessage('Usuário adicionado com sucesso!');
+      CarregarUsuarios;
+      edUsuario.clear;
+      edSenhaUsuario.Clear;
+      cbAtivo.ItemIndex := -1;
+      cbGrupo.ItemIndex := -1;
   finally
     Controller.Free;
   end;

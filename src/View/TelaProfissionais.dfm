@@ -1,8 +1,8 @@
-object PagPacientes: TPagPacientes
+object PagProfissionais: TPagProfissionais
   Left = 551
-  Top = 187
+  Top = 208
   BorderStyle = bsNone
-  Caption = 'PagPacientes'
+  Caption = 'PagProfissionais'
   ClientHeight = 664
   ClientWidth = 769
   Color = clBtnFace
@@ -12,18 +12,15 @@ object PagPacientes: TPagPacientes
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesigned
-  OnClose = FormClose
-  OnCreate = FormCreate
-  OnDestroy = FormDestroy
   OnShow = FormShow
   TextHeight = 15
-  object bordaCabecalhoPacientes: TPanel
+  object cabecalho: TPanel
     Left = -306
     Top = 0
     Width = 1075
     Height = 41
     BevelOuter = bvNone
-    Caption = 'bordaCabecalhoPacientes'
+    Caption = 'cabecalho'
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
@@ -42,12 +39,13 @@ object PagPacientes: TPagPacientes
       Color = 11293958
       ParentBackground = False
       TabOrder = 0
-      object lblTituloPacientes: TLabel
+      ExplicitTop = 5
+      object lblTitulo: TLabel
         Left = 36
         Top = 7
-        Width = 87
+        Width = 113
         Height = 23
-        Caption = 'Pacientes'
+        Caption = 'Profissionais'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
         Font.Height = -19
@@ -64,30 +62,34 @@ object PagPacientes: TPagPacientes
           0954506E67496D61676589504E470D0A1A0A0000000D49484452000000180000
           00180806000000E0773DF8000000097048597300000EC300000EC301C76FA864
           0000001974455874536F667477617265007777772E696E6B73636170652E6F72
-          679BEE3C1A000002D94944415478DAB5956B688E6118C79F471B4A73D89A958C
-          1539CCE193948F72CABC9A95F880880F4244CC8725218A9058F6C91CCB97C9EB
-          D02666A514890F5A22458ED39CF6DA72D89C5EBFFF9EEBD1B3C7F3EE7D4DEEFA
-          75DDEFF55CD7FDBFAFFBF4BACE7F6E6ED8914C267B61C641017C8046D775BF46
-          2513DB073301064233DC27F667A4800597C33AC88756E80F9FE028EC20F9BDC5
-          E661B6C132E8076D3000DEC021D8476CC76F0112F4F1120CB1C43801ADF8FBD2
-          9F693ECD728ECDA71612E6AF27B6DDC62883EDD0A458FC09970F12390F436186
-          3FCB88A5A83631B52BB0C29F652856D535D892CD9640099D1A2826E159AACDB2
-          BDD963556F0EAF7528760CE60E2C968066FF8A8455FF745CFE14398EC995C04B
-          3A1B10A84993A0352E24EE5E86020B309512F84CA784C46B6912AA30D3881B9D
-          A180963E2E811774569258170A28C2B4E16FA1AF3BF114B4D983F1BDC397E578
-          FBD698426021E68004C6D2791CBC4CF872314ABC8DBF8CDFBBE8C760382CC257
-          8B4F7B76D0441E45081CC1E44BA0379DDD8E7761FC361106C148980567608DE3
-          5DAC5B8E77D61FAA1AC73BE25B61236405C6980FEB25906DC16AF566BFC37E1B
-          681EBC855136D0143806876D90CBA00A1256B5DF3E42857F93E7DA2CA752EE8D
-          409923300F3A67E2BA55FCD64D3E0D4FA00E5F05BEB3F427AB6ADB2F3D2F1D5D
-          9E0A1B4C33D6C64CE26373C03F5E22F87ED82D55354A2EC2F7DAF62B479794BE
-          F6E8BA2AE777755820DBCACDB34A5A529C0E2D6703DF5787FC0536B84E9BDEA1
-          6F5D042C28C7F1DE1989C5829504628A314D7A0C033EBDBE57ADB2E97C6BF3BF
-          45FD1FE8D5BC08C3A094E0BB4E37CD96F082E3BDA0B1A070A48025E9993E09BA
-          8D4B488AA7882BC59C82738E7759BF846322052CB9F3D5849D7002CAF5BE0796
-          528762296CC25F996A9C940201211D41FDA369F3D7826EBC6E703B2C67F09BDD
-          E5A7153011BD415B345BCBD9ABCAA2FE707A2410102A540EED79A6397F25D093
-          F60B4E453EEDDD8ACC350000000049454E44AE426082}
+          679BEE3C1A000003444944415478DA9D95594855511486CFC926A2320A1B8CC4
+          A88768D0A2990A1AAD2CB5C10A8C4A68A041CB421A08A211D4824A217BD0689E
+          1EACCC6CA00CA401EA218AC2A24424C888665229CCDBF77B9670B9295DBBF0B9
+          B66BAFBDFF7DD65A671FD769E2E7F3F9A661E6414F0831BEC25BC8765DF79D13
+          E4CF0DD8B83DE6087C8683F08DCD7EE0575C17E8077BE034FE33FF2390852965
+          715180BF23260A2AA14A029041DCB3960A14B16876806F3A660BDC8521F0126E
+          C1786233821660A370CC6DC8810248B6A919B01FD2A1C4EAD2017AC17C446A82
+          15D881F905CFA11C06431F88B4DC2F822B700816423514235018AC40949DBCB5
+          A5C06753FD210FD6C013DB78A4898F45E04BB0029D304FEDF1C359586FFE243B
+          FD65180A6A61B5EC2762E25A5283BE1875915A35A151C0E62230A3E1B5E37553
+          67882726A625025DED941218E32FE0FF236E296612B4256671D002B67820E61C
+          0C67715D3302C99A87ADC454B748C036C8C51C6071793302BB3037997FF0AFCD
+          9B1350E1A2D9606F1373BA93F4C24D71BC6EDB60E39F8ED7757AD3B7411DEB6B
+          9B1370AD169981A7644EF7935AF5069C75BC7BEB724043E8FD51DC0AFC957F09
+          585028E6215C83EBA006488517B0C90E90E278EFC300A50C74E2395001F74D3C
+          AE490113B98AD15D3302BE83AE84484BC77B9800AF6C335DEDEDE082E3B5F164
+          D0FAB0C02E6A83898795300AD279CC63768DE75BBEBFD95C3E7389CC75639CA6
+          BCC371A5059F62D50CB9FEEF818ABBD1F1EE9B8B0A065DC73DA0B7E3B5AF4E16
+          6A272E60B35956B331A0C3DD533DF09D67BC164EB8B6B94EB81E721AAB8FEF30
+          E698E3DD3DBA6FD6818A9EA62B9DF99D4A11E3738C5B316EA57787714C43EE5D
+          37556976F9A397661C8EEC8074A91BD6E05F67EDA90B70AAE5564F506F0D9068
+          B9570D62CD176B292B90C02906DB1DEF33D9DDF6AF65E32AE68A192F80893008
+          5F163ED5C7C7388FF16EC68FAC7B3E2A4530D30EB59C7188DBF018DC8AD83B38
+          DE984034AC8261F642E9AB9642DC07E2F4BF3EA99BADAB24926902FA3029138F
+          6D1CE72F5062A771AC68EAF732C7FB8A551093E497BE30CC4928B417ADCAFCE1
+          D68509B04C0792C05106AB6D5184ED5183AFCC16ED73BCBBA734A046AACB1298
+          AB029B5B75B904A788FF2DC71F2E1A68BFF2DE7E360000000049454E44AE4260
+          82}
       end
       object btnX: TImage
         Left = 736
@@ -108,7 +110,6 @@ object PagPacientes: TPagPacientes
           00D89B0031671BA6236DAC86D00FF3439A98B3201430A70D93317A47CC100A99
           3F0D0BFD270C8890D454E12ADDDEFD31E2880127248D9039003931A08E642E8D
           1A59E60C6426631DBE013A6F900B7B89246D0000000049454E44AE426082}
-        OnClick = btnXClick
       end
     end
   end
@@ -2510,7 +2511,7 @@ object PagPacientes: TPagPacientes
       Stretch = True
       Visible = False
     end
-    object sgPacientes: TStringGrid
+    object sgProfissionais: TStringGrid
       Left = 9
       Top = 6
       Width = 592
@@ -2521,7 +2522,6 @@ object PagPacientes: TPagPacientes
       RowCount = 1
       FixedRows = 0
       TabOrder = 0
-      OnDrawCell = sgPacientesDrawCell
     end
     object pesquisar: TSearchBox
       Left = 9
@@ -2531,9 +2531,8 @@ object PagPacientes: TPagPacientes
       TabOrder = 1
       TextHint = 'Pesquisar'
       Visible = False
-      OnChange = pesquisarChange
     end
-    object pnlBotoesDireitaPacientes: TPanel
+    object pnlBotoesDireita: TPanel
       Left = 607
       Top = 6
       Width = 153
@@ -2550,9 +2549,6 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 0
-        OnClick = btnAddClick
-        OnMouseEnter = btnAddMouseEnter
-        OnMouseLeave = btnAddMouseLeave
         object lblAddUsu: TLabel
           AlignWithMargins = True
           Left = 36
@@ -2575,9 +2571,6 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnAddClick
-          OnMouseEnter = btnAddMouseEnter
-          OnMouseLeave = btnAddMouseLeave
           ExplicitWidth = 59
           ExplicitHeight = 17
         end
@@ -2591,7 +2584,6 @@ object PagPacientes: TPagPacientes
           ParentBackground = False
           TabOrder = 0
           Visible = False
-          OnClick = btnAddNovoClick
           object Label2: TLabel
             AlignWithMargins = True
             Left = 36
@@ -2614,7 +2606,6 @@ object PagPacientes: TPagPacientes
             Font.Style = [fsBold]
             ParentColor = False
             ParentFont = False
-            OnClick = btnAddNovoClick
             ExplicitWidth = 59
             ExplicitHeight = 17
           end
@@ -2629,9 +2620,6 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 1
-        OnClick = btnAlterarClick
-        OnMouseEnter = btnAlterarMouseEnter
-        OnMouseLeave = btnAlterarMouseLeave
         object lblAlterarUsu: TLabel
           AlignWithMargins = True
           Left = 36
@@ -2654,9 +2642,6 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnAlterarClick
-          OnMouseEnter = btnAlterarMouseEnter
-          OnMouseLeave = btnAlterarMouseLeave
           ExplicitWidth = 42
           ExplicitHeight = 17
         end
@@ -2670,9 +2655,6 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 2
-        OnClick = btnPesquisarClick
-        OnMouseEnter = btnPesquisarMouseEnter
-        OnMouseLeave = btnPesquisarMouseLeave
         object lblPesquisar: TLabel
           AlignWithMargins = True
           Left = 36
@@ -2695,9 +2677,6 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnPesquisarClick
-          OnMouseEnter = btnPesquisarMouseEnter
-          OnMouseLeave = btnPesquisarMouseLeave
           ExplicitWidth = 59
           ExplicitHeight = 17
         end
@@ -2711,7 +2690,6 @@ object PagPacientes: TPagPacientes
           ParentBackground = False
           TabOrder = 0
           Visible = False
-          OnClick = btnNovoPesquisarClick
           object Label1: TLabel
             AlignWithMargins = True
             Left = 36
@@ -2734,7 +2712,6 @@ object PagPacientes: TPagPacientes
             Font.Style = [fsBold]
             ParentColor = False
             ParentFont = False
-            OnClick = btnNovoPesquisarClick
             ExplicitWidth = 59
             ExplicitHeight = 17
           end
@@ -2749,9 +2726,6 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 3
-        OnClick = btnDeletarClick
-        OnMouseEnter = btnDeletarMouseEnter
-        OnMouseLeave = btnDeletarMouseLeave
         object lblDeletarUsu: TLabel
           AlignWithMargins = True
           Left = 36
@@ -2774,9 +2748,6 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnDeletarClick
-          OnMouseEnter = btnDeletarMouseEnter
-          OnMouseLeave = btnDeletarMouseLeave
           ExplicitWidth = 45
           ExplicitHeight = 17
         end
@@ -2790,9 +2761,6 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 4
-        OnClick = btnCancelarClick
-        OnMouseEnter = btnCancelarMouseEnter
-        OnMouseLeave = btnCancelarMouseLeave
         object lblCancelarUsu: TLabel
           AlignWithMargins = True
           Left = 36
@@ -2815,9 +2783,6 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnCancelarClick
-          OnMouseEnter = btnCancelarMouseEnter
-          OnMouseLeave = btnCancelarMouseLeave
           ExplicitWidth = 52
           ExplicitHeight = 17
         end
@@ -2831,9 +2796,6 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 5
-        OnClick = btnRestaurarClick
-        OnMouseEnter = btnRestaurarMouseEnter
-        OnMouseLeave = btnRestaurarMouseLeave
         object lblRestaurar: TLabel
           AlignWithMargins = True
           Left = 36
@@ -2856,9 +2818,6 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnRestaurarClick
-          OnMouseEnter = btnRestaurarMouseEnter
-          OnMouseLeave = btnRestaurarMouseLeave
           ExplicitWidth = 58
           ExplicitHeight = 17
         end
@@ -2908,8 +2867,6 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 6
-        OnMouseEnter = btnConsultasMouseEnter
-        OnMouseLeave = btnConsultasMouseLeave
         object lblConsultas: TLabel
           AlignWithMargins = True
           Left = 16
@@ -2932,8 +2889,6 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnMouseEnter = btnConsultasMouseEnter
-          OnMouseLeave = btnConsultasMouseLeave
           ExplicitWidth = 60
           ExplicitHeight = 17
         end
@@ -2947,9 +2902,6 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 7
-        OnClick = btnLimparClick
-        OnMouseEnter = btnLimparMouseEnter
-        OnMouseLeave = btnLimparMouseLeave
         object lblLimpar: TLabel
           AlignWithMargins = True
           Left = 31
@@ -2972,9 +2924,6 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnLimparClick
-          OnMouseEnter = btnLimparMouseEnter
-          OnMouseLeave = btnLimparMouseLeave
           ExplicitWidth = 43
           ExplicitHeight = 17
         end
@@ -2988,9 +2937,6 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 8
-        OnClick = lblSairClick
-        OnMouseEnter = btnSairMouseEnter
-        OnMouseLeave = btnSairMouseLeave
         object lblSair: TLabel
           AlignWithMargins = True
           Left = 31
@@ -3013,9 +2959,6 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = lblSairClick
-          OnMouseEnter = btnSairMouseEnter
-          OnMouseLeave = btnSairMouseLeave
           ExplicitWidth = 23
           ExplicitHeight = 17
         end
@@ -3030,7 +2973,6 @@ object PagPacientes: TPagPacientes
         ParentBackground = False
         TabOrder = 9
         Visible = False
-        OnClick = btnAlterarNovoClick
         object Label3: TLabel
           AlignWithMargins = True
           Left = 36
@@ -3053,13 +2995,12 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnAlterarNovoClick
           ExplicitWidth = 42
           ExplicitHeight = 17
         end
       end
     end
-    object pnlAddPacientes: TPanel
+    object pnlAdd: TPanel
       Left = 9
       Top = 460
       Width = 592
@@ -3068,7 +3009,7 @@ object PagPacientes: TPagPacientes
       ParentBackground = False
       TabOrder = 3
       Visible = False
-      object EdNomePaciente: TEdit
+      object EdNome: TEdit
         Left = 8
         Top = 9
         Width = 169
@@ -3076,28 +3017,26 @@ object PagPacientes: TPagPacientes
         AutoSize = False
         TabOrder = 0
         TextHint = 'Digite o nome:'
-        OnKeyDown = EdNomePacienteKeyDown
       end
       object edCEP: TEdit
-        Left = 8
-        Top = 57
+        Left = 224
+        Top = 56
         Width = 169
-        Height = 32
+        Height = 33
         AutoSize = False
         TabOrder = 1
         TextHint = 'Digite o Cep:'
-        OnKeyDown = edCEPKeyDown
       end
       object edEndereco: TEdit
-        Left = 224
-        Top = 57
-        Width = 169
-        Height = 32
+        Left = 432
+        Top = 56
+        Width = 147
+        Height = 33
         AutoSize = False
         TabOrder = 2
         TextHint = 'Digite o Endere'#231'o:'
       end
-      object btnaddPaciente: TPanel
+      object btnadicionar: TPanel
         AlignWithMargins = True
         Left = 8
         Top = 100
@@ -3110,9 +3049,6 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 3
-        OnClick = btnaddPacienteClick
-        OnMouseEnter = lblAddpacienteMouseEnter
-        OnMouseLeave = lblAddpacienteMouseLeave
         object lblAddpaciente: TLabel
           AlignWithMargins = True
           Left = 191
@@ -3135,8 +3071,6 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnMouseEnter = lblAddpacienteMouseEnter
-          OnMouseLeave = lblAddpacienteMouseLeave
           ExplicitWidth = 115
         end
       end
@@ -3154,9 +3088,6 @@ object PagPacientes: TPagPacientes
         ParentBackground = False
         TabOrder = 4
         Visible = False
-        OnClick = btnConfirmarAlteracoesClick
-        OnMouseEnter = btnConfirmarAlteracoesMouseEnter
-        OnMouseLeave = btnConfirmarAlteracoesMouseLeave
         object lblConfirmarAlteracoes: TLabel
           AlignWithMargins = True
           Left = 191
@@ -3183,15 +3114,6 @@ object PagPacientes: TPagPacientes
           ExplicitHeight = 17
         end
       end
-      object edDataNasc: TDateTimePicker
-        Left = 432
-        Top = 56
-        Width = 147
-        Height = 33
-        Date = 45931.000000000000000000
-        Time = 0.641822141202283100
-        TabOrder = 5
-      end
       object edTelefone: TMaskEdit
         Left = 432
         Top = 9
@@ -3199,22 +3121,29 @@ object PagPacientes: TPagPacientes
         Height = 23
         EditMask = '(00) 00000-0009;1;_'
         MaxLength = 15
-        TabOrder = 6
+        TabOrder = 5
         Text = '(  )      -    '
         TextHint = 'Digite o Telefone:'
-        OnKeyDown = edTelefoneKeyDown
       end
       object edCPF: TMaskEdit
         Left = 224
         Top = 9
-        Width = 168
+        Width = 169
         Height = 23
         EditMask = '000.000.000-00;0;_'
         MaxLength = 14
-        TabOrder = 7
+        TabOrder = 6
         Text = ''
         TextHint = 'Digite o CPF:'
-        OnKeyDown = edCPFKeyDown
+      end
+      object edEmail: TEdit
+        Left = 8
+        Top = 58
+        Width = 169
+        Height = 32
+        AutoSize = False
+        TabOrder = 7
+        TextHint = 'Digite o Email:'
       end
     end
     object pnlRestaurar: TPanel
@@ -3291,7 +3220,6 @@ object PagPacientes: TPagPacientes
           00D89B0031671BA6236DAC86D00FF3439A98B3201430A70D93317A47CC100A99
           3F0D0BFD270C8890D454E12ADDDEFD31E2880127248D9039003931A08E642E8D
           1A59E60C6426631DBE013A6F900B7B89246D0000000049454E44AE426082}
-        OnClick = imgXrestoreClick
       end
       object sgRestore: TStringGrid
         Left = 5
@@ -3304,7 +3232,6 @@ object PagPacientes: TPagPacientes
         RowCount = 1
         FixedRows = 0
         TabOrder = 0
-        OnDrawCell = sgRestoreDrawCell
       end
       object btnCRestore: TPanel
         Left = 4
@@ -3316,7 +3243,6 @@ object PagPacientes: TPagPacientes
         Color = 16223019
         ParentBackground = False
         TabOrder = 1
-        OnClick = btnCRestoreClick
         object lblRestore: TLabel
           AlignWithMargins = True
           Left = 1
@@ -3339,16 +3265,10 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnCRestoreClick
           ExplicitWidth = 58
           ExplicitHeight = 17
         end
       end
     end
-  end
-  object NetHTTPClient1: TNetHTTPClient
-    UserAgent = 'Embarcadero URI Client/1.0'
-    Left = 242
-    Top = 561
   end
 end

@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.WinXCtrls, Vcl.Grids, System.Net.URLClient,
   System.Net.HttpClient, System.Net.HttpClientComponent, System.JSON,uPacientesController,uPacientes,
-  System.Generics.Collections, Vcl.ComCtrls, Vcl.Mask;
+  System.Generics.Collections, Vcl.ComCtrls, Vcl.Mask, DateUtils;
 
 type
   TPagPacientes = class(TForm)
@@ -134,6 +134,7 @@ type
      PacientesLista: TObjectList<TPaciente>;
      Controller: TPacientesController;
      procedure PesquisarPacientes(const Filtro: string);
+     function IdadeValida(DataNascimento: TDate): Boolean;
   public
     { Public declarations }
   end;
@@ -422,14 +423,14 @@ procedure TPagPacientes.btnAddNovoClick(Sender: TObject);
       pnlAddPacientes.Visible := False;
       btnaddNovo.Visible := false;
     end;
-
   end;
 
 procedure TPagPacientes.btnaddPacienteClick(Sender: TObject);
 begin
-  if not buscarCEP(edCep.Text) then
+  if not IdadeValida(edDataNasc.Date) then begin
     Exit;
-  adicionarPaciente;
+  end else
+    adicionarPaciente;
 end;
 
 procedure TPagPacientes.btnAlterarClick(Sender: TObject);
@@ -581,7 +582,11 @@ procedure TPagPacientes.btnNovoPesquisarClick(Sender: TObject);
 
 procedure TPagPacientes.btnConfirmarAlteracoesClick(Sender: TObject);
   begin
-    ConfirmarAlteracoes(nil);
+    if not IdadeValida(edDataNasc.Date) then begin
+    Exit;
+    end else begin
+      ConfirmarAlteracoes(nil);
+    end;
   end;
 
 
@@ -728,7 +733,7 @@ begin
         begin
           ShowMessage('CEP não encontrado!');
           edCEP.SetFocus;
-          Exit;  // sai com Result = False
+          Exit;
         end;
 
         edEndereco.Text := JsonResp.GetValue('logradouro').Value;
@@ -755,7 +760,6 @@ procedure TPagPacientes.edCEPKeyDown(Sender: TObject; var Key: Word;
       if Key = VK_RETURN then begin
         key := 0;
         buscarCep(edCep.Text);
-        edDataNasc.setfocus;
       end;
   end;
 
@@ -763,8 +767,8 @@ procedure TPagPacientes.edCPFKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
   begin
     if Key = VK_RETURN then begin
-      key := 0;
-      edTelefone.setfocus;
+    Key := 0;
+      edTelefone.SetFocus;
     end;
   end;
 
@@ -825,6 +829,29 @@ procedure TPagPacientes.FormShow(Sender: TObject);
     OrdenarGrid;
   end;
 
+function TPagPacientes.IdadeValida(DataNascimento: TDate): Boolean;
+var
+  Idade: Integer;
+begin
+  Result := False;
+
+  if DataNascimento > Date then begin
+    ShowMessage('Data de nascimento inválida!');
+    Exit;
+  end;
+  Idade := YearOf(Date) - YearOf(DataNascimento);
+
+  if (MonthOf(DataNascimento) > MonthOf(Date)) or
+     ((MonthOf(DataNascimento) = MonthOf(Date)) and (DayOf(DataNascimento) > DayOf(Date))) then
+      Dec(Idade);
+
+  if (Idade < 3) or (Idade > 100) then
+  begin
+    ShowMessage('Data de nascimento inválida!');
+    Exit;
+  end;
+  Result := True;
+end;
 procedure TPagPacientes.imgXrestoreClick(Sender: TObject);
   begin
     pnlRestaurar.Visible := False;
@@ -885,6 +912,5 @@ begin
     sgRestore.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2,
     sgRestore.Cells[ACol, ARow]);
 end;
-
 
 end.

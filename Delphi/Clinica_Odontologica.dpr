@@ -11,7 +11,11 @@ uses
   TelaPacientes in '..\src\View\TelaPacientes.pas' {PagPacientes},
   uPacientes in '..\src\Model\uPacientes.pas',
   uPacientesRepository in '..\src\Repository\uPacientesRepository.pas',
-  uPacientesController in '..\src\Controller\uPacientesController.pas' {$R *.res};
+  uPacientesController in '..\src\Controller\uPacientesController.pas' {$R *.res},
+  TelaProfissionais in '..\src\View\TelaProfissionais.pas' {PagProfissionais},
+  uProfissionais in '..\src\Model\uProfissionais.pas',
+  uProfissionaisRepository in '..\src\Repository\uProfissionaisRepository.pas',
+  uProfissionaisController in '..\src\Controller\uProfissionaisController.pas';
 
 {$R *.res}
 
@@ -22,6 +26,7 @@ begin
   Application.CreateForm(TPagUsuarios, PagUsuarios);
   Application.CreateForm(TPagPacientes, PagPacientes);
   Application.CreateForm(TdmUsuarios, dmUsuarios);
+  Application.CreateForm(TPagProfissionais, PagProfissionais);
   Application.Run;
 
 end.

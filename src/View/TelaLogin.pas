@@ -8,7 +8,7 @@ uses
         Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
         Vcl.Imaging.pngimage,
         Vcl.StdCtrls, Vcl.Imaging.jpeg, Vcl.Buttons, System.ImageList,
-        Vcl.ImgList,TelaUsuarios,uUsuarios,uUsuariosController,TelaPacientes;
+        Vcl.ImgList,TelaUsuarios,uUsuarios,uUsuariosController,TelaPacientes,TelaProfissionais;
 
 type
         TFormLogin = class(TForm)
@@ -59,10 +59,10 @@ type
         imgRelatorios: TImage;
         imgProcedimentos: TImage;
         imgEncerrarSistema: TImage;
-    footerPrincipal: TPanel;
-    lblBemVindo: TLabel;
-    Timer1: TTimer;
-    lblDataHora: TLabel;
+        footerPrincipal: TPanel;
+        lblBemVindo: TLabel;
+        Timer1: TTimer;
+        lblDataHora: TLabel;
         procedure FormCreate(Sender: TObject);
         procedure btnEntrarMouseEnter(Sender: TObject);
         procedure btnEntrarMouseLeave(Sender: TObject);
@@ -90,6 +90,7 @@ type
         procedure btnEntrarClick(Sender: TObject);
         procedure Timer1Timer(Sender: TObject);
     procedure pnlPacientesClick(Sender: TObject);
+    procedure pnlProfissionaisClick(Sender: TObject);
     private
       { Private declarations }
     public
@@ -231,6 +232,11 @@ procedure TFormLogin.pnlProcedimentosMouseEnter(Sender: TObject);
 procedure TFormLogin.pnlProcedimentosMouseLeave(Sender: TObject);
   begin
     pnlProcedimentos.Color := $007C3E05;
+  end;
+
+procedure TFormLogin.pnlProfissionaisClick(Sender: TObject);
+  begin
+    PagProfissionais.Show;
   end;
 
 procedure TFormLogin.pnlProfissionaisMouseEnter(Sender: TObject);

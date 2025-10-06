@@ -15,6 +15,7 @@ type
     FDPhysPgDriverLink1: TFDPhysPgDriverLink;
     queryUsu: TFDQuery;
     queryPacientes: TFDQuery;
+    queryProfissionais: TFDQuery;
   private
     { Private declarations }
   public

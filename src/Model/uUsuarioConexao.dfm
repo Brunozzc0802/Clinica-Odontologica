@@ -16,8 +16,8 @@ object dmUsuarios: TdmUsuarios
     VendorLib = 
       'C:\Users\Bruno Tesser\Desktop\Clinica odontologica alves\Clinica' +
       '-Odontologica\lib\lib\libpq.dll'
-    Left = 217
-    Top = 88
+    Left = 89
+    Top = 32
   end
   object queryUsu: TFDQuery
     Connection = FDConnection1
@@ -28,5 +28,10 @@ object dmUsuarios: TdmUsuarios
     Connection = FDConnection1
     Left = 408
     Top = 24
+  end
+  object queryProfissionais: TFDQuery
+    Connection = FDConnection1
+    Left = 320
+    Top = 88
   end
 end

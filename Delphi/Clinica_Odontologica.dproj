@@ -150,6 +150,13 @@
         <DCCReference Include="..\src\Controller\uPacientesController.pas">
             <Form>$R *.res</Form>
         </DCCReference>
+        <DCCReference Include="..\src\View\TelaProfissionais.pas">
+            <Form>PagProfissionais</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\src\Model\uProfissionais.pas"/>
+        <DCCReference Include="..\src\Repository\uProfissionaisRepository.pas"/>
+        <DCCReference Include="..\src\Controller\uProfissionaisController.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

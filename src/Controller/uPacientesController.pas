@@ -9,6 +9,7 @@ type
   TPacientesController = class
   public
     function BuscarTodos: TObjectList<TPaciente>;
+    function BuscarInativos: TObjectList<TPaciente>;
     procedure AdicionarPaciente(const Nome, CPF, telefone, cep, endereco: string; dataNascimento: TDate);
     procedure AlterarPaciente(const Id: Integer; const Nome, CPF, telefone, cep, endereco: string; dataNascimento: TDate);
     procedure DesativarPaciente(const Id: Integer);
@@ -68,6 +69,18 @@ var
       end;
     finally
       Paciente.Free;
+    end;
+  end;
+
+function TPacientesController.BuscarInativos: TObjectList<TPaciente>;
+var
+RepoPaci: TPacientesRepository;
+  begin
+    RepoPaci := TPacientesRepository.Create;
+    try
+      Result := RepoPaci.ListarInativos;
+    finally
+      RepoPaci.Free;
     end;
   end;
 

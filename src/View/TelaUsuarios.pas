@@ -529,7 +529,6 @@ var
   ControllerDelet: TUsuarioController;
 begin
   if not Assigned(UsuarioLista) then Exit;
-
   LinhaDelet := sgUsuarios.Row;
   if LinhaDelet > 0 then begin
     Usuario := TUsuario.Create;
@@ -647,7 +646,6 @@ procedure TPagUsuarios.btnRestaurarUsuClick(Sender: TObject);
       pnlFormAddUsuarios.Visible := false;
     end;
 
-
     if btnNovoPesquisar.Visible = true  then begin
       sgUsuarios.Top := sgUsuarios.Top - (pesquisarUsuario.Height + 5);
       sgUsuarios.Height := sgUsuarios.Height + (pesquisarUsuario.Height + 5);
@@ -660,6 +658,7 @@ procedure TPagUsuarios.btnRestaurarUsuClick(Sender: TObject);
     btnAddNovo.Visible := False;
     btnAlterarNovo.Visible := false;
     pnlRestaurar.Visible := True;
+    sgRestore.SetFocus;
 
     sgRestore.Cells[0,0] := 'ID';
     sgRestore.Cells[1,0] := 'Nome de Usuário';

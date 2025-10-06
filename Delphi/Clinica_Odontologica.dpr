@@ -11,16 +11,16 @@ uses
   TelaPacientes in '..\src\View\TelaPacientes.pas' {PagPacientes},
   uPacientes in '..\src\Model\uPacientes.pas',
   uPacientesRepository in '..\src\Repository\uPacientesRepository.pas',
-  uPacientesController in '..\src\Controller\uPacientesController.pas';
+  uPacientesController in '..\src\Controller\uPacientesController.pas' {$R *.res};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TPagUsuarios, PagUsuarios);
-  Application.CreateForm(TFormLogin, FormLogin);
   Application.CreateForm(TPagPacientes, PagPacientes);
+  Application.CreateForm(TFormLogin, FormLogin);
+  Application.CreateForm(TPagUsuarios, PagUsuarios);
   Application.CreateForm(TdmUsuarios, dmUsuarios);
   Application.Run;
 

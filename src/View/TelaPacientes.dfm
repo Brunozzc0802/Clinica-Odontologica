@@ -4,7 +4,7 @@ object PagPacientes: TPagPacientes
   BorderStyle = bsNone
   Caption = 'PagPacientes'
   ClientHeight = 664
-  ClientWidth = 770
+  ClientWidth = 769
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -2830,6 +2830,7 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 5
+        OnClick = btnRestaurarClick
         OnMouseEnter = btnRestaurarMouseEnter
         OnMouseLeave = btnRestaurarMouseLeave
         object lblRestaurar: TLabel
@@ -3212,6 +3213,132 @@ object PagPacientes: TPagPacientes
         Text = ''
         TextHint = 'Digite o CPF:'
         OnKeyDown = edCPFKeyDown
+      end
+    end
+    object pnlRestaurar: TPanel
+      Left = 56
+      Top = 107
+      Width = 497
+      Height = 307
+      BevelOuter = bvNone
+      Color = 8142341
+      ParentBackground = False
+      TabOrder = 4
+      Visible = False
+      object imgRestore: TImage
+        Left = 4
+        Top = 8
+        Width = 17
+        Height = 17
+        Picture.Data = {
+          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
+          001008060000001FF3FF61000000097048597300000EC300000EC301C76FA864
+          0000001974455874536F667477617265007777772E696E6B73636170652E6F72
+          679BEE3C1A000001744944415478DA9D92CD2B84511487EFCD476445C68692D5
+          E423564636C8465136A4AC849585B190951AA664C1CAC84A585851B66C28FC01
+          0A25168C64E923B231643CA7F7BC7ADD4CA6B9F5F4BB1FE7FEEE3DF71E6B68E9
+          743A84F4C1B6B5F649C71D50031F7007FBACBD18A7593588217158840A188442
+          2736056B10C3E8C1359843A603C15F7008177A834668877C4842372697990C3E
+          611326097AF61D8909231BD00A37D02CE9BA2904DB2801EBC109E28AF4662DB0
+          CC7AD4372847C6A04463DF6025788380491D72A6A985ACC9A1617284B441AF65
+          5046A71F7638F1314B8325242A88C1149D0598C5209EA5410219F70D06E86CC1
+          2E063DB9A4205577AF5F1AC624F9CFE67AE4F4D7233229DF35AC5FD485492AC3
+          E6628D894082B809DF40CAF7042AE1184658BC7636D71AAF90A406642DF25348
+          1AD080EC41955E4F4E3AD7D49A8C57CA79C6AB4229E52BA38BC153E43DE66108
+          0A9C0CDE611566E4647FF2CF42C2A814E9846A19C22D1CB0F1D58DFD060FCA98
+          8BD8B5066A0000000049454E44AE426082}
+      end
+      object Label6: TLabel
+        AlignWithMargins = True
+        Left = 24
+        Top = 7
+        Width = 58
+        Height = 17
+        Cursor = crHandPoint
+        Margins.Left = 35
+        Margins.Top = 10
+        Margins.Right = 35
+        Margins.Bottom = 10
+        Alignment = taCenter
+        Caption = 'Restaurar'
+        Color = clCream
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -13
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+      object imgXrestore: TImage
+        Left = 473
+        Top = 7
+        Width = 16
+        Height = 16
+        Cursor = crHandPoint
+        Picture.Data = {
+          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
+          001008060000001FF3FF61000000097048597300000EC300000EC301C76FA864
+          0000001974455874536F667477617265007777772E696E6B73636170652E6F72
+          679BEE3C1A000001014944415478DA8D92210B0241108577B22282560D163169
+          B52A88184C16FFA141934550412C16412CB62BD74550C42078BE394618CE9DD5
+          81C7CDEDECFB766FE6284992AA736E0AE5A131111D5D20B0BF89C704BA4123C2
+          C201494BEA67A86B41C4BC864AB27460408CA4A2F679211E3347CC8036920554
+          B02086F90AF54936F82017A8073DA1155456B53B34C0015B5257F441F8941754
+          F499F98554C18238CBFC0550902594CB941EE9372BB305E0866D32D7E6E0B977
+          00D89B0031671BA6236DAC86D00FF3439A98B3201430A70D93317A47CC100A99
+          3F0D0BFD270C8890D454E12ADDDEFD31E2880127248D9039003931A08E642E8D
+          1A59E60C6426631DBE013A6F900B7B89246D0000000049454E44AE426082}
+        OnClick = imgXrestoreClick
+      end
+      object sgRestore: TStringGrid
+        Left = 5
+        Top = 37
+        Width = 489
+        Height = 232
+        ColCount = 7
+        DefaultColWidth = 78
+        FixedCols = 0
+        RowCount = 1
+        FixedRows = 0
+        TabOrder = 0
+        OnDrawCell = sgRestoreDrawCell
+      end
+      object btnCRestore: TPanel
+        Left = 4
+        Top = 273
+        Width = 489
+        Height = 30
+        Cursor = crHandPoint
+        BevelOuter = bvNone
+        Color = 16223019
+        ParentBackground = False
+        TabOrder = 1
+        object lblRestore: TLabel
+          AlignWithMargins = True
+          Left = 1
+          Top = 5
+          Width = 487
+          Height = 24
+          Cursor = crHandPoint
+          Margins.Left = 1
+          Margins.Top = 5
+          Margins.Right = 1
+          Margins.Bottom = 1
+          Align = alClient
+          Alignment = taCenter
+          Caption = 'Restaurar'
+          Color = clCream
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          ExplicitWidth = 58
+          ExplicitHeight = 17
+        end
       end
     end
   end

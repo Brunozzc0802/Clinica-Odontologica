@@ -60,6 +60,13 @@ type
     edDataNasc: TDateTimePicker;
     edTelefone: TMaskEdit;
     edCPF: TMaskEdit;
+    pnlRestaurar: TPanel;
+    imgRestore: TImage;
+    Label6: TLabel;
+    imgXrestore: TImage;
+    sgRestore: TStringGrid;
+    btnCRestore: TPanel;
+    lblRestore: TLabel;
     procedure btnXClick(Sender: TObject);
     procedure btnAddMouseEnter(Sender: TObject);
     procedure btnAddMouseLeave(Sender: TObject);
@@ -114,6 +121,11 @@ type
     procedure ConfirmarAlteracoes(Sender: TObject);
     procedure btnDeletarClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure btnRestaurarClick(Sender: TObject);
+    procedure imgXrestoreClick(Sender: TObject);
+    procedure CarregarInativos;
+    procedure sgRestoreDrawCell(Sender: TObject; ACol, ARow: LongInt;
+      Rect: TRect; State: TGridDrawState);
 
   private
      PacienteIdalterar: Integer;
@@ -188,6 +200,42 @@ procedure TPagPacientes.PesquisarPacientes(const Filtro: string);
 
 
 
+procedure TPagPacientes.CarregarInativos;
+var
+  Controller: TPacientesController;
+  I: Integer;
+begin
+  Controller := TPacientesController.Create;
+  try
+    if Assigned(PacientesLista) then
+    PacientesLista.Free;
+    PacientesLista := Controller.BuscarInativos;
+
+    sgRestore.Cells[0,0] := 'ID';
+    sgRestore.Cells[1,0] := 'Nome do Paciente';
+    sgRestore.Cells[2,0] := 'CPF';
+    sgRestore.Cells[3,0] := 'Telefone';
+    sgRestore.Cells[4,0] := 'Cep';
+    sgRestore.Cells[5,0] := 'Data de nascimento';
+    sgRestore.Cells[6,0] := 'Endereço';
+
+    sgRestore.RowCount := PacientesLista.Count + 1;
+
+    for I := 0 to PacientesLista.Count - 1 do
+    begin
+      sgRestore.Cells[0, I + 1] := IntToStr(PacientesLista[I].Id);
+      sgRestore.Cells[1, I + 1] := PacientesLista[I].Nome;
+      sgRestore.Cells[2, I + 1] := PacientesLista[I].cpf;
+      sgRestore.Cells[3, I + 1] := PacientesLista[I].telefone;
+      sgRestore.Cells[4, I + 1] := PacientesLista[I].cep;
+      sgRestore.Cells[5, I + 1] := DateToStr(PacientesLista[I].DataNascimento);
+      sgRestore.Cells[6, I + 1] := PacientesLista[I].endereco;
+    end;
+  finally
+    Controller.Free;
+  end;
+end;
+
 procedure TPagPacientes.CarregarPacientes;
   var
   Controller: TPacientesController;
@@ -199,7 +247,6 @@ begin
     PacientesLista.Free;
     PacientesLista := Controller.BuscarTodos;
 
-    // Cabeçalho
     sgPacientes.Cells[0,0] := 'ID';
     sgPacientes.Cells[1,0] := 'Nome do Paciente';
     sgPacientes.Cells[2,0] := 'CPF';
@@ -448,19 +495,19 @@ procedure TPagPacientes.btnDeletarClick(Sender: TObject);
 var
   Id: Integer;
 begin
-  Id := StrToIntDef(sgPacientes.Cells[0, sgPacientes.Row], 0); // primeira coluna = ID
-  if Id > 0 then
-  begin
-    if MessageDlg('Deseja realmente excluir este paciente?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-    begin
+  Id := StrToIntDef(sgPacientes.Cells[0, sgPacientes.Row], 0);
+  if Id > 0 then begin
+      ShowMessage('Paciente Deletado com sucesso!');
       Controller.DesativarPaciente(Id);
       CarregarPacientes;
       sgPacientes.Row := 0;
       sgPacientes.Col := 0;
       sgPacientes.SetFocus;
+    end else begin
+      ShowMessage('Selecione um paciente para deletar.');
     end;
+
   end;
-end;
 
 procedure TPagPacientes.btnDeletarMouseEnter(Sender: TObject);
   begin
@@ -558,6 +605,46 @@ procedure TPagPacientes.btnPesquisarMouseEnter(Sender: TObject);
 procedure TPagPacientes.btnPesquisarMouseLeave(Sender: TObject);
   begin
     btnPesquisar.Color := $007C3E05;
+  end;
+
+procedure TPagPacientes.btnRestaurarClick(Sender: TObject);
+  begin
+    if pnlAddPacientes.Visible = True then begin
+      pnlAddPacientes.Visible := false;
+    end;
+
+    if btnNovoPesquisar.Visible = true  then begin
+      sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
+      sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
+      pesquisar.Visible := False;
+      btnNovoPesquisar.Visible := False;
+    end;
+
+    btnRestaurarNovo.Visible := True;
+    CarregarInativos;
+    btnAddNovo.Visible := False;
+    btnAlterarNovo.Visible := false;
+    pnlRestaurar.Visible := True;
+    sgRestore.SetFocus;
+
+
+    sgRestore.Cells[0,0] := 'ID';
+    sgRestore.Cells[1,0] := 'Nome do Paciente';
+    sgRestore.Cells[2,0] := 'CPF';
+    sgRestore.Cells[3,0] := 'Telefone';
+    sgRestore.Cells[4,0] := 'Cep';
+    sgRestore.Cells[5,0] := 'Data de nascimento';
+    sgRestore.Cells[6,0] := 'Endereço';
+
+    sgRestore.ColWidths[0] := 50;
+    sgRestore.ColWidths[1] := 140;
+    sgRestore.ColWidths[2] := 105;
+    sgRestore.ColWidths[3] := 110;
+    sgRestore.ColWidths[4] := 95;
+    sgRestore.ColWidths[5] := 130;
+    sgRestore.ColWidths[6] := 146;
+
+
   end;
 
 procedure TPagPacientes.btnRestaurarMouseEnter(Sender: TObject);
@@ -708,6 +795,13 @@ procedure TPagPacientes.FormShow(Sender: TObject);
     OrdenarGrid;
   end;
 
+procedure TPagPacientes.imgXrestoreClick(Sender: TObject);
+  begin
+    pnlRestaurar.Visible := False;
+    btnRestaurarNovo.Visible := False;
+    CarregarPacientes;
+  end;
+
 procedure TPagPacientes.lblAddpacienteMouseEnter(Sender: TObject);
   begin
     btnAddPaciente.Color := $00C46106;
@@ -727,27 +821,40 @@ procedure TPagPacientes.sgPacientesDrawCell(Sender: TObject; ACol,
 var
   BGColor: TColor;
 begin
-  // Define a cor de fundo dependendo se a célula está selecionada
   if gdSelected in State then
     BGColor := clHighlight
   else
     BGColor := clWindow;
-
-  // Pinta o fundo da célula
   sgPacientes.Canvas.Brush.Color := BGColor;
   sgPacientes.Canvas.FillRect(Rect);
-
-  // Define a cor da fonte dependendo se a célula está selecionada
   if gdSelected in State then
     sgPacientes.Canvas.Font.Color := clHighlightText
   else
     sgPacientes.Canvas.Font.Color := clWindowText;
-
-  // Desenha o texto da célula
   sgPacientes.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2,
     sgPacientes.Cells[ACol, ARow]);
 end;
 
+
+
+procedure TPagPacientes.sgRestoreDrawCell(Sender: TObject; ACol, ARow: LongInt;
+  Rect: TRect; State: TGridDrawState);
+var
+  BGColor: TColor;
+begin
+  if gdSelected in State then
+    BGColor := clHighlight
+  else
+    BGColor := clWindow;
+  sgRestore.Canvas.Brush.Color := BGColor;
+  sgRestore.Canvas.FillRect(Rect);
+  if gdSelected in State then
+    sgRestore.Canvas.Font.Color := clHighlightText
+  else
+    sgRestore.Canvas.Font.Color := clWindowText;
+    sgRestore.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2,
+    sgRestore.Cells[ACol, ARow]);
+end;
 
 
 end.

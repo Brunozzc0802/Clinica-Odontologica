@@ -9,6 +9,7 @@ type
   TPacientesRepository = class
   public
   function ListarTodos: TObjectList<TPaciente>;
+  function ListarInativos: TObjectList<TPaciente>;
   procedure Adicionar(APaciente: TPaciente);
   procedure Alterar(APaciente: TPaciente);
   procedure DesativarPaciente(const Id: Integer);
@@ -71,6 +72,32 @@ procedure TPacientesRepository.DesativarPaciente(const Id: Integer);
     end;
   end;
 
+function TPacientesRepository.ListarInativos: TObjectList<TPaciente>;
+  var
+  Paciente: TPaciente;
+begin
+  Result := TObjectList<TPaciente>.Create(True);
+  with dmUsuarios.queryPacientes do
+  begin
+    Close;
+    SQL.Text := 'SELECT id, nome, cpf, telefone, cep, endereco, data_nascimento  FROM pacientes WHERE ativo = FALSE';
+    Open;
+
+    while not Eof do begin
+      Paciente := TPaciente.Create;
+      Paciente.Id := FieldByName('id').AsInteger;
+      Paciente.Nome := FieldByName('nome').AsString;
+      Paciente.Cpf := FieldByName('cpf').AsString;
+      Paciente.Telefone := FieldByName('telefone').AsString;
+      Paciente.Cep := FieldByName('cep').AsString;
+      Paciente.Endereco := FieldByName('endereco').AsString;
+      Paciente.DataNascimento := FieldByName('data_nascimento').AsDateTime;
+      Result.Add(Paciente);
+      Next;
+    end;
+  end;
+end;
+
 function TPacientesRepository.ListarTodos: TObjectList<TPaciente>;
 var
   Paciente: TPaciente;
@@ -82,8 +109,7 @@ begin
     SQL.Text := 'SELECT id, nome, cpf, telefone, cep, data_nascimento, endereco FROM pacientes WHERE ativo = TRUE';
     Open;
 
-    while not Eof do
-    begin
+    while not Eof do begin
       Paciente := TPaciente.Create;
       Paciente.Id := FieldByName('id').AsInteger;
       Paciente.Nome := FieldByName('nome').AsString;

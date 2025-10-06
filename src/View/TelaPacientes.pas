@@ -126,6 +126,8 @@ type
     procedure CarregarInativos;
     procedure sgRestoreDrawCell(Sender: TObject; ACol, ARow: LongInt;
       Rect: TRect; State: TGridDrawState);
+    procedure ConfirmarRestauracao;
+    procedure btnCRestoreClick(Sender: TObject);
 
   private
      PacienteIdalterar: Integer;
@@ -315,6 +317,29 @@ begin
   end;
 end;
 
+procedure TPagPacientes.ConfirmarRestauracao;
+var
+  Controller: TPacientesController;
+  PacienteId: Integer;
+begin
+  if sgRestore.Row > 0 then
+  begin
+    PacienteId := StrToIntDef(sgRestore.Cells[0, sgRestore.Row], 0);
+    if PacienteId = 0 then Exit;
+
+    Controller := TPacientesController.Create;
+    try
+      Controller.RestaurarPaciente(PacienteId);
+      ShowMessage('Paciente restaurado com sucesso!');
+      CarregarInativos;
+      CarregarPacientes;
+    finally
+      Controller.Free;
+    end;
+  end
+  else
+    ShowMessage('Selecione um paciente para restaurar.');
+end;
 procedure TPagPacientes.adicionarPaciente;
 var
   Controller: TPacientesController;
@@ -578,6 +603,11 @@ procedure TPagPacientes.btnConsultasMouseEnter(Sender: TObject);
 procedure TPagPacientes.btnConsultasMouseLeave(Sender: TObject);
   begin
     btnConsultas.Color := $007C3E05;
+  end;
+
+procedure TPagPacientes.btnCRestoreClick(Sender: TObject);
+  begin
+    ConfirmarRestauracao;
   end;
 
 procedure TPagPacientes.btnPesquisarClick(Sender: TObject);

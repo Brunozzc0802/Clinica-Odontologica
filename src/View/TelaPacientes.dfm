@@ -3314,6 +3314,7 @@ object PagPacientes: TPagPacientes
         Color = 16223019
         ParentBackground = False
         TabOrder = 1
+        OnClick = btnCRestoreClick
         object lblRestore: TLabel
           AlignWithMargins = True
           Left = 1
@@ -3336,6 +3337,7 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnCRestoreClick
           ExplicitWidth = 58
           ExplicitHeight = 17
         end

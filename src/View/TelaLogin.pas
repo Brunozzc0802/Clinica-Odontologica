@@ -192,11 +192,9 @@ procedure TFormLogin.pnlEncerrarSistemaClick(Sender: TObject);
   begin
   if MessageDlg('Deseja Encerrar o Sistema', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
   begin
-    ShowMessage('Encerrando Sistema');
     Sleep(500);
     Close;
   end else begin
-    showMessage('O sistema continuará aberto');
   end;
 end;
 

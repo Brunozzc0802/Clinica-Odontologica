@@ -13,6 +13,7 @@ type
     procedure AdicionarPaciente(const Nome, CPF, telefone, cep, endereco: string; dataNascimento: TDate);
     procedure AlterarPaciente(const Id: Integer; const Nome, CPF, telefone, cep, endereco: string; dataNascimento: TDate);
     procedure DesativarPaciente(const Id: Integer);
+    procedure RestaurarPaciente(const Id: Integer);
   end;
 
 implementation
@@ -108,6 +109,18 @@ var
       RepoPaci.Free;
     end;
   end;
+
+procedure TPacientesController.RestaurarPaciente(const Id: Integer);
+var
+  RepoPaci: TPacientesRepository;
+begin
+  RepoPaci := TPacientesRepository.Create;
+  try
+    RepoPaci.RestaurarPaciente(Id);
+  finally
+    RepoPaci.Free;
+  end;
+end;
 
 end.
 

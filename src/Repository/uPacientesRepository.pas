@@ -13,6 +13,7 @@ type
   procedure Adicionar(APaciente: TPaciente);
   procedure Alterar(APaciente: TPaciente);
   procedure DesativarPaciente(const Id: Integer);
+  procedure RestaurarPaciente(const Id: Integer);
 end;
 
 implementation
@@ -121,6 +122,17 @@ begin
       Result.Add(Paciente);
       Next;
     end;
+  end;
+end;
+
+procedure TPacientesRepository.RestaurarPaciente(const Id: Integer);
+begin
+  with dmUsuarios.queryPacientes do
+  begin
+    Close;
+    SQL.Text := 'UPDATE pacientes SET ativo = TRUE WHERE id = :id';
+    ParamByName('id').AsInteger := Id;
+    ExecSQL;
   end;
 end;
 

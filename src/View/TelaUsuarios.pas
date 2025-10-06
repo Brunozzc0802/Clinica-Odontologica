@@ -114,6 +114,7 @@ type
     procedure btnNovoPesquisarClick(Sender: TObject);
     procedure btnCRestoreMouseEnter(Sender: TObject);
     procedure btnCRestoreMouseLeave(Sender: TObject);
+    procedure ConfirmarRestauracao;
   private
     UsuarioIdalterar: Integer;
     UsuarioLista: TObjectList<TUsuario>;
@@ -244,6 +245,44 @@ begin
   finally
     Controller.Free;
   end;
+end;
+
+procedure TPagUsuarios.ConfirmarRestauracao;
+var
+  LinhaRestore: Integer;
+  Usuario: TUsuario;
+  ControllerRestore: TUsuarioController;
+begin
+  if not Assigned(UsuarioLista) then Exit;
+
+  LinhaRestore := sgRestore.Row;
+  if LinhaRestore > 0 then begin
+    Usuario := TUsuario.Create;
+    try
+      Usuario.Id    := StrToInt(sgRestore.Cells[0, LinhaRestore]);
+      Usuario.Nome  := sgRestore.Cells[1, LinhaRestore];
+      Usuario.Senha := sgRestore.Cells[2, LinhaRestore];
+      Usuario.Ativo := False;
+      Usuario.Grupo := sgRestore.Cells[4, LinhaRestore];
+
+      ControllerRestore := TUsuarioController.Create;
+      try
+        ControllerRestore.RestaurarUsuario(Usuario);
+        CarregarInativos;
+        ShowMessage('Usuário Restaurado com sucesso!');
+      finally
+        ControllerRestore.Free;
+        CarregarInativos;
+        sgRestore.Row := 0;
+        sgRestore.Col := 0;
+        sgRestore.SetFocus;
+      end;
+    finally
+      Usuario.Free;
+    end;
+  end else begin
+    ShowMessage('Selecione um usuário para Restaurar.');
+end;
 end;
 
 //ação de fechar o formulario\\
@@ -675,47 +714,9 @@ procedure TPagUsuarios.btnRestaurarUsuClick(Sender: TObject);
   end;
 //Click do botão de confirmar restaurar\\
 procedure TPagUsuarios.btnCRestoreClick(Sender: TObject);
-
-var
-  LinhaRestore: Integer;
-  Usuario: TUsuario;
-  ControllerRestore: TUsuarioController;
-begin
-  if not Assigned(UsuarioLista) then Exit;
-
-  LinhaRestore := sgRestore.Row;
-  if LinhaRestore > 0 then begin
-    Usuario := TUsuario.Create;
-    try
-      Usuario.Id    := StrToInt(sgRestore.Cells[0, LinhaRestore]);
-      Usuario.Nome  := sgRestore.Cells[1, LinhaRestore];
-      Usuario.Senha := sgRestore.Cells[2, LinhaRestore];
-      Usuario.Ativo := False;
-      Usuario.Grupo := sgRestore.Cells[4, LinhaRestore];
-
-      ControllerRestore := TUsuarioController.Create;
-      try
-        ControllerRestore.RestaurarUsuario(Usuario);
-        CarregarInativos;
-        ShowMessage('Usuário Restaurado com sucesso!');
-      finally
-        ControllerRestore.Free;
-        pnlRestaurar.Visible := False;
-        btnRestaurarNovo.Visible := False;
-        CarregarUsuarios;
-        sgUsuarios.Row := 0;
-        sgUsuarios.Col := 0;
-        sgUsuarios.SetFocus;
-      end;
-    finally
-      Usuario.Free;
-    end;
-  end else begin
-    ShowMessage('Selecione um usuário para Restaurar.');
-end;
-end;
-
-
+  begin
+    ConfirmarRestauracao;
+  end;
 
 procedure TPagUsuarios.btnCRestoreMouseEnter(Sender: TObject);
   begin

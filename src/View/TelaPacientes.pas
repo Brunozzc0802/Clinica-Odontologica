@@ -813,7 +813,6 @@ begin
   sgPacientes.ColWidths[4] := 115;
   sgPacientes.ColWidths[5] := 155;
   sgPacientes.ColWidths[6] := 194;
-
   OrdenarGrid;
 
 end;

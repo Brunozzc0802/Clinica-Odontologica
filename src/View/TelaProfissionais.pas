@@ -67,6 +67,8 @@ type
     edEmail: TEdit;
     procedure CarregarGrid;
     procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btnXClick(Sender: TObject);
   private
     ProfissionaisLista: TObjectList<TProfissionais>;
   public
@@ -81,6 +83,11 @@ implementation
 {$R *.dfm}
 
 { TPagProfissionais }
+
+procedure TPagProfissionais.btnXClick(Sender: TObject);
+  begin
+    close;
+  end;
 
 procedure TPagProfissionais.CarregarGrid;
   var
@@ -117,6 +124,25 @@ begin
     Controller.Free;
   end;
 end;
+
+procedure TPagProfissionais.FormCreate(Sender: TObject);
+  begin
+    sgProfissionais.Cells[0,0] := 'ID';
+    sgProfissionais.Cells[1,0] := 'Nome do Paciente';
+    sgProfissionais.Cells[2,0] := 'CPF';
+    sgProfissionais.Cells[3,0] := 'Telefone';
+    sgProfissionais.Cells[4,0] := 'Cep';
+    sgProfissionais.Cells[5,0] := 'Endereço';
+    sgProfissionais.Cells[6,0] := 'Email';
+
+    sgProfissionais.ColWidths[0] := 50;
+    sgProfissionais.ColWidths[1] := 175;
+    sgProfissionais.ColWidths[2] := 130;
+    sgProfissionais.ColWidths[3] := 130;
+    sgProfissionais.ColWidths[4] := 110;
+    sgProfissionais.ColWidths[5] := 185;
+    sgProfissionais.ColWidths[6] := 157;
+  end;
 
 procedure TPagProfissionais.FormShow(Sender: TObject);
   begin

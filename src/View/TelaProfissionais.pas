@@ -97,6 +97,9 @@ type
     procedure btnadicionarMouseLeave(Sender: TObject);
     procedure btnConfirmarAlteracoesMouseEnter(Sender: TObject);
     procedure btnConfirmarAlteracoesMouseLeave(Sender: TObject);
+    procedure btnRestaurarClick(Sender: TObject);
+    procedure CarregarInativos;
+    procedure imgXrestoreClick(Sender: TObject);
   private
     ProfissionaisLista: TObjectList<TProfissionais>;
     ProfissionalIdalterar: Integer;
@@ -112,6 +115,43 @@ implementation
 {$R *.dfm}
 
 { TPagProfissionais }
+
+
+procedure TPagProfissionais.CarregarInativos;
+var
+  Controller: TProfissionaisController;
+  I: Integer;
+begin
+  Controller := TProfissionaisController.Create;
+  try
+    if Assigned(ProfissionaisLista) then
+    ProfissionaisLista.Free;
+    ProfissionaisLista := Controller.BuscarInativos;
+
+    sgRestore.Cells[0,0] := 'ID';
+    sgRestore.Cells[1,0] := 'Nome do Paciente';
+    sgRestore.Cells[2,0] := 'CPF';
+    sgRestore.Cells[3,0] := 'Telefone';
+    sgRestore.Cells[4,0] := 'Cep';
+    sgRestore.Cells[5,0] := 'Data de nascimento';
+    sgRestore.Cells[6,0] := 'Endereço';
+
+    sgRestore.RowCount := ProfissionaisLista.Count + 1;
+
+    for I := 0 to ProfissionaisLista.Count - 1 do
+    begin
+      sgRestore.Cells[0, I + 1] := IntToStr(ProfissionaisLista[I].Id);
+      sgRestore.Cells[1, I + 1] := ProfissionaisLista[I].Nome;
+      sgRestore.Cells[2, I + 1] := ProfissionaisLista[I].cpf;
+      sgRestore.Cells[3, I + 1] := ProfissionaisLista[I].telefone;
+      sgRestore.Cells[4, I + 1] := ProfissionaisLista[I].Email;
+      sgRestore.Cells[5, I + 1] := ProfissionaisLista[I].cep;
+      sgRestore.Cells[6, I + 1] := ProfissionaisLista[I].endereco;
+    end;
+  finally
+    Controller.Free;
+  end;
+end;
 
 procedure TPagProfissionais.adicionarProf;
 var
@@ -319,6 +359,45 @@ procedure TPagProfissionais.btnLimparMouseLeave(Sender: TObject);
     btnLimpar.Color := $007C3E05;
   end;
 
+procedure TPagProfissionais.btnRestaurarClick(Sender: TObject);
+  begin
+    if pnlAdd.Visible = True then begin
+      pnlAdd.Visible := false;
+    end;
+
+    if btnNovoPesquisar.Visible = true  then begin
+      sgProfissionais.Top := sgProfissionais.Top - (pesquisar.Height + 5);
+      sgProfissionais.Height := sgProfissionais.Height + (pesquisar.Height + 5);
+      pesquisar.Visible := False;
+      btnNovoPesquisar.Visible := False;
+    end;
+
+    btnRestaurarNovo.Visible := True;
+    CarregarInativos;
+    sgRestore.Row := 0;
+    sgRestore.Col := 0;
+    btnAddNovo.Visible := False;
+    btnAlterarNovo.Visible := false;
+    pnlRestaurar.Visible := True;
+    sgRestore.SetFocus;
+
+    sgProfissionais.Cells[0,0] := 'ID';
+    sgProfissionais.Cells[1,0] := 'Nome do Profissional';
+    sgProfissionais.Cells[2,0] := 'CPF';
+    sgProfissionais.Cells[3,0] := 'Telefone';
+    sgProfissionais.Cells[4,0] := 'Cep';
+    sgProfissionais.Cells[5,0] := 'Endereço';
+    sgProfissionais.Cells[6,0] := 'Email';
+
+    sgRestore.ColWidths[0] := 50;
+    sgRestore.ColWidths[1] := 140;
+    sgRestore.ColWidths[2] := 105;
+    sgRestore.ColWidths[3] := 110;
+    sgRestore.ColWidths[4] := 95;
+    sgRestore.ColWidths[5] := 130;
+    sgRestore.ColWidths[6] := 146;
+  end;
+
 procedure TPagProfissionais.btnRestaurarMouseEnter(Sender: TObject);
   begin
     btnRestaurar.Color := $00F78B2B;
@@ -436,6 +515,13 @@ procedure TPagProfissionais.FormCreate(Sender: TObject);
 
 procedure TPagProfissionais.FormShow(Sender: TObject);
   begin
+    CarregarGrid;
+  end;
+
+procedure TPagProfissionais.imgXrestoreClick(Sender: TObject);
+  begin
+    pnlRestaurar.Visible := False;
+    btnRestaurarNovo.Visible := False;
     CarregarGrid;
   end;
 

@@ -10,6 +10,7 @@ type
   TProfissionaisRepository = class
   public
     function ListarTodos: TObjectList<TProfissionais>;
+    function ListarInativos: TObjectList<TProfissionais>;
     procedure Adicionar(AProfissional: TProfissionais);
     procedure Alterar(AProfissional: TProfissionais);
   end;
@@ -53,6 +54,32 @@ begin
     ExecSQL;
   end;
 end;
+
+function TProfissionaisRepository.ListarInativos: TObjectList<TProfissionais>;
+  var
+  Profissional: TProfissionais;
+begin
+  Result := TObjectList<TProfissionais>.Create(True);
+  with dmUsuarios.queryProfissionais do begin
+    Close;
+    SQL.Text := 'SELECT id, nome, cpf, telefone, email, cep, endereco  FROM profissionais WHERE ativo = FALSE';
+    Open;
+
+    while not Eof do begin
+      Profissional := TProfissionais.Create;
+      Profissional.Id := FieldByName('id').AsInteger;
+      Profissional.Nome := FieldByName('nome').AsString;
+      Profissional.Cpf := FieldByName('cpf').AsString;
+      Profissional.Telefone := FieldByName('telefone').AsString;
+      Profissional.Email := FieldByName('email').AsString;
+      Profissional.Cep := FieldByName('cep').AsString;
+      Profissional.Endereco := FieldByName('endereco').AsString;
+      Result.Add(Profissional);
+      Next;
+    end;
+  end;
+end;
+
 
 function TProfissionaisRepository.ListarTodos: TObjectList<TProfissionais>;
 var

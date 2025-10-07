@@ -3068,6 +3068,7 @@ object PagPacientes: TPagPacientes
       ParentBackground = False
       TabOrder = 3
       Visible = False
+      OnClick = btnaddPacienteClick
       object EdNomePaciente: TEdit
         Left = 8
         Top = 9

@@ -9,6 +9,7 @@ type
   TProfissionaisController = class
   public
     function BuscarTodos: TObjectList<TProfissionais>;
+    function BuscarInativos: TObjectList<TProfissionais>;
     procedure AdicionarProfissional(const Nome, CPF, telefone,email, cep, endereco: string);
    procedure AlterarProfissional(const Id: Integer; const Nome, CPF, telefone, email, cep, endereco: string);
 
@@ -68,6 +69,18 @@ var
       end;
     finally
       Profissional.Free;
+    end;
+  end;
+
+function TProfissionaisController.BuscarInativos: TObjectList<TProfissionais>;
+var
+RepoProf: TProfissionaisRepository;
+  begin
+    RepoProf := TProfissionaisRepository.Create;
+    try
+      Result := RepoProf.ListarInativos;
+    finally
+      RepoProf.Free;
     end;
   end;
 

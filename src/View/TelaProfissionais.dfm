@@ -2828,6 +2828,7 @@ object PagProfissionais: TPagProfissionais
         Color = 8142341
         ParentBackground = False
         TabOrder = 5
+        OnClick = btnRestaurarClick
         OnMouseEnter = btnRestaurarMouseEnter
         OnMouseLeave = btnRestaurarMouseLeave
         object lblRestaurar: TLabel
@@ -3276,6 +3277,7 @@ object PagProfissionais: TPagProfissionais
           00D89B0031671BA6236DAC86D00FF3439A98B3201430A70D93317A47CC100A99
           3F0D0BFD270C8890D454E12ADDDEFD31E2880127248D9039003931A08E642E8D
           1A59E60C6426631DBE013A6F900B7B89246D0000000049454E44AE426082}
+        OnClick = imgXrestoreClick
       end
       object sgRestore: TStringGrid
         Left = 5

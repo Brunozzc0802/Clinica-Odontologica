@@ -3135,6 +3135,7 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnaddPacienteClick
           OnMouseEnter = lblAddpacienteMouseEnter
           OnMouseLeave = lblAddpacienteMouseLeave
           ExplicitWidth = 115
@@ -3179,6 +3180,9 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnConfirmarAlteracoesClick
+          OnMouseEnter = btnConfirmarAlteracoesMouseEnter
+          OnMouseLeave = btnConfirmarAlteracoesMouseLeave
           ExplicitWidth = 130
           ExplicitHeight = 17
         end
@@ -3196,7 +3200,8 @@ object PagPacientes: TPagPacientes
         Left = 432
         Top = 9
         Width = 147
-        Height = 23
+        Height = 32
+        AutoSize = False
         EditMask = '(00) 00000-0009;1;_'
         MaxLength = 15
         TabOrder = 6
@@ -3208,7 +3213,8 @@ object PagPacientes: TPagPacientes
         Left = 224
         Top = 9
         Width = 168
-        Height = 23
+        Height = 32
+        AutoSize = False
         EditMask = '000.000.000-00;0;_'
         MaxLength = 14
         TabOrder = 7

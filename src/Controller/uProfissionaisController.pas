@@ -10,6 +10,8 @@ type
   public
     function BuscarTodos: TObjectList<TProfissionais>;
     procedure AdicionarProfissional(const Nome, CPF, telefone,email, cep, endereco: string);
+   procedure AlterarProfissional(const Id: Integer; const Nome, CPF, telefone, email, cep, endereco: string);
+
   end;
 
 implementation
@@ -38,6 +40,34 @@ var
       end;
     finally
       profissional.Free;
+    end;
+  end;
+
+procedure TProfissionaisController.AlterarProfissional(const Id: Integer; const Nome, CPF, telefone, email, cep, endereco: string);
+
+var
+  Profissional: TProfissionais;
+  RepoProf: TProfissionaisRepository;
+  begin
+    Profissional := TProfissionais.Create;
+    try
+      Profissional.Id := Id;
+      Profissional.Nome  := Nome;
+      Profissional.CPF := cpf;
+      Profissional.Telefone := telefone;
+      Profissional.Email := email;
+      Profissional.cep := cep;
+      Profissional.endereco := endereco;
+
+
+      RepoProf := TProfissionaisRepository.Create;
+      try
+        RepoProf.Alterar(Profissional);
+      finally
+        RepoProf.Free;
+      end;
+    finally
+      Profissional.Free;
     end;
   end;
 

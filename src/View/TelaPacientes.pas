@@ -386,26 +386,41 @@ end;
 
 procedure TPagPacientes.btnAddClick(Sender: TObject);
   begin
-    if btnRestaurarNovo.Visible = True then begin
-      btnAdd.Enabled;
-      btnAlterar.Enabled;
-      btnPesquisar.Enabled;
+    if pnlRestaurar.Visible = true then begin
+      pnlRestaurar.Visible := False;
+      btnRestaurarNovo.Visible := false;
     end;
+
+    if (btnAlterarNovo.Visible = True) then begin
+      EdNomePaciente.Clear;
+      edCEP.Clear;
+      edEndereco.Clear;
+      edTelefone.Clear;
+      edCPF.Clear;
+      EdNomePaciente.SetFocus;
+      sgPacientes.Row := 0;
+      sgPacientes.Col := 0;
+      sgPacientes.SetFocus;
 
     if btnNovoPesquisar.Visible = true  then begin
-      sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
-      sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
-      pesquisar.Visible := False;
-      btnNovoPesquisar.Visible := False;
+        sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
+        sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
+        pesquisar.Visible := False;
+        btnNovoPesquisar.Visible := False;
+      end;
+
     end;
 
-    pnlAddPacientes.Visible := True;
-    btnAddNovo.Visible := True;
-    edNomePaciente.SetFocus;
-    imgLogo1.Visible := False;
-    imgLogo2.Visible := True;
-    sgPacientes.Row := 0;
-    sgPacientes.Col := 0;
+      btnAlterarNovo.Visible := false;
+      btnAddNovo.Visible := True;
+      btnNovoPesquisar.Visible := False;
+      btnRestaurarNovo.Visible := false;
+      btnConfirmarAlteracoes.Visible := false;
+      btnaddPaciente.Visible := True;
+      pnlAddPacientes.Visible := True;
+      imgLogo2.Visible := True;
+      imgLogo1.Visible := False;
+      EdNomePaciente.SetFocus;
   end;
 
 procedure TPagPacientes.btnAddMouseEnter(Sender: TObject);

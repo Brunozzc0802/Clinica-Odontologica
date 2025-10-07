@@ -11,6 +11,7 @@ type
   public
     function ListarTodos: TObjectList<TProfissionais>;
     procedure Adicionar(AProfissional: TProfissionais);
+    procedure Alterar(AProfissional: TProfissionais);
   end;
 
 implementation
@@ -34,6 +35,25 @@ begin
     ExecSQL;
   end;
 end;
+procedure TProfissionaisRepository.Alterar(AProfissional: TProfissionais);
+begin
+  with dmUsuarios.queryProfissionais do begin
+    Close;
+    SQL.Text :=
+      'UPDATE profissionais ' + 'SET nome = :nome, ' + 'cpf = :cpf, ' + 'telefone = :telefone, ' + 'email = :email,' +
+      'cep = :cep, ' + 'endereco = :endereco, ' + 'ativo = TRUE ' + 'WHERE id = :id';
+
+    ParamByName('id').AsInteger       := AProfissional.Id;
+    ParamByName('nome').AsString      := AProfissional.Nome;
+    ParamByName('cpf').AsString       := AProfissional.Cpf;
+    ParamByName('telefone').AsString  := AProfissional.Telefone;
+    ParamByName('email').AsString     := AProfissional.Email;
+    ParamByName('cep').AsString       := AProfissional.cep;
+    ParamByName('endereco').AsString    := AProfissional.endereco;
+    ExecSQL;
+  end;
+end;
+
 function TProfissionaisRepository.ListarTodos: TObjectList<TProfissionais>;
 var
   Profissional: TProfissionais;

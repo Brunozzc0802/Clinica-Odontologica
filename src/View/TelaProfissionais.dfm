@@ -2635,6 +2635,7 @@ object PagProfissionais: TPagProfissionais
         Color = 8142341
         ParentBackground = False
         TabOrder = 1
+        OnClick = btnAlterarClick
         OnMouseEnter = btnAlterarMouseEnter
         OnMouseLeave = btnAlterarMouseLeave
         object lblAlterarUsu: TLabel
@@ -3097,6 +3098,8 @@ object PagProfissionais: TPagProfissionais
         ParentBackground = False
         TabOrder = 3
         OnClick = btnadicionarClick
+        OnMouseEnter = btnadicionarMouseEnter
+        OnMouseLeave = btnadicionarMouseLeave
         object lblAddpaciente: TLabel
           AlignWithMargins = True
           Left = 191
@@ -3136,6 +3139,9 @@ object PagProfissionais: TPagProfissionais
         ParentBackground = False
         TabOrder = 4
         Visible = False
+        OnClick = btnConfirmarAlteracoesClick
+        OnMouseEnter = btnConfirmarAlteracoesMouseEnter
+        OnMouseLeave = btnConfirmarAlteracoesMouseLeave
         object lblConfirmarAlteracoes: TLabel
           AlignWithMargins = True
           Left = 191
@@ -3166,7 +3172,8 @@ object PagProfissionais: TPagProfissionais
         Left = 432
         Top = 9
         Width = 147
-        Height = 23
+        Height = 32
+        AutoSize = False
         EditMask = '(00) 00000-0009;1;_'
         MaxLength = 15
         TabOrder = 5
@@ -3177,7 +3184,8 @@ object PagProfissionais: TPagProfissionais
         Left = 224
         Top = 9
         Width = 169
-        Height = 23
+        Height = 32
+        AutoSize = False
         EditMask = '000.000.000-00;0;_'
         MaxLength = 14
         TabOrder = 6
@@ -3186,9 +3194,9 @@ object PagProfissionais: TPagProfissionais
       end
       object edEmail: TEdit
         Left = 8
-        Top = 58
+        Top = 56
         Width = 169
-        Height = 32
+        Height = 34
         AutoSize = False
         TabOrder = 7
         TextHint = 'Digite o Email:'

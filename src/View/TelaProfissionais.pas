@@ -90,8 +90,16 @@ type
     procedure btnSairMouseLeave(Sender: TObject);
     procedure adicionarProf;
     procedure btnadicionarClick(Sender: TObject);
+    procedure btnAlterarClick(Sender: TObject);
+    procedure ConfirmarAlteracoes(Sender: TObject);
+    procedure btnConfirmarAlteracoesClick(Sender: TObject);
+    procedure btnadicionarMouseEnter(Sender: TObject);
+    procedure btnadicionarMouseLeave(Sender: TObject);
+    procedure btnConfirmarAlteracoesMouseEnter(Sender: TObject);
+    procedure btnConfirmarAlteracoesMouseLeave(Sender: TObject);
   private
     ProfissionaisLista: TObjectList<TProfissionais>;
+    ProfissionalIdalterar: Integer;
   public
     { Public declarations }
   end;
@@ -141,12 +149,42 @@ end;
 
 procedure TPagProfissionais.btnAddClick(Sender: TObject);
   begin
-    pnlAdd.Visible := True;
-    btnAddNovo.Visible := True;
-    EdNome.SetFocus;
-    btnAlterarNovo.Visible := false;
-    btnNovoPesquisar.Visible := false;
-    btnRestaurarNovo.Visible := false;
+    if pnlRestaurar.Visible = true then begin
+      pnlRestaurar.Visible := False;
+      btnRestaurarNovo.Visible := false;
+    end;
+
+    if (btnAlterarNovo.Visible = True) then begin
+      EdNome.Clear;
+      edCEP.Clear;
+      edEndereco.Clear;
+      edEmail.Clear;
+      edTelefone.Clear;
+      edCPF.Clear;
+      EdNome.SetFocus;
+      sgprofissionais.Row := 0;
+      sgprofissionais.Col := 0;
+      sgprofissionais.SetFocus;
+
+    if btnNovoPesquisar.Visible = true  then begin
+        sgProfissionais.Top := sgProfissionais.Top - (pesquisar.Height + 5);
+        sgProfissionais.Height := sgProfissionais.Height + (pesquisar.Height + 5);
+        pesquisar.Visible := False;
+        btnNovoPesquisar.Visible := False;
+      end;
+
+    end;
+
+      btnAlterarNovo.Visible := false;
+      btnAddNovo.Visible := True;
+      btnNovoPesquisar.Visible := False;
+      btnRestaurarNovo.Visible := false;
+      btnConfirmarAlteracoes.Visible := false;
+      btnadicionar.Visible := True;
+      pnlAdd.Visible := True;
+      imgLogo2.Visible := True;
+      imgLogo1.Visible := False;
+      EdNome.SetFocus;
   end;
 
 procedure TPagProfissionais.btnAddMouseEnter(Sender: TObject);
@@ -164,6 +202,48 @@ procedure TPagProfissionais.btnadicionarClick(Sender: TObject);
     adicionarProf;
   end;
 
+procedure TPagProfissionais.btnadicionarMouseEnter(Sender: TObject);
+  begin
+    btnAdicionar.Color := $00F78B2B;
+  end;
+
+procedure TPagProfissionais.btnadicionarMouseLeave(Sender: TObject);
+  begin
+    btnAdicionar.Color := $007C3E05;
+  end;
+
+procedure TPagProfissionais.btnAlterarClick(Sender: TObject);
+var
+  linha: Integer;
+  begin
+    linha := sgProfissionais.Row;
+    if linha <= 0 then
+    begin
+      ShowMessage('Selecione um profissional para alterar!');
+      Exit;
+    end;
+
+    if btnNovoPesquisar.Visible = true  then begin
+      sgProfissionais.Top := sgProfissionais.Top - (pesquisar.Height + 5);
+      sgProfissionais.Height := sgProfissionais.Height + (pesquisar.Height + 5);
+      pesquisar.Visible := False;
+      btnNovoPesquisar.Visible := False;
+    end;
+
+    ProfissionalIdalterar := StrToIntDef(sgProfissionais.Cells[0, linha], 0);
+    EdNome.Text := sgProfissionais.Cells[1, linha];
+    edCPF.Text := sgProfissionais.Cells[2, linha];
+    edTelefone.Text := sgProfissionais.Cells[3, linha];
+    edEmail.Text := sgProfissionais.Cells[4, linha];
+    edCEP.Text := sgProfissionais.Cells[5, linha];
+    edendereco.Text := sgProfissionais.Cells[6, linha];
+
+    btnConfirmarAlteracoes.Visible := True;
+    btnAddNovo.Visible := False;
+    btnAlterarNovo.Visible := True;
+    btnAddNovo.Visible := False;
+    pnlAdd.Visible := True;
+   end;
 procedure TPagProfissionais.btnAlterarMouseEnter(Sender: TObject);
   begin
     btnAlterar.Color := $00F78B2B;
@@ -182,6 +262,21 @@ procedure TPagProfissionais.btnCancelarMouseEnter(Sender: TObject);
 procedure TPagProfissionais.btnCancelarMouseLeave(Sender: TObject);
   begin
     btncancelar.Color := $007C3E05;
+  end;
+
+procedure TPagProfissionais.btnConfirmarAlteracoesClick(Sender: TObject);
+  begin
+    ConfirmarAlteracoes(nil);
+  end;
+
+procedure TPagProfissionais.btnConfirmarAlteracoesMouseEnter(Sender: TObject);
+  begin
+    btnConfirmarAlteracoes.Color := $00F78B2B;
+  end;
+
+procedure TPagProfissionais.btnConfirmarAlteracoesMouseLeave(Sender: TObject);
+  begin
+    btnConfirmarAlteracoes.Color := $007C3E05;
   end;
 
 procedure TPagProfissionais.btnConsultasMouseEnter(Sender: TObject);
@@ -280,6 +375,41 @@ begin
       sgProfissionais.Cells[5, I + 1] := ProfissionaisLista[I].endereco;
       sgProfissionais.Cells[6, I + 1] := ProfissionaisLista[I].email;
     end;
+  finally
+    Controller.Free;
+  end;
+end;
+
+procedure TPagProfissionais.ConfirmarAlteracoes(Sender: TObject);
+var
+  Controller: TProfissionaisController;
+begin
+  if ProfissionalIdalterar = 0 then
+  begin
+    ShowMessage('Selecione um Profissional para alterar');
+    Exit;
+  end;
+  Controller := TProfissionaisController.Create;
+  try
+    Controller.AlterarProfissional(
+    ProfissionalIdalterar,
+    edNome.Text,
+    edCpf.Text,
+    edTelefone.Text,
+    edEmail.Text,
+    edCep.Text,
+    edEndereco.Text
+);
+
+
+    ShowMessage('Alterações feitas com sucesso!');
+    btnAlterarNovo.Visible := False;
+    CarregarGrid;
+    sgProfissionais.Row := 0;
+    sgProfissionais.Col := 0;
+    sgProfissionais.SetFocus;
+    pnlAdd.Visible := False;
+
   finally
     Controller.Free;
   end;

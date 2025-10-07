@@ -3359,11 +3359,11 @@ object FormLogin: TFormLogin
         870)
       object imgLogoPrincipal: TImage
         AlignWithMargins = True
-        Left = 101
+        Left = 81
         Top = 51
-        Width = 722
+        Width = 742
         Height = 768
-        Margins.Left = 100
+        Margins.Left = 80
         Margins.Top = 50
         Margins.Right = 50
         Margins.Bottom = 50
@@ -5084,9 +5084,8 @@ object FormLogin: TFormLogin
           C8312891935F8E1C39062572F2CB9123C7A0444E7E3972E41894C8C92F478E1C
           831239F9E5C89163502227BF1C39720C4AE4E49723478E41899CFC72E4C83128
           91935F8E1C390625FE3FF554A820DEE964570000000049454E44AE426082}
-        ExplicitLeft = 96
-        ExplicitWidth = 725
-        ExplicitHeight = 757
+        ExplicitLeft = 77
+        ExplicitWidth = 722
       end
       object footerPrincipal: TPanel
         Left = 0
@@ -5570,6 +5569,7 @@ object FormLogin: TFormLogin
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = pnlProfissionaisClick
           OnMouseEnter = pnlProfissionaisMouseEnter
           OnMouseLeave = pnlProfissionaisMouseLeave
           ExplicitWidth = 112
@@ -5699,6 +5699,7 @@ object FormLogin: TFormLogin
             F10000000049454E44AE426082}
           Proportional = True
           Stretch = True
+          OnClick = pnlProfissionaisClick
           OnMouseEnter = pnlProfissionaisMouseEnter
           OnMouseLeave = pnlProfissionaisMouseLeave
         end

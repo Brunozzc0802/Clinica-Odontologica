@@ -319,6 +319,9 @@ procedure TPagUsuarios.FormCreate(Sender: TObject);
 procedure TPagUsuarios.FormShow(Sender: TObject);
   begin
     CarregarUsuarios;
+    sgUsuarios.Row := 0;
+    sgUsuarios.Col := 0;
+    sgUsuarios.SetFocus;
   end;
 procedure TPagUsuarios.imgXrestoreClick(Sender: TObject);
   begin

@@ -400,6 +400,7 @@ procedure TPagPacientes.btnAddClick(Sender: TObject);
     end;
 
     pnlAddPacientes.Visible := True;
+    btnAddNovo.Visible := True;
     edNomePaciente.SetFocus;
     imgLogo1.Visible := False;
     imgLogo2.Visible := True;
@@ -490,17 +491,18 @@ procedure TPagPacientes.btnAlterarNovoClick(Sender: TObject);
 procedure TPagPacientes.btnCancelarClick(Sender: TObject);
   begin
     pnlAddPacientes.Visible := False;
+    btnAddNovo.Visible := False;
+    btnRestaurarNovo.Visible := False;
+    pnlRestaurar.Visible := false;
     btnAlterarNovo.Visible := False;
     imgLogo1.Visible := True;
     imgLogo2.visible := False;
-
-    if pesquisar.Visible = True then begin
+    if pesquisar.Visible = true then begin
       sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
       sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
       pesquisar.Visible := False;
       btnNovoPesquisar.Visible := False;
     end;
-
     sgPacientes.Row := 0;
     sgPacientes.Col := 0;
     sgPacientes.SetFocus;
@@ -657,11 +659,12 @@ procedure TPagPacientes.btnRestaurarClick(Sender: TObject);
 
     btnRestaurarNovo.Visible := True;
     CarregarInativos;
+    sgRestore.Row := 0;
+    sgRestore.Col := 0;
     btnAddNovo.Visible := False;
     btnAlterarNovo.Visible := false;
     pnlRestaurar.Visible := True;
     sgRestore.SetFocus;
-
 
     sgRestore.Cells[0,0] := 'ID';
     sgRestore.Cells[1,0] := 'Nome do Paciente';
@@ -713,6 +716,19 @@ procedure TPagPacientes.btnSairMouseLeave(Sender: TObject);
 procedure TPagPacientes.btnXClick(Sender: TObject);
   begin
     close;
+    pnlAddPacientes.Visible := False;
+    btnAddNovo.Visible := False;
+    btnRestaurarNovo.Visible := False;
+    pnlRestaurar.Visible := false;
+    btnAlterarNovo.Visible := False;
+    imgLogo1.Visible := True;
+    imgLogo2.visible := False;
+    if pesquisar.Visible = true then begin
+      sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
+      sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
+      pesquisar.Visible := False;
+      btnNovoPesquisar.Visible := False;
+    end;
   end;
 
 function TPagPacientes.buscarCEP(const CEP: string): Boolean;
@@ -794,6 +810,11 @@ procedure TPagPacientes.FormClose(Sender: TObject; var Action: TCloseAction);
   begin
     pnlAddPacientes.Visible := False;
     controller.Free;
+    FreeAndNil(PacientesLista);
+    btnAddNovo.visible := false;
+    pnlAddPacientes.Visible := False;
+    imgLogo2.Visible := False;
+    imgLogo1.Visible := True;
   end;
 
 procedure TPagPacientes.FormCreate(Sender: TObject);
@@ -826,6 +847,9 @@ procedure TPagPacientes.FormShow(Sender: TObject);
   begin
     CarregarPacientes;
     OrdenarGrid;
+    sgPacientes.Row := 0;
+    sgPacientes.Col := 0;
+    sgPacientes.SetFocus;
   end;
 
 function TPagPacientes.IdadeValida(DataNascimento: TDate): Boolean;
@@ -872,6 +896,7 @@ procedure TPagPacientes.lblSairClick(Sender: TObject);
   begin
     close;
   end;
+
 procedure TPagPacientes.sgPacientesDrawCell(Sender: TObject; ACol,
   ARow: LongInt; Rect: TRect; State: TGridDrawState);
 var
@@ -890,8 +915,6 @@ begin
   sgPacientes.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2,
     sgPacientes.Cells[ACol, ARow]);
 end;
-
-
 
 procedure TPagPacientes.sgRestoreDrawCell(Sender: TObject; ACol, ARow: LongInt;
   Rect: TRect; State: TGridDrawState);

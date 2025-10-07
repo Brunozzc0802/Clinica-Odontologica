@@ -10,10 +10,30 @@ type
   TProfissionaisRepository = class
   public
     function ListarTodos: TObjectList<TProfissionais>;
+    procedure Adicionar(AProfissional: TProfissionais);
   end;
 
 implementation
 
+procedure TProfissionaisRepository.Adicionar(AProfissional: TProfissionais);
+begin
+  with dmUsuarios.queryProfissionais do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Text :=
+      'INSERT INTO profissionais (nome, cpf, telefone, email, cep, endereco, ativo) ' +
+      'VALUES (:nome, :cpf, :telefone, :email, :cep, :endereco, TRUE)';
+
+    ParamByName('nome').AsString     := AProfissional.Nome;
+    ParamByName('cpf').AsString      := AProfissional.Cpf;
+    ParamByName('telefone').AsString := AProfissional.Telefone;
+    ParamByName('email').AsString    := AProfissional.Email;
+    ParamByName('cep').AsString      := AProfissional.Cep;
+    ParamByName('endereco').AsString := AProfissional.Endereco;
+    ExecSQL;
+  end;
+end;
 function TProfissionaisRepository.ListarTodos: TObjectList<TProfissionais>;
 var
   Profissional: TProfissionais;

@@ -212,6 +212,8 @@ procedure TFormLogin.pnlEncerrarSistemaMouseLeave(Sender: TObject);
 procedure TFormLogin.pnlPacientesClick(Sender: TObject);
   begin
     PagPacientes.Show;
+    PagUsuarios.Close;
+    PagProfissionais.close;
   end;
 
 procedure TFormLogin.pnlPacientesMouseEnter(Sender: TObject);
@@ -237,6 +239,8 @@ procedure TFormLogin.pnlProcedimentosMouseLeave(Sender: TObject);
 procedure TFormLogin.pnlProfissionaisClick(Sender: TObject);
   begin
     PagProfissionais.Show;
+    PagPacientes.Close;
+    PagUsuarios.close;
   end;
 
 procedure TFormLogin.pnlProfissionaisMouseEnter(Sender: TObject);
@@ -262,6 +266,8 @@ procedure TFormLogin.pnlRelatoriosMouseLeave(Sender: TObject);
 procedure TFormLogin.pnlUserClick(Sender: TObject);
   begin
     PagUsuarios.Show;
+    PagPacientes.Close;
+    PagProfissionais.Close;
   end;
 
 procedure TFormLogin.pnlUserMouseEnter(Sender: TObject);

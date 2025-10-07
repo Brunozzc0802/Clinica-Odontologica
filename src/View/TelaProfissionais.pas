@@ -69,6 +69,27 @@ type
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnXClick(Sender: TObject);
+    procedure btnAddClick(Sender: TObject);
+    procedure btnAddMouseEnter(Sender: TObject);
+    procedure btnAddMouseLeave(Sender: TObject);
+    procedure btnAlterarMouseEnter(Sender: TObject);
+    procedure btnAlterarMouseLeave(Sender: TObject);
+    procedure btnPesquisarMouseEnter(Sender: TObject);
+    procedure btnPesquisarMouseLeave(Sender: TObject);
+    procedure btnDeletarMouseEnter(Sender: TObject);
+    procedure btnDeletarMouseLeave(Sender: TObject);
+    procedure btnCancelarMouseEnter(Sender: TObject);
+    procedure btnCancelarMouseLeave(Sender: TObject);
+    procedure btnRestaurarMouseEnter(Sender: TObject);
+    procedure btnRestaurarMouseLeave(Sender: TObject);
+    procedure btnConsultasMouseEnter(Sender: TObject);
+    procedure btnConsultasMouseLeave(Sender: TObject);
+    procedure btnLimparMouseLeave(Sender: TObject);
+    procedure btnLimparMouseEnter(Sender: TObject);
+    procedure btnSairMouseEnter(Sender: TObject);
+    procedure btnSairMouseLeave(Sender: TObject);
+    procedure adicionarProf;
+    procedure btnadicionarClick(Sender: TObject);
   private
     ProfissionaisLista: TObjectList<TProfissionais>;
   public
@@ -83,6 +104,145 @@ implementation
 {$R *.dfm}
 
 { TPagProfissionais }
+
+procedure TPagProfissionais.adicionarProf;
+var
+  Controller: TProfissionaisController;
+begin
+  Controller := TProfissionaisController.Create;
+  try
+
+    if (EdNome.Text = '') or (edCPF.Text = '') or (edTelefone.Text = '') or
+    (edCEP.Text = '') or (edEmail.Text = '') or (edEndereco.Text = '')
+    then begin
+      ShowMessage('Preencha todos os campos');
+      exit;
+    end;
+
+      Controller.AdicionarProfissional(
+      edNome.Text,
+      edCPF.Text,
+      edTelefone.Text,
+      edCEP.Text,
+      edEndereco.Text,
+      edEmail.Text);
+    ShowMessage('Profissional adicionado com sucesso!');
+    CarregarGrid;
+    edNome.clear;
+    edCPF.clear;
+    edTelefone.clear;
+    edCEP.clear;
+    edEndereco.clear;
+    edEmail.Clear;
+  finally
+    Controller.Free;
+  end;
+end;
+
+procedure TPagProfissionais.btnAddClick(Sender: TObject);
+  begin
+    pnlAdd.Visible := True;
+    btnAddNovo.Visible := True;
+    EdNome.SetFocus;
+    btnAlterarNovo.Visible := false;
+    btnNovoPesquisar.Visible := false;
+    btnRestaurarNovo.Visible := false;
+  end;
+
+procedure TPagProfissionais.btnAddMouseEnter(Sender: TObject);
+  begin
+    btnAdd.Color := $00F78B2B;
+  end;
+
+procedure TPagProfissionais.btnAddMouseLeave(Sender: TObject);
+  begin
+    btnadd.Color := $007C3E05;
+  end;
+
+procedure TPagProfissionais.btnadicionarClick(Sender: TObject);
+  begin
+    adicionarProf;
+  end;
+
+procedure TPagProfissionais.btnAlterarMouseEnter(Sender: TObject);
+  begin
+    btnAlterar.Color := $00F78B2B;
+  end;
+
+procedure TPagProfissionais.btnAlterarMouseLeave(Sender: TObject);
+  begin
+    btnAlterar.Color := $007C3E05;
+  end;
+
+procedure TPagProfissionais.btnCancelarMouseEnter(Sender: TObject);
+  begin
+    btnCancelar.Color := $00F78B2B;
+  end;
+
+procedure TPagProfissionais.btnCancelarMouseLeave(Sender: TObject);
+  begin
+    btncancelar.Color := $007C3E05;
+  end;
+
+procedure TPagProfissionais.btnConsultasMouseEnter(Sender: TObject);
+  begin
+    btnConsultas.Color := $00F78B2B;
+  end;
+
+procedure TPagProfissionais.btnConsultasMouseLeave(Sender: TObject);
+  begin
+    btnconsultas.Color := $007C3E05;
+  end;
+
+procedure TPagProfissionais.btnDeletarMouseEnter(Sender: TObject);
+  begin
+    btnDeletar.Color := $00F78B2B;
+  end;
+
+procedure TPagProfissionais.btnDeletarMouseLeave(Sender: TObject);
+  begin
+    btnDeletar.Color := $007C3E05;
+  end;
+
+procedure TPagProfissionais.btnPesquisarMouseEnter(Sender: TObject);
+  begin
+    btnPesquisar.Color := $00F78B2B;
+  end;
+
+procedure TPagProfissionais.btnPesquisarMouseLeave(Sender: TObject);
+  begin
+    btnPesquisar.Color := $007C3E05;
+  end;
+
+procedure TPagProfissionais.btnLimparMouseEnter(Sender: TObject);
+  begin
+    btnLimpar.Color := $00F78B2B;
+  end;
+
+procedure TPagProfissionais.btnLimparMouseLeave(Sender: TObject);
+  begin
+    btnLimpar.Color := $007C3E05;
+  end;
+
+procedure TPagProfissionais.btnRestaurarMouseEnter(Sender: TObject);
+  begin
+    btnRestaurar.Color := $00F78B2B;
+  end;
+
+procedure TPagProfissionais.btnRestaurarMouseLeave(Sender: TObject);
+  begin
+    btnRestaurar.Color := $007C3E05;
+  end;
+
+procedure TPagProfissionais.btnSairMouseEnter(Sender: TObject);
+  begin
+    btnSair.Color := $00F78B2B;
+  end;
+
+procedure TPagProfissionais.btnSairMouseLeave(Sender: TObject);
+  begin
+    btnSair.Color := $007C3E05;
+  end;
 
 procedure TPagProfissionais.btnXClick(Sender: TObject);
   begin

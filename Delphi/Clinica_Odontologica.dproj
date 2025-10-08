@@ -152,7 +152,6 @@
         </DCCReference>
         <DCCReference Include="..\src\View\TelaProfissionais.pas">
             <Form>PagProfissionais</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\src\Model\uProfissionais.pas"/>
         <DCCReference Include="..\src\Repository\uProfissionaisRepository.pas"/>

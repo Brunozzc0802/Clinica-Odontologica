@@ -2532,6 +2532,7 @@ object PagProfissionais: TPagProfissionais
       RowCount = 1
       FixedRows = 0
       TabOrder = 0
+      OnDrawCell = sgProfissionaisDrawCell
     end
     object pesquisar: TSearchBox
       Left = 9
@@ -2541,6 +2542,7 @@ object PagProfissionais: TPagProfissionais
       TabOrder = 1
       TextHint = 'Pesquisar'
       Visible = False
+      OnChange = pesquisarChange
     end
     object pnlBotoesDireita: TPanel
       Left = 607
@@ -2675,6 +2677,7 @@ object PagProfissionais: TPagProfissionais
         Color = 8142341
         ParentBackground = False
         TabOrder = 2
+        OnClick = btnPesquisarClick
         OnMouseEnter = btnPesquisarMouseEnter
         OnMouseLeave = btnPesquisarMouseLeave
         object lblPesquisar: TLabel
@@ -2750,6 +2753,7 @@ object PagProfissionais: TPagProfissionais
         Color = 8142341
         ParentBackground = False
         TabOrder = 3
+        OnClick = btnDeletarClick
         OnMouseEnter = btnDeletarMouseEnter
         OnMouseLeave = btnDeletarMouseLeave
         object lblDeletarUsu: TLabel
@@ -2789,6 +2793,7 @@ object PagProfissionais: TPagProfissionais
         Color = 8142341
         ParentBackground = False
         TabOrder = 4
+        OnClick = btnCancelarClick
         OnMouseEnter = btnCancelarMouseEnter
         OnMouseLeave = btnCancelarMouseLeave
         object lblCancelarUsu: TLabel
@@ -2895,7 +2900,7 @@ object PagProfissionais: TPagProfissionais
           end
         end
       end
-      object btnConsultas: TPanel
+      object btnLimpar: TPanel
         Left = 8
         Top = 287
         Width = 137
@@ -2904,45 +2909,7 @@ object PagProfissionais: TPagProfissionais
         Color = 8142341
         ParentBackground = False
         TabOrder = 6
-        OnMouseEnter = btnConsultasMouseEnter
-        OnMouseLeave = btnConsultasMouseLeave
-        object lblConsultas: TLabel
-          AlignWithMargins = True
-          Left = 16
-          Top = 11
-          Width = 105
-          Height = 19
-          Cursor = crHandPoint
-          Margins.Left = 15
-          Margins.Top = 10
-          Margins.Right = 15
-          Margins.Bottom = 10
-          Align = alClient
-          Alignment = taCenter
-          Caption = 'Consultas'
-          Color = clCream
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -13
-          Font.Name = 'Segoe UI'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          OnMouseEnter = btnConsultasMouseEnter
-          OnMouseLeave = btnConsultasMouseLeave
-          ExplicitWidth = 60
-          ExplicitHeight = 17
-        end
-      end
-      object btnLimpar: TPanel
-        Left = 8
-        Top = 334
-        Width = 137
-        Height = 41
-        Cursor = crHandPoint
-        Color = 8142341
-        ParentBackground = False
-        TabOrder = 7
+        OnClick = btnLimparClick
         OnMouseEnter = btnLimparMouseEnter
         OnMouseLeave = btnLimparMouseLeave
         object lblLimpar: TLabel
@@ -2975,13 +2942,13 @@ object PagProfissionais: TPagProfissionais
       end
       object btnSair: TPanel
         Left = 8
-        Top = 381
+        Top = 334
         Width = 137
         Height = 41
         Cursor = crHandPoint
         Color = 8142341
         ParentBackground = False
-        TabOrder = 8
+        TabOrder = 7
         OnMouseEnter = btnSairMouseEnter
         OnMouseLeave = btnSairMouseLeave
         object lblSair: TLabel
@@ -3020,7 +2987,7 @@ object PagProfissionais: TPagProfissionais
         Cursor = crHandPoint
         Color = 16223019
         ParentBackground = False
-        TabOrder = 9
+        TabOrder = 8
         Visible = False
         object Label3: TLabel
           AlignWithMargins = True
@@ -3066,9 +3033,10 @@ object PagProfissionais: TPagProfissionais
         AutoSize = False
         TabOrder = 0
         TextHint = 'Digite o nome:'
+        OnKeyDown = EdNomeKeyDown
       end
       object edCEP: TEdit
-        Left = 224
+        Left = 219
         Top = 56
         Width = 169
         Height = 33
@@ -3180,9 +3148,10 @@ object PagProfissionais: TPagProfissionais
         TabOrder = 5
         Text = '(  )      -    '
         TextHint = 'Digite o Telefone:'
+        OnKeyDown = edTelefoneKeyDown
       end
       object edCPF: TMaskEdit
-        Left = 224
+        Left = 219
         Top = 9
         Width = 169
         Height = 32
@@ -3192,6 +3161,7 @@ object PagProfissionais: TPagProfissionais
         TabOrder = 6
         Text = ''
         TextHint = 'Digite o CPF:'
+        OnKeyDown = edCPFKeyDown
       end
       object edEmail: TEdit
         Left = 8
@@ -3201,6 +3171,7 @@ object PagProfissionais: TPagProfissionais
         AutoSize = False
         TabOrder = 7
         TextHint = 'Digite o Email:'
+        OnKeyDown = edEmailKeyDown
       end
     end
     object pnlRestaurar: TPanel
@@ -3301,6 +3272,8 @@ object PagProfissionais: TPagProfissionais
         Color = 16223019
         ParentBackground = False
         TabOrder = 1
+        OnMouseEnter = btnCRestoreMouseEnter
+        OnMouseLeave = btnCRestoreMouseLeave
         object lblRestore: TLabel
           AlignWithMargins = True
           Left = 1
@@ -3323,6 +3296,8 @@ object PagProfissionais: TPagProfissionais
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnMouseEnter = btnCRestoreMouseEnter
+          OnMouseLeave = btnCRestoreMouseLeave
           ExplicitWidth = 58
           ExplicitHeight = 17
         end

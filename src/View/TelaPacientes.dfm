@@ -3090,7 +3090,7 @@ object PagPacientes: TPagPacientes
         OnKeyDown = edCEPKeyDown
       end
       object edEndereco: TEdit
-        Left = 224
+        Left = 219
         Top = 57
         Width = 169
         Height = 32
@@ -3211,7 +3211,7 @@ object PagPacientes: TPagPacientes
         OnKeyDown = edTelefoneKeyDown
       end
       object edCPF: TMaskEdit
-        Left = 224
+        Left = 219
         Top = 9
         Width = 168
         Height = 32
@@ -3324,6 +3324,8 @@ object PagPacientes: TPagPacientes
         ParentBackground = False
         TabOrder = 1
         OnClick = btnCRestoreClick
+        OnMouseEnter = btnCRestoreMouseEnter
+        OnMouseLeave = btnCRestoreMouseLeave
         object lblRestore: TLabel
           AlignWithMargins = True
           Left = 1
@@ -3347,6 +3349,8 @@ object PagPacientes: TPagPacientes
           ParentColor = False
           ParentFont = False
           OnClick = btnCRestoreClick
+          OnMouseEnter = btnCRestoreMouseEnter
+          OnMouseLeave = btnCRestoreMouseLeave
           ExplicitWidth = 58
           ExplicitHeight = 17
         end

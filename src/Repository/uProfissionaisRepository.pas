@@ -13,6 +13,7 @@ type
     function ListarInativos: TObjectList<TProfissionais>;
     procedure Adicionar(AProfissional: TProfissionais);
     procedure Alterar(AProfissional: TProfissionais);
+    procedure DesativarProfissional(const Id: Integer);
   end;
 
 implementation
@@ -54,6 +55,16 @@ begin
     ExecSQL;
   end;
 end;
+
+procedure TProfissionaisRepository.DesativarProfissional(const Id: Integer);
+  begin
+    with dmUsuarios.queryProfissionais do begin
+      Close;
+      SQL.Text := 'UPDATE profissionais SET ativo = FALSE WHERE id = :id';
+      ParamByName('id').AsInteger := Id;
+      ExecSQL;
+    end;
+  end;
 
 function TProfissionaisRepository.ListarInativos: TObjectList<TProfissionais>;
   var

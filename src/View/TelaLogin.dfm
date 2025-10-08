@@ -2594,6 +2594,7 @@ object FormLogin: TFormLogin
         Color = 14539739
         ParentBackground = False
         TabOrder = 0
+        ExplicitTop = -6
         DesignSize = (
           437
           579)
@@ -2647,7 +2648,7 @@ object FormLogin: TFormLogin
         end
         object ShapeSenha: TShape
           Left = 24
-          Top = 376
+          Top = 384
           Width = 377
           Height = 49
           Shape = stRoundRect
@@ -2655,7 +2656,7 @@ object FormLogin: TFormLogin
         object ImgOlhoFechado: TImage
           AlignWithMargins = True
           Left = 352
-          Top = 388
+          Top = 397
           Width = 41
           Height = 24
           Cursor = crHandPoint
@@ -2692,7 +2693,7 @@ object FormLogin: TFormLogin
         object ImgOlhoAberto: TImage
           AlignWithMargins = True
           Left = 352
-          Top = 388
+          Top = 397
           Width = 40
           Height = 24
           Cursor = crHandPoint
@@ -3267,12 +3268,12 @@ object FormLogin: TFormLogin
           Font.Style = []
           ParentFont = False
           TabOrder = 0
-          TextHint = 'Digite Seu Usuario:'
+          TextHint = 'Digite Seu Usu'#225'rio:'
           OnKeyDown = edUsuarioKeyDown
         end
         object edSenha: TEdit
           Left = 32
-          Top = 381
+          Top = 389
           Width = 314
           Height = 33
           Anchors = [akTop, akRight]

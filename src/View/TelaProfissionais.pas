@@ -39,8 +39,6 @@ type
     lblRestaurar: TLabel;
     btnRestaurarNovo: TPanel;
     Label5: TLabel;
-    btnConsultas: TPanel;
-    lblConsultas: TLabel;
     btnLimpar: TPanel;
     lblLimpar: TLabel;
     btnSair: TPanel;
@@ -82,8 +80,6 @@ type
     procedure btnCancelarMouseLeave(Sender: TObject);
     procedure btnRestaurarMouseEnter(Sender: TObject);
     procedure btnRestaurarMouseLeave(Sender: TObject);
-    procedure btnConsultasMouseEnter(Sender: TObject);
-    procedure btnConsultasMouseLeave(Sender: TObject);
     procedure btnLimparMouseLeave(Sender: TObject);
     procedure btnLimparMouseEnter(Sender: TObject);
     procedure btnSairMouseEnter(Sender: TObject);
@@ -100,9 +96,26 @@ type
     procedure btnRestaurarClick(Sender: TObject);
     procedure CarregarInativos;
     procedure imgXrestoreClick(Sender: TObject);
+    procedure btnCRestoreMouseEnter(Sender: TObject);
+    procedure btnCRestoreMouseLeave(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure btnLimparClick(Sender: TObject);
+    procedure EdNomeKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edCPFKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edTelefoneKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edEmailKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure btnPesquisarClick(Sender: TObject);
+    procedure pesquisarChange(Sender: TObject);
+    procedure btnDeletarClick(Sender: TObject);
+    procedure sgProfissionaisDrawCell(Sender: TObject; ACol, ARow: LongInt;
+      Rect: TRect; State: TGridDrawState);
   private
     ProfissionaisLista: TObjectList<TProfissionais>;
     ProfissionalIdalterar: Integer;
+    Controller: TProfissionaisController;
+    procedure PesquisarProf(const Filtro: string);
   public
     { Public declarations }
   end;
@@ -195,24 +208,25 @@ procedure TPagProfissionais.btnAddClick(Sender: TObject);
     end;
 
     if (btnAlterarNovo.Visible = True) then begin
-      EdNome.Clear;
-      edCEP.Clear;
-      edEndereco.Clear;
-      edEmail.Clear;
-      edTelefone.Clear;
-      edCPF.Clear;
-      EdNome.SetFocus;
-      sgprofissionais.Row := 0;
-      sgprofissionais.Col := 0;
-      sgprofissionais.SetFocus;
-
-    if btnNovoPesquisar.Visible = true  then begin
-        sgProfissionais.Top := sgProfissionais.Top - (pesquisar.Height + 5);
-        sgProfissionais.Height := sgProfissionais.Height + (pesquisar.Height + 5);
-        pesquisar.Visible := False;
-        btnNovoPesquisar.Visible := False;
+        EdNome.Clear;
+        edCEP.Clear;
+        edEndereco.Clear;
+        edEmail.Clear;
+        edTelefone.Clear;
+        edCPF.Clear;
+        EdNome.SetFocus;
+        sgprofissionais.Row := 0;
+        sgprofissionais.Col := 0;
+        sgprofissionais.SetFocus;
       end;
 
+    if pesquisar.Visible = true  then begin
+        pesquisar.Visible := False;
+        sgProfissionais.Top := sgProfissionais.Top - (pesquisar.Height + 6);
+        sgProfissionais.Height := sgProfissionais.Height + (pesquisar.Height + 6);
+        btnNovoPesquisar.Visible := False;
+        sgprofissionais.Row := 0;
+        sgprofissionais.Col := 0;
     end;
 
       btnAlterarNovo.Visible := false;
@@ -225,6 +239,8 @@ procedure TPagProfissionais.btnAddClick(Sender: TObject);
       imgLogo2.Visible := True;
       imgLogo1.Visible := False;
       EdNome.SetFocus;
+      sgprofissionais.Row := 0;
+      sgprofissionais.Col := 0;
   end;
 
 procedure TPagProfissionais.btnAddMouseEnter(Sender: TObject);
@@ -244,7 +260,7 @@ procedure TPagProfissionais.btnadicionarClick(Sender: TObject);
 
 procedure TPagProfissionais.btnadicionarMouseEnter(Sender: TObject);
   begin
-    btnAdicionar.Color := $00F78B2B;
+    btnAdicionar.Color := $00C46106;
   end;
 
 procedure TPagProfissionais.btnadicionarMouseLeave(Sender: TObject);
@@ -294,6 +310,27 @@ procedure TPagProfissionais.btnAlterarMouseLeave(Sender: TObject);
     btnAlterar.Color := $007C3E05;
   end;
 
+procedure TPagProfissionais.btnCancelarClick(Sender: TObject);
+  begin
+    pnlAdd.Visible := False;
+    btnAddNovo.Visible := False;
+    btnRestaurarNovo.Visible := False;
+    pnlRestaurar.Visible := false;
+    btnAlterarNovo.Visible := False;
+    imgLogo1.Visible := True;
+    imgLogo2.visible := False;
+    if pesquisar.Visible = true then begin
+      sgProfissionais.Top := sgProfissionais.Top - (pesquisar.Height + 5);
+      sgProfissionais.Height := sgProfissionais.Height + (pesquisar.Height + 5);
+      pesquisar.Visible := False;
+      btnNovoPesquisar.Visible := False;
+    end;
+    sgProfissionais.Row := 0;
+    sgProfissionais.Col := 0;
+    sgProfissionais.SetFocus;
+
+  end;
+
 procedure TPagProfissionais.btnCancelarMouseEnter(Sender: TObject);
   begin
     btnCancelar.Color := $00F78B2B;
@@ -311,7 +348,7 @@ procedure TPagProfissionais.btnConfirmarAlteracoesClick(Sender: TObject);
 
 procedure TPagProfissionais.btnConfirmarAlteracoesMouseEnter(Sender: TObject);
   begin
-    btnConfirmarAlteracoes.Color := $00F78B2B;
+    btnConfirmarAlteracoes.Color := $00C46106;
   end;
 
 procedure TPagProfissionais.btnConfirmarAlteracoesMouseLeave(Sender: TObject);
@@ -319,15 +356,35 @@ procedure TPagProfissionais.btnConfirmarAlteracoesMouseLeave(Sender: TObject);
     btnConfirmarAlteracoes.Color := $007C3E05;
   end;
 
-procedure TPagProfissionais.btnConsultasMouseEnter(Sender: TObject);
+procedure TPagProfissionais.btnCRestoreMouseEnter(Sender: TObject);
   begin
-    btnConsultas.Color := $00F78B2B;
+    btnCRestore.Color := $00F78B2B;
   end;
 
-procedure TPagProfissionais.btnConsultasMouseLeave(Sender: TObject);
+procedure TPagProfissionais.btnCRestoreMouseLeave(Sender: TObject);
   begin
-    btnconsultas.Color := $007C3E05;
+    btnCrestore.Color :=  $00F8973F;
   end;
+
+procedure TPagProfissionais.btnDeletarClick(Sender: TObject);
+var
+  Id: Integer;
+begin
+  Id := StrToIntDef(sgProfissionais.Cells[0, sgProfissionais.Row], 0);
+  if Id > 0 then
+  begin
+    Controller.DesativarProfissional(Id);
+    ShowMessage('Profissional desativado com sucesso!');
+    CarregarGrid;
+    sgProfissionais.Row := 0;
+    sgProfissionais.Col := 0;
+    sgProfissionais.SetFocus;
+  end
+  else
+  begin
+    ShowMessage('Selecione um profissional para desativar.');
+  end;
+end;
 
 procedure TPagProfissionais.btnDeletarMouseEnter(Sender: TObject);
   begin
@@ -339,6 +396,26 @@ procedure TPagProfissionais.btnDeletarMouseLeave(Sender: TObject);
     btnDeletar.Color := $007C3E05;
   end;
 
+procedure TPagProfissionais.btnPesquisarClick(Sender: TObject);
+  begin
+    btnAddNovo.Visible := False;
+    btnAlterarNovo.Visible := False;
+    btnNovoPesquisar.Visible := True;
+    pnlAdd.Visible := false;
+    imgLogo2.Visible := false;
+    imgLogo1.Visible := True;
+
+    if not pesquisar.Visible then begin
+    pesquisar.Visible := True;
+    sgProfissionais.Top := pesquisar.Top + pesquisar.Height + 8;
+    sgProfissionais.Height := sgProfissionais.Height - (pesquisar.Height + 8);
+    pesquisar.SetFocus;
+    end;
+
+    sgprofissionais.Row := 0;
+    sgprofissionais.Col := 0;
+  end;
+
 procedure TPagProfissionais.btnPesquisarMouseEnter(Sender: TObject);
   begin
     btnPesquisar.Color := $00F78B2B;
@@ -347,6 +424,21 @@ procedure TPagProfissionais.btnPesquisarMouseEnter(Sender: TObject);
 procedure TPagProfissionais.btnPesquisarMouseLeave(Sender: TObject);
   begin
     btnPesquisar.Color := $007C3E05;
+  end;
+
+procedure TPagProfissionais.btnLimparClick(Sender: TObject);
+  begin
+    if pnlAdd.Visible = True then begin
+      EdNome.Clear;
+      edCPF.Clear;
+      edTelefone.Clear;
+      edCEP.Clear;
+      edEndereco.Clear;
+      edEmail.Clear;
+      edNome.SetFocus;
+      sgprofissionais.Row := 0;
+      sgprofissionais.Col := 0;
+    end;
   end;
 
 procedure TPagProfissionais.btnLimparMouseEnter(Sender: TObject);
@@ -494,6 +586,42 @@ begin
   end;
 end;
 
+procedure TPagProfissionais.edCPFKeyDown(Sender: TObject; var Key: Word;
+Shift: TShiftState);
+  begin
+    if Key = VK_RETURN then begin
+      key := 0;
+      edTelefone.setfocus;
+    end;
+  end;
+
+procedure TPagProfissionais.edEmailKeyDown(Sender: TObject; var Key: Word;
+Shift: TShiftState);
+  begin
+    if Key = VK_RETURN then begin
+      key := 0;
+      edCEP.setfocus;
+    end;
+  end;
+
+procedure TPagProfissionais.EdNomeKeyDown(Sender: TObject; var Key: Word;
+Shift: TShiftState);
+  begin
+    if Key = VK_RETURN then begin
+      key := 0;
+      edCPF.setfocus;
+    end;
+  end;
+
+procedure TPagProfissionais.edTelefoneKeyDown(Sender: TObject; var Key: Word;
+Shift: TShiftState);
+  begin
+    if Key = VK_RETURN then begin
+      key := 0;
+      edEmail.setfocus;
+    end;
+  end;
+
 procedure TPagProfissionais.FormCreate(Sender: TObject);
   begin
     sgProfissionais.Cells[0,0] := 'ID';
@@ -524,5 +652,61 @@ procedure TPagProfissionais.imgXrestoreClick(Sender: TObject);
     btnRestaurarNovo.Visible := False;
     CarregarGrid;
   end;
+
+procedure TPagProfissionais.pesquisarChange(Sender: TObject);
+  begin
+    PesquisarProf(pesquisar.Text);
+  end;
+
+procedure TPagProfissionais.PesquisarProf(const Filtro: string);
+  var
+  I, Linha: Integer;
+  Profissional: TProfissionais;
+  TextoFiltro: string;
+  begin
+    if not Assigned(ProfissionaisLista) then Exit;
+    sgProfissionais.ColCount := 7;
+    sgProfissionais.RowCount := 1;
+    Linha := 1;
+    TextoFiltro := LowerCase(Filtro);
+    for I := 0 to ProfissionaisLista.Count - 1 do begin
+      Profissional := ProfissionaisLista[I];
+      if (Filtro = '') or (Pos(TextoFiltro, LowerCase(Profissional.Nome)) > 0) or
+      (Filtro = '') or (Pos(TextoFiltro, LowerCase(Profissional.Id.ToString)) > 0) then begin
+
+      sgProfissionais.RowCount := Linha + 1;
+      sgProfissionais.Cells[0, Linha] := Profissional.Id.ToString;
+      sgProfissionais.Cells[1, Linha] := Profissional.Nome;
+      sgProfissionais.Cells[2, Linha] := Profissional.Cpf;
+      sgProfissionais.Cells[3, Linha] := Profissional.Telefone;
+      sgProfissionais.Cells[4, Linha] := Profissional.Email;
+      sgProfissionais.Cells[5, Linha] := Profissional.Cep;
+      sgProfissionais.Cells[6, Linha] := Profissional.Endereco;
+      Inc(Linha);
+      end;
+    end;
+  end;
+
+procedure TPagProfissionais.sgProfissionaisDrawCell(Sender: TObject; ACol,
+  ARow: LongInt; Rect: TRect; State: TGridDrawState);
+var
+  BGColor, FontColor: TColor;
+  begin
+
+    if gdSelected in State then
+      BGColor := clHighlight
+    else
+    BGColor := clWindow;
+    sgProfissionais.Canvas.Brush.Color := BGColor;
+    sgProfissionais.Canvas.FillRect(Rect);
+  if gdSelected in State then
+    FontColor := clHighlightText
+  else
+    FontColor := clWindowText;
+    sgProfissionais.Canvas.Font.Color := FontColor;
+    sgProfissionais.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2,
+    sgProfissionais.Cells[ACol, ARow]);
+end;
+
 
 end.

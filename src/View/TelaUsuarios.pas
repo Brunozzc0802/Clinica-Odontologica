@@ -195,14 +195,14 @@ var
   TextoFiltro: string;
 begin
   if not Assigned(UsuarioLista) then Exit;
-  sgUsuarios.ColCount := 5;   // garante colunas
-  sgUsuarios.RowCount := 1;   // só cabeçalho
+  sgUsuarios.ColCount := 5;
+  sgUsuarios.RowCount := 1;
   Linha := 1;
   TextoFiltro := LowerCase(Filtro);
   for I := 0 to UsuarioLista.Count - 1 do begin
     Usuario := UsuarioLista[I];
-    if (Filtro = '') or (Pos(TextoFiltro, LowerCase(Usuario.Nome)) > 0)
-     then begin
+    if (Filtro = '') or (Pos(TextoFiltro, LowerCase(Usuario.Nome)) > 0) or
+    (Filtro = '') or (Pos(TextoFiltro, LowerCase(Usuario.Id.ToString)) > 0) then begin
       sgUsuarios.RowCount := Linha + 1;
       sgUsuarios.Cells[0, Linha] := Usuario.Id.ToString;
       sgUsuarios.Cells[1, Linha] := Usuario.Nome;
@@ -514,15 +514,16 @@ procedure TPagUsuarios.btnAddUsuClick(Sender: TObject);
       sgUsuarios.Row := 0;
       sgUsuarios.Col := 0;
       sgUsuarios.SetFocus;
+    end;
 
-    if btnNovoPesquisar.Visible = true  then begin
-        sgUsuarios.Top := sgUsuarios.Top - (pesquisarUsuario.Height + 5);
-        sgUsuarios.Height := sgUsuarios.Height + (pesquisarUsuario.Height + 5);
+    if pesquisarUsuario.Visible = true  then begin
+        sgUsuarios.Top := sgUsuarios.Top - (pesquisarUsuario.Height + 6);
+        sgUsuarios.Height := sgUsuarios.Height + (pesquisarUsuario.Height + 6);
         pesquisarUsuario.Visible := False;
         btnNovoPesquisar.Visible := False;
-      end;
-
     end;
+
+
 
       btnAlterarNovo.Visible := false;
       btnAddNovo.Visible := True;

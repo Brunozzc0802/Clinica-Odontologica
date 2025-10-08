@@ -3161,7 +3161,7 @@ object PagUsuarios: TPagUsuarios
     end
   end
   object pnlFormAddUsuarios: TPanel
-    Left = 10
+    Left = 8
     Top = 503
     Width = 525
     Height = 132
@@ -3171,8 +3171,8 @@ object PagUsuarios: TPagUsuarios
     TabOrder = 4
     object edUsuario: TEdit
       Left = 10
-      Top = 10
-      Width = 143
+      Top = 11
+      Width = 142
       Height = 31
       AutoSize = False
       BevelOuter = bvNone
@@ -3188,7 +3188,7 @@ object PagUsuarios: TPagUsuarios
     end
     object edSenhaUsuario: TEdit
       Left = 163
-      Top = 10
+      Top = 11
       Width = 142
       Height = 31
       AutoSize = False
@@ -3202,19 +3202,28 @@ object PagUsuarios: TPagUsuarios
       TextHint = 'Digite a senha:'
     end
     object cbAtivo: TComboBox
-      Left = 317
+      Left = 315
       Top = 10
-      Width = 81
+      Width = 83
       Height = 23
+      BevelEdges = []
+      BevelInner = bvNone
+      BevelOuter = bvNone
       Style = csDropDownList
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 2
-      TextHint = 'Ativo'
+      TextHint = 'Ativo:'
       Items.Strings = (
         'True'
         'False')
     end
     object cbGrupo: TComboBox
-      Left = 410
+      Left = 412
       Top = 10
       Width = 100
       Height = 23
@@ -3228,13 +3237,13 @@ object PagUsuarios: TPagUsuarios
     end
     object btnAdicionarUsuario: TPanel
       AlignWithMargins = True
-      Left = 10
+      Left = 11
       Top = 65
-      Width = 502
+      Width = 500
       Height = 31
-      Margins.Left = 10
+      Margins.Left = 11
       Margins.Top = 65
-      Margins.Right = 13
+      Margins.Right = 14
       Margins.Bottom = 36
       Align = alClient
       Color = 8142341
@@ -3243,11 +3252,13 @@ object PagUsuarios: TPagUsuarios
       OnClick = btnAdicionarUsuarioClick
       OnMouseEnter = btnAdicionarUsuarioMouseEnter
       OnMouseLeave = btnAdicionarUsuarioMouseLeave
+      ExplicitLeft = 10
+      ExplicitWidth = 502
       object lblAdicionarUsuario: TLabel
         AlignWithMargins = True
         Left = 221
         Top = 6
-        Width = 80
+        Width = 78
         Height = 18
         Cursor = crHandPoint
         Margins.Left = 220
@@ -3274,13 +3285,13 @@ object PagUsuarios: TPagUsuarios
     end
     object btnConfirmarAlteracoes: TPanel
       AlignWithMargins = True
-      Left = 10
+      Left = 11
       Top = 65
-      Width = 502
+      Width = 500
       Height = 31
-      Margins.Left = 10
+      Margins.Left = 11
       Margins.Top = 65
-      Margins.Right = 13
+      Margins.Right = 14
       Margins.Bottom = 36
       Align = alClient
       Color = 8142341
@@ -3290,11 +3301,14 @@ object PagUsuarios: TPagUsuarios
       OnClick = btnConfirmarAlteracoesClick
       OnMouseEnter = btnConfirmarAlteracoesMouseEnter
       OnMouseLeave = btnConfirmarAlteracoesMouseLeave
+      ExplicitLeft = 10
+      ExplicitTop = 64
+      ExplicitWidth = 502
       object lblConfirmarAlteracoes: TLabel
         AlignWithMargins = True
         Left = 191
         Top = 6
-        Width = 140
+        Width = 138
         Height = 18
         Cursor = crHandPoint
         Margins.Left = 190

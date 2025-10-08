@@ -22,11 +22,11 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TFormLogin, FormLogin);
+  Application.CreateForm(TPagProfissionais, PagProfissionais);
   Application.CreateForm(TPagUsuarios, PagUsuarios);
+  Application.CreateForm(TFormLogin, FormLogin);
   Application.CreateForm(TPagPacientes, PagPacientes);
   Application.CreateForm(TdmUsuarios, dmUsuarios);
-  Application.CreateForm(TPagProfissionais, PagProfissionais);
   Application.Run;
 
 end.

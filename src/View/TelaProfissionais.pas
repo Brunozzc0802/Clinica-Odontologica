@@ -111,6 +111,9 @@ type
     procedure btnDeletarClick(Sender: TObject);
     procedure sgProfissionaisDrawCell(Sender: TObject; ACol, ARow: LongInt;
       Rect: TRect; State: TGridDrawState);
+    procedure ConfirmarRestauracao;
+    procedure btnCRestoreClick(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     ProfissionaisLista: TObjectList<TProfissionais>;
     ProfissionalIdalterar: Integer;
@@ -132,10 +135,8 @@ implementation
 
 procedure TPagProfissionais.CarregarInativos;
 var
-  Controller: TProfissionaisController;
   I: Integer;
 begin
-  Controller := TProfissionaisController.Create;
   try
     if Assigned(ProfissionaisLista) then
     ProfissionaisLista.Free;
@@ -162,43 +163,40 @@ begin
       sgRestore.Cells[6, I + 1] := ProfissionaisLista[I].endereco;
     end;
   finally
-    Controller.Free;
+
   end;
 end;
 
 procedure TPagProfissionais.adicionarProf;
-var
-  Controller: TProfissionaisController;
-begin
-  Controller := TProfissionaisController.Create;
-  try
+  begin
 
-    if (EdNome.Text = '') or (edCPF.Text = '') or (edTelefone.Text = '') or
-    (edCEP.Text = '') or (edEmail.Text = '') or (edEndereco.Text = '')
-    then begin
-      ShowMessage('Preencha todos os campos');
-      exit;
+    try
+
+      if (EdNome.Text = '') or (edCPF.Text = '') or (edTelefone.Text = '') or
+      (edCEP.Text = '') or (edEmail.Text = '') or (edEndereco.Text = '')
+      then begin
+        ShowMessage('Preencha todos os campos');
+        exit;
+      end;
+
+        Controller.AdicionarProfissional(
+        edNome.Text,
+        edCPF.Text,
+        edTelefone.Text,
+        edCEP.Text,
+        edEndereco.Text,
+        edEmail.Text);
+      ShowMessage('Profissional adicionado com sucesso!');
+      CarregarGrid;
+      edNome.clear;
+      edCPF.clear;
+      edTelefone.clear;
+      edCEP.clear;
+      edEndereco.clear;
+      edEmail.Clear;
+    finally
     end;
-
-      Controller.AdicionarProfissional(
-      edNome.Text,
-      edCPF.Text,
-      edTelefone.Text,
-      edCEP.Text,
-      edEndereco.Text,
-      edEmail.Text);
-    ShowMessage('Profissional adicionado com sucesso!');
-    CarregarGrid;
-    edNome.clear;
-    edCPF.clear;
-    edTelefone.clear;
-    edCEP.clear;
-    edEndereco.clear;
-    edEmail.Clear;
-  finally
-    Controller.Free;
   end;
-end;
 
 procedure TPagProfissionais.btnAddClick(Sender: TObject);
   begin
@@ -354,6 +352,11 @@ procedure TPagProfissionais.btnConfirmarAlteracoesMouseEnter(Sender: TObject);
 procedure TPagProfissionais.btnConfirmarAlteracoesMouseLeave(Sender: TObject);
   begin
     btnConfirmarAlteracoes.Color := $007C3E05;
+  end;
+
+procedure TPagProfissionais.btnCRestoreClick(Sender: TObject);
+  begin
+    ConfirmarRestauracao;
   end;
 
 procedure TPagProfissionais.btnCRestoreMouseEnter(Sender: TObject);
@@ -517,74 +520,93 @@ procedure TPagProfissionais.btnXClick(Sender: TObject);
 
 procedure TPagProfissionais.CarregarGrid;
   var
-  Controller: TProfissionaisController;
   I: Integer;
-begin
-  Controller := TProfissionaisController.Create;
-  try
-    if Assigned(ProfissionaisLista) then
-    ProfissionaisLista.Free;
-    ProfissionaisLista := Controller.BuscarTodos;
+  begin
+    try
+      if Assigned(ProfissionaisLista) then
+      ProfissionaisLista.Free;
+      ProfissionaisLista := Controller.BuscarTodos;
 
-    sgProfissionais.Cells[0,0] := 'ID';
-    sgProfissionais.Cells[1,0] := 'Nome do Profissional';
-    sgProfissionais.Cells[2,0] := 'CPF';
-    sgProfissionais.Cells[3,0] := 'Telefone';
-    sgProfissionais.Cells[4,0] := 'Cep';
-    sgProfissionais.Cells[5,0] := 'Endereço';
-    sgProfissionais.Cells[6,0] := 'Email';
+      sgProfissionais.Cells[0,0] := 'ID';
+      sgProfissionais.Cells[1,0] := 'Nome do Profissional';
+      sgProfissionais.Cells[2,0] := 'CPF';
+      sgProfissionais.Cells[3,0] := 'Telefone';
+      sgProfissionais.Cells[4,0] := 'Cep';
+      sgProfissionais.Cells[5,0] := 'Endereço';
+      sgProfissionais.Cells[6,0] := 'Email';
 
-    sgProfissionais.RowCount := ProfissionaisLista.Count + 1;
+      sgProfissionais.RowCount := ProfissionaisLista.Count + 1;
 
-    for I := 0 to ProfissionaisLista.Count - 1 do
-    begin
-      sgProfissionais.Cells[0, I + 1] := IntToStr(ProfissionaisLista[I].Id);
-      sgProfissionais.Cells[1, I + 1] := ProfissionaisLista[I].Nome;
-      sgProfissionais.Cells[2, I + 1] := ProfissionaisLista[I].cpf;
-      sgProfissionais.Cells[3, I + 1] := ProfissionaisLista[I].telefone;
-      sgProfissionais.Cells[4, I + 1] := ProfissionaisLista[I].cep;
-      sgProfissionais.Cells[5, I + 1] := ProfissionaisLista[I].endereco;
-      sgProfissionais.Cells[6, I + 1] := ProfissionaisLista[I].email;
+      for I := 0 to ProfissionaisLista.Count - 1 do
+      begin
+        sgProfissionais.Cells[0, I + 1] := IntToStr(ProfissionaisLista[I].Id);
+        sgProfissionais.Cells[1, I + 1] := ProfissionaisLista[I].Nome;
+        sgProfissionais.Cells[2, I + 1] := ProfissionaisLista[I].cpf;
+        sgProfissionais.Cells[3, I + 1] := ProfissionaisLista[I].telefone;
+        sgProfissionais.Cells[4, I + 1] := ProfissionaisLista[I].cep;
+        sgProfissionais.Cells[5, I + 1] := ProfissionaisLista[I].endereco;
+        sgProfissionais.Cells[6, I + 1] := ProfissionaisLista[I].email;
+      end;
+    finally
     end;
-  finally
-    Controller.Free;
   end;
-end;
 
 procedure TPagProfissionais.ConfirmarAlteracoes(Sender: TObject);
-var
-  Controller: TProfissionaisController;
-begin
-  if ProfissionalIdalterar = 0 then
   begin
-    ShowMessage('Selecione um Profissional para alterar');
-    Exit;
+    if ProfissionalIdalterar = 0 then
+    begin
+      ShowMessage('Selecione um Profissional para alterar');
+      Exit;
+    end;
+    try
+      Controller.AlterarProfissional(
+      ProfissionalIdalterar,
+      edNome.Text,
+      edCpf.Text,
+      edTelefone.Text,
+      edEmail.Text,
+      edCep.Text,
+      edEndereco.Text
+  );
+
+
+      ShowMessage('Alterações feitas com sucesso!');
+      btnAlterarNovo.Visible := False;
+      CarregarGrid;
+      sgProfissionais.Row := 0;
+      sgProfissionais.Col := 0;
+      sgProfissionais.SetFocus;
+      pnlAdd.Visible := False;
+
+    finally
+    end;
   end;
-  Controller := TProfissionaisController.Create;
-  try
-    Controller.AlterarProfissional(
-    ProfissionalIdalterar,
-    edNome.Text,
-    edCpf.Text,
-    edTelefone.Text,
-    edEmail.Text,
-    edCep.Text,
-    edEndereco.Text
-);
 
+procedure TPagProfissionais.ConfirmarRestauracao;
+  var
+  ProfissionalId: Integer;
+  begin
+    if sgRestore.Row > 0 then
+    begin
+      ProfissionalId := StrToIntDef(sgRestore.Cells[0, sgRestore.Row], 0);
+      if ProfissionalId = 0 then begin
+        Exit;
+      end;
 
-    ShowMessage('Alterações feitas com sucesso!');
-    btnAlterarNovo.Visible := False;
-    CarregarGrid;
-    sgProfissionais.Row := 0;
-    sgProfissionais.Col := 0;
-    sgProfissionais.SetFocus;
-    pnlAdd.Visible := False;
-
-  finally
-    Controller.Free;
+      try
+        Controller.RestaurarProfissional(ProfissionalId);
+        ShowMessage('Profissional restaurado com sucesso!');
+        CarregarInativos;
+        CarregarGrid;
+        sgRestore.Row := 0;
+        sgRestore.Col := 0;
+        sgRestore.SetFocus;
+      finally
+        Controller.Free;
+      end;
+      end else
+      ShowMessage('Selecione um profissional para restaurar.');
   end;
-end;
 
 procedure TPagProfissionais.edCPFKeyDown(Sender: TObject; var Key: Word;
 Shift: TShiftState);
@@ -624,6 +646,8 @@ Shift: TShiftState);
 
 procedure TPagProfissionais.FormCreate(Sender: TObject);
   begin
+    Controller := TProfissionaisController.Create;
+
     sgProfissionais.Cells[0,0] := 'ID';
     sgProfissionais.Cells[1,0] := 'Nome do Paciente';
     sgProfissionais.Cells[2,0] := 'CPF';
@@ -641,9 +665,15 @@ procedure TPagProfissionais.FormCreate(Sender: TObject);
     sgProfissionais.ColWidths[6] := 157;
   end;
 
+procedure TPagProfissionais.FormDestroy(Sender: TObject);
+  begin
+    Controller.Free;
+  end;
+
 procedure TPagProfissionais.FormShow(Sender: TObject);
   begin
     CarregarGrid;
+    Controller := TProfissionaisController.Create;
   end;
 
 procedure TPagProfissionais.imgXrestoreClick(Sender: TObject);

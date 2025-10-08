@@ -14,6 +14,7 @@ type
     procedure Adicionar(AProfissional: TProfissionais);
     procedure Alterar(AProfissional: TProfissionais);
     procedure DesativarProfissional(const Id: Integer);
+    procedure RestaurarProfissional(const Id: Integer);
   end;
 
 implementation
@@ -118,6 +119,17 @@ begin
     end;
   end;
 end;
+
+procedure TProfissionaisRepository.RestaurarProfissional(const Id: Integer);
+  begin
+  with dmUsuarios.queryPacientes do begin
+    Close;
+    SQL.Text := 'UPDATE profissionais SET ativo = TRUE WHERE id = :id';
+    ParamByName('id').AsInteger := Id;
+    ExecSQL;
+  end;
+end;
+
 
 end.
 

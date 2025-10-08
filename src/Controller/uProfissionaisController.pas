@@ -13,6 +13,7 @@ type
     procedure AdicionarProfissional(const Nome, CPF, telefone,email, cep, endereco: string);
     procedure AlterarProfissional(const Id: Integer; const Nome, CPF, telefone, email, cep, endereco: string);
     procedure DesativarProfissional(const Id: Integer);
+    procedure RestaurarProfissional(const Id: Integer);
   end;
 
 implementation
@@ -107,5 +108,16 @@ procedure TProfissionaisController.DesativarProfissional(const Id: Integer);
     end;
   end;
 
+procedure TProfissionaisController.RestaurarProfissional(const Id: Integer);
+  var
+  RepoProf: TProfissionaisRepository;
+begin
+  RepoProf := TProfissionaisRepository.Create;
+  try
+    RepoProf.RestaurarProfissional(Id);
+  finally
+    RepoProf.Free;
+  end;
+end;
 end.
 

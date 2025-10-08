@@ -13,6 +13,7 @@ object PagProfissionais: TPagProfissionais
   Font.Style = []
   Position = poDesigned
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnShow = FormShow
   TextHeight = 15
   object cabecalho: TPanel
@@ -3272,6 +3273,7 @@ object PagProfissionais: TPagProfissionais
         Color = 16223019
         ParentBackground = False
         TabOrder = 1
+        OnClick = btnCRestoreClick
         OnMouseEnter = btnCRestoreMouseEnter
         OnMouseLeave = btnCRestoreMouseLeave
         object lblRestore: TLabel
@@ -3296,6 +3298,7 @@ object PagProfissionais: TPagProfissionais
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnCRestoreClick
           OnMouseEnter = btnCRestoreMouseEnter
           OnMouseLeave = btnCRestoreMouseLeave
           ExplicitWidth = 58

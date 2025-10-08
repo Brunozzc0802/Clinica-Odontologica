@@ -2742,7 +2742,6 @@ object PagUsuarios: TPagUsuarios
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnAddNovoClick
           OnMouseEnter = btnAddUsuMouseEnter
           OnMouseLeave = btnAddUsuMouseLeave
           ExplicitWidth = 59
@@ -2800,7 +2799,6 @@ object PagUsuarios: TPagUsuarios
         ParentBackground = False
         TabOrder = 0
         Visible = False
-        OnClick = btnAlterarNovoClick
         OnMouseEnter = btnAlterarUsuMouseEnter
         OnMouseLeave = btnAlterarUsuMouseLeave
         object Label3: TLabel
@@ -3252,8 +3250,6 @@ object PagUsuarios: TPagUsuarios
       OnClick = btnAdicionarUsuarioClick
       OnMouseEnter = btnAdicionarUsuarioMouseEnter
       OnMouseLeave = btnAdicionarUsuarioMouseLeave
-      ExplicitLeft = 10
-      ExplicitWidth = 502
       object lblAdicionarUsuario: TLabel
         AlignWithMargins = True
         Left = 221
@@ -3301,9 +3297,6 @@ object PagUsuarios: TPagUsuarios
       OnClick = btnConfirmarAlteracoesClick
       OnMouseEnter = btnConfirmarAlteracoesMouseEnter
       OnMouseLeave = btnConfirmarAlteracoesMouseLeave
-      ExplicitLeft = 10
-      ExplicitTop = 64
-      ExplicitWidth = 502
       object lblConfirmarAlteracoes: TLabel
         AlignWithMargins = True
         Left = 191

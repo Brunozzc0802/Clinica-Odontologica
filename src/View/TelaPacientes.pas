@@ -504,6 +504,12 @@ procedure TPagPacientes.btnDeletarClick(Sender: TObject);
 var
   Id: Integer;
 begin
+
+  if btnAlterarNovo.Visible = true then begin
+    btnalterarNovo.Visible := False;
+    pnlAddPacientes.Visible := False;
+  end;
+
   Id := StrToIntDef(sgPacientes.Cells[0, sgPacientes.Row], 0);
   if Id > 0 then begin
       ShowMessage('Paciente Deletado com sucesso!');
@@ -623,6 +629,10 @@ procedure TPagPacientes.btnPesquisarClick(Sender: TObject);
     sgPacientes.Height := sgPacientes.Height - (pesquisar.Height + 8);
     pesquisar.SetFocus;
     end;
+
+    sgPacientes.Row := 0;
+    sgPacientes.Col := 0;
+    sgPacientes.SetFocus;
   end;
 
 procedure TPagPacientes.btnPesquisarMouseEnter(Sender: TObject);

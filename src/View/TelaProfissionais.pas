@@ -114,6 +114,7 @@ type
     procedure ConfirmarRestauracao;
     procedure btnCRestoreClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure edCEPKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     ProfissionaisLista: TObjectList<TProfissionais>;
     ProfissionalIdalterar: Integer;
@@ -373,11 +374,16 @@ procedure TPagProfissionais.btnDeletarClick(Sender: TObject);
 var
   Id: Integer;
 begin
+  if btnAlterarNovo.Visible = True then begin
+    btnAlterarNovo.Visible := False;
+    pnlAdd.Visible := False;
+  end;
+
   Id := StrToIntDef(sgProfissionais.Cells[0, sgProfissionais.Row], 0);
   if Id > 0 then
   begin
     Controller.DesativarProfissional(Id);
-    ShowMessage('Profissional desativado com sucesso!');
+    ShowMessage('Profissional deletado com sucesso!');
     CarregarGrid;
     sgProfissionais.Row := 0;
     sgProfissionais.Col := 0;
@@ -385,7 +391,7 @@ begin
   end
   else
   begin
-    ShowMessage('Selecione um profissional para desativar.');
+    ShowMessage('Selecione um profissional para deletar.');
   end;
 end;
 
@@ -606,6 +612,15 @@ procedure TPagProfissionais.ConfirmarRestauracao;
       end;
       end else
       ShowMessage('Selecione um profissional para restaurar.');
+  end;
+
+procedure TPagProfissionais.edCEPKeyDown(Sender: TObject; var Key: Word;
+Shift: TShiftState);
+  begin
+    if Key = VK_RETURN then begin
+      key := 0;
+      edEndereco.setfocus;
+    end;
   end;
 
 procedure TPagProfissionais.edCPFKeyDown(Sender: TObject; var Key: Word;

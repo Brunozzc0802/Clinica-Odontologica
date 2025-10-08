@@ -3044,6 +3044,7 @@ object PagProfissionais: TPagProfissionais
         AutoSize = False
         TabOrder = 1
         TextHint = 'Digite o Cep:'
+        OnKeyDown = edCEPKeyDown
       end
       object edEndereco: TEdit
         Left = 432

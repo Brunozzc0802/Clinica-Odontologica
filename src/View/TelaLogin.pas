@@ -8,7 +8,8 @@ uses
         Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls,
         Vcl.Imaging.pngimage,
         Vcl.StdCtrls, Vcl.Imaging.jpeg, Vcl.Buttons, System.ImageList,
-        Vcl.ImgList,TelaUsuarios,uUsuarios,uUsuariosController,TelaPacientes,TelaProfissionais;
+        Vcl.ImgList,TelaUsuarios,uUsuarios,uUsuariosController,TelaPacientes,
+        TelaProfissionais,TelaProcedimentos;
 
 type
         TFormLogin = class(TForm)
@@ -91,6 +92,7 @@ type
         procedure Timer1Timer(Sender: TObject);
     procedure pnlPacientesClick(Sender: TObject);
     procedure pnlProfissionaisClick(Sender: TObject);
+    procedure pnlProcedimentosClick(Sender: TObject);
     private
       { Private declarations }
     public
@@ -224,6 +226,14 @@ procedure TFormLogin.pnlPacientesMouseEnter(Sender: TObject);
 procedure TFormLogin.pnlPacientesMouseLeave(Sender: TObject);
   begin
     pnlPacientes.Color := $007C3E05;
+  end;
+
+procedure TFormLogin.pnlProcedimentosClick(Sender: TObject);
+  begin
+    PagProcedimentos.Show;
+    PagProfissionais.Close;
+    PagPacientes.Close;
+    PagUsuarios.close;
   end;
 
 procedure TFormLogin.pnlProcedimentosMouseEnter(Sender: TObject);

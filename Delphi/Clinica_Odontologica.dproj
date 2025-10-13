@@ -156,6 +156,10 @@
         <DCCReference Include="..\src\Model\uProfissionais.pas"/>
         <DCCReference Include="..\src\Repository\uProfissionaisRepository.pas"/>
         <DCCReference Include="..\src\Controller\uProfissionaisController.pas"/>
+        <DCCReference Include="..\src\View\TelaProcedimentos.pas">
+            <Form>PagProcedimentos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

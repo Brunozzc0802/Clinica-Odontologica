@@ -1,9 +1,9 @@
-object PagProfissionais: TPagProfissionais
-  Left = 572
-  Top = 166
+object PagProcedimentos: TPagProcedimentos
+  Left = 551
+  Top = 187
   BorderStyle = bsNone
-  Caption = 'PagProfissionais'
-  ClientHeight = 664
+  Caption = 'PagProcedimentos'
+  ClientHeight = 644
   ClientWidth = 769
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -12,25 +12,130 @@ object PagProfissionais: TPagProfissionais
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesigned
-  OnCreate = FormCreate
-  OnDestroy = FormDestroy
-  OnShow = FormShow
   TextHeight = 15
+  object cabecalho: TPanel
+    Left = -306
+    Top = 0
+    Width = 1075
+    Height = 41
+    BevelOuter = bvNone
+    Caption = 'cabecalho'
+    Color = clWhite
+    ParentBackground = False
+    TabOrder = 0
+    object pnlCabecalho: TPanel
+      AlignWithMargins = True
+      Left = 308
+      Top = 2
+      Width = 765
+      Height = 38
+      Margins.Left = 308
+      Margins.Top = 2
+      Margins.Right = 2
+      Margins.Bottom = 1
+      Align = alClient
+      BevelOuter = bvNone
+      Color = 11293958
+      ParentBackground = False
+      TabOrder = 0
+      object lblTitulo: TLabel
+        Left = 44
+        Top = 8
+        Width = 132
+        Height = 23
+        Caption = 'Procedimentos'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = [fsItalic]
+        ParentFont = False
+      end
+      object iconProcedimentos: TImage
+        Left = 6
+        Top = 3
+        Width = 32
+        Height = 32
+        Picture.Data = {
+          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000200000
+          00200806000000737A7AF4000000097048597300000EC300000EC301C76FA864
+          0000001974455874536F667477617265007777772E696E6B73636170652E6F72
+          679BEE3C1A000004794944415478DAC5977F8CD7731CC7DF1F69B4D65466562E
+          97A5EEC4844343CB72697EC6FC28EA8898CD75998A3F42616ED56198A84CDCCE
+          9533364C35A4D449D94E97B942911F751413896C5DE23C9EDECFEF766BF5BDCF
+          7DBFB7F96E8FBDDE3F5EEFD7EBF579FF7C7D93D0815F6B6BEB9988EBE0222880
+          63D50CBFC0765809AF2649F2595A9B494AC747219E856BA0D68EB6C26EDBE805
+          45500AE3A106A611C881CE0AA0C65F3C16A3BBDAD1ED8378031AD0BD2BEF003C
+          EDEFC0403806BA62F89BC3E80E40B4C03ECF5009BA5FE71B4025A2272C86651E
+          531EE25AFF6D9D2E8831302FC43D71294C8226741ECF378017119FD8E9D3F015
+          CC85E3E15BAB9D043F42059C62DD3AE84D0053F30D609EA7BF1F0CC6E03F6E57
+          5B81D59A69DFEAF623105FC01E5841FB7DF9063005F104CCC1D8F4F6F43DE631
+          C43D309131D539078021F53F6846636C49CA002E0B71BF28E02AC6B5E61AC04D
+          88873595FA220CFD9E3200DD0B55301266306E71AE0168FD8A3170731AC78718
+          AF4B6B13E3AB720DE054C4875080913F3BE8BC3BE27B1896ED6A4EB3099B1015
+          18F9A083010C473CC3B8D3B3E9A5096061888FCE748C6D4EE9BC18310BF630E6
+          D67C03E88BD06574006357A40C602942B7E36D8CD991570036380C518DB18129
+          F5755BEA0E58D39E6E479EE39D70757B7BC16BFF26F441B7A55302B061BDF3CA
+          09F4C4D61E7CB9F8D22A0BF19D9894EDECE71AC089882D9E096DC67138F9CD7D
+          7AA65F0EF121523E5044DFF6CE0E6034623694D8D9E0105F47FD26C3E7216643
+          8D219E98B73A25004FED0298003BFC957F816E47E5005A8AD7E025E8EAD9D12C
+          E8112ACFF60E640D00C77AEFCF83AB60149C6527CAF3B4C6DF1DA4DF3FC43DD2
+          C5C16E80774133F111FA3F650DC0E9D408D0913B1F0A613DE8FDBF00EE0C312B
+          527E703D7C0C9920E4FC1CCF84F4B419E7C33AFB381BB6B9AEAB7D5526554BEC
+          5CB7D553500F3FC0E53008A57DF469AA1F80DE70376D8B689313E508755E8271
+          3095BEF9F495D9D6AFF0086DB5B41D4DF9CB109FE813E042DBAACE04B0C50696
+          51D62653BE37C07D23BCD96E87B765142A3D139904459BB3DC81CE0831277CC1
+          4B556F3BFAE231D41B9D2F3C49B928A13284CA7BD05779FC2102382EC43F1D3D
+          BD344BBCB67A298B1C803E60135C02577AAA95922965DB2F67A0DC42274479E3
+          A7211EE7D2C429D7B938BCD10E65E03939A06DB7DB14C00DD4D751EE4179AFBF
+          B6D8016CF6AC7447672F3A0AB48E7221651DD96E2126369AFAFB43CC319F87B5
+          0AE095FF0A493297F21CCA778498F90E0AF1EAAD7762BA8BF2CC369B76396291
+          AB65F48D6AD3A765EA455B05E53F289F46799BFB1A10331DFC5005A094FBDE10
+          9387B556DE49BB8ED214CA67509671BD88FDBD4C4786F8B72CF3D637D961A64F
+          A76302F595D4758A0A29373B635EE325D12CCE52003F7B6D4F8687501CDAE65C
+          6FA4DEC30337C2A3D46BA8EBC8BD4EB99F759B11D7526FA07C0BE5690A4E9710
+          3F4DF5069F10F9A8F131D69E5A2D8D167F892E18CDC6641FC74A1FBDF1FECA52
+          EF8D91DEE5253E19FA2DF406D32959E1657C3F64FFE93836265ECB8BC3FFF35B
+          FE2F32E0F6C96788646D0000000049454E44AE426082}
+      end
+      object btnX: TImage
+        Left = 736
+        Top = 11
+        Width = 16
+        Height = 16
+        Cursor = crHandPoint
+        Picture.Data = {
+          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
+          001008060000001FF3FF61000000097048597300000EC300000EC301C76FA864
+          0000001974455874536F667477617265007777772E696E6B73636170652E6F72
+          679BEE3C1A000001014944415478DA8D92210B0241108577B22282560D163169
+          B52A88184C16FFA141934550412C16412CB62BD74550C42078BE394618CE9DD5
+          81C7CDEDECFB766FE6284992AA736E0AE5A131111D5D20B0BF89C704BA4123C2
+          C201494BEA67A86B41C4BC864AB27460408CA4A2F679211E3347CC8036920554
+          B02086F90AF54936F82017A8073DA1155456B53B34C0015B5257F441F8941754
+          F499F98554C18238CBFC0550902594CB941EE9372BB305E0866D32D7E6E0B977
+          00D89B0031671BA6236DAC86D00FF3439A98B3201430A70D93317A47CC100A99
+          3F0D0BFD270C8890D454E12ADDDEFD31E2880127248D9039003931A08E642E8D
+          1A59E60C6426631DBE013A6F900B7B89246D0000000049454E44AE426082}
+        OnClick = btnXClick
+      end
+    end
+  end
   object pnlAzulPrincipal: TPanel
     AlignWithMargins = True
     Left = 1
     Top = 41
     Width = 766
-    Height = 620
+    Height = 600
     Margins.Left = 305
     Margins.Top = 1
     Color = 8142341
     ParentBackground = False
-    TabOrder = 0
+    TabOrder = 1
     object imgLogo1: TImage
       AlignWithMargins = True
-      Left = 312
-      Top = 467
+      Left = 304
+      Top = 460
       Width = 153
       Height = 134
       Margins.Left = 1000
@@ -1223,9 +1328,9 @@ object PagProfissionais: TPagProfissionais
     object imgLogo2: TImage
       AlignWithMargins = True
       Left = 607
-      Top = 467
+      Top = 460
       Width = 153
-      Height = 134
+      Height = 133
       Margins.Left = 100
       Margins.Top = 50
       Margins.Right = 50
@@ -2414,7 +2519,7 @@ object PagProfissionais: TPagProfissionais
       Stretch = True
       Visible = False
     end
-    object sgProfissionais: TStringGrid
+    object sgProcedimentos: TStringGrid
       Left = 9
       Top = 6
       Width = 592
@@ -2425,7 +2530,6 @@ object PagProfissionais: TPagProfissionais
       RowCount = 1
       FixedRows = 0
       TabOrder = 0
-      OnDrawCell = sgProfissionaisDrawCell
     end
     object pesquisar: TSearchBox
       Left = 9
@@ -2435,7 +2539,6 @@ object PagProfissionais: TPagProfissionais
       TabOrder = 1
       TextHint = 'Pesquisar'
       Visible = False
-      OnChange = pesquisarChange
     end
     object pnlBotoesDireita: TPanel
       Left = 607
@@ -2479,7 +2582,6 @@ object PagProfissionais: TPagProfissionais
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnAddClick
           OnMouseEnter = btnAddMouseEnter
           OnMouseLeave = btnAddMouseLeave
           ExplicitWidth = 59
@@ -2517,7 +2619,6 @@ object PagProfissionais: TPagProfissionais
             Font.Style = [fsBold]
             ParentColor = False
             ParentFont = False
-            OnClick = btnAddClick
             ExplicitWidth = 59
             ExplicitHeight = 17
           end
@@ -2532,7 +2633,6 @@ object PagProfissionais: TPagProfissionais
         Color = 8142341
         ParentBackground = False
         TabOrder = 1
-        OnClick = btnAlterarClick
         OnMouseEnter = btnAlterarMouseEnter
         OnMouseLeave = btnAlterarMouseLeave
         object lblAlterarUsu: TLabel
@@ -2572,7 +2672,6 @@ object PagProfissionais: TPagProfissionais
         Color = 8142341
         ParentBackground = False
         TabOrder = 2
-        OnClick = btnPesquisarClick
         OnMouseEnter = btnPesquisarMouseEnter
         OnMouseLeave = btnPesquisarMouseLeave
         object lblPesquisar: TLabel
@@ -2597,8 +2696,6 @@ object PagProfissionais: TPagProfissionais
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnMouseEnter = btnPesquisarMouseEnter
-          OnMouseLeave = btnPesquisarMouseLeave
           ExplicitWidth = 59
           ExplicitHeight = 17
         end
@@ -2634,7 +2731,6 @@ object PagProfissionais: TPagProfissionais
             Font.Style = [fsBold]
             ParentColor = False
             ParentFont = False
-            OnClick = btnPesquisarClick
             ExplicitWidth = 59
             ExplicitHeight = 17
           end
@@ -2649,7 +2745,6 @@ object PagProfissionais: TPagProfissionais
         Color = 8142341
         ParentBackground = False
         TabOrder = 3
-        OnClick = btnDeletarClick
         OnMouseEnter = btnDeletarMouseEnter
         OnMouseLeave = btnDeletarMouseLeave
         object lblDeletarUsu: TLabel
@@ -2674,7 +2769,6 @@ object PagProfissionais: TPagProfissionais
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnDeletarClick
           OnMouseEnter = btnDeletarMouseEnter
           OnMouseLeave = btnDeletarMouseLeave
           ExplicitWidth = 45
@@ -2690,7 +2784,6 @@ object PagProfissionais: TPagProfissionais
         Color = 8142341
         ParentBackground = False
         TabOrder = 4
-        OnClick = btnCancelarClick
         OnMouseEnter = btnCancelarMouseEnter
         OnMouseLeave = btnCancelarMouseLeave
         object lblCancelarUsu: TLabel
@@ -2715,9 +2808,8 @@ object PagProfissionais: TPagProfissionais
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnCancelarClick
           OnMouseEnter = btnCancelarMouseEnter
-          OnMouseLeave = btnCancelarMouseLeave
+          OnMouseLeave = btnCancelarMouseEnter
           ExplicitWidth = 52
           ExplicitHeight = 17
         end
@@ -2731,7 +2823,6 @@ object PagProfissionais: TPagProfissionais
         Color = 8142341
         ParentBackground = False
         TabOrder = 5
-        OnClick = btnRestaurarClick
         OnMouseEnter = btnRestaurarMouseEnter
         OnMouseLeave = btnRestaurarMouseLeave
         object lblRestaurar: TLabel
@@ -2756,7 +2847,6 @@ object PagProfissionais: TPagProfissionais
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnRestaurarClick
           OnMouseEnter = btnRestaurarMouseEnter
           OnMouseLeave = btnRestaurarMouseLeave
           ExplicitWidth = 58
@@ -2794,7 +2884,6 @@ object PagProfissionais: TPagProfissionais
             Font.Style = [fsBold]
             ParentColor = False
             ParentFont = False
-            OnClick = btnRestaurarClick
             ExplicitWidth = 58
             ExplicitHeight = 17
           end
@@ -2809,7 +2898,6 @@ object PagProfissionais: TPagProfissionais
         Color = 8142341
         ParentBackground = False
         TabOrder = 6
-        OnClick = btnLimparClick
         OnMouseEnter = btnLimparMouseEnter
         OnMouseLeave = btnLimparMouseLeave
         object lblLimpar: TLabel
@@ -2834,7 +2922,6 @@ object PagProfissionais: TPagProfissionais
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnLimparClick
           OnMouseEnter = btnLimparMouseEnter
           OnMouseLeave = btnLimparMouseLeave
           ExplicitWidth = 43
@@ -2850,7 +2937,6 @@ object PagProfissionais: TPagProfissionais
         Color = 8142341
         ParentBackground = False
         TabOrder = 7
-        OnClick = btnSairClick
         OnMouseEnter = btnSairMouseEnter
         OnMouseLeave = btnSairMouseLeave
         object lblSair: TLabel
@@ -2875,7 +2961,6 @@ object PagProfissionais: TPagProfissionais
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnSairClick
           OnMouseEnter = btnSairMouseEnter
           OnMouseLeave = btnSairMouseLeave
           ExplicitWidth = 23
@@ -2914,7 +2999,6 @@ object PagProfissionais: TPagProfissionais
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnAlterarClick
           ExplicitWidth = 42
           ExplicitHeight = 17
         end
@@ -2922,46 +3006,17 @@ object PagProfissionais: TPagProfissionais
     end
     object pnlAdd: TPanel
       Left = 9
-      Top = 460
+      Top = 467
       Width = 592
-      Height = 147
+      Height = 117
       Color = 15790320
       ParentBackground = False
       TabOrder = 3
       Visible = False
-      object EdNome: TEdit
-        Left = 8
-        Top = 9
-        Width = 169
-        Height = 32
-        AutoSize = False
-        TabOrder = 0
-        TextHint = 'Digite o nome:'
-        OnKeyDown = EdNomeKeyDown
-      end
-      object edCEP: TEdit
-        Left = 219
-        Top = 56
-        Width = 169
-        Height = 33
-        AutoSize = False
-        TabOrder = 1
-        TextHint = 'Digite o Cep:'
-        OnKeyDown = edCEPKeyDown
-      end
-      object edEndereco: TEdit
-        Left = 432
-        Top = 56
-        Width = 147
-        Height = 33
-        AutoSize = False
-        TabOrder = 2
-        TextHint = 'Digite o Endere'#231'o:'
-      end
       object btnadicionar: TPanel
         AlignWithMargins = True
         Left = 8
-        Top = 100
+        Top = 66
         Width = 571
         Height = 32
         Margins.Left = 10
@@ -2970,11 +3025,10 @@ object PagProfissionais: TPagProfissionais
         Margins.Bottom = 36
         Color = 8142341
         ParentBackground = False
-        TabOrder = 3
-        OnClick = btnadicionarClick
+        TabOrder = 0
         OnMouseEnter = btnadicionarMouseEnter
         OnMouseLeave = btnadicionarMouseLeave
-        object lblAddpaciente: TLabel
+        object lblAddprocedimento: TLabel
           AlignWithMargins = True
           Left = 191
           Top = 7
@@ -2996,7 +3050,6 @@ object PagProfissionais: TPagProfissionais
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnadicionarClick
           OnMouseEnter = btnadicionarMouseEnter
           OnMouseLeave = btnadicionarMouseLeave
           ExplicitWidth = 115
@@ -3005,7 +3058,7 @@ object PagProfissionais: TPagProfissionais
       object btnConfirmarAlteracoes: TPanel
         AlignWithMargins = True
         Left = 8
-        Top = 100
+        Top = 65
         Width = 571
         Height = 32
         Margins.Left = 10
@@ -3014,9 +3067,8 @@ object PagProfissionais: TPagProfissionais
         Margins.Bottom = 36
         Color = 8142341
         ParentBackground = False
-        TabOrder = 4
+        TabOrder = 1
         Visible = False
-        OnClick = btnConfirmarAlteracoesClick
         OnMouseEnter = btnConfirmarAlteracoesMouseEnter
         OnMouseLeave = btnConfirmarAlteracoesMouseLeave
         object lblConfirmarAlteracoes: TLabel
@@ -3041,53 +3093,49 @@ object PagProfissionais: TPagProfissionais
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnConfirmarAlteracoesClick
           OnMouseEnter = btnConfirmarAlteracoesMouseEnter
           OnMouseLeave = btnConfirmarAlteracoesMouseLeave
           ExplicitWidth = 130
           ExplicitHeight = 17
         end
       end
-      object edTelefone: TMaskEdit
-        Left = 432
-        Top = 9
-        Width = 147
-        Height = 32
-        AutoSize = False
-        EditMask = '(00) 00000-0009;1;_'
-        MaxLength = 15
-        TabOrder = 5
-        Text = '(  )      -    '
-        TextHint = 'Digite o Telefone:'
-        OnKeyDown = edTelefoneKeyDown
-      end
-      object edCPF: TMaskEdit
-        Left = 219
-        Top = 9
-        Width = 169
-        Height = 32
-        AutoSize = False
-        EditMask = '000.000.000-00;0;_'
-        MaxLength = 14
-        TabOrder = 6
-        Text = ''
-        TextHint = 'Digite o CPF:'
-        OnKeyDown = edCPFKeyDown
-      end
-      object edEmail: TEdit
+      object EdNome: TEdit
         Left = 8
-        Top = 56
+        Top = 9
         Width = 169
-        Height = 34
+        Height = 32
         AutoSize = False
-        TabOrder = 7
-        TextHint = 'Digite o Email:'
-        OnKeyDown = edEmailKeyDown
+        TabOrder = 2
+        TextHint = 'Nome do Procedimento:'
+      end
+      object edValor: TMaskEdit
+        Left = 218
+        Top = 9
+        Width = 169
+        Height = 32
+        AutoSize = False
+        EditMask = '9999,99;1;_'
+        MaxLength = 7
+        TabOrder = 3
+        Text = '    ,  '
+        TextHint = 'Valor:'
+      end
+      object edHora: TTimePicker
+        Left = 429
+        Top = 8
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        TabOrder = 4
+        Time = 45943.653938379630000000
+        TimeFormat = 'hh:nn'
       end
     end
     object pnlRestaurar: TPanel
       Left = 56
-      Top = 107
+      Top = 83
       Width = 497
       Height = 307
       BevelOuter = bvNone
@@ -3159,7 +3207,6 @@ object PagProfissionais: TPagProfissionais
           00D89B0031671BA6236DAC86D00FF3439A98B3201430A70D93317A47CC100A99
           3F0D0BFD270C8890D454E12ADDDEFD31E2880127248D9039003931A08E642E8D
           1A59E60C6426631DBE013A6F900B7B89246D0000000049454E44AE426082}
-        OnClick = imgXrestoreClick
       end
       object sgRestore: TStringGrid
         Left = 5
@@ -3183,7 +3230,6 @@ object PagProfissionais: TPagProfissionais
         Color = 16223019
         ParentBackground = False
         TabOrder = 1
-        OnClick = btnCRestoreClick
         OnMouseEnter = btnCRestoreMouseEnter
         OnMouseLeave = btnCRestoreMouseLeave
         object lblRestore: TLabel
@@ -3208,119 +3254,9 @@ object PagProfissionais: TPagProfissionais
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnCRestoreClick
-          OnMouseEnter = btnCRestoreMouseEnter
-          OnMouseLeave = btnCRestoreMouseLeave
           ExplicitWidth = 58
           ExplicitHeight = 17
         end
-      end
-    end
-  end
-  object cabecalho: TPanel
-    Left = -306
-    Top = 0
-    Width = 1075
-    Height = 41
-    BevelOuter = bvNone
-    Caption = 'cabecalho'
-    Color = clWhite
-    ParentBackground = False
-    TabOrder = 1
-    object pnlCabecalho: TPanel
-      AlignWithMargins = True
-      Left = 308
-      Top = 2
-      Width = 765
-      Height = 38
-      Margins.Left = 308
-      Margins.Top = 2
-      Margins.Right = 2
-      Margins.Bottom = 1
-      Align = alClient
-      BevelOuter = bvNone
-      Color = 11293958
-      ParentBackground = False
-      TabOrder = 0
-      object lblTitulo: TLabel
-        Left = 44
-        Top = 8
-        Width = 113
-        Height = 23
-        Caption = 'Profissionais'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -19
-        Font.Name = 'Arial'
-        Font.Style = [fsItalic]
-        ParentFont = False
-      end
-      object iconPacientes: TImage
-        Left = 6
-        Top = 3
-        Width = 32
-        Height = 32
-        Picture.Data = {
-          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000200000
-          00200806000000737A7AF4000000097048597300000EC300000EC301C76FA864
-          0000001974455874536F667477617265007777772E696E6B73636170652E6F72
-          679BEE3C1A000004794944415478DAC5977F8CD7731CC7DF1F69B4D65466562E
-          97A5EEC4844343CB72697EC6FC28EA8898CD75998A3F42616ED56198A84CDCCE
-          9533364C35A4D449D94E97B942911F751413896C5DE23C9EDECFEF766BF5BDCF
-          7DBFB7F96E8FBDDE3F5EEFD7EBF579FF7C7D93D0815F6B6BEB9988EBE0222880
-          63D50CBFC0765809AF2649F2595A9B494AC747219E856BA0D68EB6C26EDBE805
-          45500AE3A106A611C881CE0AA0C65F3C16A3BBDAD1ED8378031AD0BD2BEF003C
-          EDEFC0403806BA62F89BC3E80E40B4C03ECF5009BA5FE71B4025A2272C86651E
-          531EE25AFF6D9D2E8831302FC43D71294C8226741ECF378017119FD8E9D3F015
-          CC85E3E15BAB9D043F42059C62DD3AE84D0053F30D609EA7BF1F0CC6E03F6E57
-          5B81D59A69DFEAF623105FC01E5841FB7DF9063005F104CCC1D8F4F6F43DE631
-          C43D309131D539078021F53F6846636C49CA002E0B71BF28E02AC6B5E61AC04D
-          88873595FA220CFD9E3200DD0B55301266306E71AE0168FD8A3170731AC78718
-          AF4B6B13E3AB720DE054C4875080913F3BE8BC3BE27B1896ED6A4EB3099B1015
-          18F9A083010C473CC3B8D3B3E9A5096061888FCE748C6D4EE9BC18310BF630E6
-          D67C03E88BD06574006357A40C602942B7E36D8CD991570036380C518DB18129
-          F5755BEA0E58D39E6E479EE39D70757B7BC16BFF26F441B7A55302B061BDF3CA
-          09F4C4D61E7CB9F8D22A0BF19D9894EDECE71AC089882D9E096DC67138F9CD7D
-          7AA65F0EF121523E5044DFF6CE0E6034623694D8D9E0105F47FD26C3E7216643
-          8D219E98B73A25004FED0298003BFC957F816E47E5005A8AD7E025E8EAD9D12C
-          E8112ACFF60E640D00C77AEFCF83AB60149C6527CAF3B4C6DF1DA4DF3FC43DD2
-          C5C16E80774133F111FA3F650DC0E9D408D0913B1F0A613DE8FDBF00EE0C312B
-          527E703D7C0C9920E4FC1CCF84F4B419E7C33AFB381BB6B9AEAB7D5526554BEC
-          5CB7D553500F3FC0E53008A57DF469AA1F80DE70376D8B689313E508755E8271
-          3095BEF9F495D9D6AFF0086DB5B41D4DF9CB109FE813E042DBAACE04B0C50696
-          51D62653BE37C07D23BCD96E87B765142A3D139904459BB3DC81CE0831277CC1
-          4B556F3BFAE231D41B9D2F3C49B928A13284CA7BD05779FC2102382EC43F1D3D
-          BD344BBCB67A298B1C803E60135C02577AAA95922965DB2F67A0DC42274479E3
-          A7211EE7D2C429D7B938BCD10E65E03939A06DB7DB14C00DD4D751EE4179AFBF
-          B6D8016CF6AC7447672F3A0AB48E7221651DD96E2126369AFAFB43CC319F87B5
-          0AE095FF0A493297F21CCA778498F90E0AF1EAAD7762BA8BF2CC369B76396291
-          AB65F48D6AD3A765EA455B05E53F289F46799BFB1A10331DFC5005A094FBDE10
-          9387B556DE49BB8ED214CA67509671BD88FDBD4C4786F8B72CF3D637D961A64F
-          A76302F595D4758A0A29373B635EE325D12CCE52003F7B6D4F8687501CDAE65C
-          6FA4DEC30337C2A3D46BA8EBC8BD4EB99F759B11D7526FA07C0BE5690A4E9710
-          3F4DF5069F10F9A8F131D69E5A2D8D167F892E18CDC6641FC74A1FBDF1FECA52
-          EF8D91DEE5253E19FA2DF406D32959E1657C3F64FFE93836265ECB8BC3FFF35B
-          FE2F32E0F6C96788646D0000000049454E44AE426082}
-      end
-      object btnX: TImage
-        Left = 736
-        Top = 11
-        Width = 16
-        Height = 16
-        Cursor = crHandPoint
-        Picture.Data = {
-          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
-          001008060000001FF3FF61000000097048597300000EC300000EC301C76FA864
-          0000001974455874536F667477617265007777772E696E6B73636170652E6F72
-          679BEE3C1A000001014944415478DA8D92210B0241108577B22282560D163169
-          B52A88184C16FFA141934550412C16412CB62BD74550C42078BE394618CE9DD5
-          81C7CDEDECFB766FE6284992AA736E0AE5A131111D5D20B0BF89C704BA4123C2
-          C201494BEA67A86B41C4BC864AB27460408CA4A2F679211E3347CC8036920554
-          B02086F90AF54936F82017A8073DA1155456B53B34C0015B5257F441F8941754
-          F499F98554C18238CBFC0550902594CB941EE9372BB305E0866D32D7E6E0B977
-          00D89B0031671BA6236DAC86D00FF3439A98B3201430A70D93317A47CC100A99
-          3F0D0BFD270C8890D454E12ADDDEFD31E2880127248D9039003931A08E642E8D
-          1A59E60C6426631DBE013A6F900B7B89246D0000000049454E44AE426082}
       end
     end
   end

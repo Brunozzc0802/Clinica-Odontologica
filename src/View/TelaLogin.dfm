@@ -2594,7 +2594,6 @@ object FormLogin: TFormLogin
         Color = 14539739
         ParentBackground = False
         TabOrder = 0
-        ExplicitTop = -6
         DesignSize = (
           437
           579)
@@ -3355,6 +3354,7 @@ object FormLogin: TFormLogin
       Color = 13204758
       ParentBackground = False
       TabOrder = 0
+      OnClick = pnlProcedimentosClick
       DesignSize = (
         874
         870)
@@ -5819,6 +5819,7 @@ object FormLogin: TFormLogin
         Color = 8142341
         ParentBackground = False
         TabOrder = 4
+        OnClick = pnlProcedimentosClick
         OnMouseEnter = pnlProcedimentosMouseEnter
         OnMouseLeave = pnlProcedimentosMouseLeave
         object lblProcedimentos: TLabel
@@ -5841,6 +5842,7 @@ object FormLogin: TFormLogin
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = pnlProcedimentosClick
           OnMouseEnter = pnlProcedimentosMouseEnter
           OnMouseLeave = pnlProcedimentosMouseLeave
         end
@@ -5923,6 +5925,7 @@ object FormLogin: TFormLogin
             82}
           Proportional = True
           Stretch = True
+          OnClick = pnlProcedimentosClick
           OnMouseEnter = pnlProcedimentosMouseEnter
           OnMouseLeave = pnlProcedimentosMouseLeave
         end

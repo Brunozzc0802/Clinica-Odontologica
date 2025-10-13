@@ -15,7 +15,8 @@ uses
   TelaProfissionais in '..\src\View\TelaProfissionais.pas' {PagProfissionais},
   uProfissionais in '..\src\Model\uProfissionais.pas',
   uProfissionaisRepository in '..\src\Repository\uProfissionaisRepository.pas',
-  uProfissionaisController in '..\src\Controller\uProfissionaisController.pas';
+  uProfissionaisController in '..\src\Controller\uProfissionaisController.pas',
+  TelaProcedimentos in '..\src\View\TelaProcedimentos.pas' {PagProcedimentos};
 
 {$R *.res}
 
@@ -27,6 +28,7 @@ begin
   Application.CreateForm(TPagUsuarios, PagUsuarios);
   Application.CreateForm(TPagPacientes, PagPacientes);
   Application.CreateForm(TdmUsuarios, dmUsuarios);
+  Application.CreateForm(TPagProcedimentos, PagProcedimentos);
   Application.Run;
 
 end.

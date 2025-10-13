@@ -10,11 +10,6 @@ uses
 
 type
   TPagProfissionais = class(TForm)
-    cabecalho: TPanel;
-    pnlCabecalho: TPanel;
-    lblTitulo: TLabel;
-    iconPacientes: TImage;
-    btnX: TImage;
     pnlAzulPrincipal: TPanel;
     imgLogo1: TImage;
     imgLogo2: TImage;
@@ -63,6 +58,11 @@ type
     btnCRestore: TPanel;
     lblRestore: TLabel;
     edEmail: TEdit;
+    cabecalho: TPanel;
+    pnlCabecalho: TPanel;
+    lblTitulo: TLabel;
+    iconPacientes: TImage;
+    btnX: TImage;
     procedure CarregarGrid;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -115,6 +115,7 @@ type
     procedure btnCRestoreClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure edCEPKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure btnSairClick(Sender: TObject);
   private
     ProfissionaisLista: TObjectList<TProfissionais>;
     ProfissionalIdalterar: Integer;
@@ -170,14 +171,12 @@ end;
 
 procedure TPagProfissionais.adicionarProf;
   begin
-
     try
-
       if (EdNome.Text = '') or (edCPF.Text = '') or (edTelefone.Text = '') or
-      (edCEP.Text = '') or (edEmail.Text = '') or (edEndereco.Text = '')
+        (edCEP.Text = '') or (edEmail.Text = '') or (edEndereco.Text = '')
       then begin
         ShowMessage('Preencha todos os campos');
-        exit;
+        Exit;
       end;
 
         Controller.AdicionarProfissional(
@@ -187,14 +186,14 @@ procedure TPagProfissionais.adicionarProf;
         edCEP.Text,
         edEndereco.Text,
         edEmail.Text);
-      ShowMessage('Profissional adicionado com sucesso!');
-      CarregarGrid;
-      edNome.clear;
-      edCPF.clear;
-      edTelefone.clear;
-      edCEP.clear;
-      edEndereco.clear;
-      edEmail.Clear;
+        ShowMessage('Profissional adicionado com sucesso!');
+        CarregarGrid;
+        edNome.clear;
+        edCPF.clear;
+        edTelefone.clear;
+        edCEP.clear;
+        edEndereco.clear;
+        edEmail.Clear;
     finally
     end;
   end;
@@ -327,7 +326,6 @@ procedure TPagProfissionais.btnCancelarClick(Sender: TObject);
     sgProfissionais.Row := 0;
     sgProfissionais.Col := 0;
     sgProfissionais.SetFocus;
-
   end;
 
 procedure TPagProfissionais.btnCancelarMouseEnter(Sender: TObject);
@@ -509,6 +507,11 @@ procedure TPagProfissionais.btnRestaurarMouseLeave(Sender: TObject);
     btnRestaurar.Color := $007C3E05;
   end;
 
+procedure TPagProfissionais.btnSairClick(Sender: TObject);
+  begin
+    Close;
+  end;
+
 procedure TPagProfissionais.btnSairMouseEnter(Sender: TObject);
   begin
     btnSair.Color := $00F78B2B;
@@ -629,7 +632,7 @@ Shift: TShiftState);
     if Key = VK_RETURN then begin
       key := 0;
       edTelefone.setfocus;
-    end;
+    end
   end;
 
 procedure TPagProfissionais.edEmailKeyDown(Sender: TObject; var Key: Word;
@@ -688,7 +691,6 @@ procedure TPagProfissionais.FormDestroy(Sender: TObject);
 procedure TPagProfissionais.FormShow(Sender: TObject);
   begin
     CarregarGrid;
-    Controller := TProfissionaisController.Create;
   end;
 
 procedure TPagProfissionais.imgXrestoreClick(Sender: TObject);

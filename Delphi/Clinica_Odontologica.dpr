@@ -16,19 +16,22 @@ uses
   uProfissionais in '..\src\Model\uProfissionais.pas',
   uProfissionaisRepository in '..\src\Repository\uProfissionaisRepository.pas',
   uProfissionaisController in '..\src\Controller\uProfissionaisController.pas',
-  TelaProcedimentos in '..\src\View\TelaProcedimentos.pas' {PagProcedimentos};
+  TelaProcedimentos in '..\src\View\TelaProcedimentos.pas' {PagProcedimentos},
+  uProcedimentos in '..\src\Model\uProcedimentos.pas',
+  uProcedimentosRepository in '..\src\Repository\uProcedimentosRepository.pas',
+  uProcedimentosController in '..\src\Controller\uProcedimentosController.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TPagProcedimentos, PagProcedimentos);
   Application.CreateForm(TFormLogin, FormLogin);
   Application.CreateForm(TPagProfissionais, PagProfissionais);
   Application.CreateForm(TPagUsuarios, PagUsuarios);
   Application.CreateForm(TPagPacientes, PagPacientes);
   Application.CreateForm(TdmUsuarios, dmUsuarios);
-  Application.CreateForm(TPagProcedimentos, PagProcedimentos);
   Application.Run;
 
 end.

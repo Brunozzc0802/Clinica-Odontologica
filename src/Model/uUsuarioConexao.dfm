@@ -1,6 +1,6 @@
 object dmUsuarios: TdmUsuarios
   Height = 240
-  Width = 497
+  Width = 525
   object FDConnection1: TFDConnection
     Params.Strings = (
       'DriverID=PG'
@@ -26,12 +26,17 @@ object dmUsuarios: TdmUsuarios
   end
   object queryPacientes: TFDQuery
     Connection = FDConnection1
-    Left = 408
+    Left = 400
     Top = 24
   end
   object queryProfissionais: TFDQuery
     Connection = FDConnection1
     Left = 320
+    Top = 88
+  end
+  object queryProcedimentos: TFDQuery
+    Connection = FDConnection1
+    Left = 432
     Top = 88
   end
 end

@@ -283,8 +283,13 @@ procedure TPagUsuarios.FormClose(Sender: TObject; var Action: TCloseAction);
   begin
     FreeAndNil(Controller);
     FreeAndNil(UsuarioLista);
+    pnlFormAddUsuarios.Visible := False;
     btnAddNovo.visible := false;
     pnlFormAddUsuarios.Visible := False;
+    btnAlterarNovo.Visible := False;
+    btnPesquisarUsu.Visible := False;
+    btnRestaurarNovo.Visible := False;
+    pnlRestaurar.Visible := False;
     imgLogoUsuarios2.Visible := False;
     imgLogoUsuarios1.Visible := True;
   end;

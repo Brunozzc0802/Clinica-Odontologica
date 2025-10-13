@@ -116,6 +116,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure edCEPKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btnSairClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     ProfissionaisLista: TObjectList<TProfissionais>;
     ProfissionalIdalterar: Integer;
@@ -660,6 +661,19 @@ Shift: TShiftState);
       key := 0;
       edEmail.setfocus;
     end;
+  end;
+
+procedure TPagProfissionais.FormClose(Sender: TObject; var Action: TCloseAction);
+  begin
+    pnlAdd.Visible := False;
+    btnAddNovo.visible := false;
+    pnlAdd.Visible := False;
+    btnAlterarNovo.Visible := False;
+    btnPesquisar.Visible := False;
+    btnRestaurarNovo.Visible := False;
+    pnlRestaurar.Visible := False;
+    imgLogo2.Visible := False;
+    imgLogo1.Visible := True;
   end;
 
 procedure TPagProfissionais.FormCreate(Sender: TObject);

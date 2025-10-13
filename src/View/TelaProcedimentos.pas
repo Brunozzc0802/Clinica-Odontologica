@@ -83,6 +83,8 @@ type
     procedure btnCRestoreMouseLeave(Sender: TObject);
     procedure btnAddClick(Sender: TObject);
     procedure btnXClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -129,6 +131,7 @@ procedure TPagProcedimentos.btnAddClick(Sender: TObject);
       btnConfirmarAlteracoes.Visible := false;
       btnadicionar.Visible := True;
       pnlAdd.Visible := True;
+      edHora.Time := EncodeTime(0, 0, 0, 0);
       imgLogo2.Visible := True;
       imgLogo1.Visible := False;
       EdNome.SetFocus;
@@ -148,12 +151,12 @@ procedure TPagProcedimentos.btnAddMouseLeave(Sender: TObject);
 
 procedure TPagProcedimentos.btnadicionarMouseEnter(Sender: TObject);
   begin
-    btnadicionar.Color := $007C3E05;
+    btnadicionar.Color := $00C46106;
   end;
 
 procedure TPagProcedimentos.btnadicionarMouseLeave(Sender: TObject);
   begin
-    btnAdicionar.Color := $00F78B2B;
+    btnAdicionar.Color := $007C3E05;
   end;
 
 procedure TPagProcedimentos.btnAlterarMouseEnter(Sender: TObject);
@@ -249,6 +252,32 @@ procedure TPagProcedimentos.btnSairMouseLeave(Sender: TObject);
 procedure TPagProcedimentos.btnXClick(Sender: TObject);
   begin
     Close;
+  end;
+
+procedure TPagProcedimentos.FormClose(Sender: TObject;var Action: TCloseAction);
+  begin
+    pnlAdd.Visible := False;
+    btnAddNovo.visible := false;
+    pnlAdd.Visible := False;
+    btnAlterarNovo.Visible := False;
+    btnPesquisar.Visible := False;
+    btnRestaurarNovo.Visible := False;
+    pnlRestaurar.Visible := False;
+    imgLogo2.Visible := False;
+    imgLogo1.Visible := True;
+  end;
+
+procedure TPagProcedimentos.FormCreate(Sender: TObject);
+  begin
+    sgProcedimentos.Cells[0,0] := 'ID';
+    sgProcedimentos.Cells[1,0] := 'Nome do Procedimento';
+    sgProcedimentos.Cells[2,0] := 'Valor';
+    sgProcedimentos.Cells[3,0] := 'Duração';
+
+    sgProcedimentos.ColWidths[0] := 50;
+    sgProcedimentos.ColWidths[1] := 195;
+    sgProcedimentos.ColWidths[2] := 150;
+    sgProcedimentos.ColWidths[3] := 140;
   end;
 
 end.

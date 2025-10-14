@@ -20,8 +20,7 @@ implementation
 
 { TPacientesController }
 
-procedure TPacientesController.AdicionarPaciente(const Nome, CPF, telefone, cep,
-  endereco: string; dataNascimento: TDate);
+procedure TPacientesController.AdicionarPaciente(const Nome, CPF, telefone, cep,endereco: string; dataNascimento: TDate);
 var
   Paciente: TPaciente;
   RepoPaci: TPacientesRepository;

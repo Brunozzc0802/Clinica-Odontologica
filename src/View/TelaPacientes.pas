@@ -117,7 +117,6 @@ type
     procedure pesquisarChange(Sender: TObject);
     procedure btnAddNovoClick(Sender: TObject);
     procedure btnNovoPesquisarClick(Sender: TObject);
-    procedure btnRestaurarNovoClick(Sender: TObject);
     procedure ConfirmarAlteracoes(Sender: TObject);
     procedure btnDeletarClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -309,6 +308,8 @@ begin
     end else
     ShowMessage('Selecione um paciente para restaurar.');
 end;
+
+
 procedure TPagPacientes.adicionarPaciente;
 var
   DataNascimento: TDate;
@@ -320,12 +321,12 @@ var
       Exit;
     end;
 
-    DataNascimento := edDataNasc.Date;
-    if DataNascimento > Date then
-    begin
-      ShowMessage('Data de nascimento inválida!');
-      Exit;
-    end;
+//    DataNascimento := edDataNasc.Date;
+//    if DataNascimento > Date then
+//    begin
+//      ShowMessage('Data de nascimento inválida!');
+//      Exit;
+//    end;
 
     Controller.AdicionarPaciente(
       edNomePaciente.Text,
@@ -408,12 +409,9 @@ procedure TPagPacientes.btnAddNovoClick(Sender: TObject);
   end;
 
 procedure TPagPacientes.btnaddPacienteClick(Sender: TObject);
-begin
-  if not IdadeValida(edDataNasc.Date) then begin
-    Exit;
-  end else
+  begin
     adicionarPaciente;
-end;
+  end;
 
 procedure TPagPacientes.btnAlterarClick(Sender: TObject);
 var
@@ -694,14 +692,6 @@ procedure TPagPacientes.btnRestaurarMouseEnter(Sender: TObject);
 procedure TPagPacientes.btnRestaurarMouseLeave(Sender: TObject);
   begin
     btnRestaurar.Color := $007C3E05;
-  end;
-
-procedure TPagPacientes.btnRestaurarNovoClick(Sender: TObject);
-  begin
-    if (btnrestaurarnovo.Visible = True) then begin
-
-    end;
-
   end;
 
 procedure TPagPacientes.btnSairMouseEnter(Sender: TObject);

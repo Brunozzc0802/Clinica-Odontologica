@@ -3354,7 +3354,7 @@ object FormLogin: TFormLogin
       Color = 13204758
       ParentBackground = False
       TabOrder = 0
-      OnClick = pnlProcedimentosClick
+      ExplicitLeft = 282
       DesignSize = (
         874
         870)
@@ -5304,8 +5304,8 @@ object FormLogin: TFormLogin
         ExplicitHeight = 21
       end
       object pnlUser: TPanel
-        Left = 1
-        Top = 2
+        Left = -4
+        Top = 4
         Width = 302
         Height = 72
         Cursor = crHandPoint

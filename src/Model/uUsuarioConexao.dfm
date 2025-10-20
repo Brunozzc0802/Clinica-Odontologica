@@ -9,6 +9,7 @@ object dmUsuarios: TdmUsuarios
       'Database=clinica_odontologica'
       'User_Name=postgres'
       'Password=root')
+    Connected = True
     Left = 88
     Top = 88
   end

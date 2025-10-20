@@ -195,6 +195,7 @@ procedure TPagProfissionais.adicionarProf;
         edCEP.clear;
         edEndereco.clear;
         edEmail.Clear;
+        pnlAdd.Visible := False;
     finally
     end;
   end;
@@ -234,6 +235,12 @@ procedure TPagProfissionais.btnAddClick(Sender: TObject);
       btnRestaurarNovo.Visible := false;
       btnConfirmarAlteracoes.Visible := false;
       btnadicionar.Visible := True;
+      EdNome.Clear;
+      edCPF.Clear;
+      edTelefone.Clear;
+      edCEP.Clear;
+      edEndereco.Clear;
+      edEmail.Clear;
       pnlAdd.Visible := True;
       imgLogo2.Visible := True;
       imgLogo1.Visible := False;
@@ -414,10 +421,10 @@ procedure TPagProfissionais.btnPesquisarClick(Sender: TObject);
     imgLogo1.Visible := True;
 
     if not pesquisar.Visible then begin
-    pesquisar.Visible := True;
-    sgProfissionais.Top := pesquisar.Top + pesquisar.Height + 8;
-    sgProfissionais.Height := sgProfissionais.Height - (pesquisar.Height + 8);
-    pesquisar.SetFocus;
+      pesquisar.Visible := True;
+      sgProfissionais.Top := pesquisar.Top + pesquisar.Height + 8;
+      sgProfissionais.Height := sgProfissionais.Height - (pesquisar.Height + 8);
+      pesquisar.SetFocus;
     end;
 
     sgprofissionais.Row := 0;
@@ -667,13 +674,23 @@ procedure TPagProfissionais.FormClose(Sender: TObject; var Action: TCloseAction)
   begin
     pnlAdd.Visible := False;
     btnAddNovo.visible := false;
-    pnlAdd.Visible := False;
     btnAlterarNovo.Visible := False;
-    btnPesquisar.Visible := False;
+    btnNovoPesquisar.Visible := False;
     btnRestaurarNovo.Visible := False;
     pnlRestaurar.Visible := False;
     imgLogo2.Visible := False;
     imgLogo1.Visible := True;
+    if pnlAdd.Visible = True then begin
+      EdNome.Clear;
+      edCPF.Clear;
+      edTelefone.Clear;
+      edCEP.Clear;
+      edEndereco.Clear;
+      edEmail.Clear;
+      edNome.SetFocus;
+      sgprofissionais.Row := 0;
+      sgprofissionais.Col := 0;
+    end;
   end;
 
 procedure TPagProfissionais.FormCreate(Sender: TObject);
@@ -753,7 +770,6 @@ procedure TPagProfissionais.sgProfissionaisDrawCell(Sender: TObject; ACol,
 var
   BGColor, FontColor: TColor;
   begin
-
     if gdSelected in State then
       BGColor := clHighlight
     else
@@ -768,6 +784,4 @@ var
     sgProfissionais.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2,
     sgProfissionais.Cells[ACol, ARow]);
 end;
-
-
 end.

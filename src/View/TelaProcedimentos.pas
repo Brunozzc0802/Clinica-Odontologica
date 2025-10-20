@@ -93,9 +93,15 @@ type
     procedure FormShow(Sender: TObject);
     procedure adicionarProcedimento;
     procedure btnadicionarClick(Sender: TObject);
+    procedure sgProcedimentosDrawCell(Sender: TObject; ACol, ARow: LongInt;
+      Rect: TRect; State: TGridDrawState);
+    procedure btnAlterarClick(Sender: TObject);
+    procedure btnConfirmarAlteracoesClick(Sender: TObject);
+    procedure ConfirmarAlteracoes(Sender: TObject);
   private
     ProcedimentoLista: TObjectList<TProcedimento>;
     Controller: TProcedimentosController;
+    ProcedimentoIdalterar: Integer;
   public
     { Public declarations }
   end;
@@ -129,6 +135,26 @@ procedure TPagProcedimentos.FormShow(Sender: TObject);
     CarregarGrid;
   end;
 
+procedure TPagProcedimentos.sgProcedimentosDrawCell(Sender: TObject; ACol,
+  ARow: LongInt; Rect: TRect; State: TGridDrawState);
+  var
+  BGColor, FontColor: TColor;
+  begin
+    if gdSelected in State then
+      BGColor := clHighlight
+    else
+    BGColor := clWindow;
+    sgProcedimentos.Canvas.Brush.Color := BGColor;
+    sgProcedimentos.Canvas.FillRect(Rect);
+  if gdSelected in State then
+    FontColor := clHighlightText
+  else
+    FontColor := clWindowText;
+    sgProcedimentos.Canvas.Font.Color := FontColor;
+    sgProcedimentos.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2,
+    sgProcedimentos.Cells[ACol, ARow]);
+end;
+
 procedure TPagProcedimentos.FormClose(Sender: TObject; var Action: TCloseAction);
   begin
     FreeAndNil(Controller);
@@ -138,34 +164,64 @@ procedure TPagProcedimentos.FormClose(Sender: TObject; var Action: TCloseAction)
 procedure TPagProcedimentos.CarregarGrid;
 var
   I: Integer;
+begin
+  if Assigned(ProcedimentoLista) then
+    ProcedimentoLista.Clear
+  else
+    ProcedimentoLista := TObjectList<TProcedimento>.Create;
+
+  ProcedimentoLista.AddRange(Controller.BuscarTodos);
+
+  sgProcedimentos.RowCount := ProcedimentoLista.Count + 1;
+
+  sgProcedimentos.Cells[0,0] := 'ID';
+  sgProcedimentos.Cells[1,0] := 'Nome do Procedimento';
+  sgProcedimentos.Cells[2,0] := 'Valor';
+  sgProcedimentos.Cells[3,0] := 'Duração';
+
+  for I := 0 to ProcedimentoLista.Count - 1 do
   begin
+    sgProcedimentos.Cells[0, I + 1] := IntToStr(ProcedimentoLista[I].Id);
+    sgProcedimentos.Cells[1, I + 1] := ProcedimentoLista[I].Nome;
+    sgProcedimentos.Cells[2, I + 1] := FloatToStr(ProcedimentoLista[I].Valor);
+    sgProcedimentos.Cells[3, I + 1] := TimeToStr(ProcedimentoLista[I].Duracao);
+  end;
+end;
+
+procedure TPagProcedimentos.ConfirmarAlteracoes(Sender: TObject);
+  begin
+     begin
+    if ProcedimentoIdalterar = 0 then begin
+      ShowMessage('Selecione um Procedimento para alterar');
+      Exit;
+    end;
     try
-      if Assigned(ProcedimentoLista) then
-      ProcedimentoLista.Free;
-      ProcedimentoLista := Controller.BuscarTodos;
-
-      sgProcedimentos.Cells[0,0] := 'ID';
-      sgProcedimentos.Cells[1,0] := 'Nome do Procedimento';
-      sgProcedimentos.Cells[2,0] := 'Valor';
-      sgProcedimentos.Cells[3,0] := 'Duração';
-      sgProcedimentos.RowCount := ProcedimentoLista.Count + 1;
-
-      for I := 0 to ProcedimentoLista.Count - 1 do
-      begin
-        sgProcedimentos.Cells[0, I + 1] := IntToStr(ProcedimentoLista[I].Id);
-        sgProcedimentos.Cells[1, I + 1] := ProcedimentoLista[I].Nome;
-        sgProcedimentos.Cells[2, I + 1] := FloatToStr(ProcedimentoLista[I].Valor);
-        sgProcedimentos.Cells[3, I + 1] := TimeToStr(ProcedimentoLista[I].Duracao);
-      end;
+      Controller.AlterarProcedimento(
+      ProcedimentoIdalterar,
+      EdNome.Text,
+      StrToFloat(EdValor.Text),
+      EdHora.Time
+      );
+      ShowMessage('Alterações feitas com sucesso!');
+      btnAlterarNovo.Visible := False;
+      CarregarGrid;
+      sgProcedimentos.Row := 0;
+      sgProcedimentos.Col := 0;
+      sgProcedimentos.SetFocus;
+      pnlAdd.Visible := False;
     finally
     end;
   end;
-
+  end;
 
 procedure TPagProcedimentos.AdicionarProcedimento;
+  var
+  ValorConvertido: Double;
+  TextoValor: string;
 begin
-  if (EdNome.Text = '') or
-     (EdValor.Text = '') or
+  // Validação dos campos
+  if (Trim(EdNome.Text) = '') or
+     (Trim(EdValor.Text) = '') or
      (EdHora.Time = EncodeTime(0, 0, 0, 0)) then
   begin
     ShowMessage('Preencha todos os campos');
@@ -173,17 +229,23 @@ begin
   end;
 
   try
+    // Remove caracteres da máscara e converte
+    TextoValor := StringReplace(EdValor.Text, '.', '', [rfReplaceAll]);
+    TextoValor := StringReplace(TextoValor, ',', FormatSettings.DecimalSeparator, []);
+    ValorConvertido := StrToFloat(TextoValor);
+
     Controller.AdicionarProcedimento(
-      EdNome.Text,
-      StrToFloat(EdValor.Text),
+      Trim(EdNome.Text),
+      ValorConvertido,
       EdHora.Time
     );
 
     ShowMessage('Procedimento adicionado com sucesso!');
     CarregarGrid;
-      EdNome.Clear;
-      EdValor.Clear;
-      EdHora.Time := EncodeTime(0,0,0,0);
+    EdNome.Clear;
+    EdValor.Clear;
+    EdHora.Time := EncodeTime(0,0,0,0);
+    EdNome.SetFocus;
   except
     on E: Exception do
       ShowMessage('Erro ao adicionar procedimento: ' + E.Message);
@@ -192,24 +254,53 @@ end;
 
 procedure TPagProcedimentos.btnAddClick(Sender: TObject);
   begin
-    pnlAdd.Visible := True;
-    btnadicionar.Visible := True;
-    btnConfirmarAlteracoes.Visible := False;
-
-    EdNome.Clear;
-    edValor.Clear;
-    edHora.Time := EncodeTime(0, 0, 0, 0);
-    EdNome.SetFocus;
-
-    imgLogo2.Visible := True;
-    imgLogo1.Visible := False;
+     if pnlRestaurar.Visible = true then begin
+      pnlRestaurar.Visible := False;
+      btnRestaurarNovo.Visible := false;
+    end;
+    if (btnAlterarNovo.Visible = True) then begin
+        EdNome.Clear;
+        edValor.Clear;
+        edHora.Time := EncodeTime(0, 0, 0, 0);
+        btnAddNovo.Visible := True;
+        sgProcedimentos.Row := 0;
+        sgProcedimentos.Col := 0;
+    end;
+    if pesquisar.Visible = true  then begin
+        pesquisar.Visible := False;
+        sgProcedimentos.Top := sgProcedimentos.Top - (pesquisar.Height + 6);
+        sgProcedimentos.Height := sgProcedimentos.Height + (pesquisar.Height + 6);
+        btnNovoPesquisar.Visible := False;
+        sgprocedimentos.Row := 0;
+        sgprocedimentos.Col := 0;
+    end;
+        btnAddNovo.Visible := True;
+        pnlAdd.Visible := True;
+        edNome.SetFocus;
+        btnadicionar.Visible := True;
+        btnConfirmarAlteracoes.Visible := False;
+        imgLogo2.Visible := True;
+        imgLogo1.Visible := False;
   end;
 
 procedure TPagProcedimentos.btnCancelarClick(Sender: TObject);
   begin
-    pnlAdd.Visible := False;
-    imgLogo1.Visible := True;
-    imgLogo2.Visible := False;
+      pnlAdd.Visible := False;
+      btnAddNovo.Visible := False;
+      btnRestaurarNovo.Visible := False;
+      pnlRestaurar.Visible := false;
+      btnAlterarNovo.Visible := False;
+      imgLogo1.Visible := True;
+      imgLogo2.visible := False;
+    if pesquisar.Visible = true then begin
+      sgProcedimentos.Top := sgProcedimentos.Top - (pesquisar.Height + 5);
+      sgProcedimentos.Height := sgProcedimentos.Height + (pesquisar.Height + 5);
+      pesquisar.Visible := False;
+      btnNovoPesquisar.Visible := False;
+    end;
+      sgProcedimentos.Row := 0;
+      sgProcedimentos.Col := 0;
+      sgProcedimentos.SetFocus;
   end;
 
 procedure TPagProcedimentos.btnLimparClick(Sender: TObject);
@@ -253,6 +344,42 @@ procedure TPagProcedimentos.btnadicionarMouseLeave(Sender: TObject);
     btnadicionar.Color := $007C3E05;
   end;
 
+procedure TPagProcedimentos.btnAlterarClick(Sender: TObject);
+  var
+  linha: Integer;
+  hora: TDateTime;
+begin
+  linha := sgProcedimentos.Row;
+  if linha <= 0 then
+  begin
+    ShowMessage('Selecione um procedimento para alterar!');
+    Exit;
+  end;
+
+  if btnNovoPesquisar.Visible = true then
+  begin
+    sgProcedimentos.Top := sgProcedimentos.Top - (pesquisar.Height + 5);
+    sgProcedimentos.Height := sgProcedimentos.Height + (pesquisar.Height + 5);
+    pesquisar.Visible := False;
+    btnNovoPesquisar.Visible := False;
+  end;
+
+  ProcedimentoIdalterar := StrToIntDef(sgProcedimentos.Cells[0, linha], 0);
+  EdNome.Text := sgProcedimentos.Cells[1, linha];
+  edValor.Text := sgProcedimentos.Cells[2, linha];
+
+  if TryStrToTime(sgProcedimentos.Cells[3, linha], hora) then
+    edHora.Time := hora
+  else
+    edHora.Time := EncodeTime(0,0,0,0);
+
+    btnConfirmarAlteracoes.Visible := True;
+    btnAddNovo.Visible := False;
+    btnAlterarNovo.Visible := True;
+    pnlAdd.Visible := True;
+end;
+
+
 procedure TPagProcedimentos.btnAlterarMouseEnter(Sender: TObject);
   begin
     btnAlterar.Color := $00F78B2B;
@@ -273,14 +400,19 @@ procedure TPagProcedimentos.btnCancelarMouseLeave(Sender: TObject);
     btnCancelar.Color := $007C3E05;
   end;
 
+procedure TPagProcedimentos.btnConfirmarAlteracoesClick(Sender: TObject);
+  begin
+    ConfirmarAlteracoes(nil);
+  end;
+
 procedure TPagProcedimentos.btnConfirmarAlteracoesMouseEnter(Sender: TObject);
   begin
-    btnConfirmarAlteracoes.Color := $007C3E05;
+    btnConfirmarAlteracoes.Color := $00F78B2B;
   end;
 
 procedure TPagProcedimentos.btnConfirmarAlteracoesMouseLeave(Sender: TObject);
   begin
-    btnConfirmarAlteracoes.Color := $00F78B2B;
+    btnConfirmarAlteracoes.Color := $007C3E05;
   end;
 
 procedure TPagProcedimentos.btnCRestoreMouseEnter(Sender: TObject);

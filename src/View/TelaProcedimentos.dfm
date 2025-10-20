@@ -2516,6 +2516,7 @@ object PagProcedimentos: TPagProcedimentos
       RowCount = 1
       FixedRows = 0
       TabOrder = 0
+      OnDrawCell = sgProcedimentosDrawCell
     end
     object pesquisar: TSearchBox
       Left = 9
@@ -2620,6 +2621,7 @@ object PagProcedimentos: TPagProcedimentos
         Color = 8142341
         ParentBackground = False
         TabOrder = 1
+        OnClick = btnAlterarClick
         OnMouseEnter = btnAlterarMouseEnter
         OnMouseLeave = btnAlterarMouseLeave
         object lblAlterarUsu: TLabel
@@ -3060,6 +3062,7 @@ object PagProcedimentos: TPagProcedimentos
         ParentBackground = False
         TabOrder = 1
         Visible = False
+        OnClick = btnConfirmarAlteracoesClick
         OnMouseEnter = btnConfirmarAlteracoesMouseEnter
         OnMouseLeave = btnConfirmarAlteracoesMouseLeave
         object lblConfirmarAlteracoes: TLabel
@@ -3120,8 +3123,7 @@ object PagProcedimentos: TPagProcedimentos
         Font.Name = 'Segoe UI'
         Font.Style = []
         TabOrder = 4
-        Time = 45950.596283449070000000
-        TimeFormat = 'hh:nn'
+        TimeFormat = 'HH:mm'
       end
     end
     object pnlRestaurar: TPanel

@@ -158,7 +158,6 @@
         <DCCReference Include="..\src\Controller\uProfissionaisController.pas"/>
         <DCCReference Include="..\src\View\TelaProcedimentos.pas">
             <Form>PagProcedimentos</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="..\src\Model\uProcedimentos.pas"/>
         <DCCReference Include="..\src\Repository\uProcedimentosRepository.pas"/>

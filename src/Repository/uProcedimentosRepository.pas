@@ -28,7 +28,7 @@ begin
   Result := TObjectList<TProcedimento>.Create(True);
   with dmUsuarios.queryProcedimentos do begin
     Close;
-    SQL.Text := 'SELECT id, nome, valor, duracao, ativo FROM procedimentos WHERE ativo = TRUE';
+    SQL.Text := 'SELECT id, nome, valor, duracao::TIME as duracao, ativo FROM procedimentos WHERE ativo = TRUE';
     Open;
     while not Eof do begin
       Procedimento := TProcedimento.Create;
@@ -78,15 +78,21 @@ begin
 end;
 
 procedure TProcedimentoRepository.Adicionar(AProcedimento: TProcedimento);
+  var
+  DuracaoSQL: string;
 begin
   with dmUsuarios.queryProcedimentos do begin
     Close;
+
+    // Converte TDateTime para formato INTERVAL do PostgreSQL
+    DuracaoSQL := FormatDateTime('hh:nn:ss', AProcedimento.Duracao);
+
     SQL.Text :=
       'INSERT INTO procedimentos (nome, valor, duracao, ativo) ' +
-      'VALUES (:nome, :valor, :duracao, :ativo)';
+      'VALUES (:nome, :valor, CAST(:duracao AS INTERVAL), :ativo)';
     ParamByName('nome').AsString   := AProcedimento.Nome;
     ParamByName('valor').AsFloat   := AProcedimento.Valor;
-    ParamByName('duracao').AsDateTime := AProcedimento.Duracao;
+    ParamByName('duracao').AsString := DuracaoSQL;  // Passa como string e faz CAST
     ParamByName('ativo').AsBoolean := AProcedimento.Ativo;
     ExecSQL;
   end;

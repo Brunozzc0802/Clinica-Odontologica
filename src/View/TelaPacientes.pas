@@ -794,7 +794,7 @@ procedure TPagPacientes.FormClose(Sender: TObject; var Action: TCloseAction);
     btnAddNovo.visible := false;
     pnlAddPacientes.Visible := False;
     btnAlterarNovo.Visible := False;
-    btnPesquisar.Visible := False;
+    btnNovoPesquisar.Visible := False;
     btnRestaurarNovo.Visible := False;
     pnlRestaurar.Visible := False;
     imgLogo2.Visible := False;

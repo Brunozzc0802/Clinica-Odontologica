@@ -14,6 +14,7 @@ object PagProcedimentos: TPagProcedimentos
   Position = poDesigned
   OnClose = FormClose
   OnCreate = FormCreate
+  OnShow = FormShow
   TextHeight = 15
   object cabecalho: TPanel
     Left = -306
@@ -2567,6 +2568,7 @@ object PagProcedimentos: TPagProcedimentos
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnAddClick
           OnMouseEnter = btnAddMouseEnter
           OnMouseLeave = btnAddMouseLeave
           ExplicitWidth = 59
@@ -2769,6 +2771,7 @@ object PagProcedimentos: TPagProcedimentos
         Color = 8142341
         ParentBackground = False
         TabOrder = 4
+        OnClick = btnCancelarClick
         OnMouseEnter = btnCancelarMouseEnter
         OnMouseLeave = btnCancelarMouseLeave
         object lblCancelarUsu: TLabel
@@ -2883,6 +2886,7 @@ object PagProcedimentos: TPagProcedimentos
         Color = 8142341
         ParentBackground = False
         TabOrder = 6
+        OnClick = btnLimparClick
         OnMouseEnter = btnLimparMouseEnter
         OnMouseLeave = btnLimparMouseLeave
         object lblLimpar: TLabel
@@ -3011,6 +3015,7 @@ object PagProcedimentos: TPagProcedimentos
         Color = 8142341
         ParentBackground = False
         TabOrder = 0
+        OnClick = btnadicionarClick
         OnMouseEnter = btnadicionarMouseEnter
         OnMouseLeave = btnadicionarMouseLeave
         object lblAddprocedimento: TLabel
@@ -3035,6 +3040,7 @@ object PagProcedimentos: TPagProcedimentos
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnadicionarClick
           OnMouseEnter = btnadicionarMouseEnter
           OnMouseLeave = btnadicionarMouseLeave
           ExplicitWidth = 115
@@ -3043,7 +3049,7 @@ object PagProcedimentos: TPagProcedimentos
       object btnConfirmarAlteracoes: TPanel
         AlignWithMargins = True
         Left = 8
-        Top = 65
+        Top = 66
         Width = 571
         Height = 32
         Margins.Left = 10
@@ -3096,13 +3102,13 @@ object PagProcedimentos: TPagProcedimentos
       object edValor: TMaskEdit
         Left = 218
         Top = 9
-        Width = 169
+        Width = 164
         Height = 32
         AutoSize = False
-        EditMask = '9999,99;1;_'
-        MaxLength = 7
+        EditMask = '999,99;1;_'
+        MaxLength = 6
         TabOrder = 3
-        Text = '    ,  '
+        Text = '   ,  '
         TextHint = 'Valor:'
       end
       object edHora: TTimePicker
@@ -3114,7 +3120,7 @@ object PagProcedimentos: TPagProcedimentos
         Font.Name = 'Segoe UI'
         Font.Style = []
         TabOrder = 4
-        Time = 45943.702465057870000000
+        Time = 45950.596283449070000000
         TimeFormat = 'hh:nn'
       end
     end

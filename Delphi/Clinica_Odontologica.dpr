@@ -26,9 +26,9 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TFormLogin, FormLogin);
   Application.CreateForm(TPagPacientes, PagPacientes);
   Application.CreateForm(TPagProcedimentos, PagProcedimentos);
-  Application.CreateForm(TFormLogin, FormLogin);
   Application.CreateForm(TPagProfissionais, PagProfissionais);
   Application.CreateForm(TPagUsuarios, PagUsuarios);
   Application.CreateForm(TdmUsuarios, dmUsuarios);

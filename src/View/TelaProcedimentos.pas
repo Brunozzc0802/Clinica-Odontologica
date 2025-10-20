@@ -5,7 +5,9 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.WinXPickers, Vcl.Mask, Vcl.StdCtrls,
-  Vcl.WinXCtrls, Vcl.Grids, Vcl.Imaging.pngimage, Vcl.ExtCtrls;
+  Vcl.WinXCtrls, Vcl.Grids, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
+  uProcedimentosController, uProcedimentos,
+  System.Generics.Collections;
 
 type
   TPagProcedimentos = class(TForm)
@@ -85,8 +87,15 @@ type
     procedure btnXClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure btnLimparClick(Sender: TObject);
+    procedure CarregarGrid;
+    procedure FormShow(Sender: TObject);
+    procedure adicionarProcedimento;
+    procedure btnadicionarClick(Sender: TObject);
   private
-    { Private declarations }
+    ProcedimentoLista: TObjectList<TProcedimento>;
+    Controller: TProcedimentosController;
   public
     { Public declarations }
   end;
@@ -98,45 +107,125 @@ implementation
 
 {$R *.dfm}
 
+
+procedure TPagProcedimentos.FormCreate(Sender: TObject);
+  begin
+    Controller := TProcedimentosController.Create;
+    ProcedimentoLista := TObjectList<TProcedimento>.Create;
+
+    sgProcedimentos.Cells[0,0] := 'ID';
+    sgProcedimentos.Cells[1,0] := 'Nome do Procedimento';
+    sgProcedimentos.Cells[2,0] := 'Valor';
+    sgProcedimentos.Cells[3,0] := 'Duração';
+
+    sgProcedimentos.ColWidths[0] := 50;
+    sgProcedimentos.ColWidths[1] := 195;
+    sgProcedimentos.ColWidths[2] := 150;
+    sgProcedimentos.ColWidths[3] := 140;
+  end;
+
+procedure TPagProcedimentos.FormShow(Sender: TObject);
+  begin
+    CarregarGrid;
+  end;
+
+procedure TPagProcedimentos.FormClose(Sender: TObject; var Action: TCloseAction);
+  begin
+    FreeAndNil(Controller);
+    FreeAndNil(ProcedimentoLista);
+  end;
+
+procedure TPagProcedimentos.CarregarGrid;
+var
+  I: Integer;
+  begin
+    try
+      if Assigned(ProcedimentoLista) then
+      ProcedimentoLista.Free;
+      ProcedimentoLista := Controller.BuscarTodos;
+
+      sgProcedimentos.Cells[0,0] := 'ID';
+      sgProcedimentos.Cells[1,0] := 'Nome do Procedimento';
+      sgProcedimentos.Cells[2,0] := 'Valor';
+      sgProcedimentos.Cells[3,0] := 'Duração';
+      sgProcedimentos.RowCount := ProcedimentoLista.Count + 1;
+
+      for I := 0 to ProcedimentoLista.Count - 1 do
+      begin
+        sgProcedimentos.Cells[0, I + 1] := IntToStr(ProcedimentoLista[I].Id);
+        sgProcedimentos.Cells[1, I + 1] := ProcedimentoLista[I].Nome;
+        sgProcedimentos.Cells[2, I + 1] := FloatToStr(ProcedimentoLista[I].Valor);
+        sgProcedimentos.Cells[3, I + 1] := TimeToStr(ProcedimentoLista[I].Duracao);
+      end;
+    finally
+    end;
+  end;
+
+
+procedure TPagProcedimentos.AdicionarProcedimento;
+begin
+  if (EdNome.Text = '') or
+     (EdValor.Text = '') or
+     (EdHora.Time = EncodeTime(0, 0, 0, 0)) then
+  begin
+    ShowMessage('Preencha todos os campos');
+    Exit;
+  end;
+
+  try
+    Controller.AdicionarProcedimento(
+      EdNome.Text,
+      StrToFloat(EdValor.Text),
+      EdHora.Time
+    );
+
+    ShowMessage('Procedimento adicionado com sucesso!');
+    CarregarGrid;
+      EdNome.Clear;
+      EdValor.Clear;
+      EdHora.Time := EncodeTime(0,0,0,0);
+  except
+    on E: Exception do
+      ShowMessage('Erro ao adicionar procedimento: ' + E.Message);
+  end;
+end;
+
 procedure TPagProcedimentos.btnAddClick(Sender: TObject);
   begin
-    if pnlRestaurar.Visible = true then begin
-      pnlRestaurar.Visible := False;
-      btnRestaurarNovo.Visible := false;
-    end;
+    pnlAdd.Visible := True;
+    btnadicionar.Visible := True;
+    btnConfirmarAlteracoes.Visible := False;
 
-    if (btnAlterarNovo.Visible = True) then begin
-        EdNome.Clear;
-        edValor.Clear;
-        edHora.Time := EncodeTime(0, 0, 0, 0);
-        EdNome.SetFocus;
-        sgProcedimentos.Row := 0;
-        sgProcedimentos.Col := 0;
-        sgProcedimentos.SetFocus;
-    end;
+    EdNome.Clear;
+    edValor.Clear;
+    edHora.Time := EncodeTime(0, 0, 0, 0);
+    EdNome.SetFocus;
 
-    if pesquisar.Visible = true  then begin
-        pesquisar.Visible := False;
-        sgProcedimentos.Top := sgProcedimentos.Top - (pesquisar.Height + 6);
-        sgProcedimentos.Height := sgProcedimentos.Height + (pesquisar.Height + 6);
-        btnNovoPesquisar.Visible := False;
-        sgProcedimentos.Row := 0;
-        sgProcedimentos.Col := 0;
-    end;
+    imgLogo2.Visible := True;
+    imgLogo1.Visible := False;
+  end;
 
-      btnAlterarNovo.Visible := false;
-      btnAddNovo.Visible := True;
-      btnNovoPesquisar.Visible := False;
-      btnRestaurarNovo.Visible := false;
-      btnConfirmarAlteracoes.Visible := false;
-      btnadicionar.Visible := True;
-      pnlAdd.Visible := True;
+procedure TPagProcedimentos.btnCancelarClick(Sender: TObject);
+  begin
+    pnlAdd.Visible := False;
+    imgLogo1.Visible := True;
+    imgLogo2.Visible := False;
+  end;
+
+procedure TPagProcedimentos.btnLimparClick(Sender: TObject);
+  begin
+    if pnlAdd.Visible = True then
+    begin
+      EdNome.Clear;
+      edValor.Clear;
       edHora.Time := EncodeTime(0, 0, 0, 0);
-      imgLogo2.Visible := True;
-      imgLogo1.Visible := False;
       EdNome.SetFocus;
-      sgprocedimentos.Row := 0;
-      sgprocedimentos.Col := 0;
+    end;
+  end;
+
+procedure TPagProcedimentos.btnXClick(Sender: TObject);
+  begin
+    Close;
   end;
 
 procedure TPagProcedimentos.btnAddMouseEnter(Sender: TObject);
@@ -146,7 +235,12 @@ procedure TPagProcedimentos.btnAddMouseEnter(Sender: TObject);
 
 procedure TPagProcedimentos.btnAddMouseLeave(Sender: TObject);
   begin
-     btnadd.Color := $007C3E05;
+    btnAdd.Color := $007C3E05;
+  end;
+
+procedure TPagProcedimentos.btnadicionarClick(Sender: TObject);
+  begin
+    adicionarProcedimento;
   end;
 
 procedure TPagProcedimentos.btnadicionarMouseEnter(Sender: TObject);
@@ -156,7 +250,7 @@ procedure TPagProcedimentos.btnadicionarMouseEnter(Sender: TObject);
 
 procedure TPagProcedimentos.btnadicionarMouseLeave(Sender: TObject);
   begin
-    btnAdicionar.Color := $007C3E05;
+    btnadicionar.Color := $007C3E05;
   end;
 
 procedure TPagProcedimentos.btnAlterarMouseEnter(Sender: TObject);
@@ -196,7 +290,7 @@ procedure TPagProcedimentos.btnCRestoreMouseEnter(Sender: TObject);
 
 procedure TPagProcedimentos.btnCRestoreMouseLeave(Sender: TObject);
   begin
-    btnCrestore.Color :=  $00F8973F;
+    btnCRestore.Color := $00F8973F;
   end;
 
 procedure TPagProcedimentos.btnDeletarMouseEnter(Sender: TObject);
@@ -249,35 +343,5 @@ procedure TPagProcedimentos.btnSairMouseLeave(Sender: TObject);
     btnSair.Color := $007C3E05;
   end;
 
-procedure TPagProcedimentos.btnXClick(Sender: TObject);
-  begin
-    Close;
-  end;
-
-procedure TPagProcedimentos.FormClose(Sender: TObject;var Action: TCloseAction);
-  begin
-    pnlAdd.Visible := False;
-    btnAddNovo.visible := false;
-    pnlAdd.Visible := False;
-    btnAlterarNovo.Visible := False;
-    btnPesquisar.Visible := False;
-    btnRestaurarNovo.Visible := False;
-    pnlRestaurar.Visible := False;
-    imgLogo2.Visible := False;
-    imgLogo1.Visible := True;
-  end;
-
-procedure TPagProcedimentos.FormCreate(Sender: TObject);
-  begin
-    sgProcedimentos.Cells[0,0] := 'ID';
-    sgProcedimentos.Cells[1,0] := 'Nome do Procedimento';
-    sgProcedimentos.Cells[2,0] := 'Valor';
-    sgProcedimentos.Cells[3,0] := 'Duração';
-
-    sgProcedimentos.ColWidths[0] := 50;
-    sgProcedimentos.ColWidths[1] := 195;
-    sgProcedimentos.ColWidths[2] := 150;
-    sgProcedimentos.ColWidths[3] := 140;
-  end;
-
 end.
+

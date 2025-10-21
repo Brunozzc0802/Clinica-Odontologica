@@ -106,6 +106,10 @@ type
     procedure btnRestaurarClick(Sender: TObject);
     procedure CarregarInativos;
     procedure imgXrestoreClick(Sender: TObject);
+    procedure sgRestoreDrawCell(Sender: TObject; ACol, ARow: LongInt;
+      Rect: TRect; State: TGridDrawState);
+    procedure ConfirmarRestauracao;
+    procedure btnCRestoreClick(Sender: TObject);
   private
     ProcedimentoLista: TObjectList<TProcedimento>;
     Controller: TProcedimentosController;
@@ -221,6 +225,25 @@ procedure TPagProcedimentos.sgProcedimentosDrawCell(Sender: TObject; ACol,
     sgProcedimentos.Cells[ACol, ARow]);
 end;
 
+procedure TPagProcedimentos.sgRestoreDrawCell(Sender: TObject; ACol,
+  ARow: LongInt; Rect: TRect; State: TGridDrawState);
+  var
+  BGColor: TColor;
+begin
+  if gdSelected in State then
+    BGColor := clHighlight
+  else
+    BGColor := clWindow;
+  sgRestore.Canvas.Brush.Color := BGColor;
+  sgRestore.Canvas.FillRect(Rect);
+  if gdSelected in State then
+    sgRestore.Canvas.Font.Color := clHighlightText
+  else
+    sgRestore.Canvas.Font.Color := clWindowText;
+    sgRestore.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2,
+    sgRestore.Cells[ACol, ARow]);
+end;
+
 procedure TPagProcedimentos.FormClose(Sender: TObject; var Action: TCloseAction);
   begin
     FreeAndNil(Controller);
@@ -309,6 +332,31 @@ procedure TPagProcedimentos.ConfirmarAlteracoes(Sender: TObject);
         end;
       end;
 
+procedure TPagProcedimentos.ConfirmarRestauracao;
+  var
+  ProcedimentoId: Integer;
+  begin
+    if sgRestore.Row > 0 then
+    begin
+      ProcedimentoId := StrToIntDef(sgRestore.Cells[0, sgRestore.Row], 0);
+      if ProcedimentoId = 0 then begin
+        Exit;
+      end;
+
+      try
+        Controller.RestaurarProcedimento(ProcedimentoId);
+        ShowMessage('Procedimento restaurado com sucesso!');
+        CarregarInativos;
+        CarregarGrid;
+        sgRestore.Row := 0;
+        sgRestore.Col := 0;
+        sgRestore.SetFocus;
+      finally
+      end;
+      end else
+      ShowMessage('Selecione um procedimento para restaurar.');
+  end;
+
 procedure TPagProcedimentos.AdicionarProcedimento;
    begin
     try
@@ -340,6 +388,8 @@ procedure TPagProcedimentos.btnAddClick(Sender: TObject);
      if pnlRestaurar.Visible = true then begin
       pnlRestaurar.Visible := False;
       btnRestaurarNovo.Visible := false;
+      sgprocedimentos.Row := 0;
+      sgprocedimentos.Col := 0;
     end;
     if (btnAlterarNovo.Visible = True) then begin
         EdNome.Clear;
@@ -358,6 +408,8 @@ procedure TPagProcedimentos.btnAddClick(Sender: TObject);
         sgprocedimentos.Row := 0;
         sgprocedimentos.Col := 0;
     end;
+        sgprocedimentos.Row := 0;
+        sgprocedimentos.Col := 0;
         btnAddNovo.Visible := True;
         pnlAdd.Visible := True;
         edNome.SetFocus;
@@ -491,6 +543,11 @@ procedure TPagProcedimentos.btnConfirmarAlteracoesMouseEnter(Sender: TObject);
 procedure TPagProcedimentos.btnConfirmarAlteracoesMouseLeave(Sender: TObject);
   begin
     btnConfirmarAlteracoes.Color := $007C3E05;
+  end;
+
+procedure TPagProcedimentos.btnCRestoreClick(Sender: TObject);
+  begin
+    ConfirmarRestauracao;
   end;
 
 procedure TPagProcedimentos.btnCRestoreMouseEnter(Sender: TObject);

@@ -17,6 +17,7 @@ type
     queryPacientes: TFDQuery;
     queryProfissionais: TFDQuery;
     queryProcedimentos: TFDQuery;
+    queryConsultas: TFDQuery;
   private
     { Private declarations }
   public

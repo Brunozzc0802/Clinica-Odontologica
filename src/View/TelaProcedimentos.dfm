@@ -3221,6 +3221,7 @@ object PagProcedimentos: TPagProcedimentos
         RowCount = 1
         FixedRows = 0
         TabOrder = 0
+        OnDrawCell = sgRestoreDrawCell
       end
       object btnCRestore: TPanel
         Left = 4
@@ -3232,6 +3233,7 @@ object PagProcedimentos: TPagProcedimentos
         Color = 16223019
         ParentBackground = False
         TabOrder = 1
+        OnClick = btnCRestoreClick
         OnMouseEnter = btnCRestoreMouseEnter
         OnMouseLeave = btnCRestoreMouseLeave
         object lblRestore: TLabel
@@ -3256,6 +3258,7 @@ object PagProcedimentos: TPagProcedimentos
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnCRestoreClick
           OnMouseEnter = btnCRestoreMouseEnter
           OnMouseLeave = btnCRestoreMouseLeave
           ExplicitWidth = 58

@@ -118,6 +118,8 @@ type
     procedure btnSairClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure OrdenarGrid;
+    procedure sgRestoreDrawCell(Sender: TObject; ACol, ARow: LongInt;
+      Rect: TRect; State: TGridDrawState);
   private
     ProfissionaisLista: TObjectList<TProfissionais>;
     ProfissionalIdalterar: Integer;
@@ -806,4 +808,23 @@ var
     sgProfissionais.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2,
     sgProfissionais.Cells[ACol, ARow]);
 end;
+procedure TPagProfissionais.sgRestoreDrawCell(Sender: TObject; ACol,
+  ARow: LongInt; Rect: TRect; State: TGridDrawState);
+  var
+  BGColor: TColor;
+begin
+  if gdSelected in State then
+    BGColor := clHighlight
+  else
+    BGColor := clWindow;
+  sgRestore.Canvas.Brush.Color := BGColor;
+  sgRestore.Canvas.FillRect(Rect);
+  if gdSelected in State then
+    sgRestore.Canvas.Font.Color := clHighlightText
+  else
+    sgRestore.Canvas.Font.Color := clWindowText;
+    sgRestore.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2,
+    sgRestore.Cells[ACol, ARow]);
+end;
+
 end.

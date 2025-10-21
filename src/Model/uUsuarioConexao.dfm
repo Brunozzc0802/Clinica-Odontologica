@@ -40,4 +40,9 @@ object dmUsuarios: TdmUsuarios
     Left = 432
     Top = 88
   end
+  object queryConsultas: TFDQuery
+    Connection = FDConnection1
+    Left = 320
+    Top = 152
+  end
 end

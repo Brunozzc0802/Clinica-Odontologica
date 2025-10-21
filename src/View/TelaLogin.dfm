@@ -3354,7 +3354,6 @@ object FormLogin: TFormLogin
       Color = 13204758
       ParentBackground = False
       TabOrder = 0
-      ExplicitLeft = 282
       DesignSize = (
         874
         870)
@@ -5715,6 +5714,7 @@ object FormLogin: TFormLogin
         Color = 8142341
         ParentBackground = False
         TabOrder = 3
+        OnClick = pnlConsultasClick
         OnMouseEnter = pnlConsultasMouseEnter
         OnMouseLeave = pnlConsultasMouseLeave
         object lblConsultas: TLabel

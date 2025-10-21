@@ -3173,6 +3173,7 @@ object PagProfissionais: TPagProfissionais
         RowCount = 1
         FixedRows = 0
         TabOrder = 0
+        OnDrawCell = sgRestoreDrawCell
       end
       object btnCRestore: TPanel
         Left = 4
@@ -3212,8 +3213,7 @@ object PagProfissionais: TPagProfissionais
           OnClick = btnCRestoreClick
           OnMouseEnter = btnCRestoreMouseEnter
           OnMouseLeave = btnCRestoreMouseLeave
-          ExplicitWidth = 58
-          ExplicitHeight = 17
+          ExplicitTop = 4
         end
       end
     end

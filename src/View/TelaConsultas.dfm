@@ -1,9 +1,9 @@
-object PagPacientes: TPagPacientes
-  Left = 551
+object PagConsultas: TPagConsultas
+  Left = 592
   Top = 187
   BorderStyle = bsNone
-  Caption = 'PagPacientes'
-  ClientHeight = 664
+  Caption = 'PagConsultas'
+  ClientHeight = 627
   ClientWidth = 769
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -12,18 +12,14 @@ object PagPacientes: TPagPacientes
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesigned
-  OnClose = FormClose
-  OnCreate = FormCreate
-  OnDestroy = FormDestroy
-  OnShow = FormShow
   TextHeight = 15
-  object bordaCabecalhoPacientes: TPanel
+  object cabecalho: TPanel
     Left = -306
     Top = 0
     Width = 1075
     Height = 41
     BevelOuter = bvNone
-    Caption = 'bordaCabecalhoPacientes'
+    Caption = 'cabecalho'
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
@@ -42,12 +38,12 @@ object PagPacientes: TPagPacientes
       Color = 11293958
       ParentBackground = False
       TabOrder = 0
-      object lblTituloPacientes: TLabel
-        Left = 36
-        Top = 7
-        Width = 87
+      object lblTitulo: TLabel
+        Left = 44
+        Top = 8
+        Width = 88
         Height = 23
-        Caption = 'Pacientes'
+        Caption = 'Consultas'
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
         Font.Height = -19
@@ -55,39 +51,41 @@ object PagPacientes: TPagPacientes
         Font.Style = [fsItalic]
         ParentFont = False
       end
-      object iconPacientes: TImage
+      object iconConsultas: TImage
         Left = 6
-        Top = 7
-        Width = 24
-        Height = 24
+        Top = 3
+        Width = 32
+        Height = 32
         Picture.Data = {
-          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000180000
-          00180806000000E0773DF8000000097048597300000EC300000EC301C76FA864
+          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000200000
+          00200806000000737A7AF4000000097048597300000EC300000EC301C76FA864
           0000001974455874536F667477617265007777772E696E6B73636170652E6F72
-          679BEE3C1A000002D94944415478DAB5956B688E6118C79F471B4A73D89A958C
-          1539CCE193948F72CABC9A95F880880F4244CC8725218A9058F6C91CCB97C9EB
-          D02666A514890F5A22458ED39CF6DA72D89C5EBFFF9EEBD1B3C7F3EE7D4DEEFA
-          75DDEFF55CD7FDBFAFFBF4BACE7F6E6ED8914C267B61C641017C8046D775BF46
-          2513DB073301064233DC27F667A4800597C33AC88756E80F9FE028EC20F9BDC5
-          E661B6C132E8076D3000DEC021D8476CC76F0112F4F1120CB1C43801ADF8FBD2
-          9F693ECD728ECDA71612E6AF27B6DDC62883EDD0A458FC09970F12390F436186
-          3FCB88A5A83631B52BB0C29F652856D535D892CD9640099D1A2826E159AACDB2
-          BDD963556F0EAF7528760CE60E2C968066FF8A8455FF745CFE14398EC995C04B
-          3A1B10A84993A0352E24EE5E86020B309512F84CA784C46B6912AA30D3881B9D
-          A180963E2E811774569258170A28C2B4E16FA1AF3BF114B4D983F1BDC397E578
-          FBD698426021E68004C6D2791CBC4CF872314ABC8DBF8CDFBBE8C760382CC257
-          8B4F7B76D0441E45081CC1E44BA0379DDD8E7761FC361106C148980567608DE3
-          5DAC5B8E77D61FAA1AC73BE25B61236405C6980FEB25906DC16AF566BFC37E1B
-          681EBC855136D0143806876D90CBA00A1256B5DF3E42857F93E7DA2CA752EE8D
-          409923300F3A67E2BA55FCD64D3E0D4FA00E5F05BEB3F427AB6ADB2F3D2F1D5D
-          9E0A1B4C33D6C64CE26373C03F5E22F87ED82D55354A2EC2F7DAF62B479794BE
-          F6E8BA2AE777755820DBCACDB34A5A529C0E2D6703DF5787FC0536B84E9BDEA1
-          6F5D042C28C7F1DE1989C5829504628A314D7A0C033EBDBE57ADB2E97C6BF3BF
-          45FD1FE8D5BC08C3A094E0BB4E37CD96F082E3BDA0B1A070A48025E9993E09BA
-          8D4B488AA7882BC59C82738E7759BF846322052CB9F3D5849D7002CAF5BE0796
-          528762296CC25F996A9C940201211D41FDA369F3D7826EBC6E703B2C67F09BDD
-          E5A7153011BD415B345BCBD9ABCAA2FE707A2410102A540EED79A6397F25D093
-          F60B4E453EEDDD8ACC350000000049454E44AE426082}
+          679BEE3C1A0000031F4944415478DAED97496814411486BBE3727405A3328A7B
+          C483E042C8E821184C329383662151BCBA46A3A2E8C58382E049415CA2E07614
+          9DB80B71C605CC412342887A88E22420B8C49BC6A368C6EF4DBF0A633BA533CC
+          0C11B1E0E755BFA5DE5F5DAFABAA5D67989B6B33241289318885E091EBBA098B
+          CFBCE420AEFBDA6297F1978317F87CC996C039C47A504DF05D8BCF8012186BB1
+          572162E03C3E1BFE48808022C4123003EC02417014745A7846543659EC411DA7
+          53C77903BA2033F80B01924F455C04E54E615B075807890F430474ADEE830A20
+          8627A0140494FD3BCB608D2ADB2CF680BE05897F0ACA804CF401A894DA32044A
+          10AFC047B000C3277497E8AF010D3C5F4B373A3EDF92B370DD91167B3DE22AB8
+          8CCF5A9E27D0EF01C56031BA6E43A016715D80B25E75CB748607859025C17625
+          70C2621F8FD82F6F089FC7AA933CB566628680248AA8A3ADA0F2D2C815D18935
+          91ABED3F01436007E2582113A7693B2170FCAF2130EC4BF06F11D08D6DB63EF6
+          A69E960523C018B21B6E047BC02C9FB90F1C0172C2B6A84F15B97AF24280F871
+          8EB7E556A8AA1F743BDE59B3084C56BD9C378DE4F86C627326A0338F69F2F760
+          2BB86D2E317AC4AF02AD8E7710DD0361ECDFF345A019714A9307897FABFA8E64
+          02D72DD7E7698E77CA0A89CDE8CFE48B80ACAFACF96A626FA5E8134A20F5CE51
+          879093550A736ECE04889B8F78E978778840EADDD142A048DF94D444897C1DB9
+          120823DAC11DE26A7CB6AF88516029B6AE147D1451AD7510CD95404892832871
+          619F4DEAA259675C6AAE60E8A560E5B21A4217CB9580B949F5EB120CA6D84623
+          E4362D45D88AADE5774B20AF445E4D0C652853021ADBEB78BB5E1DB1377CB689
+          88038E772D7FCE7303FD2B20CEB3F74FA18E939499148E38B59BEF3403025B10
+          A71DAF10CBCC6798C66FBAE37D8653C026FCCE0E11508743887D594CFE2183AC
+          D08D48EA60A59290ADF6A6590E7DED72073CA9C965596A7EDA88D451FADBC06E
+          303353021A2B5BB1D450A5DAE476FD4CFBB215176B5F92CB2134600671334894
+          5183C408C7FB95DB0BE6F8CC7170185CF02F6DDE08F8C8488149614A4DF59134
+          6EF32D08816CDA0F96F8AD301E39C56C0000000049454E44AE426082}
       end
       object btnX: TImage
         Left = 736
@@ -115,9 +113,9 @@ object PagPacientes: TPagPacientes
   object pnlAzulPrincipal: TPanel
     AlignWithMargins = True
     Left = 1
-    Top = 41
+    Top = 42
     Width = 766
-    Height = 620
+    Height = 583
     Margins.Left = 305
     Margins.Top = 1
     Color = 8142341
@@ -125,8 +123,8 @@ object PagPacientes: TPagPacientes
     TabOrder = 1
     object imgLogo1: TImage
       AlignWithMargins = True
-      Left = 312
-      Top = 467
+      Left = 307
+      Top = 451
       Width = 153
       Height = 134
       Margins.Left = 1000
@@ -1318,9 +1316,9 @@ object PagPacientes: TPagPacientes
     end
     object imgLogo2: TImage
       AlignWithMargins = True
-      Left = 607
-      Top = 467
-      Width = 153
+      Left = 610
+      Top = 451
+      Width = 147
       Height = 134
       Margins.Left = 100
       Margins.Top = 50
@@ -2510,37 +2508,14 @@ object PagPacientes: TPagPacientes
       Stretch = True
       Visible = False
     end
-    object sgPacientes: TStringGrid
-      Left = 9
-      Top = 6
-      Width = 592
-      Height = 441
-      ColCount = 7
-      DefaultColWidth = 100
-      FixedCols = 0
-      RowCount = 1
-      FixedRows = 0
-      TabOrder = 0
-      OnDrawCell = sgPacientesDrawCell
-    end
-    object pesquisar: TSearchBox
-      Left = 9
-      Top = 6
-      Width = 592
-      Height = 23
-      TabOrder = 1
-      TextHint = 'Pesquisar'
-      Visible = False
-      OnChange = pesquisarChange
-    end
-    object pnlBotoesDireitaPacientes: TPanel
+    object pnlBotoesDireita: TPanel
       Left = 607
       Top = 6
       Width = 153
       Height = 441
       Color = 15790320
       ParentBackground = False
-      TabOrder = 2
+      TabOrder = 0
       object btnAdd: TPanel
         Left = 8
         Top = 5
@@ -2550,9 +2525,6 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 0
-        OnClick = btnAddClick
-        OnMouseEnter = btnAddMouseEnter
-        OnMouseLeave = btnAddMouseLeave
         object lblAddUsu: TLabel
           AlignWithMargins = True
           Left = 36
@@ -2575,9 +2547,6 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnAddClick
-          OnMouseEnter = btnAddMouseEnter
-          OnMouseLeave = btnAddMouseLeave
           ExplicitWidth = 59
           ExplicitHeight = 17
         end
@@ -2591,7 +2560,6 @@ object PagPacientes: TPagPacientes
           ParentBackground = False
           TabOrder = 0
           Visible = False
-          OnClick = btnAddNovoClick
           object Label2: TLabel
             AlignWithMargins = True
             Left = 36
@@ -2614,7 +2582,6 @@ object PagPacientes: TPagPacientes
             Font.Style = [fsBold]
             ParentColor = False
             ParentFont = False
-            OnClick = btnAddNovoClick
             ExplicitWidth = 59
             ExplicitHeight = 17
           end
@@ -2629,9 +2596,6 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 1
-        OnClick = btnAlterarClick
-        OnMouseEnter = btnAlterarMouseEnter
-        OnMouseLeave = btnAlterarMouseLeave
         object lblAlterarUsu: TLabel
           AlignWithMargins = True
           Left = 36
@@ -2654,14 +2618,11 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnAlterarClick
-          OnMouseEnter = btnAlterarMouseEnter
-          OnMouseLeave = btnAlterarMouseLeave
           ExplicitWidth = 42
           ExplicitHeight = 17
         end
       end
-      object btnPesquisar: TPanel
+      object btnDeletar: TPanel
         Left = 8
         Top = 99
         Width = 137
@@ -2670,89 +2631,7 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 2
-        OnClick = btnPesquisarClick
-        OnMouseEnter = btnPesquisarMouseEnter
-        OnMouseLeave = btnPesquisarMouseLeave
-        object lblPesquisar: TLabel
-          AlignWithMargins = True
-          Left = 36
-          Top = 11
-          Width = 65
-          Height = 19
-          Cursor = crHandPoint
-          Margins.Left = 35
-          Margins.Top = 10
-          Margins.Right = 35
-          Margins.Bottom = 10
-          Align = alClient
-          Alignment = taCenter
-          Caption = 'Pesquisar'
-          Color = clCream
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -13
-          Font.Name = 'Segoe UI'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          OnClick = btnPesquisarClick
-          OnMouseEnter = btnPesquisarMouseEnter
-          OnMouseLeave = btnPesquisarMouseLeave
-          ExplicitWidth = 59
-          ExplicitHeight = 17
-        end
-        object btnNovoPesquisar: TPanel
-          Left = 0
-          Top = 0
-          Width = 137
-          Height = 41
-          Cursor = crHandPoint
-          Color = 16223019
-          ParentBackground = False
-          TabOrder = 0
-          Visible = False
-          OnClick = btnNovoPesquisarClick
-          object Label1: TLabel
-            AlignWithMargins = True
-            Left = 36
-            Top = 11
-            Width = 65
-            Height = 19
-            Cursor = crHandPoint
-            Margins.Left = 35
-            Margins.Top = 10
-            Margins.Right = 35
-            Margins.Bottom = 10
-            Align = alClient
-            Alignment = taCenter
-            Caption = 'Pesquisar'
-            Color = clCream
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -13
-            Font.Name = 'Segoe UI'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            OnClick = btnNovoPesquisarClick
-            ExplicitWidth = 59
-            ExplicitHeight = 17
-          end
-        end
-      end
-      object btnDeletar: TPanel
-        Left = 8
-        Top = 146
-        Width = 137
-        Height = 41
-        Cursor = crHandPoint
-        Color = 8142341
-        ParentBackground = False
-        TabOrder = 3
-        OnClick = btnDeletarClick
-        OnMouseEnter = btnDeletarMouseEnter
-        OnMouseLeave = btnDeletarMouseLeave
-        object lblDeletarUsu: TLabel
+        object lblDeletar: TLabel
           AlignWithMargins = True
           Left = 36
           Top = 11
@@ -2774,25 +2653,19 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnDeletarClick
-          OnMouseEnter = btnDeletarMouseEnter
-          OnMouseLeave = btnDeletarMouseLeave
           ExplicitWidth = 45
           ExplicitHeight = 17
         end
       end
       object btnCancelar: TPanel
         Left = 8
-        Top = 193
+        Top = 146
         Width = 137
         Height = 41
         Cursor = crHandPoint
         Color = 8142341
         ParentBackground = False
-        TabOrder = 4
-        OnClick = btnCancelarClick
-        OnMouseEnter = btnCancelarMouseEnter
-        OnMouseLeave = btnCancelarMouseLeave
+        TabOrder = 3
         object lblCancelarUsu: TLabel
           AlignWithMargins = True
           Left = 36
@@ -2815,25 +2688,19 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnCancelarClick
-          OnMouseEnter = btnCancelarMouseEnter
-          OnMouseLeave = btnCancelarMouseLeave
           ExplicitWidth = 52
           ExplicitHeight = 17
         end
       end
       object btnRestaurar: TPanel
         Left = 8
-        Top = 240
+        Top = 193
         Width = 137
         Height = 41
         Cursor = crHandPoint
         Color = 8142341
         ParentBackground = False
-        TabOrder = 5
-        OnClick = btnRestaurarClick
-        OnMouseEnter = btnRestaurarMouseEnter
-        OnMouseLeave = btnRestaurarMouseLeave
+        TabOrder = 4
         object lblRestaurar: TLabel
           AlignWithMargins = True
           Left = 36
@@ -2856,9 +2723,6 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnRestaurarClick
-          OnMouseEnter = btnRestaurarMouseEnter
-          OnMouseLeave = btnRestaurarMouseLeave
           ExplicitWidth = 58
           ExplicitHeight = 17
         end
@@ -2899,57 +2763,15 @@ object PagPacientes: TPagPacientes
           end
         end
       end
-      object btnConsultas: TPanel
-        Left = 8
-        Top = 287
-        Width = 137
-        Height = 41
-        Cursor = crHandPoint
-        Color = 8142341
-        ParentBackground = False
-        TabOrder = 6
-        OnMouseEnter = btnConsultasMouseEnter
-        OnMouseLeave = btnConsultasMouseLeave
-        object lblConsultas: TLabel
-          AlignWithMargins = True
-          Left = 16
-          Top = 11
-          Width = 105
-          Height = 19
-          Cursor = crHandPoint
-          Margins.Left = 15
-          Margins.Top = 10
-          Margins.Right = 15
-          Margins.Bottom = 10
-          Align = alClient
-          Alignment = taCenter
-          Caption = 'Consultas'
-          Color = clCream
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -13
-          Font.Name = 'Segoe UI'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          OnMouseEnter = btnConsultasMouseEnter
-          OnMouseLeave = btnConsultasMouseLeave
-          ExplicitWidth = 60
-          ExplicitHeight = 17
-        end
-      end
       object btnLimpar: TPanel
         Left = 8
-        Top = 334
+        Top = 240
         Width = 137
         Height = 41
         Cursor = crHandPoint
         Color = 8142341
         ParentBackground = False
-        TabOrder = 7
-        OnClick = btnLimparClick
-        OnMouseEnter = btnLimparMouseEnter
-        OnMouseLeave = btnLimparMouseLeave
+        TabOrder = 5
         object lblLimpar: TLabel
           AlignWithMargins = True
           Left = 31
@@ -2972,25 +2794,19 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnLimparClick
-          OnMouseEnter = btnLimparMouseEnter
-          OnMouseLeave = btnLimparMouseLeave
           ExplicitWidth = 43
           ExplicitHeight = 17
         end
       end
       object btnSair: TPanel
         Left = 8
-        Top = 381
+        Top = 287
         Width = 137
         Height = 41
         Cursor = crHandPoint
         Color = 8142341
         ParentBackground = False
-        TabOrder = 8
-        OnClick = lblSairClick
-        OnMouseEnter = btnSairMouseEnter
-        OnMouseLeave = btnSairMouseLeave
+        TabOrder = 6
         object lblSair: TLabel
           AlignWithMargins = True
           Left = 31
@@ -3013,9 +2829,6 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = lblSairClick
-          OnMouseEnter = btnSairMouseEnter
-          OnMouseLeave = btnSairMouseLeave
           ExplicitWidth = 23
           ExplicitHeight = 17
         end
@@ -3028,9 +2841,8 @@ object PagPacientes: TPagPacientes
         Cursor = crHandPoint
         Color = 16223019
         ParentBackground = False
-        TabOrder = 9
+        TabOrder = 7
         Visible = False
-        OnClick = btnAlterarNovoClick
         object Label3: TLabel
           AlignWithMargins = True
           Left = 36
@@ -3053,73 +2865,39 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnAlterarNovoClick
           ExplicitWidth = 42
           ExplicitHeight = 17
         end
       end
     end
-    object pnlAddPacientes: TPanel
-      Left = 9
-      Top = 460
-      Width = 592
-      Height = 147
+    object pnlAdd: TPanel
+      Left = 7
+      Top = 467
+      Width = 594
+      Height = 110
       Color = 15790320
       ParentBackground = False
-      TabOrder = 3
+      TabOrder = 1
       Visible = False
-      OnClick = btnaddPacienteClick
-      object EdNomePaciente: TEdit
-        Left = 8
-        Top = 9
-        Width = 169
-        Height = 32
-        AutoSize = False
-        TabOrder = 0
-        TextHint = 'Digite o nome:'
-        OnKeyDown = EdNomePacienteKeyDown
-      end
-      object edCEP: TEdit
-        Left = 8
-        Top = 57
-        Width = 169
-        Height = 32
-        AutoSize = False
-        TabOrder = 1
-        TextHint = 'Digite o Cep:'
-        OnKeyDown = edCEPKeyDown
-      end
-      object edEndereco: TEdit
-        Left = 219
-        Top = 57
-        Width = 169
-        Height = 32
-        AutoSize = False
-        TabOrder = 2
-        TextHint = 'Digite o Endere'#231'o:'
-      end
-      object btnaddPaciente: TPanel
+      object btnadicionar: TPanel
         AlignWithMargins = True
-        Left = 8
-        Top = 100
-        Width = 571
-        Height = 32
+        Left = 216
+        Top = 52
+        Width = 362
+        Height = 29
         Margins.Left = 10
         Margins.Top = 65
         Margins.Right = 13
         Margins.Bottom = 36
         Color = 8142341
         ParentBackground = False
-        TabOrder = 3
-        OnClick = btnaddPacienteClick
-        OnMouseEnter = lblAddpacienteMouseEnter
-        OnMouseLeave = lblAddpacienteMouseLeave
+        TabOrder = 0
         object lblAddpaciente: TLabel
           AlignWithMargins = True
           Left = 191
           Top = 7
-          Width = 209
-          Height = 17
+          Width = 0
+          Height = 14
           Cursor = crHandPoint
           Margins.Left = 190
           Margins.Top = 6
@@ -3136,17 +2914,15 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnaddPacienteClick
-          OnMouseEnter = lblAddpacienteMouseEnter
-          OnMouseLeave = lblAddpacienteMouseLeave
           ExplicitWidth = 115
+          ExplicitHeight = 17
         end
       end
       object btnConfirmarAlteracoes: TPanel
         AlignWithMargins = True
-        Left = 8
-        Top = 100
-        Width = 571
+        Left = 215
+        Top = 52
+        Width = 364
         Height = 32
         Margins.Left = 10
         Margins.Top = 75
@@ -3154,22 +2930,19 @@ object PagPacientes: TPagPacientes
         Margins.Bottom = 36
         Color = 8142341
         ParentBackground = False
-        TabOrder = 4
+        TabOrder = 1
         Visible = False
-        OnClick = btnConfirmarAlteracoesClick
-        OnMouseEnter = btnConfirmarAlteracoesMouseEnter
-        OnMouseLeave = btnConfirmarAlteracoesMouseLeave
         object lblConfirmarAlteracoes: TLabel
           AlignWithMargins = True
-          Left = 191
-          Top = 6
-          Width = 209
-          Height = 19
+          Left = 1
+          Top = 5
+          Width = 362
+          Height = 26
           Cursor = crHandPoint
-          Margins.Left = 190
-          Margins.Top = 5
-          Margins.Right = 170
-          Margins.Bottom = 6
+          Margins.Left = 0
+          Margins.Top = 4
+          Margins.Right = 0
+          Margins.Bottom = 0
           Align = alClient
           Alignment = taCenter
           Caption = 'Confirmar Altera'#231#245'es'
@@ -3181,93 +2954,162 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          OnClick = btnConfirmarAlteracoesClick
-          OnMouseEnter = btnConfirmarAlteracoesMouseEnter
-          OnMouseLeave = btnConfirmarAlteracoesMouseLeave
-          ExplicitWidth = 130
-          ExplicitHeight = 17
+          ExplicitLeft = 0
+          ExplicitTop = 12
+          ExplicitHeight = 24
         end
       end
-      object edDataNasc: TDateTimePicker
-        Left = 432
-        Top = 56
-        Width = 147
-        Height = 33
-        Date = 45931.000000000000000000
-        Time = 0.641822141202283100
+      object cbNomePaci: TComboBox
+        Left = 8
+        Top = 9
+        Width = 161
+        Height = 23
+        TabOrder = 2
+        TextHint = 'Selecione o Paciente'
+      end
+      object cbNomeProf: TComboBox
+        Left = 8
+        Top = 57
+        Width = 161
+        Height = 23
+        TabOrder = 3
+        TextHint = 'Selecione o Profissional'
+      end
+      object cbNomeProc: TComboBox
+        Left = 216
+        Top = 9
+        Width = 161
+        Height = 23
+        TabOrder = 4
+        TextHint = 'Selecione o Procedimento'
+      end
+      object ComboBox1: TComboBox
+        Left = 418
+        Top = 9
+        Width = 161
+        Height = 23
         TabOrder = 5
-      end
-      object edTelefone: TMaskEdit
-        Left = 432
-        Top = 9
-        Width = 147
-        Height = 32
-        AutoSize = False
-        EditMask = '(00) 00000-0009;1;_'
-        MaxLength = 15
-        TabOrder = 6
-        Text = '(  )      -    '
-        TextHint = 'Digite o Telefone:'
-        OnKeyDown = edTelefoneKeyDown
-      end
-      object edCPF: TMaskEdit
-        Left = 219
-        Top = 9
-        Width = 168
-        Height = 32
-        AutoSize = False
-        EditMask = '000.000.000-00;0;_'
-        MaxLength = 14
-        TabOrder = 7
-        Text = ''
-        TextHint = 'Digite o CPF:'
-        OnKeyDown = edCPFKeyDown
+        TextHint = 'Selecione o Hor'#225'rio'
       end
     end
-    object pnlRestaurar: TPanel
-      Left = 56
-      Top = 107
-      Width = 497
-      Height = 307
+    object Calendar1: TCalendar
+      Left = 7
+      Top = 6
+      Width = 594
+      Height = 441
+      StartOfWeek = 0
+      TabOrder = 2
+    end
+  end
+  object pnlRestaurar: TPanel
+    Left = 63
+    Top = 107
+    Width = 497
+    Height = 307
+    BevelOuter = bvNone
+    Color = 8142341
+    ParentBackground = False
+    TabOrder = 2
+    Visible = False
+    object imgRestore: TImage
+      Left = 4
+      Top = 8
+      Width = 17
+      Height = 17
+      Picture.Data = {
+        0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
+        001008060000001FF3FF61000000097048597300000EC300000EC301C76FA864
+        0000001974455874536F667477617265007777772E696E6B73636170652E6F72
+        679BEE3C1A000001744944415478DA9D92CD2B84511487EFCD476445C68692D5
+        E423564636C8465136A4AC849585B190951AA664C1CAC84A585851B66C28FC01
+        0A25168C64E923B231643CA7F7BC7ADD4CA6B9F5F4BB1FE7FEEE3DF71E6B68E9
+        743A84F4C1B6B5F649C71D50031F7007FBACBD18A7593588217158840A188442
+        2736056B10C3E8C1359843A603C15F7008177A834668877C4842372697990C3E
+        611326097AF61D8909231BD00A37D02CE9BA2904DB2801EBC109E28AF4662DB0
+        CC7AD4372847C6A04463DF6025788380491D72A6A985ACC9A1617284B441AF65
+        5046A71F7638F1314B8325242A88C1149D0598C5209EA5410219F70D06E86CC1
+        2E063DB9A4205577AF5F1AC624F9CFE67AE4F4D7233229DF35AC5FD485492AC3
+        E6628D894082B809DF40CAF7042AE1184658BC7636D71AAF90A406642DF25348
+        1AD080EC41955E4F4E3AD7D49A8C57CA79C6AB4229E52BA38BC153E43DE66108
+        0A9C0CDE611566E4647FF2CF42C2A814E9846A19C22D1CB0F1D58DFD060FCA98
+        8BD8B5066A0000000049454E44AE426082}
+    end
+    object Label6: TLabel
+      AlignWithMargins = True
+      Left = 24
+      Top = 7
+      Width = 58
+      Height = 17
+      Cursor = crHandPoint
+      Margins.Left = 35
+      Margins.Top = 10
+      Margins.Right = 35
+      Margins.Bottom = 10
+      Alignment = taCenter
+      Caption = 'Restaurar'
+      Color = clCream
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -13
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object imgXrestore: TImage
+      Left = 473
+      Top = 7
+      Width = 16
+      Height = 16
+      Cursor = crHandPoint
+      Picture.Data = {
+        0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
+        001008060000001FF3FF61000000097048597300000EC300000EC301C76FA864
+        0000001974455874536F667477617265007777772E696E6B73636170652E6F72
+        679BEE3C1A000001014944415478DA8D92210B0241108577B22282560D163169
+        B52A88184C16FFA141934550412C16412CB62BD74550C42078BE394618CE9DD5
+        81C7CDEDECFB766FE6284992AA736E0AE5A131111D5D20B0BF89C704BA4123C2
+        C201494BEA67A86B41C4BC864AB27460408CA4A2F679211E3347CC8036920554
+        B02086F90AF54936F82017A8073DA1155456B53B34C0015B5257F441F8941754
+        F499F98554C18238CBFC0550902594CB941EE9372BB305E0866D32D7E6E0B977
+        00D89B0031671BA6236DAC86D00FF3439A98B3201430A70D93317A47CC100A99
+        3F0D0BFD270C8890D454E12ADDDEFD31E2880127248D9039003931A08E642E8D
+        1A59E60C6426631DBE013A6F900B7B89246D0000000049454E44AE426082}
+    end
+    object sgRestore: TStringGrid
+      Left = 5
+      Top = 37
+      Width = 489
+      Height = 232
+      ColCount = 7
+      DefaultColWidth = 78
+      FixedCols = 0
+      RowCount = 1
+      FixedRows = 0
+      TabOrder = 0
+    end
+    object btnCRestore: TPanel
+      Left = 4
+      Top = 273
+      Width = 489
+      Height = 30
+      Cursor = crHandPoint
       BevelOuter = bvNone
-      Color = 8142341
+      Color = 16223019
       ParentBackground = False
-      TabOrder = 4
-      Visible = False
-      object imgRestore: TImage
-        Left = 4
-        Top = 8
-        Width = 17
-        Height = 17
-        Picture.Data = {
-          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
-          001008060000001FF3FF61000000097048597300000EC300000EC301C76FA864
-          0000001974455874536F667477617265007777772E696E6B73636170652E6F72
-          679BEE3C1A000001744944415478DA9D92CD2B84511487EFCD476445C68692D5
-          E423564636C8465136A4AC849585B190951AA664C1CAC84A585851B66C28FC01
-          0A25168C64E923B231643CA7F7BC7ADD4CA6B9F5F4BB1FE7FEEE3DF71E6B68E9
-          743A84F4C1B6B5F649C71D50031F7007FBACBD18A7593588217158840A188442
-          2736056B10C3E8C1359843A603C15F7008177A834668877C4842372697990C3E
-          611326097AF61D8909231BD00A37D02CE9BA2904DB2801EBC109E28AF4662DB0
-          CC7AD4372847C6A04463DF6025788380491D72A6A985ACC9A1617284B441AF65
-          5046A71F7638F1314B8325242A88C1149D0598C5209EA5410219F70D06E86CC1
-          2E063DB9A4205577AF5F1AC624F9CFE67AE4F4D7233229DF35AC5FD485492AC3
-          E6628D894082B809DF40CAF7042AE1184658BC7636D71AAF90A406642DF25348
-          1AD080EC41955E4F4E3AD7D49A8C57CA79C6AB4229E52BA38BC153E43DE66108
-          0A9C0CDE611566E4647FF2CF42C2A814E9846A19C22D1CB0F1D58DFD060FCA98
-          8BD8B5066A0000000049454E44AE426082}
-      end
-      object Label6: TLabel
+      TabOrder = 1
+      object lblRestore: TLabel
         AlignWithMargins = True
-        Left = 24
-        Top = 7
-        Width = 58
-        Height = 17
+        Left = 1
+        Top = 5
+        Width = 487
+        Height = 24
         Cursor = crHandPoint
-        Margins.Left = 35
-        Margins.Top = 10
-        Margins.Right = 35
-        Margins.Bottom = 10
+        Margins.Left = 1
+        Margins.Top = 5
+        Margins.Right = 1
+        Margins.Bottom = 1
+        Align = alClient
         Alignment = taCenter
         Caption = 'Restaurar'
         Color = clCream
@@ -3278,88 +3120,9 @@ object PagPacientes: TPagPacientes
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
-      end
-      object imgXrestore: TImage
-        Left = 473
-        Top = 7
-        Width = 16
-        Height = 16
-        Cursor = crHandPoint
-        Picture.Data = {
-          0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
-          001008060000001FF3FF61000000097048597300000EC300000EC301C76FA864
-          0000001974455874536F667477617265007777772E696E6B73636170652E6F72
-          679BEE3C1A000001014944415478DA8D92210B0241108577B22282560D163169
-          B52A88184C16FFA141934550412C16412CB62BD74550C42078BE394618CE9DD5
-          81C7CDEDECFB766FE6284992AA736E0AE5A131111D5D20B0BF89C704BA4123C2
-          C201494BEA67A86B41C4BC864AB27460408CA4A2F679211E3347CC8036920554
-          B02086F90AF54936F82017A8073DA1155456B53B34C0015B5257F441F8941754
-          F499F98554C18238CBFC0550902594CB941EE9372BB305E0866D32D7E6E0B977
-          00D89B0031671BA6236DAC86D00FF3439A98B3201430A70D93317A47CC100A99
-          3F0D0BFD270C8890D454E12ADDDEFD31E2880127248D9039003931A08E642E8D
-          1A59E60C6426631DBE013A6F900B7B89246D0000000049454E44AE426082}
-        OnClick = imgXrestoreClick
-      end
-      object sgRestore: TStringGrid
-        Left = 4
-        Top = 37
-        Width = 489
-        Height = 232
-        ColCount = 7
-        DefaultColWidth = 78
-        FixedCols = 0
-        RowCount = 1
-        FixedRows = 0
-        TabOrder = 0
-        OnDrawCell = sgRestoreDrawCell
-      end
-      object btnCRestore: TPanel
-        Left = 4
-        Top = 273
-        Width = 489
-        Height = 30
-        Cursor = crHandPoint
-        BevelOuter = bvNone
-        Color = 16223019
-        ParentBackground = False
-        TabOrder = 1
-        OnClick = btnCRestoreClick
-        OnMouseEnter = btnCRestoreMouseEnter
-        OnMouseLeave = btnCRestoreMouseLeave
-        object lblRestore: TLabel
-          AlignWithMargins = True
-          Left = 1
-          Top = 5
-          Width = 487
-          Height = 24
-          Cursor = crHandPoint
-          Margins.Left = 1
-          Margins.Top = 5
-          Margins.Right = 1
-          Margins.Bottom = 1
-          Align = alClient
-          Alignment = taCenter
-          Caption = 'Restaurar'
-          Color = clCream
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -13
-          Font.Name = 'Segoe UI'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          OnClick = btnCRestoreClick
-          OnMouseEnter = btnCRestoreMouseEnter
-          OnMouseLeave = btnCRestoreMouseLeave
-          ExplicitWidth = 58
-          ExplicitHeight = 17
-        end
+        ExplicitWidth = 58
+        ExplicitHeight = 17
       end
     end
-  end
-  object NetHTTPClient1: TNetHTTPClient
-    UserAgent = 'Embarcadero URI Client/1.0'
-    Left = 242
-    Top = 561
   end
 end

@@ -162,6 +162,13 @@
         <DCCReference Include="..\src\Model\uProcedimentos.pas"/>
         <DCCReference Include="..\src\Repository\uProcedimentosRepository.pas"/>
         <DCCReference Include="..\src\Controller\uProcedimentosController.pas"/>
+        <DCCReference Include="..\src\View\TelaConsultas.pas">
+            <Form>PagConsultas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\src\Model\uConsultas.pas"/>
+        <DCCReference Include="..\src\Repository\uConsultasRepository.pas"/>
+        <DCCReference Include="..\src\Controller\uConsultasController.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

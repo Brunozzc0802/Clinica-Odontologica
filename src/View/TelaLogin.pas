@@ -9,7 +9,7 @@ uses
         Vcl.Imaging.pngimage,
         Vcl.StdCtrls, Vcl.Imaging.jpeg, Vcl.Buttons, System.ImageList,
         Vcl.ImgList,TelaUsuarios,uUsuarios,uUsuariosController,TelaPacientes,
-        TelaProfissionais,TelaProcedimentos;
+        TelaProfissionais,TelaProcedimentos,TelaConsultas;
 
 type
         TFormLogin = class(TForm)
@@ -93,6 +93,7 @@ type
     procedure pnlPacientesClick(Sender: TObject);
     procedure pnlProfissionaisClick(Sender: TObject);
     procedure pnlProcedimentosClick(Sender: TObject);
+    procedure pnlConsultasClick(Sender: TObject);
     private
       { Private declarations }
     public
@@ -180,6 +181,11 @@ procedure TFormLogin.ImgOlhoFechadoClick(Sender: TObject);
     imgOlhoFechado.Visible := False;
   end;
 
+
+procedure TFormLogin.pnlConsultasClick(Sender: TObject);
+  begin
+    PagConsultas.Show;
+  end;
 
 procedure TFormLogin.pnlConsultasMouseEnter(Sender: TObject);
   begin

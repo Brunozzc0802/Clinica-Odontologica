@@ -2738,6 +2738,7 @@ object PagProcedimentos: TPagProcedimentos
         Color = 8142341
         ParentBackground = False
         TabOrder = 3
+        OnClick = btnDeletarClick
         OnMouseEnter = btnDeletarMouseEnter
         OnMouseLeave = btnDeletarMouseLeave
         object lblDeletarUsu: TLabel
@@ -2817,6 +2818,7 @@ object PagProcedimentos: TPagProcedimentos
         Color = 8142341
         ParentBackground = False
         TabOrder = 5
+        OnClick = btnRestaurarClick
         OnMouseEnter = btnRestaurarMouseEnter
         OnMouseLeave = btnRestaurarMouseLeave
         object lblRestaurar: TLabel
@@ -2917,6 +2919,7 @@ object PagProcedimentos: TPagProcedimentos
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnLimparClick
           OnMouseEnter = btnLimparMouseEnter
           OnMouseLeave = btnLimparMouseLeave
           ExplicitWidth = 43
@@ -2968,6 +2971,7 @@ object PagProcedimentos: TPagProcedimentos
         Color = 8142341
         ParentBackground = False
         TabOrder = 8
+        OnClick = btnSairClick
         OnMouseEnter = btnSairMouseEnter
         OnMouseLeave = btnSairMouseLeave
         object lblSair: TLabel
@@ -2992,6 +2996,7 @@ object PagProcedimentos: TPagProcedimentos
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnSairClick
           OnMouseEnter = btnSairMouseEnter
           OnMouseLeave = btnSairMouseLeave
           ExplicitWidth = 23
@@ -3122,7 +3127,7 @@ object PagProcedimentos: TPagProcedimentos
         Left = 440
         Top = 9
         Width = 136
-        Height = 32
+        Height = 23
         EditMask = '00:00:00;'
         MaxLength = 8
         TabOrder = 4
@@ -3203,13 +3208,14 @@ object PagProcedimentos: TPagProcedimentos
           00D89B0031671BA6236DAC86D00FF3439A98B3201430A70D93317A47CC100A99
           3F0D0BFD270C8890D454E12ADDDEFD31E2880127248D9039003931A08E642E8D
           1A59E60C6426631DBE013A6F900B7B89246D0000000049454E44AE426082}
+        OnClick = imgXrestoreClick
       end
       object sgRestore: TStringGrid
         Left = 5
         Top = 37
         Width = 489
         Height = 232
-        ColCount = 7
+        ColCount = 4
         DefaultColWidth = 78
         FixedCols = 0
         RowCount = 1
@@ -3250,6 +3256,8 @@ object PagProcedimentos: TPagProcedimentos
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnMouseEnter = btnCRestoreMouseEnter
+          OnMouseLeave = btnCRestoreMouseLeave
           ExplicitWidth = 58
           ExplicitHeight = 17
         end

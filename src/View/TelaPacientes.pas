@@ -153,12 +153,10 @@ var
   i, j: Integer;
   temp: string;
 begin
-  // Laço de comparação de todas as linhas (exceto a primeira se for cabeçalho)
   for i := 1 to sgPacientes.RowCount - 2 do
     for j := i + 1 to sgPacientes.RowCount - 1 do
       if StrToIntDef(sgPacientes.Cells[0, i], 0) > StrToIntDef(sgPacientes.Cells[0, j], 0) then
       begin
-        // Troca todas as colunas da linha i com a linha j
         var k: Integer;
         for k := 0 to sgPacientes.ColCount - 1 do
         begin
@@ -311,11 +309,19 @@ end;
 
 
 procedure TPagPacientes.adicionarPaciente;
+  var
+    DataNascimento: TDate;
   begin
     if (EdNomePaciente.Text = '') or (edCPF.Text = '') or (edTelefone.Text = '') or
        (edCEP.Text = '') or (edDataNasc.Checked = False) then
     begin
       ShowMessage('Preencha todos os campos');
+      Exit;
+    end;
+
+    DataNascimento := edDataNasc.Date;
+    if DataNascimento > Date then begin
+      ShowMessage('Data de nascimento inválida!');
       Exit;
     end;
 

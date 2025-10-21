@@ -100,6 +100,12 @@ type
     procedure btnAlterarClick(Sender: TObject);
     procedure btnPesquisarClick(Sender: TObject);
     procedure pesquisarChange(Sender: TObject);
+    procedure btnSairClick(Sender: TObject);
+    procedure OrdenarGrid;
+    procedure btnDeletarClick(Sender: TObject);
+    procedure btnRestaurarClick(Sender: TObject);
+    procedure CarregarInativos;
+    procedure imgXrestoreClick(Sender: TObject);
   private
     ProcedimentoLista: TObjectList<TProcedimento>;
     Controller: TProcedimentosController;
@@ -137,6 +143,32 @@ procedure TPagProcedimentos.FormShow(Sender: TObject);
   begin
     CarregarGrid;
   end;
+
+procedure TPagProcedimentos.imgXrestoreClick(Sender: TObject);
+  begin
+    pnlRestaurar.Visible := False;
+    btnRestaurarNovo.Visible := False;
+    CarregarGrid;
+  end;
+
+procedure TPagProcedimentos.OrdenarGrid;
+  var
+  i, j: Integer;
+  temp: string;
+begin
+  for i := 1 to sgProcedimentos.RowCount - 2 do
+    for j := i + 1 to sgProcedimentos.RowCount - 1 do
+      if StrToIntDef(sgProcedimentos.Cells[0, i], 0) > StrToIntDef(sgProcedimentos.Cells[0, j], 0) then
+      begin
+        var k: Integer;
+        for k := 0 to sgProcedimentos.ColCount - 1 do
+        begin
+          temp := sgProcedimentos.Cells[k, i];
+          sgProcedimentos.Cells[k, i] := sgProcedimentos.Cells[k, j];
+          sgProcedimentos.Cells[k, j] := temp;
+        end;
+      end;
+end;
 
 procedure TPagProcedimentos.pesquisarChange(Sender: TObject);
   begin
@@ -220,7 +252,35 @@ begin
     sgProcedimentos.Cells[2, I + 1] := FloatToStr(ProcedimentoLista[I].Valor);
     sgProcedimentos.Cells[3, I + 1] := TimeToStr(ProcedimentoLista[I].Duracao);
   end;
+  OrdenarGrid;
 end;
+
+procedure TPagProcedimentos.CarregarInativos;
+  var
+  I: Integer;
+  begin
+    try
+      if Assigned(ProcedimentoLista) then
+      ProcedimentoLista.Free;
+      ProcedimentoLista := Controller.BuscarInativos;
+
+      sgRestore.Cells[0,0] := 'ID';
+      sgRestore.Cells[1,0] := 'Nome do Procedimento';
+      sgRestore.Cells[2,0] := 'Valor';
+      sgRestore.Cells[3,0] := 'Duração';
+
+      sgRestore.RowCount := ProcedimentoLista.Count + 1;
+
+      for I := 0 to ProcedimentoLista.Count - 1 do
+      begin
+        sgRestore.Cells[0, I + 1] := IntToStr(ProcedimentoLista[I].Id);
+        sgRestore.Cells[1, I + 1] := ProcedimentoLista[I].Nome;
+        sgRestore.Cells[2, I + 1] := FloatToStr(ProcedimentoLista[I].Valor);
+        sgRestore.Cells[3, I + 1] := TimeToStr(ProcedimentoLista[I].Duracao);
+      end;
+    finally
+    end;
+  end;
 
 procedure TPagProcedimentos.ConfirmarAlteracoes(Sender: TObject);
      begin
@@ -237,6 +297,9 @@ procedure TPagProcedimentos.ConfirmarAlteracoes(Sender: TObject);
           );
           ShowMessage('Alterações feitas com sucesso!');
           btnAlterarNovo.Visible := False;
+          EdNome.Clear;
+          edValor.Clear;
+          edHora.Clear;
           CarregarGrid;
           sgProcedimentos.Row := 0;
           sgProcedimentos.Col := 0;
@@ -282,6 +345,7 @@ procedure TPagProcedimentos.btnAddClick(Sender: TObject);
         EdNome.Clear;
         edValor.Clear;
         edHora.Clear;
+        btnalterarNovo.Visible := False;
         btnAddNovo.Visible := True;
         sgProcedimentos.Row := 0;
         sgProcedimentos.Col := 0;
@@ -421,7 +485,7 @@ procedure TPagProcedimentos.btnConfirmarAlteracoesClick(Sender: TObject);
 
 procedure TPagProcedimentos.btnConfirmarAlteracoesMouseEnter(Sender: TObject);
   begin
-    btnConfirmarAlteracoes.Color := $00F78B2B;
+    btnConfirmarAlteracoes.Color := $00C46106;
   end;
 
 procedure TPagProcedimentos.btnConfirmarAlteracoesMouseLeave(Sender: TObject);
@@ -437,6 +501,28 @@ procedure TPagProcedimentos.btnCRestoreMouseEnter(Sender: TObject);
 procedure TPagProcedimentos.btnCRestoreMouseLeave(Sender: TObject);
   begin
     btnCRestore.Color := $00F8973F;
+  end;
+
+procedure TPagProcedimentos.btnDeletarClick(Sender: TObject);
+  var
+  Id: Integer;
+  begin
+    if btnAlterarNovo.Visible = True then begin
+      btnAlterarNovo.Visible := False;
+      pnlAdd.Visible := False;
+    end;
+
+    Id := StrToIntDef(sgProcedimentos.Cells[0, sgProcedimentos.Row], 0);
+    if Id > 0 then begin
+      Controller.DesativarProcedimento(Id);
+      ShowMessage('Procedimento deletado com sucesso!');
+      CarregarGrid;
+      sgProcedimentos.Row := 0;
+      sgProcedimentos.Col := 0;
+      sgProcedimentos.SetFocus;
+    end else begin
+      ShowMessage('Selecione um procedimento para deletar.');
+    end;
   end;
 
 procedure TPagProcedimentos.btnDeletarMouseEnter(Sender: TObject);
@@ -489,6 +575,40 @@ procedure TPagProcedimentos.btnPesquisarMouseLeave(Sender: TObject);
     btnPesquisar.Color := $007C3E05;
   end;
 
+procedure TPagProcedimentos.btnRestaurarClick(Sender: TObject);
+  begin
+    if pnlAdd.Visible = True then begin
+      pnlAdd.Visible := false;
+    end;
+
+    if btnNovoPesquisar.Visible = true  then begin
+      sgProcedimentos.Top := sgProcedimentos.Top - (pesquisar.Height + 5);
+      sgProcedimentos.Height := sgProcedimentos.Height + (pesquisar.Height + 5);
+      pesquisar.Visible := False;
+      btnNovoPesquisar.Visible := False;
+    end;
+
+    btnRestaurarNovo.Visible := True;
+    CarregarInativos;
+    sgRestore.Row := 0;
+    sgRestore.Col := 0;
+    btnAddNovo.Visible := False;
+    btnAlterarNovo.Visible := false;
+    pnlRestaurar.Visible := True;
+    sgRestore.SetFocus;
+
+    sgProcedimentos.Cells[0,0] := 'ID';
+    sgProcedimentos.Cells[1,0] := 'Nome do Procedimento';
+    sgProcedimentos.Cells[2,0] := 'Valor';
+    sgProcedimentos.Cells[3,0] := 'Duração';
+
+    sgRestore.ColWidths[0] := 50;
+    sgRestore.ColWidths[1] := 160;
+    sgRestore.ColWidths[2] := 105;
+    sgRestore.ColWidths[3] := 110;
+  end;
+
+
 procedure TPagProcedimentos.btnRestaurarMouseEnter(Sender: TObject);
   begin
     btnRestaurar.Color := $00F78B2B;
@@ -497,6 +617,11 @@ procedure TPagProcedimentos.btnRestaurarMouseEnter(Sender: TObject);
 procedure TPagProcedimentos.btnRestaurarMouseLeave(Sender: TObject);
   begin
     btnRestaurar.Color := $007C3E05;
+  end;
+
+procedure TPagProcedimentos.btnSairClick(Sender: TObject);
+  begin
+    Close;
   end;
 
 procedure TPagProcedimentos.btnSairMouseEnter(Sender: TObject);

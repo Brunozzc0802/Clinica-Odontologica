@@ -117,6 +117,7 @@ type
     procedure edCEPKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btnSairClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure OrdenarGrid;
   private
     ProfissionaisLista: TObjectList<TProfissionais>;
     ProfissionalIdalterar: Integer;
@@ -278,6 +279,11 @@ procedure TPagProfissionais.btnAlterarClick(Sender: TObject);
 var
   linha: Integer;
   begin
+
+    if btnaddNovo.Visible = True then  begin
+      btnAddNovo.Visible := False;
+    end;
+
     linha := sgProfissionais.Row;
     if linha <= 0 then
     begin
@@ -379,27 +385,24 @@ procedure TPagProfissionais.btnCRestoreMouseLeave(Sender: TObject);
 procedure TPagProfissionais.btnDeletarClick(Sender: TObject);
 var
   Id: Integer;
-begin
-  if btnAlterarNovo.Visible = True then begin
-    btnAlterarNovo.Visible := False;
-    pnlAdd.Visible := False;
-  end;
+  begin
+    if btnAlterarNovo.Visible = True then begin
+      btnAlterarNovo.Visible := False;
+      pnlAdd.Visible := False;
+    end;
 
-  Id := StrToIntDef(sgProfissionais.Cells[0, sgProfissionais.Row], 0);
-  if Id > 0 then
-  begin
-    Controller.DesativarProfissional(Id);
-    ShowMessage('Profissional deletado com sucesso!');
-    CarregarGrid;
-    sgProfissionais.Row := 0;
-    sgProfissionais.Col := 0;
-    sgProfissionais.SetFocus;
-  end
-  else
-  begin
-    ShowMessage('Selecione um profissional para deletar.');
+    Id := StrToIntDef(sgProfissionais.Cells[0, sgProfissionais.Row], 0);
+    if Id > 0 then begin
+      Controller.DesativarProfissional(Id);
+      ShowMessage('Profissional deletado com sucesso!');
+      CarregarGrid;
+      sgProfissionais.Row := 0;
+      sgProfissionais.Col := 0;
+      sgProfissionais.SetFocus;
+    end else begin
+      ShowMessage('Selecione um profissional para deletar.');
+    end;
   end;
-end;
 
 procedure TPagProfissionais.btnDeletarMouseEnter(Sender: TObject);
   begin
@@ -730,6 +733,25 @@ procedure TPagProfissionais.imgXrestoreClick(Sender: TObject);
     btnRestaurarNovo.Visible := False;
     CarregarGrid;
   end;
+
+procedure TPagProfissionais.OrdenarGrid;
+  var
+  i, j: Integer;
+  temp: string;
+begin
+  for i := 1 to sgProfissionais.RowCount - 2 do
+    for j := i + 1 to sgProfissionais.RowCount - 1 do
+      if StrToIntDef(sgProfissionais.Cells[0, i], 0) > StrToIntDef(sgProfissionais.Cells[0, j], 0) then
+      begin
+        var k: Integer;
+        for k := 0 to sgProfissionais.ColCount - 1 do
+        begin
+          temp := sgProfissionais.Cells[k, i];
+          sgProfissionais.Cells[k, i] := sgProfissionais.Cells[k, j];
+          sgProfissionais.Cells[k, j] := temp;
+        end;
+      end;
+end;
 
 procedure TPagProfissionais.pesquisarChange(Sender: TObject);
   begin

@@ -2526,6 +2526,7 @@ object PagProcedimentos: TPagProcedimentos
       TabOrder = 1
       TextHint = 'Pesquisar'
       Visible = False
+      OnChange = pesquisarChange
     end
     object pnlBotoesDireita: TPanel
       Left = 607
@@ -2646,6 +2647,7 @@ object PagProcedimentos: TPagProcedimentos
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnAlterarClick
           OnMouseEnter = btnAlterarMouseEnter
           OnMouseLeave = btnAlterarMouseLeave
           ExplicitWidth = 42
@@ -2661,6 +2663,7 @@ object PagProcedimentos: TPagProcedimentos
         Color = 8142341
         ParentBackground = False
         TabOrder = 2
+        OnClick = btnPesquisarClick
         OnMouseEnter = btnPesquisarMouseEnter
         OnMouseLeave = btnPesquisarMouseLeave
         object lblPesquisar: TLabel
@@ -2685,6 +2688,7 @@ object PagProcedimentos: TPagProcedimentos
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnPesquisarClick
           ExplicitWidth = 59
           ExplicitHeight = 17
         end
@@ -2760,8 +2764,7 @@ object PagProcedimentos: TPagProcedimentos
           ParentFont = False
           OnMouseEnter = btnDeletarMouseEnter
           OnMouseLeave = btnDeletarMouseLeave
-          ExplicitWidth = 45
-          ExplicitHeight = 17
+          ExplicitTop = 7
         end
       end
       object btnCancelar: TPanel
@@ -2798,6 +2801,7 @@ object PagProcedimentos: TPagProcedimentos
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnCancelarClick
           OnMouseEnter = btnCancelarMouseEnter
           OnMouseLeave = btnCancelarMouseLeave
           ExplicitWidth = 52
@@ -3114,16 +3118,15 @@ object PagProcedimentos: TPagProcedimentos
         Text = '   ,  '
         TextHint = 'Valor:'
       end
-      object edHora: TTimePicker
-        Left = 429
-        Top = 8
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = []
+      object edHora: TMaskEdit
+        Left = 440
+        Top = 9
+        Width = 136
+        Height = 32
+        EditMask = '00:00:00;'
+        MaxLength = 8
         TabOrder = 4
-        TimeFormat = 'HH:mm'
+        Text = '  :  :  '
       end
     end
     object pnlRestaurar: TPanel

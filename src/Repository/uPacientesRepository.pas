@@ -8,7 +8,7 @@ System.Generics.Collections, FireDAC.Comp.Client;
 type
   TPacientesRepository = class
   public
-  function ListarTodos: TObjectList<TPaciente>;
+  function ListarPacientes: TObjectList<TPaciente>;
   function ListarInativos: TObjectList<TPaciente>;
   procedure Adicionar(APaciente: TPaciente);
   procedure Alterar(APaciente: TPaciente);
@@ -97,7 +97,7 @@ begin
   end;
 end;
 
-function TPacientesRepository.ListarTodos: TObjectList<TPaciente>;
+function TPacientesRepository.ListarPacientes: TObjectList<TPaciente>;
 var
   Paciente: TPaciente;
 begin

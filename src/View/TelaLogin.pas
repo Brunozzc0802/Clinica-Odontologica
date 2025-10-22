@@ -15,18 +15,11 @@ type
         TFormLogin = class(TForm)
         pnlLogin: TPanel;
         pnlTelaPrincipal: TPanel;
-        linhaUsuarios: TLabel;
         imgFundo: TImage;
         pnlAzul: TPanel;
         pnlAzulPrincipal: TPanel;
         imgLogoPrincipal: TImage;
         pnlFundoLateral: TPanel;
-        linhaPacientes: TLabel;
-        linhaProfissionais: TLabel;
-        linhaConsultas: TLabel;
-        linhaProcedimentos: TLabel;
-        linhaRelatorios: TLabel;
-        linhaFinal: TLabel;
         imgLogoLogin: TImage;
         pnlFormLogin: TPanel;
         lblRealizeSeu: TLabel;
@@ -64,6 +57,14 @@ type
         lblBemVindo: TLabel;
         Timer1: TTimer;
         lblDataHora: TLabel;
+    Bevel1: TBevel;
+    Bevel3: TBevel;
+    Bevel2: TBevel;
+    Bevel4: TBevel;
+    Bevel6: TBevel;
+    Bevel5: TBevel;
+    Bevel7: TBevel;
+    Bevel8: TBevel;
         procedure FormCreate(Sender: TObject);
         procedure btnEntrarMouseEnter(Sender: TObject);
         procedure btnEntrarMouseLeave(Sender: TObject);

@@ -9,7 +9,7 @@ uses
 type
   TProcedimentoRepository = class
   public
-    function ListarTodos: TObjectList<TProcedimento>;
+    function ListarProcedimentos: TObjectList<TProcedimento>;
     function ListarInativos: TObjectList<TProcedimento>;
     procedure Adicionar(AProcedimento: TProcedimento);
     procedure Alterar(AProcedimento: TProcedimento);
@@ -21,7 +21,7 @@ implementation
 
 { TProcedimentoRepository }
 
-function TProcedimentoRepository.ListarTodos: TObjectList<TProcedimento>;
+function TProcedimentoRepository.ListarProcedimentos: TObjectList<TProcedimento>;
 var
   Procedimento: TProcedimento;
 begin

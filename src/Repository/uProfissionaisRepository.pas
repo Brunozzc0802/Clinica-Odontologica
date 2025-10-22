@@ -9,7 +9,7 @@ uses
 type
   TProfissionaisRepository = class
   public
-    function ListarTodos: TObjectList<TProfissionais>;
+    function ListarProfissionais: TObjectList<TProfissionais>;
     function ListarInativos: TObjectList<TProfissionais>;
     procedure Adicionar(AProfissional: TProfissionais);
     procedure Alterar(AProfissional: TProfissionais);
@@ -93,7 +93,7 @@ begin
 end;
 
 
-function TProfissionaisRepository.ListarTodos: TObjectList<TProfissionais>;
+function TProfissionaisRepository.ListarProfissionais: TObjectList<TProfissionais>;
 var
   Profissional: TProfissionais;
 begin

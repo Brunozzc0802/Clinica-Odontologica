@@ -12,6 +12,8 @@ object PagConsultas: TPagConsultas
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesigned
+  OnDestroy = FormDestroy
+  OnShow = FormShow
   TextHeight = 15
   object cabecalho: TPanel
     Left = -306
@@ -2510,7 +2512,7 @@ object PagConsultas: TPagConsultas
     end
     object pnlBotoesDireita: TPanel
       Left = 607
-      Top = 6
+      Top = 5
       Width = 153
       Height = 441
       Color = 15790320
@@ -2525,6 +2527,9 @@ object PagConsultas: TPagConsultas
         Color = 8142341
         ParentBackground = False
         TabOrder = 0
+        OnClick = btnAddClick
+        OnMouseEnter = btnAddMouseEnter
+        OnMouseLeave = btnAddMouseLeave
         object lblAddUsu: TLabel
           AlignWithMargins = True
           Left = 36
@@ -2547,14 +2552,16 @@ object PagConsultas: TPagConsultas
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnMouseEnter = btnAddMouseEnter
+          OnMouseLeave = btnAddMouseLeave
           ExplicitWidth = 59
           ExplicitHeight = 17
         end
         object btnAddNovo: TPanel
           Left = 0
-          Top = 0
+          Top = 1
           Width = 137
-          Height = 41
+          Height = 44
           Cursor = crHandPoint
           Color = 16223019
           ParentBackground = False
@@ -2565,7 +2572,7 @@ object PagConsultas: TPagConsultas
             Left = 36
             Top = 11
             Width = 65
-            Height = 19
+            Height = 22
             Cursor = crHandPoint
             Margins.Left = 35
             Margins.Top = 10
@@ -2596,6 +2603,8 @@ object PagConsultas: TPagConsultas
         Color = 8142341
         ParentBackground = False
         TabOrder = 1
+        OnMouseEnter = btnAlterarMouseEnter
+        OnMouseLeave = btnAlterarMouseLeave
         object lblAlterarUsu: TLabel
           AlignWithMargins = True
           Left = 36
@@ -2618,6 +2627,8 @@ object PagConsultas: TPagConsultas
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnMouseEnter = btnAlterarMouseEnter
+          OnMouseLeave = btnAlterarMouseLeave
           ExplicitWidth = 42
           ExplicitHeight = 17
         end
@@ -2631,6 +2642,8 @@ object PagConsultas: TPagConsultas
         Color = 8142341
         ParentBackground = False
         TabOrder = 2
+        OnMouseEnter = btnDeletarMouseEnter
+        OnMouseLeave = btnDeletarMouseLeave
         object lblDeletar: TLabel
           AlignWithMargins = True
           Left = 36
@@ -2653,6 +2666,8 @@ object PagConsultas: TPagConsultas
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnMouseEnter = btnDeletarMouseEnter
+          OnMouseLeave = btnDeletarMouseLeave
           ExplicitWidth = 45
           ExplicitHeight = 17
         end
@@ -2666,6 +2681,9 @@ object PagConsultas: TPagConsultas
         Color = 8142341
         ParentBackground = False
         TabOrder = 3
+        OnClick = btnCancelarClick
+        OnMouseEnter = btnCancelarMouseEnter
+        OnMouseLeave = btnCancelarMouseLeave
         object lblCancelarUsu: TLabel
           AlignWithMargins = True
           Left = 36
@@ -2688,6 +2706,8 @@ object PagConsultas: TPagConsultas
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnMouseEnter = btnCancelarMouseEnter
+          OnMouseLeave = btnCancelarMouseLeave
           ExplicitWidth = 52
           ExplicitHeight = 17
         end
@@ -2701,6 +2721,8 @@ object PagConsultas: TPagConsultas
         Color = 8142341
         ParentBackground = False
         TabOrder = 4
+        OnMouseEnter = btnRestaurarMouseEnter
+        OnMouseLeave = btnRestaurarMouseLeave
         object lblRestaurar: TLabel
           AlignWithMargins = True
           Left = 36
@@ -2723,6 +2745,8 @@ object PagConsultas: TPagConsultas
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnMouseEnter = btnRestaurarMouseEnter
+          OnMouseLeave = btnRestaurarMouseLeave
           ExplicitWidth = 58
           ExplicitHeight = 17
         end
@@ -2772,6 +2796,9 @@ object PagConsultas: TPagConsultas
         Color = 8142341
         ParentBackground = False
         TabOrder = 5
+        OnClick = btnLimparClick
+        OnMouseEnter = btnLimparMouseEnter
+        OnMouseLeave = btnLimparMouseLeave
         object lblLimpar: TLabel
           AlignWithMargins = True
           Left = 31
@@ -2794,6 +2821,8 @@ object PagConsultas: TPagConsultas
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnMouseEnter = btnLimparMouseEnter
+          OnMouseLeave = btnLimparMouseLeave
           ExplicitWidth = 43
           ExplicitHeight = 17
         end
@@ -2807,6 +2836,9 @@ object PagConsultas: TPagConsultas
         Color = 8142341
         ParentBackground = False
         TabOrder = 6
+        OnClick = btnSairClick
+        OnMouseEnter = btnSairMouseEnter
+        OnMouseLeave = btnSairMouseLeave
         object lblSair: TLabel
           AlignWithMargins = True
           Left = 31
@@ -2829,6 +2861,8 @@ object PagConsultas: TPagConsultas
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnMouseEnter = btnSairMouseEnter
+          OnMouseLeave = btnSairMouseLeave
           ExplicitWidth = 23
           ExplicitHeight = 17
         end
@@ -2872,9 +2906,9 @@ object PagConsultas: TPagConsultas
     end
     object pnlAdd: TPanel
       Left = 7
-      Top = 467
+      Top = 458
       Width = 594
-      Height = 110
+      Height = 111
       Color = 15790320
       ParentBackground = False
       TabOrder = 1
@@ -2884,7 +2918,7 @@ object PagConsultas: TPagConsultas
         Left = 216
         Top = 52
         Width = 362
-        Height = 29
+        Height = 28
         Margins.Left = 10
         Margins.Top = 65
         Margins.Right = 13
@@ -2892,17 +2926,15 @@ object PagConsultas: TPagConsultas
         Color = 8142341
         ParentBackground = False
         TabOrder = 0
+        OnMouseEnter = btnadicionarMouseEnter
+        OnMouseLeave = btnadicionarMouseLeave
         object lblAddpaciente: TLabel
           AlignWithMargins = True
-          Left = 191
-          Top = 7
-          Width = 0
-          Height = 14
+          Left = 4
+          Top = 4
+          Width = 354
+          Height = 20
           Cursor = crHandPoint
-          Margins.Left = 190
-          Margins.Top = 6
-          Margins.Right = 170
-          Margins.Bottom = 7
           Align = alClient
           Alignment = taCenter
           Caption = 'Adicionar Paciente'
@@ -2914,33 +2946,69 @@ object PagConsultas: TPagConsultas
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnMouseEnter = btnadicionarMouseEnter
+          OnMouseLeave = btnadicionarMouseLeave
           ExplicitWidth = 115
           ExplicitHeight = 17
         end
       end
+      object cbNomePaci: TComboBox
+        Left = 8
+        Top = 9
+        Width = 161
+        Height = 23
+        TabOrder = 1
+        TextHint = 'Selecione o Paciente'
+      end
+      object cbNomeProf: TComboBox
+        Left = 8
+        Top = 56
+        Width = 161
+        Height = 23
+        TabOrder = 2
+        TextHint = 'Selecione o Profissional'
+        OnChange = cbNomeProfChange
+      end
+      object cbNomeProc: TComboBox
+        Left = 216
+        Top = 9
+        Width = 161
+        Height = 23
+        TabOrder = 3
+        TextHint = 'Selecione o Procedimento'
+      end
+      object cbHorario: TComboBox
+        Left = 418
+        Top = 9
+        Width = 161
+        Height = 23
+        TabOrder = 4
+        TextHint = 'Selecione o Hor'#225'rio'
+      end
       object btnConfirmarAlteracoes: TPanel
         AlignWithMargins = True
-        Left = 215
+        Left = 216
         Top = 52
-        Width = 364
-        Height = 32
+        Width = 362
+        Height = 28
         Margins.Left = 10
         Margins.Top = 75
         Margins.Right = 13
         Margins.Bottom = 36
         Color = 8142341
         ParentBackground = False
-        TabOrder = 1
+        TabOrder = 5
         Visible = False
+        OnMouseEnter = btnConfirmarAlteracoesMouseEnter
+        OnMouseLeave = btnConfirmarAlteracoesMouseLeave
         object lblConfirmarAlteracoes: TLabel
           AlignWithMargins = True
           Left = 1
-          Top = 5
-          Width = 362
-          Height = 26
+          Top = 4
+          Width = 360
+          Height = 23
           Cursor = crHandPoint
           Margins.Left = 0
-          Margins.Top = 4
           Margins.Right = 0
           Margins.Bottom = 0
           Align = alClient
@@ -2954,42 +3022,11 @@ object PagConsultas: TPagConsultas
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
-          ExplicitLeft = 0
-          ExplicitTop = 12
-          ExplicitHeight = 24
+          OnMouseEnter = btnConfirmarAlteracoesMouseEnter
+          OnMouseLeave = btnConfirmarAlteracoesMouseLeave
+          ExplicitWidth = 130
+          ExplicitHeight = 17
         end
-      end
-      object cbNomePaci: TComboBox
-        Left = 8
-        Top = 9
-        Width = 161
-        Height = 23
-        TabOrder = 2
-        TextHint = 'Selecione o Paciente'
-      end
-      object cbNomeProf: TComboBox
-        Left = 8
-        Top = 57
-        Width = 161
-        Height = 23
-        TabOrder = 3
-        TextHint = 'Selecione o Profissional'
-      end
-      object cbNomeProc: TComboBox
-        Left = 216
-        Top = 9
-        Width = 161
-        Height = 23
-        TabOrder = 4
-        TextHint = 'Selecione o Procedimento'
-      end
-      object ComboBox1: TComboBox
-        Left = 418
-        Top = 9
-        Width = 161
-        Height = 23
-        TabOrder = 5
-        TextHint = 'Selecione o Hor'#225'rio'
       end
     end
     object Calendar1: TCalendar
@@ -3002,8 +3039,8 @@ object PagConsultas: TPagConsultas
     end
   end
   object pnlRestaurar: TPanel
-    Left = 63
-    Top = 107
+    Left = 55
+    Top = 108
     Width = 497
     Height = 307
     BevelOuter = bvNone

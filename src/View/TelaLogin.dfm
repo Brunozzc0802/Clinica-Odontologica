@@ -3354,6 +3354,7 @@ object FormLogin: TFormLogin
       Color = 13204758
       ParentBackground = False
       TabOrder = 0
+      ExplicitLeft = 282
       DesignSize = (
         874
         870)
@@ -5087,6 +5088,13 @@ object FormLogin: TFormLogin
         ExplicitLeft = 77
         ExplicitWidth = 722
       end
+      object Bevel8: TBevel
+        Left = 1
+        Top = 0
+        Width = 65
+        Height = 723
+        Shape = bsLeftLine
+      end
       object footerPrincipal: TPanel
         Left = 0
         Top = 836
@@ -5132,181 +5140,69 @@ object FormLogin: TFormLogin
       end
     end
     object pnlFundoLateral: TPanel
-      Left = 4
+      Left = -6
       Top = 2
-      Width = 273
+      Width = 283
       Height = 870
       Anchors = [akLeft, akTop, akBottom]
       Color = 8142341
       ParentBackground = False
       TabOrder = 1
       Visible = False
-      object linhaUsuarios: TLabel
-        AlignWithMargins = True
-        Left = 2
-        Top = 66
-        Width = 269
-        Height = 23
-        Margins.Left = 1
-        Margins.Top = 65
-        Margins.Right = 1
-        Margins.Bottom = 780
-        Align = alClient
-        Caption = 
-          '----------------------------------------------------------------' +
-          '----------------------'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-        ExplicitWidth = 516
-        ExplicitHeight = 21
+      object Bevel1: TBevel
+        Left = -2
+        Top = 562
+        Width = 285
+        Height = 12
+        Shape = bsBottomLine
       end
-      object linhaPacientes: TLabel
-        AlignWithMargins = True
-        Left = 2
-        Top = 148
-        Width = 269
-        Height = 51
-        Margins.Left = 1
-        Margins.Top = 147
-        Margins.Right = 1
-        Margins.Bottom = 670
-        Align = alClient
-        Caption = 
-          '----------------------------------------------------------------' +
-          '---------------------'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-        ExplicitWidth = 510
-        ExplicitHeight = 21
+      object Bevel3: TBevel
+        Left = 0
+        Top = 482
+        Width = 285
+        Height = 12
+        Shape = bsBottomLine
       end
-      object linhaConsultas: TLabel
-        AlignWithMargins = True
-        Left = 2
-        Top = 320
-        Width = 269
-        Height = 59
-        Margins.Left = 1
-        Margins.Top = 319
-        Margins.Right = 1
-        Margins.Bottom = 490
-        Align = alClient
-        Caption = 
-          '----------------------------------------------------------------' +
-          '---------------------'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-        ExplicitWidth = 510
-        ExplicitHeight = 21
+      object Bevel2: TBevel
+        Left = 0
+        Top = 398
+        Width = 285
+        Height = 15
+        Shape = bsBottomLine
       end
-      object linhaProcedimentos: TLabel
-        AlignWithMargins = True
-        Left = 2
-        Top = 401
-        Width = 269
-        Height = 48
-        Margins.Left = 1
-        Margins.Top = 400
-        Margins.Right = 1
-        Margins.Bottom = 420
-        Align = alClient
-        Caption = 
-          '----------------------------------------------------------------' +
-          '---------------------'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-        ExplicitWidth = 510
-        ExplicitHeight = 21
+      object Bevel4: TBevel
+        Left = -2
+        Top = 327
+        Width = 285
+        Height = 7
+        Shape = bsBottomLine
       end
-      object linhaRelatorios: TLabel
-        AlignWithMargins = True
-        Left = 2
-        Top = 481
-        Width = 269
-        Height = 58
-        Margins.Left = 1
-        Margins.Top = 480
-        Margins.Right = 1
-        Margins.Bottom = 330
-        Align = alClient
-        Caption = 
-          '----------------------------------------------------------------' +
-          '---------------------'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-        ExplicitWidth = 510
-        ExplicitHeight = 21
+      object Bevel6: TBevel
+        Left = 4
+        Top = 125
+        Width = 279
+        Height = 39
+        Shape = bsBottomLine
       end
-      object linhaFinal: TLabel
-        AlignWithMargins = True
-        Left = 2
-        Top = 556
-        Width = 269
-        Height = 33
-        Margins.Left = 1
-        Margins.Top = 555
-        Margins.Right = 1
-        Margins.Bottom = 280
-        Align = alClient
-        Caption = 
-          '----------------------------------------------------------------' +
-          '---------------------'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-        ExplicitWidth = 510
-        ExplicitHeight = 21
+      object Bevel5: TBevel
+        Left = -2
+        Top = 229
+        Width = 282
+        Height = 12
+        Shape = bsBottomLine
       end
-      object linhaProfissionais: TLabel
-        AlignWithMargins = True
-        Left = 2
-        Top = 232
-        Width = 269
-        Height = 57
-        Margins.Left = 1
-        Margins.Top = 231
-        Margins.Right = 1
-        Margins.Bottom = 580
-        Align = alClient
-        Caption = 
-          '----------------------------------------------------------------' +
-          '---------------------'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        ParentFont = False
-        ExplicitWidth = 510
-        ExplicitHeight = 21
+      object Bevel7: TBevel
+        Left = 0
+        Top = 60
+        Width = 280
+        Height = 19
+        Shape = bsBottomLine
       end
       object pnlUser: TPanel
         Left = -4
         Top = 4
         Width = 302
-        Height = 72
+        Height = 71
         Cursor = crHandPoint
         BevelOuter = bvNone
         Color = 8142341
@@ -5316,8 +5212,8 @@ object FormLogin: TFormLogin
         OnMouseEnter = pnlUserMouseEnter
         OnMouseLeave = pnlUserMouseLeave
         object imgUsuario: TImage
-          Left = 5
-          Top = 5
+          Left = 12
+          Top = 8
           Width = 65
           Height = 64
           Cursor = crHandPoint
@@ -5536,10 +5432,10 @@ object FormLogin: TFormLogin
         end
       end
       object pnlProfissionais: TPanel
-        Left = 2
-        Top = 163
+        Left = 0
+        Top = 247
         Width = 302
-        Height = 78
+        Height = 71
         Cursor = crHandPoint
         BevelOuter = bvNone
         Color = 8142341
@@ -5553,7 +5449,7 @@ object FormLogin: TFormLogin
           Left = 100
           Top = 25
           Width = 129
-          Height = 28
+          Height = 21
           Cursor = crHandPoint
           Margins.Left = 100
           Margins.Top = 25
@@ -5705,10 +5601,10 @@ object FormLogin: TFormLogin
         end
       end
       object pnlConsultas: TPanel
-        Left = 2
-        Top = 247
-        Width = 302
-        Height = 82
+        Left = 0
+        Top = 170
+        Width = 300
+        Height = 67
         Cursor = crHandPoint
         BevelOuter = bvNone
         Color = 8142341
@@ -5719,8 +5615,8 @@ object FormLogin: TFormLogin
         OnMouseLeave = pnlConsultasMouseLeave
         object lblConsultas: TLabel
           AlignWithMargins = True
-          Left = 100
-          Top = 27
+          Left = 102
+          Top = 20
           Width = 86
           Height = 25
           Cursor = crHandPoint
@@ -5742,7 +5638,7 @@ object FormLogin: TFormLogin
         end
         object imgConsultas: TImage
           Left = 4
-          Top = 9
+          Top = 0
           Width = 66
           Height = 64
           Cursor = crHandPoint
@@ -6015,7 +5911,7 @@ object FormLogin: TFormLogin
         end
       end
       object pnlRelatorios: TPanel
-        Left = 2
+        Left = 0
         Top = 416
         Width = 302
         Height = 73

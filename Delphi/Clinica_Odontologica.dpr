@@ -11,12 +11,6 @@ uses
   TelaPacientes in '..\src\View\TelaPacientes.pas' {PagPacientes},
   uPacientes in '..\src\Model\uPacientes.pas',
   uPacientesRepository in '..\src\Repository\uPacientesRepository.pas',
-  {$R}
-  {$R}
-  {$R}
-  {$R}
-  {$R}
-  {$R}
   uPacientesController in '..\src\Controller\uPacientesController.pas' {$R *.res},
   TelaProfissionais in '..\src\View\TelaProfissionais.pas' {PagProfissionais},
   uProfissionais in '..\src\Model\uProfissionais.pas',

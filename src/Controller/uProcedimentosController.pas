@@ -71,7 +71,7 @@ var
   begin
     RepoProc := TProcedimentoRepository.Create;
     try
-      Result := RepoProc.ListarTodos;
+      Result := RepoProc.ListarProcedimentos;
     finally
       RepoProc.Free;
     end;

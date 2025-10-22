@@ -90,7 +90,7 @@ var
 begin
   RepoProf := TProfissionaisRepository.Create;
   try
-    Result := RepoProf.ListarTodos;
+    Result := RepoProf.ListarProfissionais;
   finally
     RepoProf.Free;
   end;

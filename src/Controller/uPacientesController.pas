@@ -90,7 +90,7 @@ var
 begin
   RepoPaci := TPacientesRepository.Create;
   try
-    Result := RepoPaci.ListarTodos;
+    Result := RepoPaci.ListarPacientes;
   finally
     RepoPaci.Free;
   end;

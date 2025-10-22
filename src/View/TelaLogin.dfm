@@ -3354,7 +3354,6 @@ object FormLogin: TFormLogin
       Color = 13204758
       ParentBackground = False
       TabOrder = 0
-      ExplicitLeft = 282
       DesignSize = (
         874
         870)
@@ -5186,7 +5185,7 @@ object FormLogin: TFormLogin
       end
       object Bevel5: TBevel
         Left = -2
-        Top = 229
+        Top = 240
         Width = 282
         Height = 12
         Shape = bsBottomLine
@@ -5212,7 +5211,7 @@ object FormLogin: TFormLogin
         OnMouseEnter = pnlUserMouseEnter
         OnMouseLeave = pnlUserMouseLeave
         object imgUsuario: TImage
-          Left = 12
+          Left = 15
           Top = 8
           Width = 65
           Height = 64
@@ -5372,7 +5371,7 @@ object FormLogin: TFormLogin
           ExplicitHeight = 25
         end
         object imgPacientes: TImage
-          Left = 5
+          Left = 10
           Top = 7
           Width = 64
           Height = 64
@@ -5432,10 +5431,10 @@ object FormLogin: TFormLogin
         end
       end
       object pnlProfissionais: TPanel
-        Left = 0
-        Top = 247
+        Left = -2
+        Top = 170
         Width = 302
-        Height = 71
+        Height = 78
         Cursor = crHandPoint
         BevelOuter = bvNone
         Color = 8142341
@@ -5449,7 +5448,7 @@ object FormLogin: TFormLogin
           Left = 100
           Top = 25
           Width = 129
-          Height = 21
+          Height = 28
           Cursor = crHandPoint
           Margins.Left = 100
           Margins.Top = 25
@@ -5468,12 +5467,13 @@ object FormLogin: TFormLogin
           OnClick = pnlProfissionaisClick
           OnMouseEnter = pnlProfissionaisMouseEnter
           OnMouseLeave = pnlProfissionaisMouseLeave
-          ExplicitWidth = 112
-          ExplicitHeight = 25
+          ExplicitLeft = 94
+          ExplicitTop = 49
+          ExplicitHeight = 21
         end
         object imgProfissionais: TImage
-          Left = 6
-          Top = 7
+          Left = 15
+          Top = 5
           Width = 65
           Height = 64
           Cursor = crHandPoint
@@ -5602,7 +5602,7 @@ object FormLogin: TFormLogin
       end
       object pnlConsultas: TPanel
         Left = 0
-        Top = 170
+        Top = 254
         Width = 300
         Height = 67
         Cursor = crHandPoint
@@ -5637,7 +5637,7 @@ object FormLogin: TFormLogin
           OnMouseLeave = pnlConsultasMouseLeave
         end
         object imgConsultas: TImage
-          Left = 4
+          Left = 10
           Top = 0
           Width = 66
           Height = 64
@@ -5743,7 +5743,7 @@ object FormLogin: TFormLogin
           OnMouseLeave = pnlProcedimentosMouseLeave
         end
         object imgProcedimentos: TImage
-          Left = 0
+          Left = 5
           Top = 5
           Width = 65
           Height = 64
@@ -5864,7 +5864,7 @@ object FormLogin: TFormLogin
           OnMouseLeave = pnlEncerrarSistemaMouseLeave
         end
         object imgEncerrarSistema: TImage
-          Left = 6
+          Left = 10
           Top = 3
           Width = 64
           Height = 64
@@ -5949,7 +5949,7 @@ object FormLogin: TFormLogin
           ExplicitHeight = 25
         end
         object imgRelatorios: TImage
-          Left = 0
+          Left = 5
           Top = 4
           Width = 65
           Height = 64

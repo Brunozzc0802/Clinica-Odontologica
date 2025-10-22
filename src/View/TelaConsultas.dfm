@@ -2976,6 +2976,7 @@ object PagConsultas: TPagConsultas
         Height = 23
         TabOrder = 3
         TextHint = 'Selecione o Procedimento'
+        OnChange = cbNomeProcChange
       end
       object cbHorario: TComboBox
         Left = 418
@@ -2983,7 +2984,7 @@ object PagConsultas: TPagConsultas
         Width = 161
         Height = 23
         TabOrder = 4
-        TextHint = 'Selecione o Hor'#225'rio'
+        TextHint = 'Hor'#225'rios Disponiveis'
       end
       object btnConfirmarAlteracoes: TPanel
         AlignWithMargins = True
@@ -3036,6 +3037,7 @@ object PagConsultas: TPagConsultas
       Height = 441
       StartOfWeek = 0
       TabOrder = 2
+      OnChange = Calendar1Change
     end
   end
   object pnlRestaurar: TPanel

@@ -85,6 +85,8 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure AtualizarHorariosDisponiveis;
     procedure cbNomeProfChange(Sender: TObject);
+    procedure cbNomeProcChange(Sender: TObject);
+    procedure Calendar1Change(Sender: TObject);
   private
     ConsultaController: TConsultaController;
     { Private declarations }
@@ -105,27 +107,27 @@ procedure TPagConsultas.AtualizarHorariosDisponiveis;
   Profissional: TProfissionais;
   Procedimento: TProcedimento;
   i: Integer;
-  begin
-    cbHorario.Clear;
+begin
+  cbHorario.Clear;
 
-    if (cbNomeProf.ItemIndex = -1) or (cbNomeProc.ItemIndex = -1) then
-      Exit;
+  if (cbNomeProf.ItemIndex = -1) or (cbNomeProc.ItemIndex = -1) then
+    Exit;
 
-    Profissional := TProfissionais(cbNomeProf.Items.Objects[cbNomeProf.ItemIndex]);
-    Procedimento := TProcedimento(cbNomeProc.Items.Objects[cbNomeProc.ItemIndex]);
+  Profissional := TProfissionais(cbNomeProf.Items.Objects[cbNomeProf.ItemIndex]);
+  Procedimento := TProcedimento(cbNomeProc.Items.Objects[cbNomeProc.ItemIndex]);
 
-    Horarios := ConsultaController.ListarHorariosDisponiveis(
-      Profissional.Id,
-      Procedimento.Id,
-      Calendar1.CalendarDate
-    );
-    try
-      for i := 0 to Horarios.Count - 1 do
-        cbHorario.Items.Add(FormatDateTime('hh:nn', Horarios[i]));
-    finally
-      Horarios.Free;
-    end;
+  Horarios := ConsultaController.ListarHorariosDisponiveis(
+    Profissional.Id,
+    Procedimento.Id,
+    Calendar1.CalendarDate
+  );
+  try
+    for i := 0 to Horarios.Count - 1 do
+      cbHorario.Items.Add(FormatDateTime('hh:nn', Horarios[i]));
+  finally
+    Horarios.Free;
   end;
+end;
 
 procedure TPagConsultas.btnAddClick(Sender: TObject);
   begin
@@ -270,9 +272,19 @@ procedure TPagConsultas.btnXClick(Sender: TObject);
     Close;
   end;
 
+procedure TPagConsultas.Calendar1Change(Sender: TObject);
+  begin
+    AtualizarHorariosDisponiveis;
+  end;
+
+procedure TPagConsultas.cbNomeProcChange(Sender: TObject);
+  begin
+    AtualizarHorariosDisponiveis;
+  end;
+
 procedure TPagConsultas.cbNomeProfChange(Sender: TObject);
   begin
-//    cbNomeProf.OnChange := AtualizarHorariosDisponiveis;
+    AtualizarHorariosDisponiveis;
   end;
 
 procedure TPagConsultas.FormDestroy(Sender: TObject);

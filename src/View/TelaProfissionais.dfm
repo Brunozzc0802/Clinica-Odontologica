@@ -3213,7 +3213,8 @@ object PagProfissionais: TPagProfissionais
           OnClick = btnCRestoreClick
           OnMouseEnter = btnCRestoreMouseEnter
           OnMouseLeave = btnCRestoreMouseLeave
-          ExplicitTop = 4
+          ExplicitWidth = 58
+          ExplicitHeight = 17
         end
       end
     end

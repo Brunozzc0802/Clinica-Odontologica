@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.Mask, Vcl.WinXCtrls, Vcl.Grids, Vcl.ComCtrls,
   Vcl.Samples.Calendar, uConsultasController, uConsultas, System.Generics.Collections,
-  uPacientes, uProfissionais, uProcedimentos;
+  uPacientes, uProfissionais, uProcedimentos, Vcl.WinXCalendars;
 
 type
   TPagConsultas = class(TForm)
@@ -53,10 +53,12 @@ type
     cbNomePaci: TComboBox;
     cbNomeProf: TComboBox;
     cbNomeProc: TComboBox;
-    Calendar1: TCalendar;
     cbHorario: TComboBox;
     btnConfirmarAlteracoes: TPanel;
     lblConfirmarAlteracoes: TLabel;
+    Calendar1: TCalendarView;
+    DateTimePicker1: TDateTimePicker;
+    MonthCalendar1: TMonthCalendar;
     procedure btnXClick(Sender: TObject);
     procedure btnAddClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
@@ -83,10 +85,6 @@ type
     procedure PreencherCombos;
     procedure FormShow(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure AtualizarHorariosDisponiveis;
-    procedure cbNomeProfChange(Sender: TObject);
-    procedure cbNomeProcChange(Sender: TObject);
-    procedure Calendar1Change(Sender: TObject);
   private
     ConsultaController: TConsultaController;
     { Private declarations }
@@ -101,40 +99,20 @@ implementation
 
 {$R *.dfm}
 
-procedure TPagConsultas.AtualizarHorariosDisponiveis;
-  var
-  Horarios: TList<TTime>;
-  Profissional: TProfissionais;
-  Procedimento: TProcedimento;
-  i: Integer;
-begin
-  cbHorario.Clear;
-
-  if (cbNomeProf.ItemIndex = -1) or (cbNomeProc.ItemIndex = -1) then
-    Exit;
-
-  Profissional := TProfissionais(cbNomeProf.Items.Objects[cbNomeProf.ItemIndex]);
-  Procedimento := TProcedimento(cbNomeProc.Items.Objects[cbNomeProc.ItemIndex]);
-
-  Horarios := ConsultaController.ListarHorariosDisponiveis(
-    Profissional.Id,
-    Procedimento.Id,
-    Calendar1.CalendarDate
-  );
-  try
-    for i := 0 to Horarios.Count - 1 do
-      cbHorario.Items.Add(FormatDateTime('hh:nn', Horarios[i]));
-  finally
-    Horarios.Free;
-  end;
-end;
-
 procedure TPagConsultas.btnAddClick(Sender: TObject);
   begin
-    if pnlRestaurar.Visible = true then begin
-      pnlRestaurar.Visible := False;
-      btnRestaurarNovo.Visible := false;
-    end;
+
+      if Calendar1.Date > 0 then begin
+        DateTimePicker1.Date := Calendar1.Date;
+        Calendar1.Enabled := False;
+      end else begin
+            ShowMessage('Selecione um dia no calendário primeiro!');
+          end;
+
+      if pnlRestaurar.Visible = true then begin
+        pnlRestaurar.Visible := False;
+        btnRestaurarNovo.Visible := false;
+      end;
 
     if (btnAlterarNovo.Visible = True) then begin
         cbNomePaci.ItemIndex := -1;
@@ -185,6 +163,7 @@ procedure TPagConsultas.btnAlterarMouseLeave(Sender: TObject);
 
 procedure TPagConsultas.btnCancelarClick(Sender: TObject);
   begin
+      calendar1.Enabled := True;
       pnlAdd.Visible := False;
       btnAddNovo.Visible := False;
       btnRestaurarNovo.Visible := False;
@@ -272,20 +251,6 @@ procedure TPagConsultas.btnXClick(Sender: TObject);
     Close;
   end;
 
-procedure TPagConsultas.Calendar1Change(Sender: TObject);
-  begin
-    AtualizarHorariosDisponiveis;
-  end;
-
-procedure TPagConsultas.cbNomeProcChange(Sender: TObject);
-  begin
-    AtualizarHorariosDisponiveis;
-  end;
-
-procedure TPagConsultas.cbNomeProfChange(Sender: TObject);
-  begin
-    AtualizarHorariosDisponiveis;
-  end;
 
 procedure TPagConsultas.FormDestroy(Sender: TObject);
   begin

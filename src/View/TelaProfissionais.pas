@@ -191,6 +191,7 @@ procedure TPagProfissionais.adicionarProf;
         edEndereco.Text,
         edEmail.Text);
         ShowMessage('Profissional adicionado com sucesso!');
+        btnAddNovo.Visible := False;
         CarregarGrid;
         edNome.clear;
         edCPF.clear;

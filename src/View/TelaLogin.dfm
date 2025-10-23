@@ -5150,48 +5150,48 @@ object FormLogin: TFormLogin
       Visible = False
       object Bevel1: TBevel
         Left = -2
-        Top = 562
+        Top = 548
         Width = 285
         Height = 12
         Shape = bsBottomLine
       end
       object Bevel3: TBevel
         Left = 0
-        Top = 482
+        Top = 466
         Width = 285
         Height = 12
         Shape = bsBottomLine
       end
       object Bevel2: TBevel
         Left = 0
-        Top = 398
+        Top = 383
         Width = 285
         Height = 15
         Shape = bsBottomLine
       end
       object Bevel4: TBevel
         Left = -2
-        Top = 327
+        Top = 309
         Width = 285
         Height = 7
         Shape = bsBottomLine
       end
       object Bevel6: TBevel
         Left = 4
-        Top = 125
+        Top = 119
         Width = 279
         Height = 39
         Shape = bsBottomLine
       end
       object Bevel5: TBevel
-        Left = -2
-        Top = 240
+        Left = 5
+        Top = 225
         Width = 282
         Height = 12
         Shape = bsBottomLine
       end
       object Bevel7: TBevel
-        Left = 0
+        Left = 5
         Top = 60
         Width = 280
         Height = 19
@@ -5199,9 +5199,9 @@ object FormLogin: TFormLogin
       end
       object pnlUser: TPanel
         Left = -4
-        Top = 4
+        Top = 2
         Width = 302
-        Height = 71
+        Height = 73
         Cursor = crHandPoint
         BevelOuter = bvNone
         Color = 8142341
@@ -5212,7 +5212,7 @@ object FormLogin: TFormLogin
         OnMouseLeave = pnlUserMouseLeave
         object imgUsuario: TImage
           Left = 15
-          Top = 8
+          Top = 5
           Width = 65
           Height = 64
           Cursor = crHandPoint
@@ -5332,9 +5332,9 @@ object FormLogin: TFormLogin
       end
       object pnlPacientes: TPanel
         Left = 1
-        Top = 82
+        Top = 80
         Width = 302
-        Height = 75
+        Height = 74
         Cursor = crHandPoint
         BevelOuter = bvNone
         Color = 8142341
@@ -5346,12 +5346,12 @@ object FormLogin: TFormLogin
         object lblPacientes: TLabel
           AlignWithMargins = True
           Left = 100
-          Top = 27
+          Top = 23
           Width = 94
-          Height = 23
+          Height = 26
           Cursor = crHandPoint
           Margins.Left = 100
-          Margins.Top = 27
+          Margins.Top = 23
           Margins.Right = 108
           Margins.Bottom = 25
           Align = alClient
@@ -5367,11 +5367,12 @@ object FormLogin: TFormLogin
           OnClick = pnlPacientesClick
           OnMouseEnter = pnlPacientesMouseEnter
           OnMouseLeave = pnlPacientesMouseLeave
-          ExplicitWidth = 83
-          ExplicitHeight = 25
+          ExplicitLeft = 97
+          ExplicitTop = 25
+          ExplicitHeight = 23
         end
         object imgPacientes: TImage
-          Left = 10
+          Left = 6
           Top = 7
           Width = 64
           Height = 64
@@ -5432,9 +5433,9 @@ object FormLogin: TFormLogin
       end
       object pnlProfissionais: TPanel
         Left = -2
-        Top = 170
+        Top = 160
         Width = 302
-        Height = 78
+        Height = 73
         Cursor = crHandPoint
         BevelOuter = bvNone
         Color = 8142341
@@ -5445,13 +5446,13 @@ object FormLogin: TFormLogin
         OnMouseLeave = pnlProfissionaisMouseLeave
         object lblProfissionais: TLabel
           AlignWithMargins = True
-          Left = 100
-          Top = 25
-          Width = 129
-          Height = 28
+          Left = 102
+          Top = 22
+          Width = 127
+          Height = 26
           Cursor = crHandPoint
-          Margins.Left = 100
-          Margins.Top = 25
+          Margins.Left = 102
+          Margins.Top = 22
           Margins.Right = 73
           Margins.Bottom = 25
           Align = alClient
@@ -5467,12 +5468,12 @@ object FormLogin: TFormLogin
           OnClick = pnlProfissionaisClick
           OnMouseEnter = pnlProfissionaisMouseEnter
           OnMouseLeave = pnlProfissionaisMouseLeave
-          ExplicitLeft = 94
-          ExplicitTop = 49
+          ExplicitTop = 19
+          ExplicitWidth = 128
           ExplicitHeight = 21
         end
         object imgProfissionais: TImage
-          Left = 15
+          Left = 13
           Top = 5
           Width = 65
           Height = 64
@@ -5602,9 +5603,9 @@ object FormLogin: TFormLogin
       end
       object pnlConsultas: TPanel
         Left = 0
-        Top = 254
+        Top = 237
         Width = 300
-        Height = 67
+        Height = 75
         Cursor = crHandPoint
         BevelOuter = bvNone
         Color = 8142341
@@ -5615,8 +5616,8 @@ object FormLogin: TFormLogin
         OnMouseLeave = pnlConsultasMouseLeave
         object lblConsultas: TLabel
           AlignWithMargins = True
-          Left = 102
-          Top = 20
+          Left = 100
+          Top = 23
           Width = 86
           Height = 25
           Cursor = crHandPoint
@@ -5638,9 +5639,9 @@ object FormLogin: TFormLogin
         end
         object imgConsultas: TImage
           Left = 10
-          Top = 0
+          Top = 5
           Width = 66
-          Height = 64
+          Height = 67
           Cursor = crHandPoint
           Picture.Data = {
             0954506E67496D61676589504E470D0A1A0A0000000D49484452000000400000
@@ -5707,9 +5708,9 @@ object FormLogin: TFormLogin
       end
       object pnlProcedimentos: TPanel
         Left = 1
-        Top = 335
+        Top = 318
         Width = 303
-        Height = 75
+        Height = 76
         Cursor = crHandPoint
         BevelOuter = bvNone
         Color = 8142341
@@ -5720,8 +5721,8 @@ object FormLogin: TFormLogin
         OnMouseLeave = pnlProcedimentosMouseLeave
         object lblProcedimentos: TLabel
           AlignWithMargins = True
-          Left = 101
-          Top = 25
+          Left = 100
+          Top = 24
           Width = 134
           Height = 25
           Cursor = crHandPoint
@@ -5828,9 +5829,9 @@ object FormLogin: TFormLogin
       end
       object pnlEncerrarSistema: TPanel
         Left = 2
-        Top = 497
+        Top = 482
         Width = 302
-        Height = 68
+        Height = 71
         Cursor = crHandPoint
         BevelOuter = bvNone
         Color = 8142341
@@ -5841,8 +5842,8 @@ object FormLogin: TFormLogin
         OnMouseLeave = pnlEncerrarSistemaMouseLeave
         object lblEncerrarSistema: TLabel
           AlignWithMargins = True
-          Left = 100
-          Top = 20
+          Left = 99
+          Top = 22
           Width = 148
           Height = 25
           Cursor = crHandPoint
@@ -5864,7 +5865,7 @@ object FormLogin: TFormLogin
           OnMouseLeave = pnlEncerrarSistemaMouseLeave
         end
         object imgEncerrarSistema: TImage
-          Left = 10
+          Left = 13
           Top = 3
           Width = 64
           Height = 64
@@ -5912,7 +5913,7 @@ object FormLogin: TFormLogin
       end
       object pnlRelatorios: TPanel
         Left = 0
-        Top = 416
+        Top = 401
         Width = 302
         Height = 73
         Cursor = crHandPoint
@@ -5925,12 +5926,12 @@ object FormLogin: TFormLogin
         object lblRelatorios: TLabel
           AlignWithMargins = True
           Left = 100
-          Top = 20
+          Top = 21
           Width = 102
-          Height = 28
+          Height = 27
           Cursor = crHandPoint
           Margins.Left = 100
-          Margins.Top = 20
+          Margins.Top = 21
           Margins.Right = 100
           Margins.Bottom = 25
           Align = alClient
@@ -5945,11 +5946,11 @@ object FormLogin: TFormLogin
           ParentFont = False
           OnMouseEnter = pnlRelatoriosMouseEnter
           OnMouseLeave = pnlRelatoriosMouseLeave
-          ExplicitWidth = 89
-          ExplicitHeight = 25
+          ExplicitTop = 25
+          ExplicitHeight = 28
         end
         object imgRelatorios: TImage
-          Left = 5
+          Left = 8
           Top = 4
           Width = 65
           Height = 64

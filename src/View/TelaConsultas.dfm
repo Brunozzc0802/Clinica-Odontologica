@@ -4,7 +4,7 @@ object PagConsultas: TPagConsultas
   BorderStyle = bsNone
   Caption = 'PagConsultas'
   ClientHeight = 627
-  ClientWidth = 769
+  ClientWidth = 770
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -2592,6 +2592,14 @@ object PagConsultas: TPagConsultas
             ExplicitWidth = 59
             ExplicitHeight = 17
           end
+          object MonthCalendar1: TMonthCalendar
+            Left = 139
+            Top = 32
+            Width = 225
+            Height = 160
+            Date = 45953.000000000000000000
+            TabOrder = 0
+          end
         end
       end
       object btnAlterar: TPanel
@@ -2915,9 +2923,9 @@ object PagConsultas: TPagConsultas
       Visible = False
       object btnadicionar: TPanel
         AlignWithMargins = True
-        Left = 216
+        Left = 418
         Top = 52
-        Width = 362
+        Width = 160
         Height = 28
         Margins.Left = 10
         Margins.Top = 65
@@ -2932,7 +2940,7 @@ object PagConsultas: TPagConsultas
           AlignWithMargins = True
           Left = 4
           Top = 4
-          Width = 354
+          Width = 152
           Height = 20
           Cursor = crHandPoint
           Align = alClient
@@ -2948,8 +2956,8 @@ object PagConsultas: TPagConsultas
           ParentFont = False
           OnMouseEnter = btnadicionarMouseEnter
           OnMouseLeave = btnadicionarMouseLeave
-          ExplicitWidth = 115
-          ExplicitHeight = 17
+          ExplicitLeft = 48
+          ExplicitWidth = 310
         end
       end
       object cbNomePaci: TComboBox
@@ -2967,7 +2975,6 @@ object PagConsultas: TPagConsultas
         Height = 23
         TabOrder = 2
         TextHint = 'Selecione o Profissional'
-        OnChange = cbNomeProfChange
       end
       object cbNomeProc: TComboBox
         Left = 216
@@ -2976,7 +2983,6 @@ object PagConsultas: TPagConsultas
         Height = 23
         TabOrder = 3
         TextHint = 'Selecione o Procedimento'
-        OnChange = cbNomeProcChange
       end
       object cbHorario: TComboBox
         Left = 418
@@ -2988,9 +2994,9 @@ object PagConsultas: TPagConsultas
       end
       object btnConfirmarAlteracoes: TPanel
         AlignWithMargins = True
-        Left = 216
+        Left = 418
         Top = 52
-        Width = 362
+        Width = 160
         Height = 28
         Margins.Left = 10
         Margins.Top = 75
@@ -3006,7 +3012,7 @@ object PagConsultas: TPagConsultas
           AlignWithMargins = True
           Left = 1
           Top = 4
-          Width = 360
+          Width = 158
           Height = 23
           Cursor = crHandPoint
           Margins.Left = 0
@@ -3025,24 +3031,53 @@ object PagConsultas: TPagConsultas
           ParentFont = False
           OnMouseEnter = btnConfirmarAlteracoesMouseEnter
           OnMouseLeave = btnConfirmarAlteracoesMouseLeave
-          ExplicitWidth = 130
-          ExplicitHeight = 17
+          ExplicitLeft = 0
+          ExplicitWidth = 360
         end
       end
+      object DateTimePicker1: TDateTimePicker
+        Left = 216
+        Top = 56
+        Width = 161
+        Height = 23
+        Date = 45658.000000000000000000
+        Time = 0.634960879629943500
+        TabOrder = 6
+      end
     end
-    object Calendar1: TCalendar
+    object Calendar1: TCalendarView
       Left = 7
-      Top = 6
+      Top = 5
       Width = 594
-      Height = 441
-      StartOfWeek = 0
+      Height = 440
+      BorderColor = 14737632
+      Date = 45931.000000000000000000
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -20
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      HeaderInfo.DaysOfWeekFont.Charset = DEFAULT_CHARSET
+      HeaderInfo.DaysOfWeekFont.Color = clWindowText
+      HeaderInfo.DaysOfWeekFont.Height = -13
+      HeaderInfo.DaysOfWeekFont.Name = 'Segoe UI'
+      HeaderInfo.DaysOfWeekFont.Style = []
+      HeaderInfo.Font.Charset = DEFAULT_CHARSET
+      HeaderInfo.Font.Color = clWindowText
+      HeaderInfo.Font.Height = -20
+      HeaderInfo.Font.Name = 'Segoe UI'
+      HeaderInfo.Font.Style = []
+      HighlightToday = False
+      ParentFont = False
+      SelectionColor = 16223019
+      ShowDayOfWeek = False
       TabOrder = 2
-      OnChange = Calendar1Change
+      TodayColor = 16223019
     end
   end
   object pnlRestaurar: TPanel
-    Left = 55
-    Top = 108
+    Left = 46
+    Top = 128
     Width = 497
     Height = 307
     BevelOuter = bvNone

@@ -85,7 +85,6 @@ begin
       HorarioAtual := IncMinute(HorarioAtual, IntervaloMinutos);
     end;
 
-    // Converter TList para TArray
     SetLength(Result, ListaHorarios.Count);
     for I := 0 to ListaHorarios.Count - 1 do
       Result[I] := ListaHorarios[I];

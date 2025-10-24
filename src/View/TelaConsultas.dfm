@@ -3161,8 +3161,8 @@ object PagConsultas: TPagConsultas
     end
   end
   object pnlRestaurar: TPanel
-    Left = 61
-    Top = 114
+    Left = 53
+    Top = 107
     Width = 497
     Height = 307
     BevelOuter = bvNone

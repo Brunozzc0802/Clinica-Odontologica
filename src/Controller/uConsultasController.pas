@@ -1,33 +1,34 @@
 unit uConsultasController;
-
 interface
-
 uses
-  System.Generics.Collections, SysUtils,
+  System.Generics.Collections, SysUtils, System.DateUtils,
   uConsultas, uConsultasRepository,
   uProfissionaisRepository, uProfissionais,
   uProcedimentosRepository, uProcedimentos,
   uPacientes, uPacientesRepository;
-
 type
+  THorarioDisponivel = uConsultasRepository.THorarioDisponivel;
+
   TConsultaController = class
   private
     RepoConsulta: TConsultaRepository;
   public
     constructor Create;
     destructor Destroy; override;
-
     function ListarPacientes: TObjectList<TPaciente>;
     function ListarProfissionais: TObjectList<TProfissionais>;
     function ListarProcedimentos: TObjectList<TProcedimento>;
-    function ListarHorariosDisponiveis(AProfissionalId, AProcedimentoId: Integer; AData: TDate): TList<TTime>;
     function GetProcedimento(AId: Integer): TProcedimento;
+    procedure Adicionar(AConsulta: TConsulta);
+    procedure Alterar(AConsulta: TConsulta);
+    procedure CancelarConsulta(const Id: Integer);
+    function ObterHorariosDisponiveis(AProfissionalId: Integer; AData: TDate; AProcedimentoId: Integer): TArray<THorarioDisponivel>;
+    function HorarioOcupado(AProfissionalId: Integer; AData: TDate; AHora: TTime; ADuracao: TTime): Boolean;
+    function ObterDuracaoProcedimento(AProcedimentoId: Integer): TTime;
   end;
 
 implementation
-
 { TConsultaController }
-
 constructor TConsultaController.Create;
 begin
   RepoConsulta := TConsultaRepository.Create;
@@ -39,6 +40,7 @@ begin
   inherited;
 end;
 
+// -- Pacientes --
 function TConsultaController.ListarPacientes: TObjectList<TPaciente>;
 var
   PacienteRepo: TPacientesRepository;
@@ -54,6 +56,7 @@ begin
   end;
 end;
 
+// -- Profissionais --
 function TConsultaController.ListarProfissionais: TObjectList<TProfissionais>;
 var
   ProfRepo: TProfissionaisRepository;
@@ -69,6 +72,7 @@ begin
   end;
 end;
 
+// -- Procedimentos --
 function TConsultaController.ListarProcedimentos: TObjectList<TProcedimento>;
 var
   ProcRepo: TProcedimentoRepository;
@@ -110,31 +114,38 @@ begin
   end;
 end;
 
-function TConsultaController.ListarHorariosDisponiveis(AProfissionalId, AProcedimentoId: Integer; AData: TDate): TList<TTime>;
-var
-  Procedimento: TProcedimento;
-  HoraAtual, HoraFim: TTime;
+
+procedure TConsultaController.Adicionar(AConsulta: TConsulta);
 begin
-  Result := TList<TTime>.Create;
+  RepoConsulta.Adicionar(AConsulta);
+end;
 
-  Procedimento := GetProcedimento(AProcedimentoId);
-  if Procedimento = nil then Exit;
+procedure TConsultaController.Alterar(AConsulta: TConsulta);
+begin
+  RepoConsulta.Alterar(AConsulta);
+end;
 
-  try
-    HoraAtual := EncodeTime(8, 0, 0, 0);
-    HoraFim := EncodeTime(17, 0, 0, 0);
+procedure TConsultaController.CancelarConsulta(const Id: Integer);
+begin
+  RepoConsulta.Cancelar(Id);
+end;
 
-    while (HoraAtual + Procedimento.Duracao <= HoraFim) do
-    begin
-      if not RepoConsulta.HorarioOcupado(AProfissionalId, AData, HoraAtual, Procedimento.Duracao) then
-        Result.Add(HoraAtual);
+// -- Horários Disponíveis --
+function TConsultaController.ObterHorariosDisponiveis(AProfissionalId: Integer; AData: TDate; AProcedimentoId: Integer): TArray<THorarioDisponivel>;
+begin
+  Result := RepoConsulta.ObterHorariosDisponiveis(AProfissionalId, AData, AProcedimentoId);
+end;
 
-      HoraAtual := HoraAtual + Procedimento.Duracao;
-    end;
-  finally
-    Procedimento.Free;
-  end;
+// -- Verifica horário ocupado --
+function TConsultaController.HorarioOcupado(AProfissionalId: Integer; AData: TDate; AHora: TTime; ADuracao: TTime): Boolean;
+begin
+  Result := RepoConsulta.HorarioOcupado(AProfissionalId, AData, AHora, ADuracao);
+end;
+
+// -- Duração procedimento --
+function TConsultaController.ObterDuracaoProcedimento(AProcedimentoId: Integer): TTime;
+begin
+  Result := RepoConsulta.ObterDuracaoProcedimento(AProcedimentoId);
 end;
 
 end.
-

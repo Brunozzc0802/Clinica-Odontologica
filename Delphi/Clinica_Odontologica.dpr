@@ -11,7 +11,6 @@ uses
   TelaPacientes in '..\src\View\TelaPacientes.pas' {PagPacientes},
   uPacientes in '..\src\Model\uPacientes.pas',
   uPacientesRepository in '..\src\Repository\uPacientesRepository.pas',
-  {$R *.res}
   uPacientesController in '..\src\Controller\uPacientesController.pas' {$R *.res},
   TelaProfissionais in '..\src\View\TelaProfissionais.pas' {PagProfissionais},
   uProfissionais in '..\src\Model\uProfissionais.pas',
@@ -31,13 +30,13 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TPagConsultas, PagConsultas);
   Application.CreateForm(TFormLogin, FormLogin);
   Application.CreateForm(TPagUsuarios, PagUsuarios);
   Application.CreateForm(TPagProcedimentos, PagProcedimentos);
   Application.CreateForm(TPagPacientes, PagPacientes);
   Application.CreateForm(TPagProfissionais, PagProfissionais);
   Application.CreateForm(TdmUsuarios, dmUsuarios);
-  Application.CreateForm(TPagConsultas, PagConsultas);
   Application.Run;
 
 end.

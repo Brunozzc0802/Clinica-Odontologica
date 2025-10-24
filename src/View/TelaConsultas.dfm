@@ -4,7 +4,7 @@ object PagConsultas: TPagConsultas
   BorderStyle = bsNone
   Caption = 'PagConsultas'
   ClientHeight = 627
-  ClientWidth = 770
+  ClientWidth = 769
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -2797,7 +2797,7 @@ object PagConsultas: TPagConsultas
       end
       object btnLimpar: TPanel
         Left = 8
-        Top = 240
+        Top = 287
         Width = 137
         Height = 41
         Cursor = crHandPoint
@@ -2837,7 +2837,7 @@ object PagConsultas: TPagConsultas
       end
       object btnSair: TPanel
         Left = 8
-        Top = 287
+        Top = 334
         Width = 137
         Height = 41
         Cursor = crHandPoint
@@ -2911,6 +2911,82 @@ object PagConsultas: TPagConsultas
           ExplicitHeight = 17
         end
       end
+      object Panel1: TPanel
+        Left = 8
+        Top = 240
+        Width = 137
+        Height = 41
+        Cursor = crHandPoint
+        Color = 8142341
+        ParentBackground = False
+        TabOrder = 8
+        OnClick = Panel1Click
+        OnMouseEnter = Panel1MouseEnter
+        OnMouseLeave = Panel1MouseLeave
+        object lblListar: TLabel
+          AlignWithMargins = True
+          Left = 31
+          Top = 11
+          Width = 75
+          Height = 19
+          Cursor = crHandPoint
+          Margins.Left = 30
+          Margins.Top = 10
+          Margins.Right = 30
+          Margins.Bottom = 10
+          Align = alClient
+          Alignment = taCenter
+          Caption = 'Listar'
+          Color = clCream
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          OnMouseEnter = Panel1MouseEnter
+          OnMouseLeave = Panel1MouseLeave
+          ExplicitWidth = 34
+          ExplicitHeight = 17
+        end
+        object Panel2: TPanel
+          Left = 0
+          Top = 0
+          Width = 137
+          Height = 41
+          Cursor = crHandPoint
+          Color = 16223019
+          ParentBackground = False
+          TabOrder = 0
+          Visible = False
+          object label7: TLabel
+            AlignWithMargins = True
+            Left = 36
+            Top = 11
+            Width = 65
+            Height = 19
+            Cursor = crHandPoint
+            Margins.Left = 35
+            Margins.Top = 10
+            Margins.Right = 35
+            Margins.Bottom = 10
+            Align = alClient
+            Alignment = taCenter
+            Caption = 'Listar'
+            Color = clCream
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -13
+            Font.Name = 'Segoe UI'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            ExplicitWidth = 34
+            ExplicitHeight = 17
+          end
+        end
+      end
     end
     object pnlAdd: TPanel
       Left = 7
@@ -2956,8 +3032,8 @@ object PagConsultas: TPagConsultas
           ParentFont = False
           OnMouseEnter = btnadicionarMouseEnter
           OnMouseLeave = btnadicionarMouseLeave
-          ExplicitLeft = 48
-          ExplicitWidth = 310
+          ExplicitWidth = 115
+          ExplicitHeight = 17
         end
       end
       object cbNomePaci: TComboBox
@@ -3031,8 +3107,8 @@ object PagConsultas: TPagConsultas
           ParentFont = False
           OnMouseEnter = btnConfirmarAlteracoesMouseEnter
           OnMouseLeave = btnConfirmarAlteracoesMouseLeave
-          ExplicitLeft = 0
-          ExplicitWidth = 360
+          ExplicitWidth = 130
+          ExplicitHeight = 17
         end
       end
       object DateTimePicker1: TDateTimePicker
@@ -3074,10 +3150,19 @@ object PagConsultas: TPagConsultas
       TabOrder = 2
       TodayColor = 16223019
     end
+    object sgConsultas: TStringGrid
+      Left = 7
+      Top = 5
+      Width = 594
+      Height = 440
+      ColCount = 7
+      TabOrder = 3
+      Visible = False
+    end
   end
   object pnlRestaurar: TPanel
-    Left = 46
-    Top = 128
+    Left = 61
+    Top = 114
     Width = 497
     Height = 307
     BevelOuter = bvNone

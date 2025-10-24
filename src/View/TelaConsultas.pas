@@ -59,6 +59,11 @@ type
     Calendar1: TCalendarView;
     DateTimePicker1: TDateTimePicker;
     MonthCalendar1: TMonthCalendar;
+    sgConsultas: TStringGrid;
+    Panel1: TPanel;
+    lblListar: TLabel;
+    Panel2: TPanel;
+    label7: TLabel;
     procedure btnXClick(Sender: TObject);
     procedure btnAddClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
@@ -85,6 +90,9 @@ type
     procedure PreencherCombos;
     procedure FormShow(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure Panel1MouseEnter(Sender: TObject);
+    procedure Panel1MouseLeave(Sender: TObject);
+    procedure Panel1Click(Sender: TObject);
   private
     ConsultaController: TConsultaController;
     { Private declarations }
@@ -99,15 +107,23 @@ implementation
 
 {$R *.dfm}
 
+
 procedure TPagConsultas.btnAddClick(Sender: TObject);
   begin
+
+      if sgConsultas.Visible = True then begin
+        sgConsultas.Visible := False;
+        calendar1.Visible := True;
+        panel2.Visible := false;
+      end;
+
 
       if Calendar1.Date > 0 then begin
         DateTimePicker1.Date := Calendar1.Date;
         Calendar1.Enabled := False;
       end else begin
             ShowMessage('Selecione um dia no calendário primeiro!');
-          end;
+      end;
 
       if pnlRestaurar.Visible = true then begin
         pnlRestaurar.Visible := False;
@@ -130,6 +146,7 @@ procedure TPagConsultas.btnAddClick(Sender: TObject);
         imgLogo2.Visible := True;
         imgLogo1.Visible := False;
   end;
+
 
 procedure TPagConsultas.btnAddMouseEnter(Sender: TObject);
   begin
@@ -171,6 +188,9 @@ procedure TPagConsultas.btnCancelarClick(Sender: TObject);
       btnAlterarNovo.Visible := False;
       imgLogo1.Visible := True;
       imgLogo2.visible := False;
+      panel2.Visible := False;
+      sgConsultas.Visible := False;
+      calendar1.Visible := True;
   end;
 
 procedure TPagConsultas.btnCancelarMouseEnter(Sender: TObject);
@@ -261,21 +281,54 @@ procedure TPagConsultas.FormShow(Sender: TObject);
   begin
     ConsultaController := TConsultaController.Create;
     PreencherCombos;
+
+  end;
+
+procedure TPagConsultas.Panel1Click(Sender: TObject);
+  begin
+    sgConsultas.Visible := True;
+    sgConsultas.Cells[0,0] := 'ID';
+    sgConsultas.Cells[1,0] := 'Paciente';
+    sgConsultas.Cells[2,0] := 'Profissional';
+    sgConsultas.Cells[3,0] := 'Procedimento';
+    sgConsultas.Cells[4,0] := 'Data';
+    sgConsultas.Cells[5,0] := 'Hora Inicio';
+    sgConsultas.Cells[6,0] := 'Hora Fim';
+
+    sgConsultas.ColWidths[0] := 50;
+    sgConsultas.ColWidths[1] := 120;
+    sgConsultas.ColWidths[2] := 90;
+    sgConsultas.ColWidths[3] := 90;
+    sgConsultas.ColWidths[4] := 90;
+    sgConsultas.ColWidths[5] := 100;
+    sgConsultas.ColWidths[6] := 116;
+    calendar1.Visible := False;
+    panel2.Visible := True;
+
+  end;
+
+procedure TPagConsultas.Panel1MouseEnter(Sender: TObject);
+  begin
+    panel1.Color := $00F78B2B;
+  end;
+
+procedure TPagConsultas.Panel1MouseLeave(Sender: TObject);
+  begin
+    panel1.Color := $007C3E05;
   end;
 
 procedure TPagConsultas.PreencherCombos;
   var
-    ListaPacientes: TObjectList<TPaciente>;
-    Paciente: TPaciente;
-    ListaProfissionais: TObjectList<TProfissionais>;
-    Profissional: TProfissionais;
-    ListaProcedimentos: TObjectList<TProcedimento>;
-    Procedimento: TProcedimento;
+  ListaPacientes: TObjectList<TPaciente>;
+  Paciente: TPaciente;
+  ListaProfissionais: TObjectList<TProfissionais>;
+  Profissional: TProfissionais;
+  ListaProcedimentos: TObjectList<TProcedimento>;
+  Procedimento: TProcedimento;
   begin
     cbNomePaci.Clear;
     cbNomeProf.Clear;
     cbNomeProc.Clear;
-
     ListaPacientes := ConsultaController.ListarPacientes;
     try
       for Paciente in ListaPacientes do
@@ -283,8 +336,6 @@ procedure TPagConsultas.PreencherCombos;
     finally
       ListaPacientes.Free;
     end;
-
-
     ListaProfissionais := ConsultaController.ListarProfissionais;
     try
       for Profissional in ListaProfissionais do
@@ -292,7 +343,6 @@ procedure TPagConsultas.PreencherCombos;
     finally
       ListaProfissionais.Free;
     end;
-
     ListaProcedimentos := ConsultaController.ListarProcedimentos;
     try
       for Procedimento in ListaProcedimentos do
@@ -300,7 +350,6 @@ procedure TPagConsultas.PreencherCombos;
     finally
       ListaProcedimentos.Free;
     end;
-
   end;
 
 end.

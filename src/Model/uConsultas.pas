@@ -2,29 +2,39 @@ unit uConsultas;
 
 interface
 
-  type
+uses
+  System.SysUtils, System.Classes;
+
+type
+  THorarioDisponivel = class
+  private
+    CHorario: TTime;
+    CDisponivel: Boolean;
+    CMotivoIndisponivel: string;
+  public
+    property Horario: TTime read CHorario write CHorario;
+    property Disponivel: Boolean read CDisponivel write CDisponivel;
+    property MotivoIndisponivel: string read CMotivoIndisponivel write CMotivoIndisponivel;
+  end;
+
   TConsulta = class
   private
-    CId: integer;
-    CProfissionalId: integer;
-    CProfissionalNome: String;
-    CPacienteId: integer;
-    CPacienteNome: String;
-    CProcedimentoId: integer;
-    CProcedimentoNome: String;
+    CId: Integer;
+    CProfissionalId: Integer;
+    CPacienteId: Integer;
+    CProcedimentoId: Integer;
     CData: TDate;
-    CHorario: TTime;
+    CHorarioInicio: TTime;
+    CHorarioFim: TTime;
     CAtivo: Boolean;
   public
     property Id: Integer read CId write CId;
     property ProfissionalId: Integer read CProfissionalId write CProfissionalId;
-    property ProfissionalNome: String read CProfissionalNome write CProfissionalNome;
     property PacienteId: Integer read CPacienteId write CPacienteId;
-    property PacienteNome: String read CPacienteNome write CPacienteNome;
     property ProcedimentoId: Integer read CProcedimentoId write CProcedimentoId;
-    property ProcedimentoNome: String read CProcedimentoNome write CProcedimentoNome;
     property Data: TDate read CData write CData;
-    property Horario: TTime read CHorario write CHorario;
+    property HorarioInicio: TTime read CHorarioInicio write CHorarioInicio;
+    property HorarioFim: TTime read CHorarioFim write CHorarioFim;
     property Ativo: Boolean read CAtivo write CAtivo;
   end;
 

@@ -2763,6 +2763,7 @@ object PagProcedimentos: TPagProcedimentos
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnDeletarClick
           OnMouseEnter = btnDeletarMouseEnter
           OnMouseLeave = btnDeletarMouseLeave
           ExplicitWidth = 45
@@ -2844,6 +2845,7 @@ object PagProcedimentos: TPagProcedimentos
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnRestaurarClick
           OnMouseEnter = btnRestaurarMouseEnter
           OnMouseLeave = btnRestaurarMouseLeave
           ExplicitWidth = 58
@@ -3129,9 +3131,9 @@ object PagProcedimentos: TPagProcedimentos
       object edHora: TMaskEdit
         Left = 440
         Top = 9
-        Width = 136
+        Width = 126
         Height = 23
-        EditMask = '00:00:00;'
+        EditMask = '!90:00:00;1;_'
         MaxLength = 8
         TabOrder = 4
         Text = '  :  :  '

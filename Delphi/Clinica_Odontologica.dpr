@@ -30,9 +30,9 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TFormLogin, FormLogin);
   Application.CreateForm(TdmUsuarios, dmUsuarios);
   Application.CreateForm(TPagConsultas, PagConsultas);
-  Application.CreateForm(TFormLogin, FormLogin);
   Application.CreateForm(TPagUsuarios, PagUsuarios);
   Application.CreateForm(TPagProcedimentos, PagProcedimentos);
   Application.CreateForm(TPagPacientes, PagPacientes);

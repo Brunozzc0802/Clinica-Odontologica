@@ -45,8 +45,7 @@ end;
 
 procedure TProcedimentoRepository.RestaurarProcedimento(const Id: Integer);
   begin
-    with dmUsuarios.queryProcedimentos do
-    begin
+    with dmUsuarios.queryProcedimentos do begin
       Close;
       SQL.Text := 'UPDATE procedimentos SET ativo = TRUE WHERE id = :id';
       ParamByName('id').AsInteger := Id;
@@ -59,8 +58,7 @@ var
   Procedimento: TProcedimento;
 begin
   Result := TObjectList<TProcedimento>.Create(True);
-  with dmUsuarios.queryProcedimentos do
-  begin
+  with dmUsuarios.queryProcedimentos do begin
     Close;
     SQL.Text := 'SELECT id, nome, valor, duracao, ativo FROM procedimentos WHERE ativo = FALSE';
     Open;

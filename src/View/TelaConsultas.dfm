@@ -12,6 +12,7 @@ object PagConsultas: TPagConsultas
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesigned
+  OnClose = FormClose
   OnCreate = FormCreate
   TextHeight = 15
   object cabecalho: TPanel
@@ -2552,6 +2553,7 @@ object PagConsultas: TPagConsultas
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnAddClick
           OnMouseEnter = btnAddMouseEnter
           OnMouseLeave = btnAddMouseLeave
           ExplicitWidth = 59
@@ -2706,6 +2708,7 @@ object PagConsultas: TPagConsultas
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnCancelarClick
           OnMouseEnter = btnCancelarMouseEnter
           OnMouseLeave = btnCancelarMouseLeave
           ExplicitWidth = 52
@@ -2821,6 +2824,7 @@ object PagConsultas: TPagConsultas
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnLimparClick
           OnMouseEnter = btnLimparMouseEnter
           OnMouseLeave = btnLimparMouseLeave
           ExplicitWidth = 43
@@ -2861,6 +2865,7 @@ object PagConsultas: TPagConsultas
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnSairClick
           OnMouseEnter = btnSairMouseEnter
           OnMouseLeave = btnSairMouseLeave
           ExplicitWidth = 23
@@ -2937,6 +2942,7 @@ object PagConsultas: TPagConsultas
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = Panel1Click
           OnMouseEnter = Panel1MouseEnter
           OnMouseLeave = Panel1MouseLeave
           ExplicitWidth = 34
@@ -3034,6 +3040,7 @@ object PagConsultas: TPagConsultas
         MaxLength = 5
         TabOrder = 4
         Text = '  :  '
+        OnKeyDown = edHoraInicioKeyDown
       end
       object btnadicionar: TPanel
         AlignWithMargins = True

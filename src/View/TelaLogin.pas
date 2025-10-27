@@ -95,6 +95,9 @@ type
     procedure pnlProfissionaisClick(Sender: TObject);
     procedure pnlProcedimentosClick(Sender: TObject);
     procedure pnlConsultasClick(Sender: TObject);
+    procedure Admin;
+    procedure Medico;
+    procedure Recepcionista;
     private
       { Private declarations }
     public
@@ -122,8 +125,7 @@ begin
       Exit;
     end;
 
-    if UserController.VerificarUsuario(edUsuario.Text, edSenha.Text, Msg) then
-    begin
+    if UserController.VerificarUsuario(edUsuario.Text, edSenha.Text, Msg) then begin
       Sleep(300);
       pnlLogin.Visible := False;
       pnlTelaPrincipal.Visible := True;
@@ -136,7 +138,6 @@ begin
     UserController.Free;
   end;
 end;
-
 procedure TFormLogin.btnEntrarMouseEnter(Sender: TObject);
   begin
     btnEntrar.Color := $00B06D13;
@@ -182,6 +183,20 @@ procedure TFormLogin.ImgOlhoFechadoClick(Sender: TObject);
     imgOlhoFechado.Visible := False;
   end;
 
+
+procedure TFormLogin.Medico;
+  begin
+      Sleep(300);
+      pnlLogin.Visible := False;
+      pnlTelaPrincipal.Visible := True;
+      pnlUser.Visible := False;
+      pnlPacientes.Visible := False;
+      pnlProcedimentos.Visible := False;
+      pnlProfissionais.Visible := False;
+      pnlRelatorios.Visible := False;
+      pnlFundoLateral.Visible := True;
+      lblBemVindo.Caption := 'Bem Vindo, ' + edUsuario.Text + '!';
+  end;
 
 procedure TFormLogin.pnlConsultasClick(Sender: TObject);
   begin
@@ -297,9 +312,32 @@ procedure TFormLogin.pnlUserMouseLeave(Sender: TObject);
     pnlUser.Color := $007C3E05;
   end;
 
+procedure TFormLogin.Recepcionista;
+  begin
+      Sleep(300);
+      pnlLogin.Visible := False;
+      pnlTelaPrincipal.Visible := True;
+      pnlUser.Visible := False;
+      pnlPacientes.Visible := True;
+      pnlProcedimentos.Visible := False;
+      pnlProfissionais.Visible := False;
+      pnlRelatorios.Visible := True;
+      pnlFundoLateral.Visible := True;
+      lblBemVindo.Caption := 'Bem Vindo, ' + edUsuario.Text + '!';
+  end;
+
 procedure TFormLogin.Timer1Timer(Sender: TObject);
   begin
     lblDataHora.Caption := FormatDateTime('dd/mm/yyyy hh:nn:ss', Now);
+  end;
+
+procedure TFormLogin.Admin;
+  begin
+      Sleep(300);
+      pnlLogin.Visible := False;
+      pnlTelaPrincipal.Visible := True;
+      pnlFundoLateral.Visible := True;
+      lblBemVindo.Caption := 'Bem Vindo, ' + edUsuario.Text + '!';
   end;
 
 procedure TFormLogin.btnEncerrarSistemaClick(Sender: TObject);

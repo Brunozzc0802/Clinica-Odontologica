@@ -5331,7 +5331,7 @@ object FormLogin: TFormLogin
         end
       end
       object pnlPacientes: TPanel
-        Left = 1
+        Left = 6
         Top = 80
         Width = 302
         Height = 74
@@ -5367,9 +5367,8 @@ object FormLogin: TFormLogin
           OnClick = pnlPacientesClick
           OnMouseEnter = pnlPacientesMouseEnter
           OnMouseLeave = pnlPacientesMouseLeave
-          ExplicitLeft = 97
-          ExplicitTop = 25
-          ExplicitHeight = 23
+          ExplicitWidth = 83
+          ExplicitHeight = 25
         end
         object imgPacientes: TImage
           Left = 6
@@ -5468,9 +5467,8 @@ object FormLogin: TFormLogin
           OnClick = pnlProfissionaisClick
           OnMouseEnter = pnlProfissionaisMouseEnter
           OnMouseLeave = pnlProfissionaisMouseLeave
-          ExplicitTop = 19
-          ExplicitWidth = 128
-          ExplicitHeight = 21
+          ExplicitWidth = 112
+          ExplicitHeight = 25
         end
         object imgProfissionais: TImage
           Left = 13
@@ -5946,8 +5944,8 @@ object FormLogin: TFormLogin
           ParentFont = False
           OnMouseEnter = pnlRelatoriosMouseEnter
           OnMouseLeave = pnlRelatoriosMouseLeave
-          ExplicitTop = 25
-          ExplicitHeight = 28
+          ExplicitWidth = 89
+          ExplicitHeight = 25
         end
         object imgRelatorios: TImage
           Left = 8

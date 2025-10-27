@@ -110,6 +110,9 @@ type
       Rect: TRect; State: TGridDrawState);
     procedure ConfirmarRestauracao;
     procedure btnCRestoreClick(Sender: TObject);
+    procedure EdNomeKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edValorKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     ProcedimentoLista: TObjectList<TProcedimento>;
     Controller: TProcedimentosController;
@@ -355,6 +358,24 @@ procedure TPagProcedimentos.ConfirmarRestauracao;
       end;
       end else
       ShowMessage('Selecione um procedimento para restaurar.');
+  end;
+
+procedure TPagProcedimentos.EdNomeKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+  begin
+    if Key = VK_RETURN then begin
+      key := 0;
+      edValor.setfocus;
+    end;
+  end;
+
+procedure TPagProcedimentos.edValorKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+  begin
+    if Key = VK_RETURN then begin
+      key := 0;
+      edHora.setfocus;
+    end;
   end;
 
 procedure TPagProcedimentos.AdicionarProcedimento;

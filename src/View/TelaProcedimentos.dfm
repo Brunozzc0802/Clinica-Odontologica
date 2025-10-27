@@ -2765,7 +2765,8 @@ object PagProcedimentos: TPagProcedimentos
           ParentFont = False
           OnMouseEnter = btnDeletarMouseEnter
           OnMouseLeave = btnDeletarMouseLeave
-          ExplicitTop = 7
+          ExplicitWidth = 45
+          ExplicitHeight = 17
         end
       end
       object btnCancelar: TPanel
@@ -3110,6 +3111,7 @@ object PagProcedimentos: TPagProcedimentos
         AutoSize = False
         TabOrder = 2
         TextHint = 'Nome do Procedimento:'
+        OnKeyDown = EdNomeKeyDown
       end
       object edValor: TMaskEdit
         Left = 218
@@ -3122,6 +3124,7 @@ object PagProcedimentos: TPagProcedimentos
         TabOrder = 3
         Text = '   ,  '
         TextHint = 'Valor:'
+        OnKeyDown = edValorKeyDown
       end
       object edHora: TMaskEdit
         Left = 440

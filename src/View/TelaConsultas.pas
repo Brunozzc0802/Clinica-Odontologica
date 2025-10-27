@@ -6,8 +6,9 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.Mask, Vcl.WinXCtrls, Vcl.Grids, Vcl.ComCtrls,
-  Vcl.Samples.Calendar, uConsultasController, uConsultas, System.Generics.Collections,
-  uPacientes, uProfissionais, uProcedimentos, Vcl.WinXCalendars;
+  Vcl.Samples.Calendar, System.Generics.Collections,
+  uPacientes, uProfissionais, uProcedimentos, Vcl.WinXCalendars,
+  uConsultasController;
 
 type
   TPagConsultas = class(TForm)
@@ -17,7 +18,6 @@ type
     iconConsultas: TImage;
     btnX: TImage;
     pnlAzulPrincipal: TPanel;
-    imgLogo1: TImage;
     imgLogo2: TImage;
     pnlBotoesDireita: TPanel;
     btnAdd: TPanel;
@@ -41,8 +41,6 @@ type
     btnAlterarNovo: TPanel;
     Label3: TLabel;
     pnlAdd: TPanel;
-    btnadicionar: TPanel;
-    lblAddpaciente: TLabel;
     pnlRestaurar: TPanel;
     imgRestore: TImage;
     Label6: TLabel;
@@ -53,17 +51,20 @@ type
     cbNomePaci: TComboBox;
     cbNomeProf: TComboBox;
     cbNomeProc: TComboBox;
-    cbHorario: TComboBox;
-    btnConfirmarAlteracoes: TPanel;
-    lblConfirmarAlteracoes: TLabel;
     Calendar1: TCalendarView;
     DateTimePicker1: TDateTimePicker;
-    MonthCalendar1: TMonthCalendar;
     sgConsultas: TStringGrid;
     Panel1: TPanel;
     lblListar: TLabel;
     Panel2: TPanel;
     label7: TLabel;
+    imgLogo1: TImage;
+    edHoraInicio: TMaskEdit;
+    btnadicionar: TPanel;
+    lblAddprocedimento: TLabel;
+    edHoraFim: TMaskEdit;
+    btnConfirmarAlteracoes: TPanel;
+    lblConfirmarAlteracoes: TLabel;
     procedure btnXClick(Sender: TObject);
     procedure btnAddClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
@@ -87,15 +88,14 @@ type
     procedure btnConfirmarAlteracoesMouseLeave(Sender: TObject);
     procedure btnAddMouseEnter(Sender: TObject);
     procedure btnAddMouseLeave(Sender: TObject);
-    procedure PreencherCombos;
-    procedure FormShow(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
     procedure Panel1MouseEnter(Sender: TObject);
     procedure Panel1MouseLeave(Sender: TObject);
     procedure Panel1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
-    ConsultaController: TConsultaController;
-    { Private declarations }
+    Controller: TConsultaController;
+    procedure CarregarComboBox;
   public
     { Public declarations }
   end;
@@ -107,22 +107,72 @@ implementation
 
 {$R *.dfm}
 
+procedure TPagConsultas.FormCreate(Sender: TObject);
+  begin
+    Controller := TConsultaController.Create;
+    CarregarComboBox;
+  end;
+
+procedure TPagConsultas.FormDestroy(Sender: TObject);
+  begin
+    Controller.Free;
+  end;
+
+procedure TPagConsultas.CarregarComboBox;
+var
+  ListaPacientes: TObjectList<TPaciente>;
+  ListaProfissionais: TObjectList<TProfissionais>;
+  ListaProcedimentos: TObjectList<TProcedimento>;
+  Paciente: TPaciente;
+  Profissional: TProfissionais;
+  Procedimento: TProcedimento;
+begin
+  ListaPacientes := Controller.BuscarPacientes;
+  if Assigned(ListaPacientes) then
+  try
+    for Paciente in ListaPacientes do
+      cbNomePaci.Items.AddObject(Paciente.Nome, TObject(Paciente.Id));
+  finally
+    ListaPacientes.Free;
+  end;
+
+  if cbNomePaci.Items.Count > 0 then
+    cbNomePaci.ItemIndex := -1;
+
+  ListaProfissionais := Controller.BuscarProfissionais;
+  if Assigned(ListaProfissionais) then
+  try
+    for Profissional in ListaProfissionais do
+      cbNomeProf.Items.AddObject(Profissional.Nome, TObject(Profissional.Id));
+  finally
+    ListaProfissionais.Free;
+  end;
+
+  if cbNomeProf.Items.Count > 0 then
+    cbNomeProf.ItemIndex := -1;
+  ListaProcedimentos := Controller.BuscarProcedimentos;
+  if Assigned(ListaProcedimentos) then
+  try
+    for Procedimento in ListaProcedimentos do
+      cbNomeProc.Items.AddObject(Procedimento.Nome, TObject(Procedimento.Id));
+  finally
+    ListaProcedimentos.Free;
+  end;
+
+  if cbNomeProc.Items.Count > 0 then
+    cbNomeProc.ItemIndex := -1;
+end;
 
 procedure TPagConsultas.btnAddClick(Sender: TObject);
   begin
-
       if sgConsultas.Visible = True then begin
         sgConsultas.Visible := False;
         calendar1.Visible := True;
         panel2.Visible := false;
       end;
-
-
       if Calendar1.Date > 0 then begin
         DateTimePicker1.Date := Calendar1.Date;
         Calendar1.Enabled := False;
-      end else begin
-            ShowMessage('Selecione um dia no calendário primeiro!');
       end;
 
       if pnlRestaurar.Visible = true then begin
@@ -130,14 +180,15 @@ procedure TPagConsultas.btnAddClick(Sender: TObject);
         btnRestaurarNovo.Visible := false;
       end;
 
-    if (btnAlterarNovo.Visible = True) then begin
-        cbNomePaci.ItemIndex := -1;
-        cbNomeProf.ItemIndex := -1;
-        cbNomeProc.ItemIndex := -1;
-        cbHorario.ItemIndex := -1;
-        btnalterarNovo.Visible := False;
-        btnAddNovo.Visible := True;
-    end;
+      if (btnAlterarNovo.Visible = True) then begin
+          cbNomePaci.ItemIndex := 0;
+          cbNomeProf.ItemIndex := 0;
+          cbNomeProc.ItemIndex := 0;
+          edHoraInicio.Clear;
+          edHoraFim.Clear;
+          btnalterarNovo.Visible := False;
+          btnAddNovo.Visible := True;
+      end;
 
         btnAddNovo.Visible := True;
         pnlAdd.Visible := True;
@@ -191,6 +242,7 @@ procedure TPagConsultas.btnCancelarClick(Sender: TObject);
       panel2.Visible := False;
       sgConsultas.Visible := False;
       calendar1.Visible := True;
+      calendar1.Date := 01/10/2025;
   end;
 
 procedure TPagConsultas.btnCancelarMouseEnter(Sender: TObject);
@@ -225,10 +277,11 @@ procedure TPagConsultas.btnDeletarMouseLeave(Sender: TObject);
 
 procedure TPagConsultas.btnLimparClick(Sender: TObject);
   begin
-    cbNomePaci.ItemIndex := -1;
-    cbNomeProf.ItemIndex := -1;
-    cbNomeProc.ItemIndex := -1;
-    cbHorario.ItemIndex := -1;
+    cbNomePaci.ItemIndex := 0;
+    cbNomeProf.ItemIndex := 0;
+    cbNomeProc.ItemIndex := 0;
+    edHoraInicio.Clear;
+    edHoraFim.Clear;
   end;
 
 procedure TPagConsultas.btnLimparMouseEnter(Sender: TObject);
@@ -271,21 +324,14 @@ procedure TPagConsultas.btnXClick(Sender: TObject);
     Close;
   end;
 
-
-procedure TPagConsultas.FormDestroy(Sender: TObject);
-  begin
-    ConsultaController.Free;
-  end;
-
-procedure TPagConsultas.FormShow(Sender: TObject);
-  begin
-    ConsultaController := TConsultaController.Create;
-    PreencherCombos;
-
-  end;
-
 procedure TPagConsultas.Panel1Click(Sender: TObject);
   begin
+
+    if pnlAdd.Visible = True then begin
+      pnlAdd.Visible := False;
+      btnAddNovo.Visible := False;
+      btnAlterarnovo.Visible := False;
+    end;
     sgConsultas.Visible := True;
     sgConsultas.Cells[0,0] := 'ID';
     sgConsultas.Cells[1,0] := 'Paciente';
@@ -297,14 +343,13 @@ procedure TPagConsultas.Panel1Click(Sender: TObject);
 
     sgConsultas.ColWidths[0] := 50;
     sgConsultas.ColWidths[1] := 120;
-    sgConsultas.ColWidths[2] := 90;
-    sgConsultas.ColWidths[3] := 90;
-    sgConsultas.ColWidths[4] := 90;
-    sgConsultas.ColWidths[5] := 100;
-    sgConsultas.ColWidths[6] := 116;
+    sgConsultas.ColWidths[2] := 120;
+    sgConsultas.ColWidths[3] := 120;
+    sgConsultas.ColWidths[4] := 120;
+    sgConsultas.ColWidths[5] := 120;
+    sgConsultas.ColWidths[6] := 120;
     calendar1.Visible := False;
     panel2.Visible := True;
-
   end;
 
 procedure TPagConsultas.Panel1MouseEnter(Sender: TObject);
@@ -315,41 +360,6 @@ procedure TPagConsultas.Panel1MouseEnter(Sender: TObject);
 procedure TPagConsultas.Panel1MouseLeave(Sender: TObject);
   begin
     panel1.Color := $007C3E05;
-  end;
-
-procedure TPagConsultas.PreencherCombos;
-  var
-  ListaPacientes: TObjectList<TPaciente>;
-  Paciente: TPaciente;
-  ListaProfissionais: TObjectList<TProfissionais>;
-  Profissional: TProfissionais;
-  ListaProcedimentos: TObjectList<TProcedimento>;
-  Procedimento: TProcedimento;
-  begin
-    cbNomePaci.Clear;
-    cbNomeProf.Clear;
-    cbNomeProc.Clear;
-    ListaPacientes := ConsultaController.ListarPacientes;
-    try
-      for Paciente in ListaPacientes do
-        cbNomePaci.Items.AddObject(Paciente.Nome, Paciente);
-    finally
-      ListaPacientes.Free;
-    end;
-    ListaProfissionais := ConsultaController.ListarProfissionais;
-    try
-      for Profissional in ListaProfissionais do
-        cbNomeProf.Items.AddObject(Profissional.Nome, Profissional);
-    finally
-      ListaProfissionais.Free;
-    end;
-    ListaProcedimentos := ConsultaController.ListarProcedimentos;
-    try
-      for Procedimento in ListaProcedimentos do
-        cbNomeProc.Items.AddObject(Procedimento.Nome, Procedimento);
-    finally
-      ListaProcedimentos.Free;
-    end;
   end;
 
 end.

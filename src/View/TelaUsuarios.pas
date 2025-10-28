@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Buttons, Vcl.StdCtrls,
   Vcl.Imaging.pngimage, Vcl.Imaging.jpeg, Vcl.Grids, Vcl.WinXCtrls, uUsuariosController, uUsuarios,
-  System.Generics.Collections;
+  System.Generics.Collections, uUsuariosControllerLog;
 
 type
   TPagUsuarios = class(TForm)
@@ -119,6 +119,7 @@ type
     UsuarioIdalterar: Integer;
     UsuarioLista: TObjectList<TUsuario>;
     Controller: TUsuarioController;
+    UserController: TLogController;
     procedure PesquisarUsuarios(const Filtro: string);
     { Private declarations }
   public
@@ -133,18 +134,18 @@ implementation
 {$R *.dfm}
 
 
-//função que ordena o grid por ordem numerica crescente\\
+
 procedure TPagUsuarios.OrdenarGrid;
 var
   i, j: Integer;
   temp: string;
 begin
-  // Laço de comparação de todas as linhas (exceto a primeira se for cabeçalho)
+
   for i := 1 to sgUsuarios.RowCount - 2 do
     for j := i + 1 to sgUsuarios.RowCount - 1 do
       if StrToIntDef(sgUsuarios.Cells[0, i], 0) > StrToIntDef(sgUsuarios.Cells[0, j], 0) then
       begin
-        // Troca todas as colunas da linha i com a linha j
+
         var k: Integer;
         for k := 0 to sgUsuarios.ColCount - 1 do
         begin
@@ -155,7 +156,6 @@ begin
       end;
 end;
 
-//função que carrega os inativos\\
 procedure TPagUsuarios.CarregarInativos;
 var
   I: Integer;
@@ -185,7 +185,6 @@ begin
   end;
 end;
 
-//Função que busca os usuarios na barra de pesquisa\
 procedure TPagUsuarios.PesquisarUsuarios(const Filtro: string);
 var
   I, Linha: Integer;
@@ -212,7 +211,6 @@ begin
   end;
 end;
 
-//função que carrega os usuarios no grid\\
 procedure TPagUsuarios.CarregarUsuarios;
 var
   I: Integer;
@@ -262,6 +260,7 @@ begin
 
       try
         Controller.RestaurarUsuario(Usuario);
+         UserController.RegistrarLog(Usuario.Nome, 'Restaurarado', 'Usuário restaurado (id: '+IntToStr(Usuario.Id)+')');
         CarregarInativos;
         ShowMessage('Usuário Restaurado com sucesso!');
       finally
@@ -281,8 +280,9 @@ end;
 //ação de fechar o formulario\\
 procedure TPagUsuarios.FormClose(Sender: TObject; var Action: TCloseAction);
   begin
-    FreeAndNil(Controller);
-    FreeAndNil(UsuarioLista);
+    UserController.Free;
+    UsuarioLista.Free;
+    Controller.Free;
     pnlFormAddUsuarios.Visible := False;
     btnAddNovo.visible := false;
     pnlFormAddUsuarios.Visible := False;
@@ -297,6 +297,7 @@ procedure TPagUsuarios.FormClose(Sender: TObject; var Action: TCloseAction);
 procedure TPagUsuarios.FormCreate(Sender: TObject);
   begin
     Controller := TUsuarioController.Create;
+    UserController := TLogController.Create;
     pesquisarUsuario.OnChange := pesquisarUsuarioChange;
     pnlFormAddUsuarios.Visible := False;
     imgLogoUsuarios2.Visible := False;
@@ -315,7 +316,8 @@ procedure TPagUsuarios.FormCreate(Sender: TObject);
     sgUsuarios.ColWidths[3] := 70;
     sgUsuarios.ColWidths[4] := 127;
   end;
-//chama a função para mostrar as informações do banco no grid\\
+
+
 procedure TPagUsuarios.FormShow(Sender: TObject);
   begin
     CarregarUsuarios;
@@ -472,7 +474,7 @@ procedure TPagUsuarios.AdicionarUsuarios;
         cbAtivo.ItemIndex = 0
         );
 
-
+        UserController.RegistrarLog('Adicionado', edUsuario.Text, 'Usuário adicionado');
         ShowMessage('Usuário adicionado com sucesso!');
         CarregarUsuarios;
         edUsuario.clear;
@@ -532,7 +534,7 @@ procedure TPagUsuarios.btnAddUsuClick(Sender: TObject);
       imgLogoUsuarios1.Visible := False;
       edUsuario.SetFocus;
   end;
-//botão de confirmar alterações
+
 procedure TPagUsuarios.btnConfirmarAlteracoesClick(Sender: TObject);
 begin
   if UsuarioIdalterar = 0 then
@@ -548,7 +550,7 @@ begin
       cbGrupo.Text,
       cbAtivo.ItemIndex = 0
     );
-
+    UserController.RegistrarLog('Alterarado', edUsuario.Text,  'Usuário alterado (id: '+IntToStr(UsuarioIdalterar)+')');
     ShowMessage('Usuário alterado com sucesso!');
     btnAlterarNovo.Visible := False;
     CarregarUsuarios;
@@ -588,6 +590,7 @@ begin
       Controller := TUsuarioController.Create;
       try
         Controller.DeletarUsuario(Usuario);
+        UserController.RegistrarLog('Deletado', Usuario.Nome, 'Usuário deletado (id: '+IntToStr(Usuario.Id)+')');
         CarregarUsuarios;
         ShowMessage('Usuário deletado com sucesso!');
         sgUsuarios.Row := 0;
@@ -737,7 +740,6 @@ procedure TPagUsuarios.btnCRestoreMouseLeave(Sender: TObject);
     btnCrestore.Color := $00F78B2B;
   end;
 
-//ANIMAÇÃO DE HOVER NOS BOTÕES\\
 procedure TPagUsuarios.btnCancelarUsuMouseEnter(Sender: TObject);
   begin
     btnCancelarUsu.Color := $00F78B2B;

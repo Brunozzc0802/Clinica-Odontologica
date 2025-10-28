@@ -23,7 +23,10 @@ uses
   TelaConsultas in '..\src\View\TelaConsultas.pas' {PagConsultas},
   uConsultas in '..\src\Model\uConsultas.pas',
   uConsultasRepository in '..\src\Repository\uConsultasRepository.pas',
-  uConsultasController in '..\src\Controller\uConsultasController.pas';
+  uConsultasController in '..\src\Controller\uConsultasController.pas',
+  uUsuarioRepositoryLog in '..\src\Repository\uUsuarioRepositoryLog.pas',
+  uUsuarioLog in '..\src\Model\uUsuarioLog.pas',
+  uUsuariosControllerLog in '..\src\Controller\uUsuariosControllerLog.pas';
 
 {$R *.res}
 

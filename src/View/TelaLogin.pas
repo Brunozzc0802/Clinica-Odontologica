@@ -9,7 +9,7 @@ uses
         Vcl.Imaging.pngimage,
         Vcl.StdCtrls, Vcl.Imaging.jpeg, Vcl.Buttons, System.ImageList,
         Vcl.ImgList,TelaUsuarios,uUsuarios,uUsuariosController,TelaPacientes,
-        TelaProfissionais,TelaProcedimentos,TelaConsultas;
+        TelaProfissionais,TelaProcedimentos,TelaConsultas, uUsuariosControllerLog;
 
 type
         TFormLogin = class(TForm)
@@ -56,14 +56,14 @@ type
         footerPrincipal: TPanel;
         lblBemVindo: TLabel;
         Timer1: TTimer;
-    Bevel1: TBevel;
-    Bevel3: TBevel;
-    Bevel2: TBevel;
-    Bevel4: TBevel;
-    Bevel6: TBevel;
-    Bevel5: TBevel;
-    Bevel7: TBevel;
-    lblDataHora: TLabel;
+        Bevel1: TBevel;
+        Bevel3: TBevel;
+        Bevel2: TBevel;
+        Bevel4: TBevel;
+        Bevel6: TBevel;
+        Bevel5: TBevel;
+        Bevel7: TBevel;
+        lblDataHora: TLabel;
         procedure FormCreate(Sender: TObject);
         procedure btnEntrarMouseEnter(Sender: TObject);
         procedure btnEntrarMouseLeave(Sender: TObject);
@@ -90,10 +90,10 @@ type
         procedure pnlEncerrarSistemaClick(Sender: TObject);
         procedure btnEntrarClick(Sender: TObject);
         procedure Timer1Timer(Sender: TObject);
-    procedure pnlPacientesClick(Sender: TObject);
-    procedure pnlProfissionaisClick(Sender: TObject);
-    procedure pnlProcedimentosClick(Sender: TObject);
-    procedure pnlConsultasClick(Sender: TObject);
+        procedure pnlPacientesClick(Sender: TObject);
+        procedure pnlProfissionaisClick(Sender: TObject);
+        procedure pnlProcedimentosClick(Sender: TObject);
+        procedure pnlConsultasClick(Sender: TObject);
     private
       { Private declarations }
     public
@@ -124,18 +124,13 @@ begin
 
     Usuario := UserController.VerificarUsuario(edUsuario.Text, edSenha.Text, Msg);
 
-    if Assigned(Usuario) then begin
+      if Usuario.Grupo = 'Administrador' then begin
       Sleep(300);
       pnlLogin.Visible := False;
       pnlTelaPrincipal.Visible := True;
       pnlFundoLateral.Visible := True;
+      pnlUser.Visible := True;
       lblBemVindo.Caption := 'Bem-vindo, ' + Usuario.Nome + '!';
-
-      if Usuario.Grupo = 'Administrador' then begin
-        pnlConsultas.Visible := True;
-        pnlPacientes.Visible := True;
-        pnlRelatorios.Visible := True;
-        pnlUser.Visible := True;
       end else if Usuario.Grupo = 'Recepcionista' then begin
         pnlPacientes.Visible := True;
         pnlPacientes.Top := 2;
@@ -151,6 +146,7 @@ begin
         pnlUser.Visible := False;
         pnlProfissionais.Visible := False;
         pnlProcedimentos.Visible := False;
+        lblBemVindo.Caption := 'Bem-vindo, ' + Usuario.Nome + '!';
       end else if Usuario.Grupo = 'Profissional' then begin
         pnlRelatorios.Visible := True;
         pnlRelatorios.Top := 80;
@@ -166,8 +162,8 @@ begin
         bevel2.Visible := False;
         bevel3.Visible := False;
         bevel4.Visible := False;
-      end;
-    end else
+        lblBemVindo.Caption := 'Bem-vindo, ' + Usuario.Nome + '!';
+      end else
       ShowMessage(Msg);
       finally
       UserController.Free;

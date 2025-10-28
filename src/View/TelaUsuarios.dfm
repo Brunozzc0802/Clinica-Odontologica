@@ -1,5 +1,5 @@
 object PagUsuarios: TPagUsuarios
-  Left = 592
+  Left = 674
   Top = 208
   BorderStyle = bsNone
   Caption = 'Usu'#225'rios'

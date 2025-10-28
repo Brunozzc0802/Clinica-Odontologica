@@ -3,7 +3,7 @@ object FormLogin: TFormLogin
   Top = 0
   Caption = 'FormLogin'
   ClientHeight = 876
-  ClientWidth = 1157
+  ClientWidth = 1158
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -18,15 +18,15 @@ object FormLogin: TFormLogin
   object pnlLogin: TPanel
     Left = 0
     Top = 0
-    Width = 1157
+    Width = 1158
     Height = 876
     Align = alClient
     TabOrder = 0
     DesignSize = (
-      1157
+      1158
       876)
     object imgFundo: TImage
-      Left = 678
+      Left = 679
       Top = 1
       Width = 478
       Height = 874
@@ -833,19 +833,19 @@ object FormLogin: TFormLogin
     object pnlAzul: TPanel
       Left = 1
       Top = 1
-      Width = 677
+      Width = 678
       Height = 874
       Align = alClient
       Color = 13204758
       ParentBackground = False
       TabOrder = 0
       DesignSize = (
-        677
+        678
         874)
       object imgLogoLogin: TImage
         Left = 124
         Top = 259
-        Width = 318
+        Width = 319
         Height = 302
         Anchors = [akLeft, akTop, akRight, akBottom]
         Center = True
@@ -2564,11 +2564,12 @@ object FormLogin: TFormLogin
           C8312891935F8E1C39062572F2CB9123C7A0444E7E3972E41894C8C92F478E1C
           831239F9E5C89163502227BF1C39720C4AE4E49723478E41899CFC72E4C83128
           91935F8E1C390625FE3FF554A820DEE964570000000049454E44AE426082}
+        ExplicitWidth = 318
         ExplicitHeight = 291
       end
     end
     object bordaDoForm: TPanel
-      Left = 696
+      Left = 697
       Top = 266
       Width = 441
       Height = 583
@@ -3334,19 +3335,19 @@ object FormLogin: TFormLogin
   object pnlTelaPrincipal: TPanel
     Left = 0
     Top = 0
-    Width = 1157
+    Width = 1158
     Height = 876
     Align = alClient
     TabOrder = 1
     Visible = False
     DesignSize = (
-      1157
+      1158
       876)
     object pnlAzulPrincipal: TPanel
       AlignWithMargins = True
       Left = 279
       Top = 2
-      Width = 874
+      Width = 875
       Height = 870
       Margins.Left = 278
       Margins.Top = 1
@@ -3355,13 +3356,13 @@ object FormLogin: TFormLogin
       ParentBackground = False
       TabOrder = 0
       DesignSize = (
-        874
+        875
         870)
       object imgLogoPrincipal: TImage
         AlignWithMargins = True
         Left = 81
         Top = 51
-        Width = 742
+        Width = 743
         Height = 768
         Margins.Left = 80
         Margins.Top = 50
@@ -5087,17 +5088,10 @@ object FormLogin: TFormLogin
         ExplicitLeft = 77
         ExplicitWidth = 722
       end
-      object Bevel8: TBevel
-        Left = 1
-        Top = 0
-        Width = 65
-        Height = 723
-        Shape = bsLeftLine
-      end
       object footerPrincipal: TPanel
-        Left = 0
+        Left = 4
         Top = 836
-        Width = 877
+        Width = 878
         Height = 41
         Anchors = [akLeft, akRight, akBottom]
         BevelOuter = bvSpace
@@ -5119,12 +5113,12 @@ object FormLogin: TFormLogin
         end
         object lblDataHora: TLabel
           AlignWithMargins = True
-          Left = 818
+          Left = 824
           Top = 7
           Width = 32
           Height = 26
           Margins.Top = 5
-          Margins.Right = 25
+          Margins.Right = 20
           Margins.Bottom = 6
           Align = alRight
           Caption = 'hora'
@@ -5150,7 +5144,7 @@ object FormLogin: TFormLogin
       Visible = False
       object Bevel1: TBevel
         Left = -2
-        Top = 548
+        Top = 542
         Width = 285
         Height = 12
         Shape = bsBottomLine
@@ -5371,8 +5365,8 @@ object FormLogin: TFormLogin
           ExplicitHeight = 25
         end
         object imgPacientes: TImage
-          Left = 6
-          Top = 7
+          Left = 0
+          Top = 5
           Width = 64
           Height = 64
           Cursor = crHandPoint
@@ -5638,8 +5632,8 @@ object FormLogin: TFormLogin
         object imgConsultas: TImage
           Left = 10
           Top = 5
-          Width = 66
-          Height = 67
+          Width = 64
+          Height = 64
           Cursor = crHandPoint
           Picture.Data = {
             0954506E67496D61676589504E470D0A1A0A0000000D49484452000000400000
@@ -5827,7 +5821,7 @@ object FormLogin: TFormLogin
       end
       object pnlEncerrarSistema: TPanel
         Left = 2
-        Top = 482
+        Top = 480
         Width = 302
         Height = 71
         Cursor = crHandPoint
@@ -5863,10 +5857,10 @@ object FormLogin: TFormLogin
           OnMouseLeave = pnlEncerrarSistemaMouseLeave
         end
         object imgEncerrarSistema: TImage
-          Left = 13
-          Top = 3
-          Width = 64
-          Height = 64
+          Left = 10
+          Top = 6
+          Width = 61
+          Height = 59
           Cursor = crHandPoint
           Picture.Data = {
             0954506E67496D61676589504E470D0A1A0A0000000D49484452000000400000
@@ -6007,7 +6001,7 @@ object FormLogin: TFormLogin
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer
-    Left = 1111
-    Top = 819
+    Left = 1023
+    Top = 843
   end
 end

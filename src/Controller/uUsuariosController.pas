@@ -8,7 +8,7 @@ uses
 type
   TUsuarioController = class
   public
-    function VerificarUsuario(const Nome, Senha: string; out Msg: string): Boolean;
+    function VerificarUsuario(const Nome, Senha: string; out Msg: string): TUsuario;
     function BuscarTodos: TObjectList<TUsuario>;
     function BuscarInativos: TObjectList<TUsuario>;
     procedure AdicionarUsuario(const Nome, Senha, Grupo: string; Ativo: Boolean);
@@ -21,32 +21,30 @@ implementation
 
 { TUsuarioController }
 
-function TUsuarioController.VerificarUsuario(const Nome, Senha: string; out Msg: string): Boolean;
+function TUsuarioController.VerificarUsuario(const Nome, Senha: string; out Msg: string): TUsuario;
 var
-  Usuario: TUsuario;
   RepoUsu: TUsuarioRepository;
 begin
-  Result := False;
+  Result := nil;
   Msg := '';
   RepoUsu := TUsuarioRepository.Create;
   try
-    Usuario := RepoUsu.VerificarUsuario(Nome, Senha);
-    if Usuario = nil then
+    Result := RepoUsu.VerificarUsuario(Nome, Senha);
+
+    if Result = nil then
     begin
       Msg := 'Usuário ou senha inválidos.';
       Exit;
     end;
 
-    if not Usuario.Ativo then
+    if not Result.Ativo then
     begin
-      Msg := 'Este usuário está inativo';
-      Usuario.Free;
+      Msg := 'Este usuário está inativo.';
+      FreeAndNil(Result);
       Exit;
     end;
 
-    Result := True;
     Msg := 'Login bem-sucedido!';
-    Usuario.Free;
   finally
     RepoUsu.Free;
   end;

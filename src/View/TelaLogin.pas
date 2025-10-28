@@ -56,7 +56,6 @@ type
         footerPrincipal: TPanel;
         lblBemVindo: TLabel;
         Timer1: TTimer;
-        lblDataHora: TLabel;
     Bevel1: TBevel;
     Bevel3: TBevel;
     Bevel2: TBevel;
@@ -64,7 +63,7 @@ type
     Bevel6: TBevel;
     Bevel5: TBevel;
     Bevel7: TBevel;
-    Bevel8: TBevel;
+    lblDataHora: TLabel;
         procedure FormCreate(Sender: TObject);
         procedure btnEntrarMouseEnter(Sender: TObject);
         procedure btnEntrarMouseLeave(Sender: TObject);
@@ -95,9 +94,6 @@ type
     procedure pnlProfissionaisClick(Sender: TObject);
     procedure pnlProcedimentosClick(Sender: TObject);
     procedure pnlConsultasClick(Sender: TObject);
-    procedure Admin;
-    procedure Medico;
-    procedure Recepcionista;
     private
       { Private declarations }
     public
@@ -114,7 +110,8 @@ implementation
 procedure TFormLogin.btnEntrarClick(Sender: TObject);
 var
   UserController: TUsuarioController;
-  Msg: string;
+  Usuario: TUsuario;
+  Msg: String;
 begin
   UserController := TUsuarioController.Create;
   try
@@ -125,19 +122,58 @@ begin
       Exit;
     end;
 
-    if UserController.VerificarUsuario(edUsuario.Text, edSenha.Text, Msg) then begin
+    Usuario := UserController.VerificarUsuario(edUsuario.Text, edSenha.Text, Msg);
+
+    if Assigned(Usuario) then begin
       Sleep(300);
       pnlLogin.Visible := False;
       pnlTelaPrincipal.Visible := True;
       pnlFundoLateral.Visible := True;
-      lblBemVindo.Caption := 'Bem Vindo, ' + edUsuario.Text + '!';
-    end
-    else
+      lblBemVindo.Caption := 'Bem-vindo, ' + Usuario.Nome + '!';
+
+      if Usuario.Grupo = 'Administrador' then begin
+        pnlConsultas.Visible := True;
+        pnlPacientes.Visible := True;
+        pnlRelatorios.Visible := True;
+        pnlUser.Visible := True;
+      end else if Usuario.Grupo = 'Recepcionista' then begin
+        pnlPacientes.Visible := True;
+        pnlPacientes.Top := 2;
+        pnlConsultas.Visible := True;
+        pnlConsultas.Top := 80;
+        pnlRelatorios.Visible := True;
+        pnlRelatorios.Top := 160;
+        pnlEncerrarSistema.Visible := True;
+        pnlEncerrarSistema.Top := 240;
+        Bevel1.Visible := False;
+        Bevel2.Visible := False;
+        Bevel3.Visible := False;
+        pnlUser.Visible := False;
+        pnlProfissionais.Visible := False;
+        pnlProcedimentos.Visible := False;
+      end else if Usuario.Grupo = 'Profissional' then begin
+        pnlRelatorios.Visible := True;
+        pnlRelatorios.Top := 80;
+        pnlConsultas.Visible := True;
+        pnlConsultas.Top := 2;
+        pnlEncerrarSistema.Visible := True;
+        pnlEncerrarSistema.Top := 160;
+        pnlUser.Visible := False;
+        pnlPacientes.Visible := False;
+        pnlProfissionais.Visible := False;
+        pnlProcedimentos.Visible := False;
+        bevel1.Visible := False;
+        bevel2.Visible := False;
+        bevel3.Visible := False;
+        bevel4.Visible := False;
+      end;
+    end else
       ShowMessage(Msg);
-  finally
-    UserController.Free;
+      finally
+      UserController.Free;
   end;
 end;
+
 procedure TFormLogin.btnEntrarMouseEnter(Sender: TObject);
   begin
     btnEntrar.Color := $00B06D13;
@@ -183,21 +219,6 @@ procedure TFormLogin.ImgOlhoFechadoClick(Sender: TObject);
     imgOlhoFechado.Visible := False;
   end;
 
-
-procedure TFormLogin.Medico;
-  begin
-      Sleep(300);
-      pnlLogin.Visible := False;
-      pnlTelaPrincipal.Visible := True;
-      pnlUser.Visible := False;
-      pnlPacientes.Visible := False;
-      pnlProcedimentos.Visible := False;
-      pnlProfissionais.Visible := False;
-      pnlRelatorios.Visible := False;
-      pnlFundoLateral.Visible := True;
-      lblBemVindo.Caption := 'Bem Vindo, ' + edUsuario.Text + '!';
-  end;
-
 procedure TFormLogin.pnlConsultasClick(Sender: TObject);
   begin
     PagConsultas.Show;
@@ -215,12 +236,10 @@ procedure TFormLogin.pnlConsultasMouseLeave(Sender: TObject);
 
 procedure TFormLogin.pnlEncerrarSistemaClick(Sender: TObject);
   begin
-  if MessageDlg('Deseja Encerrar o Sistema', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-  begin
+  if MessageDlg('Deseja Encerrar o Sistema', mtConfirmation, [mbYes, mbNo], 0) = mrYes then begin
     Sleep(500);
     Close;
-  end else begin
-  end;
+  end
 end;
 
 procedure TFormLogin.pnlEncerrarSistemaMouseEnter(Sender: TObject);
@@ -312,32 +331,9 @@ procedure TFormLogin.pnlUserMouseLeave(Sender: TObject);
     pnlUser.Color := $007C3E05;
   end;
 
-procedure TFormLogin.Recepcionista;
-  begin
-      Sleep(300);
-      pnlLogin.Visible := False;
-      pnlTelaPrincipal.Visible := True;
-      pnlUser.Visible := False;
-      pnlPacientes.Visible := True;
-      pnlProcedimentos.Visible := False;
-      pnlProfissionais.Visible := False;
-      pnlRelatorios.Visible := True;
-      pnlFundoLateral.Visible := True;
-      lblBemVindo.Caption := 'Bem Vindo, ' + edUsuario.Text + '!';
-  end;
-
 procedure TFormLogin.Timer1Timer(Sender: TObject);
   begin
     lblDataHora.Caption := FormatDateTime('dd/mm/yyyy hh:nn:ss', Now);
-  end;
-
-procedure TFormLogin.Admin;
-  begin
-      Sleep(300);
-      pnlLogin.Visible := False;
-      pnlTelaPrincipal.Visible := True;
-      pnlFundoLateral.Visible := True;
-      lblBemVindo.Caption := 'Bem Vindo, ' + edUsuario.Text + '!';
   end;
 
 procedure TFormLogin.btnEncerrarSistemaClick(Sender: TObject);

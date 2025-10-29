@@ -3141,7 +3141,7 @@ object PagProcedimentos: TPagProcedimentos
     end
     object pnlRestaurar: TPanel
       Left = 56
-      Top = 83
+      Top = 66
       Width = 497
       Height = 307
       BevelOuter = bvNone

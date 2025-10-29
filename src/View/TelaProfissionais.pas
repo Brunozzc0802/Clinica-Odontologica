@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.Mask, Vcl.WinXCtrls, Vcl.Grids, uProfissionaisController, uProfissionais,
-  System.Generics.Collections;
+  System.Generics.Collections, uProfissionaisControllerLog;
 
 type
   TPagProfissionais = class(TForm)
@@ -124,6 +124,7 @@ type
     ProfissionaisLista: TObjectList<TProfissionais>;
     ProfissionalIdalterar: Integer;
     Controller: TProfissionaisController;
+    ProfController: TLogController;
     procedure PesquisarProf(const Filtro: string);
   public
     { Public declarations }
@@ -187,9 +188,13 @@ procedure TPagProfissionais.adicionarProf;
         edNome.Text,
         edCPF.Text,
         edTelefone.Text,
+        edEmail.Text,
         edCEP.Text,
-        edEndereco.Text,
-        edEmail.Text);
+        edEndereco.Text
+        );
+
+
+        ProfController.RegistrarLog(EdNome.Text, 'Adicionado', 'CPF', edCPF.Text);
         ShowMessage('Profissional adicionado com sucesso!');
         btnAddNovo.Visible := False;
         CarregarGrid;
@@ -305,9 +310,9 @@ var
     EdNome.Text := sgProfissionais.Cells[1, linha];
     edCPF.Text := sgProfissionais.Cells[2, linha];
     edTelefone.Text := sgProfissionais.Cells[3, linha];
-    edEmail.Text := sgProfissionais.Cells[4, linha];
-    edCEP.Text := sgProfissionais.Cells[5, linha];
-    edendereco.Text := sgProfissionais.Cells[6, linha];
+    edEmail.Text := sgProfissionais.Cells[6, linha];
+    edCEP.Text := sgProfissionais.Cells[4, linha];
+    edendereco.Text := sgProfissionais.Cells[5, linha];
 
     btnConfirmarAlteracoes.Visible := True;
     btnAddNovo.Visible := False;
@@ -358,6 +363,7 @@ procedure TPagProfissionais.btnCancelarMouseLeave(Sender: TObject);
 procedure TPagProfissionais.btnConfirmarAlteracoesClick(Sender: TObject);
   begin
     ConfirmarAlteracoes(nil);
+    OrdenarGrid;
   end;
 
 procedure TPagProfissionais.btnConfirmarAlteracoesMouseEnter(Sender: TObject);
@@ -373,6 +379,7 @@ procedure TPagProfissionais.btnConfirmarAlteracoesMouseLeave(Sender: TObject);
 procedure TPagProfissionais.btnCRestoreClick(Sender: TObject);
   begin
     ConfirmarRestauracao;
+    OrdenarGrid;
   end;
 
 procedure TPagProfissionais.btnCRestoreMouseEnter(Sender: TObject);
@@ -388,6 +395,7 @@ procedure TPagProfissionais.btnCRestoreMouseLeave(Sender: TObject);
 procedure TPagProfissionais.btnDeletarClick(Sender: TObject);
 var
   Id: Integer;
+  Nome, Cpf: string;
   begin
     if btnAlterarNovo.Visible = True then begin
       btnAlterarNovo.Visible := False;
@@ -396,6 +404,9 @@ var
 
     Id := StrToIntDef(sgProfissionais.Cells[0, sgProfissionais.Row], 0);
     if Id > 0 then begin
+      Nome := sgProfissionais.Cells[1, sgProfissionais.Row];
+      Cpf  := sgProfissionais.Cells[2, sgProfissionais.Row];
+      ProfController.RegistrarLog(Nome, 'Deletado', 'CPF', Cpf);
       Controller.DesativarProfissional(Id);
       ShowMessage('Profissional deletado com sucesso!');
       CarregarGrid;
@@ -592,7 +603,7 @@ procedure TPagProfissionais.ConfirmarAlteracoes(Sender: TObject);
       edEndereco.Text
   );
 
-
+      ProfController.RegistrarLog(EdNome.Text,'Alterado', 'Cpf', edCPF.Text);
       ShowMessage('Alterações feitas com sucesso!');
       btnAlterarNovo.Visible := False;
       CarregarGrid;
@@ -608,6 +619,7 @@ procedure TPagProfissionais.ConfirmarAlteracoes(Sender: TObject);
 procedure TPagProfissionais.ConfirmarRestauracao;
   var
   ProfissionalId: Integer;
+  Profissional: TProfissionais;
   begin
     if sgRestore.Row > 0 then
     begin
@@ -616,7 +628,12 @@ procedure TPagProfissionais.ConfirmarRestauracao;
         Exit;
       end;
 
+      Profissional := TProfissionais.Create;
+      Profissional.Nome  := sgRestore.Cells[1,sgRestore.Row];
+      Profissional.Cpf := sgRestore.Cells[2,sgRestore.Row];
+
       try
+        ProfController.RegistrarLog(Profissional.Nome, 'Restaurado', 'Cpf', Profissional.Cpf);
         Controller.RestaurarProfissional(ProfissionalId);
         ShowMessage('Profissional restaurado com sucesso!');
         CarregarInativos;
@@ -625,7 +642,7 @@ procedure TPagProfissionais.ConfirmarRestauracao;
         sgRestore.Col := 0;
         sgRestore.SetFocus;
       finally
-        Controller.Free;
+        Profissional.Free;
       end;
       end else
       ShowMessage('Selecione um profissional para restaurar.');
@@ -702,6 +719,7 @@ procedure TPagProfissionais.FormClose(Sender: TObject; var Action: TCloseAction)
 procedure TPagProfissionais.FormCreate(Sender: TObject);
   begin
     Controller := TProfissionaisController.Create;
+    ProfController := TLogController.Create;
 
     sgProfissionais.Cells[0,0] := 'ID';
     sgProfissionais.Cells[1,0] := 'Nome do Paciente';
@@ -723,6 +741,7 @@ procedure TPagProfissionais.FormCreate(Sender: TObject);
 procedure TPagProfissionais.FormDestroy(Sender: TObject);
   begin
     Controller.Free;
+    ProfController.Free;
   end;
 
 procedure TPagProfissionais.FormShow(Sender: TObject);

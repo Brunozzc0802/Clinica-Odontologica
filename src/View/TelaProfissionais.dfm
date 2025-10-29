@@ -3088,7 +3088,7 @@ object PagProfissionais: TPagProfissionais
     end
     object pnlRestaurar: TPanel
       Left = 56
-      Top = 107
+      Top = 73
       Width = 497
       Height = 307
       BevelOuter = bvNone

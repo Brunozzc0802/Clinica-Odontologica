@@ -294,10 +294,10 @@ begin
     if PacienteId = 0 then begin
       Exit;
     end;
-    Paciente := TPaciente.Create;
 
-      Paciente.Nome  := sgRestore.Cells[1,sgRestore.Row];
-      Paciente.Cpf := sgRestore.Cells[2,sgRestore.Row];
+    Paciente := TPaciente.Create;
+    Paciente.Nome  := sgRestore.Cells[1,sgRestore.Row];
+    Paciente.Cpf := sgRestore.Cells[2,sgRestore.Row];
 
     try
       Controller.RestaurarPaciente(PacienteId);

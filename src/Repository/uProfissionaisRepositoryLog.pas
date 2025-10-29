@@ -1,19 +1,19 @@
-unit uPacientesRepositoryLog;
+unit uProfissionaisRepositoryLog;
 
 interface
 
 uses
-  uPacienteLog, System.SysUtils, System.IOUtils;
+  uProfissionaisLog, System.SysUtils, System.IOUtils;
 
 type
   TLogRepository = class
   public
-    procedure Salvar(ALog: TPacienteLog);
+    procedure Salvar(ALog: TProfissionalLog);
   end;
 
 implementation
 
-procedure TLogRepository.Salvar(ALog: TPacienteLog);
+procedure TLogRepository.Salvar(ALog: TProfissionalLog);
 var
   LogFile: TextFile;
   LogDir, LogPath, LogLine: string;
@@ -28,10 +28,10 @@ begin
     if not DirectoryExists(LogDir) then
       ForceDirectories(LogDir);
 
-    LogPath := LogDir + 'pacinte_log.txt';
+    LogPath := LogDir + 'profissional_log.txt';
 
     LogLine := Format('%s | %s | %s | %s | %s',
-      [ALog.Paciente,
+      [ALog.Profissional,
        ALog.Acao,
        ALog.Detalhes,
        ALog.Cpf,
@@ -45,7 +45,7 @@ begin
       else
         Rewrite(LogFile);
 
-      FileHandle := 1; // Marca que arquivo foi aberto
+      FileHandle := 1;
 
       WriteLn(LogFile, LogLine);
 

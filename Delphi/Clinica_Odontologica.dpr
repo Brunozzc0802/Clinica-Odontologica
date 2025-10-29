@@ -29,7 +29,10 @@ uses
   uUsuariosControllerLog in '..\src\Controller\uUsuariosControllerLog.pas',
   uPacienteLog in '..\src\Model\uPacienteLog.pas',
   uPacientesRepositoryLog in '..\src\Repository\uPacientesRepositoryLog.pas',
-  uPacientesControllerLog in '..\src\Controller\uPacientesControllerLog.pas';
+  uPacientesControllerLog in '..\src\Controller\uPacientesControllerLog.pas',
+  uProfissionaisLog in '..\src\Model\uProfissionaisLog.pas',
+  uProfissionaisRepositoryLog in '..\src\Repository\uProfissionaisRepositoryLog.pas',
+  uProfissionaisControllerLog in '..\src\Controller\uProfissionaisControllerLog.pas';
 
 {$R *.res}
 

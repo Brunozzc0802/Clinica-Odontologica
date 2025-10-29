@@ -1,0 +1,5 @@
+Teste | Adicionado | CPF | 98987987897 | 16:42:02 29-10-2025
+Bruno | Adicionado | CPF | 13012574948 | 16:45:52 29-10-2025
+Bruno | Alterado | Cpf | 13012574948 | 16:50:21 29-10-2025
+Teste123 | Alterado | Cpf | 98987987897 | 16:50:31 29-10-2025
+Bruno | Deletado | CPF | 13012574948 | 16:51:01 29-10-2025

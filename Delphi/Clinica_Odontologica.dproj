@@ -175,6 +175,9 @@
         <DCCReference Include="..\src\Model\uPacienteLog.pas"/>
         <DCCReference Include="..\src\Repository\uPacientesRepositoryLog.pas"/>
         <DCCReference Include="..\src\Controller\uPacientesControllerLog.pas"/>
+        <DCCReference Include="..\src\Model\uProfissionaisLog.pas"/>
+        <DCCReference Include="..\src\Repository\uProfissionaisRepositoryLog.pas"/>
+        <DCCReference Include="..\src\Controller\uProfissionaisControllerLog.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.WinXCtrls, Vcl.Grids, System.Net.URLClient,
   System.Net.HttpClient, System.Net.HttpClientComponent, System.JSON,uPacientesController,uPacientes,
-  System.Generics.Collections, Vcl.ComCtrls, Vcl.Mask, DateUtils;
+  System.Generics.Collections, Vcl.ComCtrls, Vcl.Mask, DateUtils, uPacientesControllerLog;
 
 type
   TPagPacientes = class(TForm)
@@ -134,6 +134,7 @@ type
      PacienteIdalterar: Integer;
      PacientesLista: TObjectList<TPaciente>;
      Controller: TPacientesController;
+     PaciController: TLogController;
      procedure PesquisarPacientes(const Filtro: string);
      function IdadeValida(DataNascimento: TDate): Boolean;
   public
@@ -271,7 +272,7 @@ begin
     edEndereco.Text,
     edDataNasc.Date
   );
-
+  PaciController.RegistrarLog(EdNomePaciente.Text,'Alterado', 'Cpf', edCPF.Text);
   ShowMessage('Alterações feitas com sucesso!');
   btnAlterarNovo.Visible := False;
   CarregarPacientes;
@@ -285,6 +286,7 @@ end;
 procedure TPagPacientes.ConfirmarRestauracao;
 var
   PacienteId: Integer;
+  Paciente: TPaciente;
 begin
   if sgRestore.Row > 0 then
   begin
@@ -292,9 +294,14 @@ begin
     if PacienteId = 0 then begin
       Exit;
     end;
+    Paciente := TPaciente.Create;
+
+      Paciente.Nome  := sgRestore.Cells[1,sgRestore.Row];
+      Paciente.Cpf := sgRestore.Cells[2,sgRestore.Row];
 
     try
       Controller.RestaurarPaciente(PacienteId);
+      PaciController.RegistrarLog(Paciente.Nome, 'Restaurado', 'Cpf', Paciente.Cpf);
       ShowMessage('Paciente restaurado com sucesso!');
       CarregarInativos;
       CarregarPacientes;
@@ -302,6 +309,7 @@ begin
       sgRestore.Col := 0;
       sgRestore.SetFocus;
     finally
+      Paciente.Free;
     end;
     end else
     ShowMessage('Selecione um paciente para restaurar.');
@@ -310,21 +318,23 @@ end;
 
 procedure TPagPacientes.adicionarPaciente;
   var
-    DataNascimento: TDate;
+  DataNascimento: TDate;
+begin
+  if (EdNomePaciente.Text = '') or (edCPF.Text = '') or (edTelefone.Text = '') or
+     (edCEP.Text = '') or (edDataNasc.Checked = False) then
   begin
-    if (EdNomePaciente.Text = '') or (edCPF.Text = '') or (edTelefone.Text = '') or
-       (edCEP.Text = '') or (edDataNasc.Checked = False) then
-    begin
-      ShowMessage('Preencha todos os campos');
-      Exit;
-    end;
+    ShowMessage('Preencha todos os campos');
+    Exit;
+  end;
 
-    DataNascimento := edDataNasc.Date;
-    if DataNascimento > Date then begin
-      ShowMessage('Data de nascimento inválida!');
-      Exit;
-    end;
+  DataNascimento := edDataNasc.Date;
+  if DataNascimento > Date then
+  begin
+    ShowMessage('Data de nascimento inválida!');
+    Exit;
+  end;
 
+  try
     Controller.AdicionarPaciente(
       edNomePaciente.Text,
       edCPF.Text,
@@ -333,20 +343,27 @@ procedure TPagPacientes.adicionarPaciente;
       edEndereco.Text,
       edDataNasc.Date
     );
-
+    PaciController.RegistrarLog(edNomePaciente.Text, 'Adicionado', 'CPF', edCPF.Text);
     ShowMessage('Paciente adicionado com sucesso!');
     CarregarPacientes;
     OrdenarGrid;
 
     btnAddNovo.Visible := False;
     pnlAddPacientes.Visible := False;
+
+    // Limpa campos
     edNomePaciente.Clear;
     edCPF.Clear;
     edTelefone.Clear;
     edCEP.Clear;
     edEndereco.Clear;
     edDataNasc.Date := Date;
+
+  except
+    on E: Exception do
+      ShowMessage('Erro ao adicionar paciente: ' + E.Message);
   end;
+end;
 
 procedure TPagPacientes.btnAddClick(Sender: TObject);
   begin
@@ -496,26 +513,36 @@ procedure TPagPacientes.btnCancelarMouseLeave(Sender: TObject);
   end;
 
 procedure TPagPacientes.btnDeletarClick(Sender: TObject);
-var
+  var
   Id: Integer;
-begin
+  Nome, Cpf: string;
+  begin
+    if btnAlterarNovo.Visible = True then begin
+      btnAlterarNovo.Visible := False;
+      pnlAddPacientes.Visible := False;
+    end;
 
-  if btnAlterarNovo.Visible = true then begin
-    btnalterarNovo.Visible := False;
-    pnlAddPacientes.Visible := False;
-  end;
+    if btnNovoPesquisar.Visible = true  then begin
+      sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
+      sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
+      pesquisar.Visible := False;
+      btnNovoPesquisar.Visible := False;
+    end;
 
-  Id := StrToIntDef(sgPacientes.Cells[0, sgPacientes.Row], 0);
-  if Id > 0 then begin
-      ShowMessage('Paciente Deletado com sucesso!');
+    Id := StrToIntDef(sgPacientes.Cells[0, sgPacientes.Row], 0);
+
+    if Id > 0 then begin
+      Nome := sgPacientes.Cells[1, sgPacientes.Row];
+      Cpf  := sgPacientes.Cells[2, sgPacientes.Row];
+      PaciController.RegistrarLog(Nome, 'Deletado', 'CPF', Cpf);
       Controller.DesativarPaciente(Id);
+      ShowMessage('Paciente deletado com sucesso!');
       CarregarPacientes;
       sgPacientes.Row := 0;
       sgPacientes.Col := 0;
       sgPacientes.SetFocus;
-  end else begin
-        ShowMessage('Selecione um paciente para deletar.');
-      end;
+    end else
+      ShowMessage('Selecione um paciente para deletar.');
   end;
 
 procedure TPagPacientes.btnDeletarMouseEnter(Sender: TObject);
@@ -810,6 +837,7 @@ procedure TPagPacientes.FormClose(Sender: TObject; var Action: TCloseAction);
 procedure TPagPacientes.FormCreate(Sender: TObject);
 begin
    Controller := TPacientesController.Create;
+   PaciController := TLogController.Create;
    PacientesLista := nil;
 
   sgPacientes.Cells[0,0] := 'ID';
@@ -833,8 +861,9 @@ end;
 
 procedure TPagPacientes.FormDestroy(Sender: TObject);
   begin
-    controller.Free;
+    FreeAndNil(Controller);
     FreeAndNil(PacientesLista);
+    FreeAndNil(PaciController);
   end;
 
 procedure TPagPacientes.FormShow(Sender: TObject);

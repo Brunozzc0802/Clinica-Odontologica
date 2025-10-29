@@ -8,12 +8,12 @@ uses
 type
   TLogController = class
   public
-    procedure RegistrarLog(const Usuario, Acao, Detalhes: string);
+    procedure RegistrarLog(const Usuario, Acao, Detalhes, Grupo: string);
   end;
 
 implementation
 
-procedure TLogController.RegistrarLog(const Usuario, Acao, Detalhes: string);
+procedure TLogController.RegistrarLog(const Usuario, Acao, Detalhes, Grupo: string);
 var
   UserLog: TLogRepository;
   Registro: TUsuarioLog;
@@ -23,6 +23,7 @@ var
       Registro.Usuario := Usuario;
       Registro.Acao := Acao;
       Registro.Detalhes := Detalhes;
+      Registro.Grupo := Grupo;
       Registro.DataHora := Now;
 
       UserLog := TLogRepository.Create;

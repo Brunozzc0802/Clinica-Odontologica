@@ -1,19 +1,19 @@
-unit uUsuarioRepositoryLog;
+unit uPacientesRepositoryLog;
 
 interface
 
 uses
-  uUsuarioLog, System.SysUtils, System.IOUtils;
+  uPacienteLog, System.SysUtils, System.IOUtils;
 
 type
   TLogRepository = class
   public
-    procedure Salvar(ALog: TUsuarioLog);
+    procedure Salvar(ALog: TPacienteLog);
   end;
 
 implementation
 
-procedure TLogRepository.Salvar(ALog: TUsuarioLog);
+procedure TLogRepository.Salvar(ALog: TPacienteLog);
 var
   LogFile: TextFile;
   LogDir, LogPath, LogLine: string;
@@ -23,19 +23,18 @@ begin
     Exit;
 
   try
-    // Usar caminho relativo ao executável
     LogDir := 'C:\Users\Bruno Tesser\Desktop\Clinica odontologica alves\Clinica-Odontologica\Logs\';
 
     if not DirectoryExists(LogDir) then
       ForceDirectories(LogDir);
 
-    LogPath := LogDir + 'usuario_log.txt';
+    LogPath := LogDir + 'pacinte_log.txt';
 
     LogLine := Format('%s | %s | %s | %s | %s',
-      [ALog.Usuario,
+      [ALog.Paciente,
        ALog.Acao,
        ALog.Detalhes,
-       ALog.Grupo,
+       ALog.Cpf,
        FormatDateTime('hh:nn:ss dd-mm-yyyy', ALog.DataHora)]);
 
     FileHandle := 0;

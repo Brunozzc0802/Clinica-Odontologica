@@ -1,10 +1,10 @@
 object PagUsuarios: TPagUsuarios
-  Left = 674
+  Left = 613
   Top = 208
   BorderStyle = bsNone
   Caption = 'Usu'#225'rios'
   ClientHeight = 645
-  ClientWidth = 703
+  ClientWidth = 701
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -30,11 +30,11 @@ object PagUsuarios: TPagUsuarios
       AlignWithMargins = True
       Left = 2
       Top = 2
-      Width = 698
+      Width = 696
       Height = 38
       Margins.Left = 2
       Margins.Top = 2
-      Margins.Right = 293
+      Margins.Right = 295
       Margins.Bottom = 1
       Align = alClient
       BevelOuter = bvNone
@@ -2500,9 +2500,9 @@ object PagUsuarios: TPagUsuarios
     end
     object sgUsuarios: TStringGrid
       Left = 9
-      Top = 6
+      Top = 8
       Width = 525
-      Height = 442
+      Height = 440
       DefaultColWidth = 100
       FixedCols = 0
       RowCount = 1
@@ -2512,7 +2512,7 @@ object PagUsuarios: TPagUsuarios
     end
     object pesquisarUsuario: TSearchBox
       Left = 9
-      Top = 6
+      Top = 8
       Width = 525
       Height = 23
       TabOrder = 1
@@ -2522,7 +2522,7 @@ object PagUsuarios: TPagUsuarios
     end
     object pnlRestaurar: TPanel
       Left = 64
-      Top = 107
+      Top = 75
       Width = 409
       Height = 307
       BevelOuter = bvNone

@@ -26,15 +26,18 @@ uses
   uConsultasController in '..\src\Controller\uConsultasController.pas',
   uUsuarioRepositoryLog in '..\src\Repository\uUsuarioRepositoryLog.pas',
   uUsuarioLog in '..\src\Model\uUsuarioLog.pas',
-  uUsuariosControllerLog in '..\src\Controller\uUsuariosControllerLog.pas';
+  uUsuariosControllerLog in '..\src\Controller\uUsuariosControllerLog.pas',
+  uPacienteLog in '..\src\Model\uPacienteLog.pas',
+  uPacientesRepositoryLog in '..\src\Repository\uPacientesRepositoryLog.pas',
+  uPacientesControllerLog in '..\src\Controller\uPacientesControllerLog.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TFormLogin, FormLogin);
   Application.CreateForm(TdmUsuarios, dmUsuarios);
+  Application.CreateForm(TFormLogin, FormLogin);
   Application.CreateForm(TPagConsultas, PagConsultas);
   Application.CreateForm(TPagUsuarios, PagUsuarios);
   Application.CreateForm(TPagProcedimentos, PagProcedimentos);

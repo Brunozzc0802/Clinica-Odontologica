@@ -3226,7 +3226,7 @@ object PagPacientes: TPagPacientes
     end
     object pnlRestaurar: TPanel
       Left = 56
-      Top = 107
+      Top = 66
       Width = 497
       Height = 307
       BevelOuter = bvNone

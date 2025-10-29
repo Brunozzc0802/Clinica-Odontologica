@@ -215,13 +215,11 @@ procedure TPagUsuarios.CarregarUsuarios;
 var
   I: Integer;
 begin
-  Controller := TUsuarioController.Create;
   try
     if Assigned(UsuarioLista) then
     UsuarioLista.Free;
     UsuarioLista := Controller.BuscarTodos;
 
-    // Cabeçalho
     sgUsuarios.Cells[0, 0] := 'ID';
     sgUsuarios.Cells[1, 0] := 'Nome de Usuário';
     sgUsuarios.Cells[2, 0] := 'Senha';
@@ -260,7 +258,7 @@ begin
 
       try
         Controller.RestaurarUsuario(Usuario);
-         UserController.RegistrarLog(Usuario.Nome, 'Restaurarado', 'Usuário restaurado (id: '+IntToStr(Usuario.Id)+')');
+        UserController.RegistrarLog(Usuario.Nome, 'Restaurado', 'Grupo', Usuario.Grupo);
         CarregarInativos;
         ShowMessage('Usuário Restaurado com sucesso!');
       finally
@@ -280,14 +278,14 @@ end;
 //ação de fechar o formulario\\
 procedure TPagUsuarios.FormClose(Sender: TObject; var Action: TCloseAction);
   begin
-    UserController.Free;
-    UsuarioLista.Free;
-    Controller.Free;
+    FreeAndNil(UserController);
+    FreeAndNil(UsuarioLista);
+    FreeAndNil(Controller);
     pnlFormAddUsuarios.Visible := False;
     btnAddNovo.visible := false;
     pnlFormAddUsuarios.Visible := False;
     btnAlterarNovo.Visible := False;
-    btnPesquisarUsu.Visible := False;
+    btnNovoPesquisar.Visible := False;
     btnRestaurarNovo.Visible := False;
     pnlRestaurar.Visible := False;
     imgLogoUsuarios2.Visible := False;
@@ -430,6 +428,7 @@ procedure TPagUsuarios.btnXUsuariosClick(Sender: TObject);
   begin
     Close;
   end;
+
 //comando para quando apertar enter\\
 procedure TPagUsuarios.edUsuarioKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   begin
@@ -474,7 +473,7 @@ procedure TPagUsuarios.AdicionarUsuarios;
         cbAtivo.ItemIndex = 0
         );
 
-        UserController.RegistrarLog('Adicionado', edUsuario.Text, 'Usuário adicionado');
+        UserController.RegistrarLog(edUsuario.Text,'Adicionado', 'Grupo', cbGrupo.Text);
         ShowMessage('Usuário adicionado com sucesso!');
         CarregarUsuarios;
         edUsuario.clear;
@@ -520,9 +519,6 @@ procedure TPagUsuarios.btnAddUsuClick(Sender: TObject);
         pesquisarUsuario.Visible := False;
         btnNovoPesquisar.Visible := False;
     end;
-
-
-
       btnAlterarNovo.Visible := false;
       btnAddNovo.Visible := True;
       btnNovoPesquisar.Visible := False;
@@ -550,7 +546,7 @@ begin
       cbGrupo.Text,
       cbAtivo.ItemIndex = 0
     );
-    UserController.RegistrarLog('Alterarado', edUsuario.Text,  'Usuário alterado (id: '+IntToStr(UsuarioIdalterar)+')');
+    UserController.RegistrarLog(edUsuario.Text, 'Alterado', 'Grupo', cbGrupo.Text);
     ShowMessage('Usuário alterado com sucesso!');
     btnAlterarNovo.Visible := False;
     CarregarUsuarios;
@@ -574,7 +570,7 @@ begin
       sgUsuarios.Height := sgUsuarios.Height + (pesquisarUsuario.Height + 5);
       pesquisarUsuario.Visible := False;
       btnNovoPesquisar.Visible := False;
-    end;
+  end;
 
   if not Assigned(UsuarioLista) then Exit;
   LinhaDelet := sgUsuarios.Row;
@@ -590,7 +586,7 @@ begin
       Controller := TUsuarioController.Create;
       try
         Controller.DeletarUsuario(Usuario);
-        UserController.RegistrarLog('Deletado', Usuario.Nome, 'Usuário deletado (id: '+IntToStr(Usuario.Id)+')');
+        UserController.RegistrarLog(Usuario.Nome, 'Deletado', 'Grupo', Usuario.Grupo);
         CarregarUsuarios;
         ShowMessage('Usuário deletado com sucesso!');
         sgUsuarios.Row := 0;

@@ -1,4 +1,4 @@
-unit TelaLogin;
+﻿unit TelaLogin;
 
 interface
 
@@ -56,14 +56,13 @@ type
         footerPrincipal: TPanel;
         lblBemVindo: TLabel;
         Timer1: TTimer;
-        Bevel1: TBevel;
-        Bevel3: TBevel;
-        Bevel2: TBevel;
-        Bevel4: TBevel;
         Bevel6: TBevel;
         Bevel5: TBevel;
         Bevel7: TBevel;
         lblDataHora: TLabel;
+    Shape1: TShape;
+    Shape2: TShape;
+    Shape3: TShape;
         procedure FormCreate(Sender: TObject);
         procedure btnEntrarMouseEnter(Sender: TObject);
         procedure btnEntrarMouseLeave(Sender: TObject);
@@ -124,49 +123,55 @@ begin
 
     Usuario := UserController.VerificarUsuario(edUsuario.Text, edSenha.Text, Msg);
 
-      if Usuario.Grupo = 'Administrador' then begin
+    // 🔹 Aqui o teste que evita o Access Violation
+    if Usuario = nil then
+    begin
+      ShowMessage(Msg);
+      Exit;
+    end;
+
+    if Usuario.Grupo = 'Administrador' then
+    begin
       Sleep(300);
       pnlLogin.Visible := False;
       pnlTelaPrincipal.Visible := True;
       pnlFundoLateral.Visible := True;
-      pnlUser.Visible := True;
       lblBemVindo.Caption := 'Bem-vindo, ' + Usuario.Nome + '!';
-      end else if Usuario.Grupo = 'Recepcionista' then begin
-        pnlPacientes.Visible := True;
-        pnlPacientes.Top := 2;
-        pnlConsultas.Visible := True;
-        pnlConsultas.Top := 80;
-        pnlRelatorios.Visible := True;
-        pnlRelatorios.Top := 160;
-        pnlEncerrarSistema.Visible := True;
-        pnlEncerrarSistema.Top := 240;
-        Bevel1.Visible := False;
-        Bevel2.Visible := False;
-        Bevel3.Visible := False;
-        pnlUser.Visible := False;
-        pnlProfissionais.Visible := False;
-        pnlProcedimentos.Visible := False;
-        lblBemVindo.Caption := 'Bem-vindo, ' + Usuario.Nome + '!';
-      end else if Usuario.Grupo = 'Profissional' then begin
-        pnlRelatorios.Visible := True;
-        pnlRelatorios.Top := 80;
-        pnlConsultas.Visible := True;
-        pnlConsultas.Top := 2;
-        pnlEncerrarSistema.Visible := True;
-        pnlEncerrarSistema.Top := 160;
-        pnlUser.Visible := False;
-        pnlPacientes.Visible := False;
-        pnlProfissionais.Visible := False;
-        pnlProcedimentos.Visible := False;
-        bevel1.Visible := False;
-        bevel2.Visible := False;
-        bevel3.Visible := False;
-        bevel4.Visible := False;
-        lblBemVindo.Caption := 'Bem-vindo, ' + Usuario.Nome + '!';
-      end else
-      ShowMessage(Msg);
-      finally
-      UserController.Free;
+    end else if Usuario.Grupo = 'Recepcionista' then begin
+      pnlPacientes.Visible := True;
+      pnlPacientes.Top := 2;
+      pnlConsultas.Visible := True;
+      pnlConsultas.Top := 80;
+      pnlRelatorios.Visible := True;
+      pnlRelatorios.Top := 160;
+      pnlEncerrarSistema.Visible := True;
+      pnlEncerrarSistema.Top := 240;
+      pnlUser.Visible := False;
+      pnlProfissionais.Visible := False;
+      pnlProcedimentos.Visible := False;
+      lblBemVindo.Caption := 'Bem-vindo, ' + Usuario.Nome + '!';
+    end
+    else if Usuario.Grupo = 'Profissional' then
+    begin
+      pnlRelatorios.Visible := True;
+      pnlRelatorios.Top := 80;
+      pnlConsultas.Visible := True;
+      pnlConsultas.Top := 2;
+      pnlEncerrarSistema.Visible := True;
+      pnlEncerrarSistema.Top := 160;
+      pnlUser.Visible := False;
+      pnlPacientes.Visible := False;
+      pnlProfissionais.Visible := False;
+      pnlProcedimentos.Visible := False;
+      lblBemVindo.Caption := 'Bem-vindo, ' + Usuario.Nome + '!';
+    end else
+      Sleep(300);
+      pnlLogin.Visible := False;
+      pnlTelaPrincipal.Visible := True;
+      pnlFundoLateral.Visible := True;
+      lblBemVindo.Caption := 'Bem-vindo, ' + Usuario.Nome + '!';
+  finally
+    UserController.Free;
   end;
 end;
 
@@ -241,11 +246,13 @@ end;
 procedure TFormLogin.pnlEncerrarSistemaMouseEnter(Sender: TObject);
   begin
     pnlEncerrarSistema.Color := $00F78B2B;
+    Shape1.Brush.Color := $00F78B2B;
   end;
 
 procedure TFormLogin.pnlEncerrarSistemaMouseLeave(Sender: TObject);
   begin
     pnlEncerrarSistema.Color := $007C3E05;
+    Shape1.Brush.Color := $007C3E05;
   end;
 
 procedure TFormLogin.pnlPacientesClick(Sender: TObject);
@@ -276,11 +283,13 @@ procedure TFormLogin.pnlProcedimentosClick(Sender: TObject);
 procedure TFormLogin.pnlProcedimentosMouseEnter(Sender: TObject);
   begin
     pnlProcedimentos.Color := $00F78B2B;
+    Shape3.Brush.Color := $00F78B2B;
   end;
 
 procedure TFormLogin.pnlProcedimentosMouseLeave(Sender: TObject);
   begin
     pnlProcedimentos.Color := $007C3E05;
+    Shape3.Brush.Color := $007C3E05;
   end;
 
 procedure TFormLogin.pnlProfissionaisClick(Sender: TObject);
@@ -303,11 +312,13 @@ procedure TFormLogin.pnlProfissionaisMouseLeave(Sender: TObject);
 procedure TFormLogin.pnlRelatoriosMouseEnter(Sender: TObject);
   begin
     pnlRelatorios.Color := $00F78B2B;
+    Shape2.Brush.Color := $00F78B2B;
   end;
 
 procedure TFormLogin.pnlRelatoriosMouseLeave(Sender: TObject);
   begin
     pnlRelatorios.Color := $007C3E05;
+    Shape2.Brush.Color  := $007C3E05;
   end;
 
 procedure TFormLogin.pnlUserClick(Sender: TObject);

@@ -5142,34 +5142,6 @@ object FormLogin: TFormLogin
       ParentBackground = False
       TabOrder = 1
       Visible = False
-      object Bevel1: TBevel
-        Left = -2
-        Top = 542
-        Width = 285
-        Height = 12
-        Shape = bsBottomLine
-      end
-      object Bevel3: TBevel
-        Left = 0
-        Top = 466
-        Width = 285
-        Height = 12
-        Shape = bsBottomLine
-      end
-      object Bevel2: TBevel
-        Left = 0
-        Top = 383
-        Width = 285
-        Height = 15
-        Shape = bsBottomLine
-      end
-      object Bevel4: TBevel
-        Left = -2
-        Top = 309
-        Width = 285
-        Height = 7
-        Shape = bsBottomLine
-      end
       object Bevel6: TBevel
         Left = 4
         Top = 119
@@ -5191,9 +5163,36 @@ object FormLogin: TFormLogin
         Height = 19
         Shape = bsBottomLine
       end
+      object Shape1: TShape
+        Left = 9
+        Top = 480
+        Width = 270
+        Height = 73
+        Brush.Color = 8142341
+        Pen.Color = clWhite
+        Shape = stRoundRect
+      end
+      object Shape2: TShape
+        Left = 9
+        Top = 400
+        Width = 270
+        Height = 73
+        Brush.Color = 8142341
+        Pen.Color = clWhite
+        Shape = stRoundRect
+      end
+      object Shape3: TShape
+        Left = 9
+        Top = 320
+        Width = 270
+        Height = 73
+        Brush.Color = 8142341
+        Pen.Color = clWhite
+        Shape = stRoundRect
+      end
       object pnlUser: TPanel
         Left = -5
-        Top = 2
+        Top = 3
         Width = 302
         Height = 73
         Cursor = crHandPoint
@@ -5361,8 +5360,8 @@ object FormLogin: TFormLogin
           OnClick = pnlPacientesClick
           OnMouseEnter = pnlPacientesMouseEnter
           OnMouseLeave = pnlPacientesMouseLeave
-          ExplicitTop = 20
-          ExplicitWidth = 97
+          ExplicitWidth = 83
+          ExplicitHeight = 25
         end
         object imgPacientes: TImage
           Left = 0
@@ -5595,7 +5594,7 @@ object FormLogin: TFormLogin
       end
       object pnlConsultas: TPanel
         Left = 0
-        Top = 237
+        Top = 239
         Width = 300
         Height = 75
         Cursor = crHandPoint
@@ -5699,10 +5698,10 @@ object FormLogin: TFormLogin
         end
       end
       object pnlProcedimentos: TPanel
-        Left = 1
-        Top = 318
-        Width = 303
-        Height = 76
+        Left = 12
+        Top = 323
+        Width = 264
+        Height = 65
         Cursor = crHandPoint
         BevelOuter = bvNone
         Color = 8142341
@@ -5713,8 +5712,8 @@ object FormLogin: TFormLogin
         OnMouseLeave = pnlProcedimentosMouseLeave
         object lblProcedimentos: TLabel
           AlignWithMargins = True
-          Left = 100
-          Top = 24
+          Left = 89
+          Top = 18
           Width = 134
           Height = 25
           Cursor = crHandPoint
@@ -5736,10 +5735,10 @@ object FormLogin: TFormLogin
           OnMouseLeave = pnlProcedimentosMouseLeave
         end
         object imgProcedimentos: TImage
-          Left = 5
-          Top = 5
-          Width = 65
-          Height = 64
+          Left = -2
+          Top = 6
+          Width = 57
+          Height = 55
           Cursor = crHandPoint
           Picture.Data = {
             0954506E67496D61676589504E470D0A1A0A0000000D49484452000000400000
@@ -5820,10 +5819,10 @@ object FormLogin: TFormLogin
         end
       end
       object pnlEncerrarSistema: TPanel
-        Left = 2
-        Top = 480
-        Width = 302
-        Height = 71
+        Left = 12
+        Top = 484
+        Width = 265
+        Height = 65
         Cursor = crHandPoint
         BevelOuter = bvNone
         Color = 8142341
@@ -5834,8 +5833,8 @@ object FormLogin: TFormLogin
         OnMouseLeave = pnlEncerrarSistemaMouseLeave
         object lblEncerrarSistema: TLabel
           AlignWithMargins = True
-          Left = 99
-          Top = 22
+          Left = 89
+          Top = 18
           Width = 148
           Height = 25
           Cursor = crHandPoint
@@ -5857,10 +5856,10 @@ object FormLogin: TFormLogin
           OnMouseLeave = pnlEncerrarSistemaMouseLeave
         end
         object imgEncerrarSistema: TImage
-          Left = 10
+          Left = 5
           Top = 6
-          Width = 61
-          Height = 59
+          Width = 55
+          Height = 53
           Cursor = crHandPoint
           Picture.Data = {
             0954506E67496D61676589504E470D0A1A0A0000000D49484452000000400000
@@ -5904,10 +5903,10 @@ object FormLogin: TFormLogin
         end
       end
       object pnlRelatorios: TPanel
-        Left = 0
-        Top = 401
-        Width = 302
-        Height = 73
+        Left = 12
+        Top = 403
+        Width = 264
+        Height = 65
         Cursor = crHandPoint
         BevelOuter = bvNone
         Color = 8142341
@@ -5917,15 +5916,15 @@ object FormLogin: TFormLogin
         OnMouseLeave = pnlRelatoriosMouseLeave
         object lblRelatorios: TLabel
           AlignWithMargins = True
-          Left = 100
-          Top = 21
-          Width = 102
-          Height = 27
+          Left = 88
+          Top = 18
+          Width = 126
+          Height = 29
           Cursor = crHandPoint
-          Margins.Left = 100
-          Margins.Top = 21
-          Margins.Right = 100
-          Margins.Bottom = 25
+          Margins.Left = 88
+          Margins.Top = 18
+          Margins.Right = 50
+          Margins.Bottom = 18
           Align = alClient
           Caption = 'Relat'#243'rios'
           Color = clCream
@@ -5938,14 +5937,14 @@ object FormLogin: TFormLogin
           ParentFont = False
           OnMouseEnter = pnlRelatoriosMouseEnter
           OnMouseLeave = pnlRelatoriosMouseLeave
-          ExplicitWidth = 89
-          ExplicitHeight = 25
+          ExplicitTop = 19
+          ExplicitHeight = 26
         end
         object imgRelatorios: TImage
-          Left = 8
-          Top = 4
-          Width = 65
-          Height = 64
+          Left = 1
+          Top = 6
+          Width = 55
+          Height = 55
           Cursor = crHandPoint
           Picture.Data = {
             0954506E67496D61676589504E470D0A1A0A0000000D49484452000000400000

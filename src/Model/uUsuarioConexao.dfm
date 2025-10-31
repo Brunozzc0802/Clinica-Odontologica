@@ -9,13 +9,14 @@ object dmUsuarios: TdmUsuarios
       'Database=clinica_odontologica'
       'User_Name=postgres'
       'Password=root')
+    Connected = True
     Left = 88
     Top = 88
   end
   object FDPhysPgDriverLink1: TFDPhysPgDriverLink
     VendorLib = 
-      'C:\Users\Bruno Tesser\Desktop\Clinica odontologica alves\Clinica' +
-      '-Odontologica\lib\lib\libpq.dll'
+      'C:\Users\alves.4948\Desktop\CLINICA PROJETO\Clinica-Odontologica' +
+      '\lib\lib\libpq.dll'
     Left = 89
     Top = 32
   end

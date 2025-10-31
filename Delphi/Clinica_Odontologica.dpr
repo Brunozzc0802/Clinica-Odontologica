@@ -39,10 +39,10 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TdmUsuarios, dmUsuarios);
   Application.CreateForm(TFormLogin, FormLogin);
-  Application.CreateForm(TPagConsultas, PagConsultas);
   Application.CreateForm(TPagUsuarios, PagUsuarios);
+  Application.CreateForm(TdmUsuarios, dmUsuarios);
+  Application.CreateForm(TPagConsultas, PagConsultas);
   Application.CreateForm(TPagProcedimentos, PagProcedimentos);
   Application.CreateForm(TPagPacientes, PagPacientes);
   Application.CreateForm(TPagProfissionais, PagProfissionais);

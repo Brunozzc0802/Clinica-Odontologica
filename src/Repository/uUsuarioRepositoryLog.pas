@@ -23,8 +23,7 @@ begin
     Exit;
 
   try
-    // Usar caminho relativo ao executável
-    LogDir := 'C:\Users\alves.4948\Desktop\CLINICA PROJETO\Clinica-Odontologica\Logs\';
+    LogDir := 'C:\Users\bruno\OneDrive\Desktop\Projeto empresa\Clinica-Odontologica\Logs\';
 
     if not DirectoryExists(LogDir) then
       ForceDirectories(LogDir);

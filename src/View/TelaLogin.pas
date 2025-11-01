@@ -56,19 +56,18 @@ type
         footerPrincipal: TPanel;
         lblBemVindo: TLabel;
         Timer1: TTimer;
-        Bevel6: TBevel;
-        Bevel5: TBevel;
-        Bevel7: TBevel;
         lblDataHora: TLabel;
-    Shape1: TShape;
-    Shape2: TShape;
-    Shape3: TShape;
+        Shape1: TShape;
+        Shape2: TShape;
+        Shape3: TShape;
+        Shape4: TShape;
+    Shape5: TShape;
+    Shape6: TShape;
+    Shape7: TShape;
         procedure FormCreate(Sender: TObject);
         procedure btnEntrarMouseEnter(Sender: TObject);
         procedure btnEntrarMouseLeave(Sender: TObject);
         procedure btnEncerrarSistemaClick(Sender: TObject);
-        procedure edUsuarioKeyDown(Sender: TObject; var Key: Word;Shift: TShiftState);
-        procedure edSenhaKeyDown(Sender: TObject; var Key: Word;Shift: TShiftState);
         procedure ImgOlhoFechadoClick(Sender: TObject);
         procedure ImgOlhoAbertoClick(Sender: TObject);
         procedure pnlUserMouseEnter(Sender: TObject);
@@ -93,6 +92,9 @@ type
         procedure pnlProfissionaisClick(Sender: TObject);
         procedure pnlProcedimentosClick(Sender: TObject);
         procedure pnlConsultasClick(Sender: TObject);
+    procedure edSenhaKeyPress(Sender: TObject; var Key: Char);
+    procedure edUsuarioKeyPress(Sender: TObject; var Key: Char);
+
     private
       { Private declarations }
     public
@@ -185,19 +187,19 @@ procedure TFormLogin.btnEntrarMouseLeave(Sender: TObject);
     btnEntrar.Color := $00C97D16;
   end;
 
-procedure TFormLogin.edUsuarioKeyDown(Sender: TObject; var Key: Word;Shift: TShiftState);
-  begin
-    if Key = VK_RETURN then begin
-      Key := 0;
-      edSenha.SetFocus;
+procedure TFormLogin.edSenhaKeyPress(Sender: TObject; var Key: Char);
+    begin
+    if Key = #13 then  begin
+      Key := #0; // bloqueia o som
+      btnEntrarClick(nil);
     end;
   end;
 
-procedure TFormLogin.edSenhaKeyDown(Sender: TObject; var Key: Word;Shift: TShiftState);
-  begin
-    if Key = VK_RETURN then begin
-      Key := 0;
-      btnEntrarClick(nil);
+procedure TFormLogin.edUsuarioKeyPress(Sender: TObject; var Key: Char);
+   begin
+    if Key = #13 then  begin
+      Key := #0;
+      edSenha.SetFocus;
     end;
   end;
 
@@ -228,11 +230,13 @@ procedure TFormLogin.pnlConsultasClick(Sender: TObject);
 procedure TFormLogin.pnlConsultasMouseEnter(Sender: TObject);
   begin
     pnlConsultas.Color := $00F78B2B;
+    Shape4.Brush.Color := $00F78B2B;
   end;
 
 procedure TFormLogin.pnlConsultasMouseLeave(Sender: TObject);
   begin
     pnlConsultas.Color := $007C3E05;
+    Shape4.Brush.Color := $007C3E05;
   end;
 
 procedure TFormLogin.pnlEncerrarSistemaClick(Sender: TObject);
@@ -255,6 +259,8 @@ procedure TFormLogin.pnlEncerrarSistemaMouseLeave(Sender: TObject);
     Shape1.Brush.Color := $007C3E05;
   end;
 
+
+
 procedure TFormLogin.pnlPacientesClick(Sender: TObject);
   begin
     PagPacientes.Show;
@@ -265,11 +271,13 @@ procedure TFormLogin.pnlPacientesClick(Sender: TObject);
 procedure TFormLogin.pnlPacientesMouseEnter(Sender: TObject);
   begin
     pnlPacientes.Color := $00F78B2B;
+    Shape6.Brush.Color := $00F78B2B;
   end;
 
 procedure TFormLogin.pnlPacientesMouseLeave(Sender: TObject);
   begin
     pnlPacientes.Color := $007C3E05;
+    Shape6.Brush.Color := $007C3E05;
   end;
 
 procedure TFormLogin.pnlProcedimentosClick(Sender: TObject);
@@ -302,11 +310,13 @@ procedure TFormLogin.pnlProfissionaisClick(Sender: TObject);
 procedure TFormLogin.pnlProfissionaisMouseEnter(Sender: TObject);
   begin
     pnlProfissionais.Color := $00F78B2B;
+    Shape5.Brush.Color := $00F78B2B;
   end;
 
 procedure TFormLogin.pnlProfissionaisMouseLeave(Sender: TObject);
   begin
     pnlProfissionais.Color := $007C3E05;
+    Shape5.Brush.Color := $007C3E05;
   end;
 
 procedure TFormLogin.pnlRelatoriosMouseEnter(Sender: TObject);
@@ -331,11 +341,13 @@ procedure TFormLogin.pnlUserClick(Sender: TObject);
 procedure TFormLogin.pnlUserMouseEnter(Sender: TObject);
   begin
     pnlUser.Color := $00F78B2B;
+    Shape7.Brush.Color := $00F78B2B;
   end;
 
 procedure TFormLogin.pnlUserMouseLeave(Sender: TObject);
   begin
     pnlUser.Color := $007C3E05;
+    Shape7.Brush.Color := $007C3E05;
   end;
 
 procedure TFormLogin.Timer1Timer(Sender: TObject);

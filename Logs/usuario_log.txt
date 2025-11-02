@@ -3,3 +3,4 @@ João | Adicionado | Grupo | 2
 Aaaaa | Adicionado | Grupo | Profissional
 Aaaaa | Deletado | Grupo | Profissional | 2025-10-29 14:38:06
 João | Deletado | Grupo | Profissional | 14:38:58 29-10-2025
+Fer | Adicionado | Grupo | Recepcionista | 00:10:46 02-11-2025

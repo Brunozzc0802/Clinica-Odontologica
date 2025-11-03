@@ -13,28 +13,29 @@ type
 
 implementation
 
-procedure TLogController.RegistrarLog(const Paciente, Acao, Detalhes, Cpf: string);
+procedure TLogController.RegistrarLog(const Paciente, Acao, Detalhes,
+  Cpf: string);
 var
   PaciLog: TLogRepository;
   Registro: TPacienteLog;
-  begin
-    Registro := TPacienteLog.Create;
-    try
-      Registro.Paciente := Paciente;
-      Registro.Acao := Acao;
-      Registro.Detalhes := Detalhes;
-      Registro.Cpf := Cpf;
-      Registro.DataHora := Now;
+begin
+  Registro := TPacienteLog.Create;
+  try
+    Registro.Paciente := Paciente;
+    Registro.Acao := Acao;
+    Registro.Detalhes := Detalhes;
+    Registro.Cpf := Cpf;
+    Registro.DataHora := Now;
 
-      PaciLog := TLogRepository.Create;
-      try
-        PaciLog.Salvar(Registro);
-      finally
-        PaciLog.Free;
-      end;
+    PaciLog := TLogRepository.Create;
+    try
+      PaciLog.Salvar(Registro);
     finally
-      Registro.Free;
+      PaciLog.Free;
     end;
+  finally
+    Registro.Free;
   end;
+end;
 
 end.

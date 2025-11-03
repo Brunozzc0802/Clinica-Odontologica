@@ -14,11 +14,10 @@ type
     property Id: integer read UId write UId;
     property Nome: string read UNome write UNome;
     property Senha: string read USenha write USenha;
-    property Ativo: boolean read UAtivo write UAtivo;
+    property Ativo: Boolean read UAtivo write UAtivo;
     property Grupo: string read UGrupo write UGrupo;
   end;
 
 implementation
 
 end.
-

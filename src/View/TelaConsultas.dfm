@@ -3055,6 +3055,7 @@ object PagConsultas: TPagConsultas
         Color = 8142341
         ParentBackground = False
         TabOrder = 5
+        OnClick = btnadicionarClick
         OnMouseEnter = btnadicionarMouseEnter
         OnMouseLeave = btnadicionarMouseLeave
         object lblAddprocedimento: TLabel
@@ -3173,7 +3174,7 @@ object PagConsultas: TPagConsultas
       Top = 5
       Width = 594
       Height = 440
-      ColCount = 7
+      ColCount = 8
       TabOrder = 3
       Visible = False
     end
@@ -3301,5 +3302,9 @@ object PagConsultas: TPagConsultas
         ExplicitHeight = 17
       end
     end
+  end
+  object tmrAtualizarStatus: TTimer
+    Left = 680
+    Top = 464
   end
 end

@@ -21,14 +21,16 @@ implementation
 
 { TProcedimentoRepository }
 
-function TProcedimentoRepository.ListarProcedimentos: TObjectList<TProcedimento>;
+function TProcedimentoRepository.ListarProcedimentos
+  : TObjectList<TProcedimento>;
 var
   Procedimento: TProcedimento;
 begin
   Result := TObjectList<TProcedimento>.Create(True);
   with dmUsuarios.queryProcedimentos do begin
     Close;
-    SQL.Text := 'SELECT id, nome, valor, duracao::TIME as duracao, ativo FROM procedimentos WHERE ativo = TRUE';
+    SQL.Text :=
+      'SELECT id, nome, valor, duracao::TIME as duracao, ativo FROM procedimentos WHERE ativo = TRUE';
     Open;
     while not Eof do begin
       Procedimento := TProcedimento.Create;
@@ -44,14 +46,14 @@ begin
 end;
 
 procedure TProcedimentoRepository.RestaurarProcedimento(const Id: Integer);
-  begin
-    with dmUsuarios.queryProcedimentos do begin
-      Close;
-      SQL.Text := 'UPDATE procedimentos SET ativo = TRUE WHERE id = :id';
-      ParamByName('id').AsInteger := Id;
-      ExecSQL;
-    end;
+begin
+  with dmUsuarios.queryProcedimentos do begin
+    Close;
+    SQL.Text := 'UPDATE procedimentos SET ativo = TRUE WHERE id = :id';
+    ParamByName('id').AsInteger := Id;
+    ExecSQL;
   end;
+end;
 
 function TProcedimentoRepository.ListarInativos: TObjectList<TProcedimento>;
 var
@@ -60,7 +62,8 @@ begin
   Result := TObjectList<TProcedimento>.Create(True);
   with dmUsuarios.queryProcedimentos do begin
     Close;
-    SQL.Text := 'SELECT id, nome, valor, duracao, ativo FROM procedimentos WHERE ativo = FALSE';
+    SQL.Text :=
+      'SELECT id, nome, valor, duracao, ativo FROM procedimentos WHERE ativo = FALSE';
     Open;
     while not Eof do begin
       Procedimento := TProcedimento.Create;
@@ -76,7 +79,7 @@ begin
 end;
 
 procedure TProcedimentoRepository.Adicionar(AProcedimento: TProcedimento);
-  var
+var
   DuracaoSQL: string;
 begin
   with dmUsuarios.queryProcedimentos do begin
@@ -85,12 +88,12 @@ begin
     // Converte TDateTime para formato INTERVAL do PostgreSQL
     DuracaoSQL := FormatDateTime('hh:nn:ss', AProcedimento.Duracao);
 
-    SQL.Text :=
-      'INSERT INTO procedimentos (nome, valor, duracao, ativo) ' +
+    SQL.Text := 'INSERT INTO procedimentos (nome, valor, duracao, ativo) ' +
       'VALUES (:nome, :valor, CAST(:duracao AS INTERVAL), :ativo)';
-    ParamByName('nome').AsString   := AProcedimento.Nome;
-    ParamByName('valor').AsFloat   := AProcedimento.Valor;
-    ParamByName('duracao').AsString := DuracaoSQL;  // Passa como string e faz CAST
+    ParamByName('nome').AsString := AProcedimento.Nome;
+    ParamByName('valor').AsFloat := AProcedimento.Valor;
+    ParamByName('duracao').AsString := DuracaoSQL;
+    // Passa como string e faz CAST
     ParamByName('ativo').AsBoolean := AProcedimento.Ativo;
     ExecSQL;
   end;
@@ -101,26 +104,25 @@ begin
   with dmUsuarios.queryProcedimentos do begin
     Close;
     SQL.Text := 'UPDATE procedimentos ' +
-                'SET nome = :nome, valor = :valor, duracao = :duracao, ativo = :ativo ' +
-                'WHERE id = :id';
-    ParamByName('id').AsInteger      := AProcedimento.Id;
-    ParamByName('nome').AsString     := AProcedimento.Nome;
-    ParamByName('valor').AsFloat     := AProcedimento.Valor;
+      'SET nome = :nome, valor = :valor, duracao = :duracao, ativo = :ativo ' +
+      'WHERE id = :id';
+    ParamByName('id').AsInteger := AProcedimento.Id;
+    ParamByName('nome').AsString := AProcedimento.Nome;
+    ParamByName('valor').AsFloat := AProcedimento.Valor;
     ParamByName('duracao').AsDateTime := AProcedimento.Duracao;
-    ParamByName('ativo').AsBoolean   := AProcedimento.Ativo;
+    ParamByName('ativo').AsBoolean := AProcedimento.Ativo;
     ExecSQL;
   end;
 end;
 
 procedure TProcedimentoRepository.DesativarProcedimento(const Id: Integer);
-  begin
-    with dmUsuarios.queryProcedimentos do
-    begin
-      Close;
-      SQL.Text := 'UPDATE procedimentos SET ativo = FALSE WHERE id = :id';
-      ParamByName('id').AsInteger := Id;
-      ExecSQL;
-    end;
+begin
+  with dmUsuarios.queryProcedimentos do begin
+    Close;
+    SQL.Text := 'UPDATE procedimentos SET ativo = FALSE WHERE id = :id';
+    ParamByName('id').AsInteger := Id;
+    ExecSQL;
   end;
+end;
 
 end.

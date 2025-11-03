@@ -1,13 +1,16 @@
-unit TelaPacientes;
+ï»¿unit TelaPacientes;
 
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.WinXCtrls, Vcl.Grids, System.Net.URLClient,
-  System.Net.HttpClient, System.Net.HttpClientComponent, System.JSON,uPacientesController,uPacientes,
-  System.Generics.Collections, Vcl.ComCtrls, Vcl.Mask, DateUtils, uPacientesControllerLog;
+  System.Net.HttpClient, System.Net.HttpClientComponent, System.JSON,
+  uPacientesController, uPacientes,
+  System.Generics.Collections, Vcl.ComCtrls, Vcl.Mask, DateUtils,
+  uPacientesControllerLog;
 
 type
   TPagPacientes = class(TForm)
@@ -129,14 +132,21 @@ type
     procedure btnCRestoreClick(Sender: TObject);
     procedure btnCRestoreMouseEnter(Sender: TObject);
     procedure btnCRestoreMouseLeave(Sender: TObject);
+    procedure EdNomePacienteKeyPress(Sender: TObject; var Key: Char);
+    procedure edCPFKeyPress(Sender: TObject; var Key: Char);
+    procedure edTelefoneKeyPress(Sender: TObject; var Key: Char);
+    procedure edCEPKeyPress(Sender: TObject; var Key: Char);
+    procedure edEnderecoKeyPress(Sender: TObject; var Key: Char);
+    procedure edDataNascKeyPress(Sender: TObject; var Key: Char);
+    procedure pesquisarKeyPress(Sender: TObject; var Key: Char);
 
   private
-     PacienteIdalterar: Integer;
-     PacientesLista: TObjectList<TPaciente>;
-     Controller: TPacientesController;
-     PaciController: TLogController;
-     procedure PesquisarPacientes(const Filtro: string);
-     function IdadeValida(DataNascimento: TDate): Boolean;
+    PacienteIdalterar: Integer;
+    PacientesLista: TObjectList<TPaciente>;
+    Controller: TPacientesController;
+    PaciController: TLogController;
+    procedure PesquisarPacientes(const Filtro: string);
+    function IdadeValida(DataNascimento: TDate): Boolean;
   public
     { Public declarations }
   end;
@@ -148,7 +158,6 @@ implementation
 
 {$R *.dfm}
 
-
 procedure TPagPacientes.OrdenarGrid;
 var
   i, j: Integer;
@@ -156,11 +165,11 @@ var
 begin
   for i := 1 to sgPacientes.RowCount - 2 do
     for j := i + 1 to sgPacientes.RowCount - 1 do
-      if StrToIntDef(sgPacientes.Cells[0, i], 0) > StrToIntDef(sgPacientes.Cells[0, j], 0) then
-      begin
-        var k: Integer;
-        for k := 0 to sgPacientes.ColCount - 1 do
-        begin
+      if StrToIntDef(sgPacientes.Cells[0, i], 0) >
+        StrToIntDef(sgPacientes.Cells[0, j], 0) then begin
+        var
+          k: Integer;
+        for k := 0 to sgPacientes.ColCount - 1 do begin
           temp := sgPacientes.Cells[k, i];
           sgPacientes.Cells[k, i] := sgPacientes.Cells[k, j];
           sgPacientes.Cells[k, j] := temp;
@@ -169,80 +178,83 @@ begin
 end;
 
 procedure TPagPacientes.pesquisarChange(Sender: TObject);
-  begin
-    PesquisarPacientes(pesquisar.Text);
-  end;
+begin
+  PesquisarPacientes(pesquisar.Text);
+end;
 
 procedure TPagPacientes.PesquisarPacientes(const Filtro: string);
-  var
-  I, Linha: Integer;
+var
+  i, Linha: Integer;
   Paciente: TPaciente;
   TextoFiltro: string;
-  begin
-    if not Assigned(PacientesLista) then Exit;
-    sgPacientes.ColCount := 7;
-    sgPacientes.RowCount := 1;
-    Linha := 1;
-    TextoFiltro := LowerCase(Filtro);
-    for I := 0 to PacientesLista.Count - 1 do begin
-      Paciente := PacientesLista[I];
-      if (Filtro = '') or (Pos(TextoFiltro, LowerCase(Paciente.Nome)) > 0) or
-      (Filtro = '') or (Pos(TextoFiltro, LowerCase(Paciente.Id.ToString)) > 0) then begin
+begin
+  if not Assigned(PacientesLista) then
+    Exit;
+  sgPacientes.ColCount := 7;
+  sgPacientes.RowCount := 1;
+  Linha := 1;
+  TextoFiltro := LowerCase(Filtro);
+  for i := 0 to PacientesLista.Count - 1 do begin
+    Paciente := PacientesLista[i];
+    if (Filtro = '') or (Pos(TextoFiltro, LowerCase(Paciente.Nome)) > 0) or
+      (Filtro = '') or (Pos(TextoFiltro, LowerCase(Paciente.Id.ToString)) > 0)
+    then begin
       sgPacientes.RowCount := Linha + 1;
       sgPacientes.Cells[0, Linha] := Paciente.Id.ToString;
-      sgPacientes.Cells[1, Linha] := paciente.Nome;
+      sgPacientes.Cells[1, Linha] := Paciente.Nome;
       sgPacientes.Cells[2, Linha] := Paciente.Cpf;
       sgPacientes.Cells[3, Linha] := Paciente.Telefone;
-      sgPacientes.Cells[4, Linha] := Paciente.Cep;
+      sgPacientes.Cells[4, Linha] := Paciente.CEP;
       sgPacientes.Cells[5, Linha] := Paciente.Endereco;
       sgPacientes.Cells[6, Linha] := DateToStr(Paciente.DataNascimento);
       Inc(Linha);
-      end;
     end;
   end;
+end;
 
 procedure TPagPacientes.CarregarInativos;
 var
-  I: Integer;
-  begin
-    FreeAndNil(PacientesLista);
-    PacientesLista := Controller.BuscarInativos;
+  i: Integer;
+begin
+  FreeAndNil(PacientesLista);
+  PacientesLista := Controller.BuscarInativos;
 
-    if not Assigned(PacientesLista) then Exit;
+  if not Assigned(PacientesLista) then
+    Exit;
 
-    sgRestore.RowCount := PacientesLista.Count + 1;
+  sgRestore.RowCount := PacientesLista.Count + 1;
 
-    for I := 0 to PacientesLista.Count - 1 do begin
-      sgRestore.Cells[0, I + 1] := IntToStr(PacientesLista[I].Id);
-      sgRestore.Cells[1, I + 1] := PacientesLista[I].Nome;
-      sgRestore.Cells[2, I + 1] := PacientesLista[I].Cpf;
-      sgRestore.Cells[3, I + 1] := PacientesLista[I].Telefone;
-      sgRestore.Cells[4, I + 1] := PacientesLista[I].Cep;
-      sgRestore.Cells[5, I + 1] := DateToStr(PacientesLista[I].DataNascimento);
-      sgRestore.Cells[6, I + 1] := PacientesLista[I].Endereco;
-    end;
+  for i := 0 to PacientesLista.Count - 1 do begin
+    sgRestore.Cells[0, i + 1] := IntToStr(PacientesLista[i].Id);
+    sgRestore.Cells[1, i + 1] := PacientesLista[i].Nome;
+    sgRestore.Cells[2, i + 1] := PacientesLista[i].Cpf;
+    sgRestore.Cells[3, i + 1] := PacientesLista[i].Telefone;
+    sgRestore.Cells[4, i + 1] := PacientesLista[i].CEP;
+    sgRestore.Cells[5, i + 1] := DateToStr(PacientesLista[i].DataNascimento);
+    sgRestore.Cells[6, i + 1] := PacientesLista[i].Endereco;
   end;
+end;
 
 procedure TPagPacientes.CarregarPacientes;
-  var
-  I: Integer;
+var
+  i: Integer;
 begin
   FreeAndNil(PacientesLista);
   PacientesLista := Controller.BuscarTodos;
 
-  if not Assigned(PacientesLista) then Exit;
+  if not Assigned(PacientesLista) then
+    Exit;
 
   sgPacientes.RowCount := PacientesLista.Count + 1;
 
-  for I := 0 to PacientesLista.Count - 1 do
-  begin
-    sgPacientes.Cells[0, I + 1] := IntToStr(PacientesLista[I].Id);
-    sgPacientes.Cells[1, I + 1] := PacientesLista[I].Nome;
-    sgPacientes.Cells[2, I + 1] := PacientesLista[I].Cpf;
-    sgPacientes.Cells[3, I + 1] := PacientesLista[I].Telefone;
-    sgPacientes.Cells[4, I + 1] := PacientesLista[I].Cep;
-    sgPacientes.Cells[5, I + 1] := DateToStr(PacientesLista[I].DataNascimento);
-    sgPacientes.Cells[6, I + 1] := PacientesLista[I].Endereco;
+  for i := 0 to PacientesLista.Count - 1 do begin
+    sgPacientes.Cells[0, i + 1] := IntToStr(PacientesLista[i].Id);
+    sgPacientes.Cells[1, i + 1] := PacientesLista[i].Nome;
+    sgPacientes.Cells[2, i + 1] := PacientesLista[i].Cpf;
+    sgPacientes.Cells[3, i + 1] := PacientesLista[i].Telefone;
+    sgPacientes.Cells[4, i + 1] := PacientesLista[i].CEP;
+    sgPacientes.Cells[5, i + 1] := DateToStr(PacientesLista[i].DataNascimento);
+    sgPacientes.Cells[6, i + 1] := PacientesLista[i].Endereco;
   end;
 end;
 
@@ -250,30 +262,22 @@ procedure TPagPacientes.ConfirmarAlteracoes(Sender: TObject);
 var
   DataNascimento: TDate;
 begin
-  if PacienteIdalterar = 0 then
-  begin
+  if PacienteIdalterar = 0 then begin
     ShowMessage('Selecione um Paciente para alterar');
     Exit;
   end;
 
   DataNascimento := edDataNasc.Date;
-  if DataNascimento > Date then
-  begin
-    ShowMessage('Data de nascimento inválida!');
+  if DataNascimento > Date then begin
+    ShowMessage('Data de nascimento invï¿½lida!');
     Exit;
   end;
 
-  Controller.AlterarPaciente(
-    PacienteIdalterar,
-    edNomePaciente.Text,
-    edCpf.Text,
-    edTelefone.Text,
-    edCep.Text,
-    edEndereco.Text,
-    edDataNasc.Date
-  );
-  PaciController.RegistrarLog(EdNomePaciente.Text,'Alterado', 'Cpf', edCPF.Text);
-  ShowMessage('Alterações feitas com sucesso!');
+  Controller.AlterarPaciente(PacienteIdalterar, EdNomePaciente.Text, edCPF.Text,
+    edTelefone.Text, edCEP.Text, edEndereco.Text, edDataNasc.Date);
+  PaciController.RegistrarLog(EdNomePaciente.Text, 'Alterado', 'Cpf',
+    edCPF.Text);
+  ShowMessage('AlteraÃ§Ãµes feitas com sucesso!');
   btnAlterarNovo.Visible := False;
   CarregarPacientes;
   OrdenarGrid;
@@ -288,20 +292,20 @@ var
   PacienteId: Integer;
   Paciente: TPaciente;
 begin
-  if sgRestore.Row > 0 then
-  begin
+  if sgRestore.Row > 0 then begin
     PacienteId := StrToIntDef(sgRestore.Cells[0, sgRestore.Row], 0);
     if PacienteId = 0 then begin
       Exit;
     end;
 
     Paciente := TPaciente.Create;
-    Paciente.Nome  := sgRestore.Cells[1,sgRestore.Row];
-    Paciente.Cpf := sgRestore.Cells[2,sgRestore.Row];
+    Paciente.Nome := sgRestore.Cells[1, sgRestore.Row];
+    Paciente.Cpf := sgRestore.Cells[2, sgRestore.Row];
 
     try
       Controller.RestaurarPaciente(PacienteId);
-      PaciController.RegistrarLog(Paciente.Nome, 'Restaurado', 'Cpf', Paciente.Cpf);
+      PaciController.RegistrarLog(Paciente.Nome, 'Restaurado', 'Cpf',
+        Paciente.Cpf);
       ShowMessage('Paciente restaurado com sucesso!');
       CarregarInativos;
       CarregarPacientes;
@@ -311,39 +315,32 @@ begin
     finally
       Paciente.Free;
     end;
-    end else
+  end
+  else
     ShowMessage('Selecione um paciente para restaurar.');
 end;
 
-
 procedure TPagPacientes.adicionarPaciente;
-  var
+var
   DataNascimento: TDate;
 begin
-  if (EdNomePaciente.Text = '') or (edCPF.Text = '') or (edTelefone.Text = '') or
-     (edCEP.Text = '') or (edDataNasc.Checked = False) then
-  begin
+  if (EdNomePaciente.Text = '') or (edCPF.Text = '') or (edTelefone.Text = '')
+    or (edCEP.Text = '') or (edDataNasc.Checked = False) then begin
     ShowMessage('Preencha todos os campos');
     Exit;
   end;
 
   DataNascimento := edDataNasc.Date;
-  if DataNascimento > Date then
-  begin
-    ShowMessage('Data de nascimento inválida!');
+  if DataNascimento > Date then begin
+    ShowMessage('Data de nascimento invï¿½lida!');
     Exit;
   end;
 
   try
-    Controller.AdicionarPaciente(
-      edNomePaciente.Text,
-      edCPF.Text,
-      edTelefone.Text,
-      edCEP.Text,
-      edEndereco.Text,
-      edDataNasc.Date
-    );
-    PaciController.RegistrarLog(edNomePaciente.Text, 'Adicionado', 'CPF', edCPF.Text);
+    Controller.adicionarPaciente(EdNomePaciente.Text, edCPF.Text,
+      edTelefone.Text, edCEP.Text, edEndereco.Text, edDataNasc.Date);
+    PaciController.RegistrarLog(EdNomePaciente.Text, 'Adicionado', 'CPF',
+      edCPF.Text);
     ShowMessage('Paciente adicionado com sucesso!');
     CarregarPacientes;
     OrdenarGrid;
@@ -352,7 +349,7 @@ begin
     pnlAddPacientes.Visible := False;
 
     // Limpa campos
-    edNomePaciente.Clear;
+    EdNomePaciente.Clear;
     edCPF.Clear;
     edTelefone.Clear;
     edCEP.Clear;
@@ -366,385 +363,383 @@ begin
 end;
 
 procedure TPagPacientes.btnAddClick(Sender: TObject);
-  begin
-    if pnlRestaurar.Visible = true then begin
-      pnlRestaurar.Visible := False;
-      btnRestaurarNovo.Visible := false;
-    end;
-
-    if (btnAlterarNovo.Visible = True) then begin
-      EdNomePaciente.Clear;
-      edCEP.Clear;
-      edEndereco.Clear;
-      edTelefone.Clear;
-      edCPF.Clear;
-      EdNomePaciente.SetFocus;
-      sgPacientes.Row := 0;
-      sgPacientes.Col := 0;
-      sgPacientes.SetFocus;
-
-    if btnNovoPesquisar.Visible = true  then begin
-        sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
-        sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
-        pesquisar.Visible := False;
-        btnNovoPesquisar.Visible := False;
-      end;
-
-    end;
-
-      btnAlterarNovo.Visible := false;
-      btnAddNovo.Visible := True;
-      btnNovoPesquisar.Visible := False;
-      btnRestaurarNovo.Visible := false;
-      btnConfirmarAlteracoes.Visible := false;
-      btnaddPaciente.Visible := True;
-      pnlAddPacientes.Visible := True;
-      imgLogo2.Visible := True;
-      imgLogo1.Visible := False;
-      EdNomePaciente.SetFocus;
+begin
+  if pnlRestaurar.Visible = true then begin
+    pnlRestaurar.Visible := False;
+    btnRestaurarNovo.Visible := False;
   end;
+
+  if (btnAlterarNovo.Visible = true) then begin
+    EdNomePaciente.Clear;
+    edCEP.Clear;
+    edEndereco.Clear;
+    edTelefone.Clear;
+    edCPF.Clear;
+    EdNomePaciente.SetFocus;
+    sgPacientes.Row := 0;
+    sgPacientes.Col := 0;
+    sgPacientes.SetFocus;
+
+    if btnNovoPesquisar.Visible = true then begin
+      sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
+      sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
+      pesquisar.Visible := False;
+      btnNovoPesquisar.Visible := False;
+    end;
+
+  end;
+
+  btnAlterarNovo.Visible := False;
+  btnAddNovo.Visible := true;
+  btnNovoPesquisar.Visible := False;
+  btnRestaurarNovo.Visible := False;
+  btnConfirmarAlteracoes.Visible := False;
+  btnaddPaciente.Visible := true;
+  pnlAddPacientes.Visible := true;
+  imgLogo2.Visible := true;
+  imgLogo1.Visible := False;
+  EdNomePaciente.SetFocus;
+end;
 
 procedure TPagPacientes.btnAddMouseEnter(Sender: TObject);
-  begin
-    btnAdd.Color := $00F78B2B;
-  end;
+begin
+  btnAdd.Color := $00F78B2B;
+end;
 
 procedure TPagPacientes.btnAddMouseLeave(Sender: TObject);
-  begin
-    btnAdd.Color := $007C3E05;
-  end;
+begin
+  btnAdd.Color := $007C3E05;
+end;
 
 procedure TPagPacientes.btnAddNovoClick(Sender: TObject);
-  begin
-    if btnaddNovo.Visible = True then begin
-      pnlAddPacientes.Visible := False;
-      btnaddNovo.Visible := false;
-    end;
+begin
+  if btnAddNovo.Visible = true then begin
+    pnlAddPacientes.Visible := False;
+    btnAddNovo.Visible := False;
   end;
+end;
 
 procedure TPagPacientes.btnaddPacienteClick(Sender: TObject);
-  begin
-    adicionarPaciente;
-  end;
+begin
+  adicionarPaciente;
+end;
 
 procedure TPagPacientes.btnAlterarClick(Sender: TObject);
 var
-  linha: Integer;
-  begin
-    linha := sgPacientes.Row;
-    if linha <= 0 then
-    begin
-      ShowMessage('Selecione um paciente para alterar!');
-      Exit;
-    end;
+  Linha: Integer;
+begin
+  Linha := sgPacientes.Row;
+  if Linha <= 0 then begin
+    ShowMessage('Selecione um paciente para alterar!');
+    Exit;
+  end;
 
-    if btnNovoPesquisar.Visible = true  then begin
-      sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
-      sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
-      pesquisar.Visible := False;
-      btnNovoPesquisar.Visible := False;
-    end;
+  if btnNovoPesquisar.Visible = true then begin
+    sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
+    sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
+    pesquisar.Visible := False;
+    btnNovoPesquisar.Visible := False;
+  end;
 
-    PacienteIdalterar := StrToIntDef(sgPacientes.Cells[0, linha], 0);
-    EdNomePaciente.Text := sgPacientes.Cells[1, linha];
-    edCPF.Text := sgpacientes.Cells[2, linha];
-    edTelefone.Text := sgPacientes.Cells[3, linha];
-    edCEP.Text := sgpacientes.Cells[4, linha];
-    edDataNasc.Date := StrToDate(sgPacientes.Cells[5, linha]);
-    edendereco.Text := sgpacientes.Cells[6, linha];
+  PacienteIdalterar := StrToIntDef(sgPacientes.Cells[0, Linha], 0);
+  EdNomePaciente.Text := sgPacientes.Cells[1, Linha];
+  edCPF.Text := sgPacientes.Cells[2, Linha];
+  edTelefone.Text := sgPacientes.Cells[3, Linha];
+  edCEP.Text := sgPacientes.Cells[4, Linha];
+  edDataNasc.Date := StrToDate(sgPacientes.Cells[5, Linha]);
+  edEndereco.Text := sgPacientes.Cells[6, Linha];
 
-    btnConfirmarAlteracoes.Visible := True;
-    btnAddNovo.Visible := False;
-    btnAlterarNovo.Visible := True;
-    btnAddNovo.Visible := False;
-    pnlAddPacientes.Visible := True;
-   end;
+  btnConfirmarAlteracoes.Visible := true;
+  btnAddNovo.Visible := False;
+  btnAlterarNovo.Visible := true;
+  btnAddNovo.Visible := False;
+  pnlAddPacientes.Visible := true;
+end;
 
 procedure TPagPacientes.btnAlterarMouseEnter(Sender: TObject);
-  begin
-    btnAlterar.Color := $00F78B2B;
-  end;
+begin
+  btnAlterar.Color := $00F78B2B;
+end;
 
 procedure TPagPacientes.btnAlterarMouseLeave(Sender: TObject);
-  begin
-    btnAlterar.Color := $007C3E05;
-  end;
-
+begin
+  btnAlterar.Color := $007C3E05;
+end;
 
 procedure TPagPacientes.btnAlterarNovoClick(Sender: TObject);
-  begin
-    if btnAlterarNovo.Visible = true then begin
-      pnlAddPacientes.Visible := False;
-      btnAlterarNovo.Visible := False;
-      imgLogo1.Visible := True;
-      imgLogo2.visible := False;
-    end;
+begin
+  if btnAlterarNovo.Visible = true then begin
+    pnlAddPacientes.Visible := False;
+    btnAlterarNovo.Visible := False;
+    imgLogo1.Visible := true;
+    imgLogo2.Visible := False;
   end;
+end;
 
 procedure TPagPacientes.btnCancelarClick(Sender: TObject);
-  begin
-    pnlAddPacientes.Visible := False;
-    btnAddNovo.Visible := False;
-    btnRestaurarNovo.Visible := False;
-    pnlRestaurar.Visible := false;
+begin
+  pnlAddPacientes.Visible := False;
+  btnAddNovo.Visible := False;
+  btnRestaurarNovo.Visible := False;
+  pnlRestaurar.Visible := False;
+  btnAlterarNovo.Visible := False;
+  imgLogo1.Visible := true;
+  imgLogo2.Visible := False;
+  if pesquisar.Visible = true then begin
+    sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
+    sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
+    pesquisar.Visible := False;
+    btnNovoPesquisar.Visible := False;
+  end;
+  sgPacientes.Row := 0;
+  sgPacientes.Col := 0;
+  sgPacientes.SetFocus;
+
+end;
+
+procedure TPagPacientes.btnCancelarMouseEnter(Sender: TObject);
+begin
+  btnCancelar.Color := $00F78B2B;
+end;
+
+procedure TPagPacientes.btnCancelarMouseLeave(Sender: TObject);
+begin
+  btnCancelar.Color := $007C3E05;
+end;
+
+procedure TPagPacientes.btnDeletarClick(Sender: TObject);
+var
+  Id: Integer;
+  Nome, Cpf: string;
+begin
+  if btnAlterarNovo.Visible = true then begin
     btnAlterarNovo.Visible := False;
-    imgLogo1.Visible := True;
-    imgLogo2.visible := False;
-    if pesquisar.Visible = true then begin
-      sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
-      sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
-      pesquisar.Visible := False;
-      btnNovoPesquisar.Visible := False;
-    end;
+    pnlAddPacientes.Visible := False;
+  end;
+
+  if btnNovoPesquisar.Visible = true then begin
+    sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
+    sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
+    pesquisar.Visible := False;
+    btnNovoPesquisar.Visible := False;
+  end;
+
+  Id := StrToIntDef(sgPacientes.Cells[0, sgPacientes.Row], 0);
+
+  if Id > 0 then begin
+    Nome := sgPacientes.Cells[1, sgPacientes.Row];
+    Cpf := sgPacientes.Cells[2, sgPacientes.Row];
+    PaciController.RegistrarLog(Nome, 'Deletado', 'CPF', Cpf);
+    Controller.DesativarPaciente(Id);
+    ShowMessage('Paciente deletado com sucesso!');
+    CarregarPacientes;
     sgPacientes.Row := 0;
     sgPacientes.Col := 0;
     sgPacientes.SetFocus;
-
-  end;
-
-procedure TPagPacientes.btnCancelarMouseEnter(Sender: TObject);
-  begin
-    btnCancelar.Color := $00F78B2B;
-  end;
-
-procedure TPagPacientes.btnCancelarMouseLeave(Sender: TObject);
-  begin
-    btnCancelar.Color := $007C3E05;
-  end;
-
-procedure TPagPacientes.btnDeletarClick(Sender: TObject);
-  var
-  Id: Integer;
-  Nome, Cpf: string;
-  begin
-    if btnAlterarNovo.Visible = True then begin
-      btnAlterarNovo.Visible := False;
-      pnlAddPacientes.Visible := False;
-    end;
-
-    if btnNovoPesquisar.Visible = true  then begin
-      sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
-      sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
-      pesquisar.Visible := False;
-      btnNovoPesquisar.Visible := False;
-    end;
-
-    Id := StrToIntDef(sgPacientes.Cells[0, sgPacientes.Row], 0);
-
-    if Id > 0 then begin
-      Nome := sgPacientes.Cells[1, sgPacientes.Row];
-      Cpf  := sgPacientes.Cells[2, sgPacientes.Row];
-      PaciController.RegistrarLog(Nome, 'Deletado', 'CPF', Cpf);
-      Controller.DesativarPaciente(Id);
-      ShowMessage('Paciente deletado com sucesso!');
-      CarregarPacientes;
-      sgPacientes.Row := 0;
-      sgPacientes.Col := 0;
-      sgPacientes.SetFocus;
-    end else
-      ShowMessage('Selecione um paciente para deletar.');
-  end;
+  end
+  else
+    ShowMessage('Selecione um paciente para deletar.');
+end;
 
 procedure TPagPacientes.btnDeletarMouseEnter(Sender: TObject);
-  begin
-    btnDeletar.Color := $00F78B2B;
-  end;
+begin
+  btnDeletar.Color := $00F78B2B;
+end;
 
 procedure TPagPacientes.btnDeletarMouseLeave(Sender: TObject);
-  begin
-    btnDeletar.Color := $007C3E05;
-  end;
+begin
+  btnDeletar.Color := $007C3E05;
+end;
 
 procedure TPagPacientes.btnLimparClick(Sender: TObject);
-  begin
-    if pnlAddPacientes.Visible = True then begin
-      EdNomePaciente.Clear;
-      edCPF.Clear;
-      edTelefone.Clear;
-      edCEP.Clear;
-      edEndereco.Clear;
-      edDataNasc.Date := Date;
-      edNomePaciente.SetFocus;
-    end;
-
+begin
+  if pnlAddPacientes.Visible = true then begin
+    EdNomePaciente.Clear;
+    edCPF.Clear;
+    edTelefone.Clear;
+    edCEP.Clear;
+    edEndereco.Clear;
+    edDataNasc.Date := Date;
+    EdNomePaciente.SetFocus;
   end;
+
+end;
 
 procedure TPagPacientes.btnLimparMouseEnter(Sender: TObject);
-  begin
-    btnLimpar.Color := $00F78B2B;
-  end;
+begin
+  btnLimpar.Color := $00F78B2B;
+end;
 
 procedure TPagPacientes.btnLimparMouseLeave(Sender: TObject);
-  begin
-    btnLimpar.Color := $007C3E05;
-  end;
+begin
+  btnLimpar.Color := $007C3E05;
+end;
 
 procedure TPagPacientes.btnNovoPesquisarClick(Sender: TObject);
-  begin
-    if btnNovoPesquisar.Visible = true  then begin
-      sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
-      sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
-      pesquisar.Visible := False;
-      btnNovoPesquisar.Visible := False;
-    end;
-
+begin
+  if btnNovoPesquisar.Visible = true then begin
+    sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
+    sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
+    pesquisar.Visible := False;
+    btnNovoPesquisar.Visible := False;
   end;
+
+end;
 
 procedure TPagPacientes.btnConfirmarAlteracoesClick(Sender: TObject);
-  begin
-    if not IdadeValida(edDataNasc.Date) then begin
+begin
+  if not IdadeValida(edDataNasc.Date) then begin
     Exit;
-    end else begin
-      ConfirmarAlteracoes(nil);
-    end;
+  end
+  else begin
+    ConfirmarAlteracoes(nil);
   end;
-
+end;
 
 procedure TPagPacientes.btnConfirmarAlteracoesMouseEnter(Sender: TObject);
-  begin
-    btnConfirmarAlteracoes.Color := $00C46106;
-  end;
+begin
+  btnConfirmarAlteracoes.Color := $00C46106;
+end;
 
 procedure TPagPacientes.btnConfirmarAlteracoesMouseLeave(Sender: TObject);
-  begin
-    btnConfirmarAlteracoes.Color := $007C3E05;
-  end;
+begin
+  btnConfirmarAlteracoes.Color := $007C3E05;
+end;
 
 procedure TPagPacientes.btnConsultasMouseEnter(Sender: TObject);
-  begin
-    btnConsultas.Color := $00F78B2B;
-  end;
+begin
+  btnConsultas.Color := $00F78B2B;
+end;
 
 procedure TPagPacientes.btnConsultasMouseLeave(Sender: TObject);
-  begin
-    btnConsultas.Color := $007C3E05;
-  end;
+begin
+  btnConsultas.Color := $007C3E05;
+end;
 
 procedure TPagPacientes.btnCRestoreClick(Sender: TObject);
-  begin
-    ConfirmarRestauracao;
-    OrdenarGrid;
-  end;
+begin
+  ConfirmarRestauracao;
+  OrdenarGrid;
+end;
 
 procedure TPagPacientes.btnCRestoreMouseEnter(Sender: TObject);
-  begin
-    btnCRestore.Color := $00F8973F;
-  end;
+begin
+  btnCRestore.Color := $00F8973F;
+end;
 
 procedure TPagPacientes.btnCRestoreMouseLeave(Sender: TObject);
-  begin
-    btnCrestore.Color := $00F78B2B;
-  end;
+begin
+  btnCRestore.Color := $00F78B2B;
+end;
 
 procedure TPagPacientes.btnPesquisarClick(Sender: TObject);
-  begin
+begin
   btnAddNovo.Visible := False;
   btnAlterarNovo.Visible := False;
-  btnNovoPesquisar.Visible := True;
-  pnlAddPacientes.Visible := false;
-  imgLogo2.Visible := false;
-  imgLogo1.Visible := True;
+  btnNovoPesquisar.Visible := true;
+  pnlAddPacientes.Visible := False;
+  imgLogo2.Visible := False;
+  imgLogo1.Visible := true;
 
-    if not pesquisar.Visible then begin
-    pesquisar.Visible := True;
+  if not pesquisar.Visible then begin
+    pesquisar.Visible := true;
     sgPacientes.Top := pesquisar.Top + pesquisar.Height + 8;
     sgPacientes.Height := sgPacientes.Height - (pesquisar.Height + 8);
     pesquisar.SetFocus;
-    end;
-
-    sgPacientes.Row := 0;
-    sgPacientes.Col := 0;
-    sgPacientes.SetFocus;
   end;
+
+  sgPacientes.Row := 0;
+  sgPacientes.Col := 0;
+  sgPacientes.SetFocus;
+end;
 
 procedure TPagPacientes.btnPesquisarMouseEnter(Sender: TObject);
-  begin
-    btnPesquisar.Color := $00F78B2B;
-  end;
+begin
+  btnPesquisar.Color := $00F78B2B;
+end;
 
 procedure TPagPacientes.btnPesquisarMouseLeave(Sender: TObject);
-  begin
-    btnPesquisar.Color := $007C3E05;
-  end;
+begin
+  btnPesquisar.Color := $007C3E05;
+end;
 
 procedure TPagPacientes.btnRestaurarClick(Sender: TObject);
-  begin
-    if pnlAddPacientes.Visible = True then begin
-      pnlAddPacientes.Visible := false;
-    end;
-
-    if btnNovoPesquisar.Visible = true  then begin
-      sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
-      sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
-      pesquisar.Visible := False;
-      btnNovoPesquisar.Visible := False;
-    end;
-
-    btnRestaurarNovo.Visible := True;
-    CarregarInativos;
-    sgRestore.Row := 0;
-    sgRestore.Col := 0;
-    btnAddNovo.Visible := False;
-    btnAlterarNovo.Visible := false;
-    pnlRestaurar.Visible := True;
-    sgRestore.SetFocus;
-
-    sgRestore.Cells[0,0] := 'ID';
-    sgRestore.Cells[1,0] := 'Nome do Paciente';
-    sgRestore.Cells[2,0] := 'CPF';
-    sgRestore.Cells[3,0] := 'Telefone';
-    sgRestore.Cells[4,0] := 'Cep';
-    sgRestore.Cells[5,0] := 'Data de nascimento';
-    sgRestore.Cells[6,0] := 'Endereço';
-
-    sgRestore.ColWidths[0] := 50;
-    sgRestore.ColWidths[1] := 140;
-    sgRestore.ColWidths[2] := 105;
-    sgRestore.ColWidths[3] := 110;
-    sgRestore.ColWidths[4] := 95;
-    sgRestore.ColWidths[5] := 130;
-    sgRestore.ColWidths[6] := 146;
-
-
+begin
+  if pnlAddPacientes.Visible = true then begin
+    pnlAddPacientes.Visible := False;
   end;
+
+  if btnNovoPesquisar.Visible = true then begin
+    sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
+    sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
+    pesquisar.Visible := False;
+    btnNovoPesquisar.Visible := False;
+  end;
+
+  btnRestaurarNovo.Visible := true;
+  CarregarInativos;
+  sgRestore.Row := 0;
+  sgRestore.Col := 0;
+  btnAddNovo.Visible := False;
+  btnAlterarNovo.Visible := False;
+  pnlRestaurar.Visible := true;
+  sgRestore.SetFocus;
+
+  sgRestore.Cells[0, 0] := 'ID';
+  sgRestore.Cells[1, 0] := 'Nome do Paciente';
+  sgRestore.Cells[2, 0] := 'CPF';
+  sgRestore.Cells[3, 0] := 'Telefone';
+  sgRestore.Cells[4, 0] := 'Cep';
+  sgRestore.Cells[5, 0] := 'Data de nascimento';
+  sgRestore.Cells[6, 0] := 'EndereÃ§o';
+
+  sgRestore.ColWidths[0] := 50;
+  sgRestore.ColWidths[1] := 140;
+  sgRestore.ColWidths[2] := 105;
+  sgRestore.ColWidths[3] := 110;
+  sgRestore.ColWidths[4] := 95;
+  sgRestore.ColWidths[5] := 130;
+  sgRestore.ColWidths[6] := 146;
+
+end;
 
 procedure TPagPacientes.btnRestaurarMouseEnter(Sender: TObject);
-  begin
-    btnRestaurar.Color := $00F78B2B;
-  end;
+begin
+  btnRestaurar.Color := $00F78B2B;
+end;
 
 procedure TPagPacientes.btnRestaurarMouseLeave(Sender: TObject);
-  begin
-    btnRestaurar.Color := $007C3E05;
-  end;
+begin
+  btnRestaurar.Color := $007C3E05;
+end;
 
 procedure TPagPacientes.btnSairMouseEnter(Sender: TObject);
-  begin
-    btnSair.Color := $00F78B2B;
-  end;
+begin
+  btnSair.Color := $00F78B2B;
+end;
 
 procedure TPagPacientes.btnSairMouseLeave(Sender: TObject);
-  begin
-    btnSair.Color := $007C3E05;
-  end;
+begin
+  btnSair.Color := $007C3E05;
+end;
 
 procedure TPagPacientes.btnXClick(Sender: TObject);
-  begin
-    close;
-    pnlAddPacientes.Visible := False;
-    btnAddNovo.Visible := False;
-    btnRestaurarNovo.Visible := False;
-    pnlRestaurar.Visible := false;
-    btnAlterarNovo.Visible := False;
-    imgLogo1.Visible := True;
-    imgLogo2.visible := False;
-    if pesquisar.Visible = true then begin
-      sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
-      sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
-      pesquisar.Visible := False;
-      btnNovoPesquisar.Visible := False;
-    end;
+begin
+  close;
+  pnlAddPacientes.Visible := False;
+  btnAddNovo.Visible := False;
+  btnRestaurarNovo.Visible := False;
+  pnlRestaurar.Visible := False;
+  btnAlterarNovo.Visible := False;
+  imgLogo1.Visible := true;
+  imgLogo2.Visible := False;
+  if pesquisar.Visible = true then begin
+    sgPacientes.Top := sgPacientes.Top - (pesquisar.Height + 5);
+    sgPacientes.Height := sgPacientes.Height + (pesquisar.Height + 5);
+    pesquisar.Visible := False;
+    btnNovoPesquisar.Visible := False;
   end;
+end;
 
 function TPagPacientes.buscarCEP(const CEP: string): Boolean;
 var
@@ -756,27 +751,25 @@ begin
   HTTP := TNetHTTPClient.Create(nil);
   try
     Response := HTTP.Get('https://viacep.com.br/ws/' + CEP + '/json/');
-    if Response.StatusCode = 200 then
-    begin
-      JsonResp := TJSONObject.ParseJSONValue(Response.ContentAsString) as TJSONObject;
+    if Response.StatusCode = 200 then begin
+      JsonResp := TJSONObject.ParseJSONValue(Response.ContentAsString)
+        as TJSONObject;
       try
-        if JsonResp.GetValue('erro') <> nil then
-        begin
-          ShowMessage('CEP não encontrado!');
+        if JsonResp.GetValue('erro') <> nil then begin
+          ShowMessage('CEP nï¿½o encontrado!');
           edCEP.SetFocus;
           Exit;
         end;
 
         edEndereco.Text := JsonResp.GetValue('logradouro').Value;
         edDataNasc.SetFocus;
-        Result := True; // CEP encontrado
+        Result := true; // CEP encontrado
       finally
         JsonResp.Free;
       end;
     end
-    else
-    begin
-      ShowMessage('CEP não encontrado!');
+    else begin
+      ShowMessage('CEP nÃ£o encontrado!');
       edCEP.SetFocus;
     end;
   finally
@@ -784,69 +777,68 @@ begin
   end;
 end;
 
-
 procedure TPagPacientes.edCEPKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
-  begin
-      if Key = VK_RETURN then begin
-        key := 0;
-        buscarCep(edCep.Text);
-      end;
+begin
+  if Key = VK_RETURN then begin
+    Key := 0;
+    buscarCEP(edCEP.Text);
   end;
+end;
 
 procedure TPagPacientes.edCPFKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
-  begin
-    if Key = VK_RETURN then begin
+begin
+  if Key = VK_RETURN then begin
     Key := 0;
-      edTelefone.SetFocus;
-    end;
+    edTelefone.SetFocus;
   end;
+end;
 
 procedure TPagPacientes.EdNomePacienteKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
-  begin
-    if Key = VK_RETURN then begin
-      key := 0;
-      edCPF.setfocus;
-    end;
+begin
+  if Key = VK_RETURN then begin
+    Key := 0;
+    edCPF.SetFocus;
   end;
+end;
 
 procedure TPagPacientes.edTelefoneKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
-  begin
-    if Key = VK_RETURN then begin
-      key := 0;
-      edCEP.setfocus;
-    end;
+begin
+  if Key = VK_RETURN then begin
+    Key := 0;
+    edCEP.SetFocus;
   end;
+end;
 
 procedure TPagPacientes.FormClose(Sender: TObject; var Action: TCloseAction);
-  begin
-    pnlAddPacientes.Visible := False;
-    btnAddNovo.visible := false;
-    pnlAddPacientes.Visible := False;
-    btnAlterarNovo.Visible := False;
-    btnNovoPesquisar.Visible := False;
-    btnRestaurarNovo.Visible := False;
-    pnlRestaurar.Visible := False;
-    imgLogo2.Visible := False;
-    imgLogo1.Visible := True;
-  end;
+begin
+  pnlAddPacientes.Visible := False;
+  btnAddNovo.Visible := False;
+  pnlAddPacientes.Visible := False;
+  btnAlterarNovo.Visible := False;
+  btnNovoPesquisar.Visible := False;
+  btnRestaurarNovo.Visible := False;
+  pnlRestaurar.Visible := False;
+  imgLogo2.Visible := False;
+  imgLogo1.Visible := true;
+end;
 
 procedure TPagPacientes.FormCreate(Sender: TObject);
 begin
-   Controller := TPacientesController.Create;
-   PaciController := TLogController.Create;
-   PacientesLista := nil;
+  Controller := TPacientesController.Create;
+  PaciController := TLogController.Create;
+  PacientesLista := nil;
 
-  sgPacientes.Cells[0,0] := 'ID';
-  sgPacientes.Cells[1,0] := 'Nome do Paciente';
-  sgPacientes.Cells[2,0] := 'CPF';
-  sgPacientes.Cells[3,0] := 'Telefone';
-  sgPacientes.Cells[4,0] := 'Cep';
-  sgPacientes.Cells[5,0] := 'Data de nascimento';
-  sgPacientes.Cells[6,0] := 'Endereço';
+  sgPacientes.Cells[0, 0] := 'ID';
+  sgPacientes.Cells[1, 0] := 'Nome do Paciente';
+  sgPacientes.Cells[2, 0] := 'CPF';
+  sgPacientes.Cells[3, 0] := 'Telefone';
+  sgPacientes.Cells[4, 0] := 'Cep';
+  sgPacientes.Cells[5, 0] := 'Data de nascimento';
+  sgPacientes.Cells[6, 0] := 'EndereÃ§o';
 
   sgPacientes.ColWidths[0] := 40;
   sgPacientes.ColWidths[1] := 155;
@@ -860,20 +852,20 @@ begin
 end;
 
 procedure TPagPacientes.FormDestroy(Sender: TObject);
-  begin
-    FreeAndNil(Controller);
-    FreeAndNil(PacientesLista);
-    FreeAndNil(PaciController);
-  end;
+begin
+  FreeAndNil(Controller);
+  FreeAndNil(PacientesLista);
+  FreeAndNil(PaciController);
+end;
 
 procedure TPagPacientes.FormShow(Sender: TObject);
-  begin
-    CarregarPacientes;
-    OrdenarGrid;
-    sgPacientes.Row := 0;
-    sgPacientes.Col := 0;
-    sgPacientes.SetFocus;
-  end;
+begin
+  CarregarPacientes;
+  OrdenarGrid;
+  sgPacientes.Row := 0;
+  sgPacientes.Col := 0;
+  sgPacientes.SetFocus;
+end;
 
 function TPagPacientes.IdadeValida(DataNascimento: TDate): Boolean;
 var
@@ -882,63 +874,64 @@ begin
   Result := False;
 
   if DataNascimento > Date then begin
-    ShowMessage('Data de nascimento inválida!');
+    ShowMessage('Data de nascimento invÃ¡lida!');
     Exit;
   end;
   Idade := YearOf(Date) - YearOf(DataNascimento);
 
   if (MonthOf(DataNascimento) > MonthOf(Date)) or
-     ((MonthOf(DataNascimento) = MonthOf(Date)) and (DayOf(DataNascimento) > DayOf(Date))) then
-      Dec(Idade);
+    ((MonthOf(DataNascimento) = MonthOf(Date)) and
+    (DayOf(DataNascimento) > DayOf(Date))) then
+    Dec(Idade);
 
-  if (Idade < 3) or (Idade > 100) then
-  begin
-    ShowMessage('Data de nascimento inválida!');
+  if (Idade < 3) or (Idade > 100) then begin
+    ShowMessage('Data de nascimento invÃ¡lida!');
     Exit;
   end;
-  Result := True;
+  Result := true;
 end;
+
 procedure TPagPacientes.imgXrestoreClick(Sender: TObject);
-  begin
-    pnlRestaurar.Visible := False;
-    btnRestaurarNovo.Visible := False;
-    CarregarPacientes;
-    OrdenarGrid;
-  end;
+begin
+  pnlRestaurar.Visible := False;
+  btnRestaurarNovo.Visible := False;
+  CarregarPacientes;
+  OrdenarGrid;
+end;
 
 procedure TPagPacientes.lblAddpacienteMouseEnter(Sender: TObject);
-  begin
-    btnAddPaciente.Color := $00C46106;
-  end;
+begin
+  btnaddPaciente.Color := $00C46106;
+end;
 
 procedure TPagPacientes.lblAddpacienteMouseLeave(Sender: TObject);
-  begin
-    btnAddPaciente.Color := $007C3E05;
-  end;
+begin
+  btnaddPaciente.Color := $007C3E05;
+end;
 
 procedure TPagPacientes.lblSairClick(Sender: TObject);
-  begin
-    close;
-  end;
+begin
+  close;
+end;
 
-procedure TPagPacientes.sgPacientesDrawCell(Sender: TObject; ACol,
-  ARow: LongInt; Rect: TRect; State: TGridDrawState);
+procedure TPagPacientes.sgPacientesDrawCell(Sender: TObject;
+  ACol, ARow: LongInt; Rect: TRect; State: TGridDrawState);
 var
   BGColor: TColor;
-  begin
-    if gdSelected in State then
-      BGColor := clHighlight
-    else
-      BGColor := clWindow;
-    sgPacientes.Canvas.Brush.Color := BGColor;
-    sgPacientes.Canvas.FillRect(Rect);
-    if gdSelected in State then
-      sgPacientes.Canvas.Font.Color := clHighlightText
-    else
-      sgPacientes.Canvas.Font.Color := clWindowText;
-    sgPacientes.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2,
-      sgPacientes.Cells[ACol, ARow]);
-  end;
+begin
+  if gdSelected in State then
+    BGColor := clHighlight
+  else
+    BGColor := clWindow;
+  sgPacientes.Canvas.Brush.Color := BGColor;
+  sgPacientes.Canvas.FillRect(Rect);
+  if gdSelected in State then
+    sgPacientes.Canvas.Font.Color := clHighlightText
+  else
+    sgPacientes.Canvas.Font.Color := clWindowText;
+  sgPacientes.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2,
+    sgPacientes.Cells[ACol, ARow]);
+end;
 
 procedure TPagPacientes.sgRestoreDrawCell(Sender: TObject; ACol, ARow: LongInt;
   Rect: TRect; State: TGridDrawState);
@@ -955,8 +948,70 @@ begin
     sgRestore.Canvas.Font.Color := clHighlightText
   else
     sgRestore.Canvas.Font.Color := clWindowText;
-    sgRestore.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2,
+  sgRestore.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2,
     sgRestore.Cells[ACol, ARow]);
+end;
+
+procedure TPagPacientes.EdNomePacienteKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then begin
+    Key := #0; // bloqueia o som
+    edCPF.SetFocus;
+  end;
+end;
+
+procedure TPagPacientes.edCPFKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then begin
+    Key := #0; // bloqueia o som
+    edTelefone.SetFocus;
+  end;
+end;
+
+procedure TPagPacientes.edTelefoneKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then begin
+    Key := #0; // bloqueia o som
+    edCEP.SetFocus;
+  end;
+end;
+
+procedure TPagPacientes.edCEPKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then begin
+    Key := #0; // bloqueia o som
+    if edEndereco.CanFocus then
+      edEndereco.SetFocus
+    else
+      edDataNasc.SetFocus;
+  end;
+end;
+
+procedure TPagPacientes.edEnderecoKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then begin
+    Key := #0; // bloqueia o som
+    edDataNasc.SetFocus;
+  end;
+end;
+
+procedure TPagPacientes.edDataNascKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then begin
+    Key := #0; // bloqueia o som
+    if btnaddPaciente.Visible then
+      btnaddPaciente.SetFocus
+    else if btnConfirmarAlteracoes.Visible then
+      btnConfirmarAlteracoes.SetFocus;
+  end;
+end;
+
+procedure TPagPacientes.pesquisarKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then begin
+    Key := #0; // bloqueia o som
+    sgPacientes.SetFocus;
+  end;
 end;
 
 end.

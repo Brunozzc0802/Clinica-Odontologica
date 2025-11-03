@@ -2519,6 +2519,7 @@ object PagUsuarios: TPagUsuarios
       TextHint = 'Pesquisar'
       Visible = False
       OnChange = pesquisarUsuarioChange
+      OnKeyPress = pesquisarUsuarioKeyPress
     end
     object pnlRestaurar: TPanel
       Left = 64
@@ -3182,7 +3183,7 @@ object PagUsuarios: TPagUsuarios
       ParentFont = False
       TabOrder = 0
       TextHint = 'Digite o nome de usu'#225'rio:'
-      OnKeyDown = edUsuarioKeyDown
+      OnKeyPress = edUsuarioKeyPress
     end
     object edSenhaUsuario: TEdit
       Left = 163
@@ -3198,6 +3199,7 @@ object PagUsuarios: TPagUsuarios
       ParentFont = False
       TabOrder = 1
       TextHint = 'Digite a senha:'
+      OnKeyPress = edSenhaUsuarioKeyPress
     end
     object cbAtivo: TComboBox
       Left = 315
@@ -3216,6 +3218,7 @@ object PagUsuarios: TPagUsuarios
       ParentFont = False
       TabOrder = 2
       TextHint = 'Ativo:'
+      OnKeyPress = cbAtivoKeyPress
       Items.Strings = (
         'True'
         'False')
@@ -3228,6 +3231,7 @@ object PagUsuarios: TPagUsuarios
       Style = csDropDownList
       TabOrder = 3
       TextHint = 'Grupo'
+      OnKeyPress = cbGrupoKeyPress
       Items.Strings = (
         'Adminstrador'
         'Recepcionista'

@@ -2,7 +2,7 @@ unit uProfissionais;
 
 interface
 
-  type
+type
   TProfissionais = class
   private
     PId: integer;

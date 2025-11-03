@@ -2939,6 +2939,7 @@ object PagProfissionais: TPagProfissionais
         TabOrder = 0
         TextHint = 'Digite o nome:'
         OnKeyDown = EdNomeKeyDown
+        OnKeyPress = EdNomeKeyPress
       end
       object edCEP: TEdit
         Left = 219
@@ -2949,6 +2950,7 @@ object PagProfissionais: TPagProfissionais
         TabOrder = 1
         TextHint = 'Digite o Cep:'
         OnKeyDown = edCEPKeyDown
+        OnKeyPress = edCEPKeyPress
       end
       object edEndereco: TEdit
         Left = 432
@@ -2958,6 +2960,7 @@ object PagProfissionais: TPagProfissionais
         AutoSize = False
         TabOrder = 2
         TextHint = 'Digite o Endere'#231'o:'
+        OnKeyPress = edEnderecoKeyPress
       end
       object btnadicionar: TPanel
         AlignWithMargins = True
@@ -3061,6 +3064,7 @@ object PagProfissionais: TPagProfissionais
         Text = '(  )      -    '
         TextHint = 'Digite o Telefone:'
         OnKeyDown = edTelefoneKeyDown
+        OnKeyPress = edTelefoneKeyPress
       end
       object edCPF: TMaskEdit
         Left = 219
@@ -3074,6 +3078,7 @@ object PagProfissionais: TPagProfissionais
         Text = ''
         TextHint = 'Digite o CPF:'
         OnKeyDown = edCPFKeyDown
+        OnKeyPress = edCPFKeyPress
       end
       object edEmail: TEdit
         Left = 8
@@ -3084,6 +3089,7 @@ object PagProfissionais: TPagProfissionais
         TabOrder = 7
         TextHint = 'Digite o Email:'
         OnKeyDown = edEmailKeyDown
+        OnKeyPress = edEmailKeyPress
       end
     end
     object pnlRestaurar: TPanel

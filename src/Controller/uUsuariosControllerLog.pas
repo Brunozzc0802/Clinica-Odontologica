@@ -13,28 +13,29 @@ type
 
 implementation
 
-procedure TLogController.RegistrarLog(const Usuario, Acao, Detalhes, Grupo: string);
+procedure TLogController.RegistrarLog(const Usuario, Acao, Detalhes,
+  Grupo: string);
 var
   UserLog: TLogRepository;
   Registro: TUsuarioLog;
-  begin
-    Registro := TUsuarioLog.Create;
-    try
-      Registro.Usuario := Usuario;
-      Registro.Acao := Acao;
-      Registro.Detalhes := Detalhes;
-      Registro.Grupo := Grupo;
-      Registro.DataHora := Now;
+begin
+  Registro := TUsuarioLog.Create;
+  try
+    Registro.Usuario := Usuario;
+    Registro.Acao := Acao;
+    Registro.Detalhes := Detalhes;
+    Registro.Grupo := Grupo;
+    Registro.DataHora := Now;
 
-      UserLog := TLogRepository.Create;
-      try
-        UserLog.Salvar(Registro);
-      finally
-        UserLog.Free;
-      end;
+    UserLog := TLogRepository.Create;
+    try
+      UserLog.Salvar(Registro);
     finally
-      Registro.Free;
+      UserLog.Free;
     end;
+  finally
+    Registro.Free;
   end;
+end;
 
 end.

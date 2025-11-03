@@ -2,22 +2,21 @@ unit uPacientesRepository;
 
 interface
 
-uses uUsuarioConexao,uPacientes,  System.SysUtils,
-System.Generics.Collections, FireDAC.Comp.Client;
+uses uUsuarioConexao, uPacientes, System.SysUtils,
+  System.Generics.Collections, FireDAC.Comp.Client;
 
 type
   TPacientesRepository = class
   public
-  function ListarPacientes: TObjectList<TPaciente>;
-  function ListarInativos: TObjectList<TPaciente>;
-  procedure Adicionar(APaciente: TPaciente);
-  procedure Alterar(APaciente: TPaciente);
-  procedure DesativarPaciente(const Id: Integer);
-  procedure RestaurarPaciente(const Id: Integer);
-end;
+    function ListarPacientes: TObjectList<TPaciente>;
+    function ListarInativos: TObjectList<TPaciente>;
+    procedure Adicionar(APaciente: TPaciente);
+    procedure Alterar(APaciente: TPaciente);
+    procedure DesativarPaciente(const Id: Integer);
+    procedure RestaurarPaciente(const Id: Integer);
+  end;
 
 implementation
-
 
 { TPacientesRepository }
 
@@ -26,60 +25,58 @@ begin
   with dmUsuarios.queryPacientes do begin
     Close;
     SQL.Text :=
-      'INSERT INTO pacientes (nome, cpf, telefone, cep, endereco, data_nascimento) ' +
-      'VALUES (:nome, :cpf, :telefone, :cep, :endereco, :data_nascimento)';
-    ParamByName('nome').AsString   := APaciente.Nome;
-    ParamByName('cpf').AsString  := APaciente.Cpf;
-    ParamByName('telefone').AsString  := APaciente.Telefone;
-    ParamByName('cep').AsString  := APaciente.cep;
-    ParamByName('data_nascimento').AsDate  := APaciente.DataNascimento;
-    ParamByName('endereco').AsString  := APaciente.endereco;
+      'INSERT INTO pacientes (nome, cpf, telefone, cep, endereco, data_nascimento) '
+      + 'VALUES (:nome, :cpf, :telefone, :cep, :endereco, :data_nascimento)';
+    ParamByName('nome').AsString := APaciente.Nome;
+    ParamByName('cpf').AsString := APaciente.Cpf;
+    ParamByName('telefone').AsString := APaciente.Telefone;
+    ParamByName('cep').AsString := APaciente.cep;
+    ParamByName('data_nascimento').AsDate := APaciente.DataNascimento;
+    ParamByName('endereco').AsString := APaciente.endereco;
     ExecSQL;
   end;
 end;
 
 procedure TPacientesRepository.Alterar(APaciente: TPaciente);
 begin
-  with dmUsuarios.queryPacientes do
-  begin
+  with dmUsuarios.queryPacientes do begin
     Close;
-    SQL.Text :=
-      'UPDATE pacientes ' + 'SET nome = :nome, ' + 'cpf = :cpf, ' + 'telefone = :telefone, ' +
-      'cep = :cep, ' + 'endereco = :endereco, ' + 'data_nascimento = :data_nascimento, ' +
-      'ativo = TRUE ' + 'WHERE id = :id';
+    SQL.Text := 'UPDATE pacientes ' + 'SET nome = :nome, ' + 'cpf = :cpf, ' +
+      'telefone = :telefone, ' + 'cep = :cep, ' + 'endereco = :endereco, ' +
+      'data_nascimento = :data_nascimento, ' + 'ativo = TRUE ' +
+      'WHERE id = :id';
 
-    ParamByName('id').AsInteger            := APaciente.Id;
-    ParamByName('nome').AsString           := APaciente.Nome;
-    ParamByName('cpf').AsString            := APaciente.Cpf;
-    ParamByName('telefone').AsString       := APaciente.Telefone;
-    ParamByName('cep').AsString            := APaciente.Cep;
-    ParamByName('endereco').AsString       := APaciente.Endereco;
-    ParamByName('data_nascimento').AsDate  := APaciente.DataNascimento;
+    ParamByName('id').AsInteger := APaciente.Id;
+    ParamByName('nome').AsString := APaciente.Nome;
+    ParamByName('cpf').AsString := APaciente.Cpf;
+    ParamByName('telefone').AsString := APaciente.Telefone;
+    ParamByName('cep').AsString := APaciente.cep;
+    ParamByName('endereco').AsString := APaciente.endereco;
+    ParamByName('data_nascimento').AsDate := APaciente.DataNascimento;
 
     ExecSQL;
   end;
 end;
 
 procedure TPacientesRepository.DesativarPaciente(const Id: Integer);
-  begin
-    with dmUsuarios.queryPacientes do
-    begin
-      Close;
-      SQL.Text := 'UPDATE pacientes SET ativo = FALSE WHERE id = :id';
-      ParamByName('id').AsInteger := Id;
-      ExecSQL;
-    end;
+begin
+  with dmUsuarios.queryPacientes do begin
+    Close;
+    SQL.Text := 'UPDATE pacientes SET ativo = FALSE WHERE id = :id';
+    ParamByName('id').AsInteger := Id;
+    ExecSQL;
   end;
+end;
 
 function TPacientesRepository.ListarInativos: TObjectList<TPaciente>;
-  var
+var
   Paciente: TPaciente;
 begin
   Result := TObjectList<TPaciente>.Create(True);
-  with dmUsuarios.queryPacientes do
-  begin
+  with dmUsuarios.queryPacientes do begin
     Close;
-    SQL.Text := 'SELECT id, nome, cpf, telefone, cep, endereco, data_nascimento  FROM pacientes WHERE ativo = FALSE';
+    SQL.Text :=
+      'SELECT id, nome, cpf, telefone, cep, endereco, data_nascimento  FROM pacientes WHERE ativo = FALSE';
     Open;
 
     while not Eof do begin
@@ -88,8 +85,8 @@ begin
       Paciente.Nome := FieldByName('nome').AsString;
       Paciente.Cpf := FieldByName('cpf').AsString;
       Paciente.Telefone := FieldByName('telefone').AsString;
-      Paciente.Cep := FieldByName('cep').AsString;
-      Paciente.Endereco := FieldByName('endereco').AsString;
+      Paciente.cep := FieldByName('cep').AsString;
+      Paciente.endereco := FieldByName('endereco').AsString;
       Paciente.DataNascimento := FieldByName('data_nascimento').AsDateTime;
       Result.Add(Paciente);
       Next;
@@ -102,10 +99,10 @@ var
   Paciente: TPaciente;
 begin
   Result := TObjectList<TPaciente>.Create(True);
-  with dmUsuarios.queryPacientes do
-  begin
+  with dmUsuarios.queryPacientes do begin
     Close;
-    SQL.Text := 'SELECT id, nome, cpf, telefone, cep, data_nascimento, endereco FROM pacientes WHERE ativo = TRUE';
+    SQL.Text :=
+      'SELECT id, nome, cpf, telefone, cep, data_nascimento, endereco FROM pacientes WHERE ativo = TRUE';
     Open;
 
     while not Eof do begin
@@ -114,9 +111,9 @@ begin
       Paciente.Nome := FieldByName('nome').AsString;
       Paciente.Cpf := FieldByName('cpf').AsString;
       Paciente.Telefone := FieldByName('telefone').AsString;
-      Paciente.Cep := FieldByName('cep').AsString;
+      Paciente.cep := FieldByName('cep').AsString;
       Paciente.DataNascimento := FieldByName('data_nascimento').AsDateTime;
-      Paciente.Endereco := FieldByName('endereco').AsString;
+      Paciente.endereco := FieldByName('endereco').AsString;
       Result.Add(Paciente);
       Next;
     end;
@@ -125,8 +122,7 @@ end;
 
 procedure TPacientesRepository.RestaurarPaciente(const Id: Integer);
 begin
-  with dmUsuarios.queryPacientes do
-  begin
+  with dmUsuarios.queryPacientes do begin
     Close;
     SQL.Text := 'UPDATE pacientes SET ativo = TRUE WHERE id = :id';
     ParamByName('id').AsInteger := Id;

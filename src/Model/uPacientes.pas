@@ -2,7 +2,7 @@ unit uPacientes;
 
 interface
 
-  type
+type
   TPaciente = class
   private
     PId: integer;

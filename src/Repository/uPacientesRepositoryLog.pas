@@ -23,19 +23,16 @@ begin
     Exit;
 
   try
-    LogDir := 'C:\Users\bruno\OneDrive\Desktop\Projeto empresa\Clinica-Odontologica\Logs\';
+    LogDir := 'C:\Users\Bruno Tesser\Desktop\Clinica odontologica alves\Clinica-Odontologica\Logs\';
 
     if not DirectoryExists(LogDir) then
       ForceDirectories(LogDir);
 
     LogPath := LogDir + 'pacinte_log.txt';
 
-    LogLine := Format('%s | %s | %s | %s | %s',
-      [ALog.Paciente,
-       ALog.Acao,
-       ALog.Detalhes,
-       ALog.Cpf,
-       FormatDateTime('hh:nn:ss dd-mm-yyyy', ALog.DataHora)]);
+    LogLine := Format('%s | %s | %s | %s | %s', [ALog.Paciente, ALog.Acao,
+      ALog.Detalhes, ALog.Cpf, FormatDateTime('hh:nn:ss dd-mm-yyyy',
+      ALog.DataHora)]);
 
     FileHandle := 0;
     AssignFile(LogFile, LogPath);

@@ -23,19 +23,16 @@ begin
     Exit;
 
   try
-    LogDir := 'C:\Users\bruno\OneDrive\Desktop\Projeto empresa\Clinica-Odontologica\Logs\';
+    LogDir := 'C:\Users\Bruno Tesser\Desktop\Clinica odontologica alves\Clinica-Odontologica\Logs\';
 
     if not DirectoryExists(LogDir) then
       ForceDirectories(LogDir);
 
     LogPath := LogDir + 'usuario_log.txt';
 
-    LogLine := Format('%s | %s | %s | %s | %s',
-      [ALog.Usuario,
-       ALog.Acao,
-       ALog.Detalhes,
-       ALog.Grupo,
-       FormatDateTime('hh:nn:ss dd-mm-yyyy', ALog.DataHora)]);
+    LogLine := Format('%s | %s | %s | %s | %s', [ALog.Usuario, ALog.Acao,
+      ALog.Detalhes, ALog.Grupo, FormatDateTime('hh:nn:ss dd-mm-yyyy',
+      ALog.DataHora)]);
 
     FileHandle := 0;
     AssignFile(LogFile, LogPath);
@@ -52,10 +49,8 @@ begin
       CloseFile(LogFile);
       FileHandle := 0; // Marca que arquivo foi fechado
     except
-      on E: Exception do
-      begin
-        if FileHandle = 1 then
-        begin
+      on E: Exception do begin
+        if FileHandle = 1 then begin
           try
             CloseFile(LogFile);
           except

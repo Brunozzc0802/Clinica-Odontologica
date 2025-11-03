@@ -5,3 +5,7 @@ Nome do Paciente | Restaurado | Cpf | CPF | 16:03:08 29-10-2025
 Gustavo | Restaurado | Cpf | 99999999999 | 16:04:28 29-10-2025
 cccccc | Deletado | CPF | 44444444444 | 16:04:35 29-10-2025
 aaaaaaaabbbbb | Adicionado | Cpf | 88888888888 | 16:05:09 29-10-2025
+bbbbbbbb | Deletado | CPF | 99995567655 | 16:14:27 03-11-2025
+aaaaaaaabbbbb | Deletado | CPF | 88888888888 | 16:14:31 03-11-2025
+Gustavo | Deletado | CPF | 99999999999 | 16:14:33 03-11-2025
+Bruno | Deletado | CPF | 13012574948 | 16:14:36 03-11-2025

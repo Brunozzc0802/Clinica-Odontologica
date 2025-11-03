@@ -26,8 +26,10 @@ type
     property HoraFim: TTime read CHoraFim write CHoraFim;
     property Ativo: Boolean read CAtivo write CAtivo;
     property NomePaciente: string read CNomePaciente write CNomePaciente;
-    property NomeProfissional: string read CNomeProfissional write CNomeProfissional;
-    property NomeProcedimento: string read CNomeProcedimento write CNomeProcedimento;
+    property NomeProfissional: string read CNomeProfissional
+      write CNomeProfissional;
+    property NomeProcedimento: string read CNomeProcedimento
+      write CNomeProcedimento;
   end;
 
 implementation

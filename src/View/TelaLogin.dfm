@@ -3355,6 +3355,7 @@ object FormLogin: TFormLogin
       Color = 13204758
       ParentBackground = False
       TabOrder = 0
+      OnClick = pnlConsultasClick
       DesignSize = (
         875
         870)
@@ -5219,10 +5220,10 @@ object FormLogin: TFormLogin
         OnMouseEnter = pnlUserMouseEnter
         OnMouseLeave = pnlUserMouseLeave
         object imgUsuario: TImage
-          Left = -2
+          Left = -1
           Top = 0
-          Width = 64
-          Height = 64
+          Width = 273
+          Height = 70
           Cursor = crHandPoint
           Picture.Data = {
             0954506E67496D61676589504E470D0A1A0A0000000D49484452000000400000
@@ -5298,8 +5299,6 @@ object FormLogin: TFormLogin
             8C6CE5BC28E572E64589E9CD0E6309E61299915A102F9EAFD40AF028834652FF
             CB0C97BDFE97196E0746904C94EEB07926774C28A0B2962A05A45A8054972A05
             A45A805497E35E01FF01174C696E9A3A18910000000049454E44AE426082}
-          Proportional = True
-          Stretch = True
           OnClick = pnlUserClick
           OnMouseEnter = pnlUserMouseEnter
           OnMouseLeave = pnlUserMouseLeave
@@ -5367,10 +5366,10 @@ object FormLogin: TFormLogin
           OnMouseLeave = pnlPacientesMouseLeave
         end
         object imgPacientes: TImage
-          Left = 0
-          Top = 1
-          Width = 64
-          Height = 64
+          Left = -205
+          Top = -2
+          Width = 472
+          Height = 72
           Cursor = crHandPoint
           Center = True
           Picture.Data = {
@@ -5417,8 +5416,6 @@ object FormLogin: TFormLogin
             73CBF5E8E284C35A23AC75DF2C0B0BC026A357DCEAAA4ECBDBF1596F9D170A80
             85A0428CD6022A8A7C90F5F50A07206FEB00081D4068EB00081D40683BE201FC
             034FEBA3504A42C28B0000000049454E44AE426082}
-          Proportional = True
-          Stretch = True
           OnClick = pnlPacientesClick
           OnMouseEnter = pnlPacientesMouseEnter
           OnMouseLeave = pnlPacientesMouseLeave
@@ -5462,11 +5459,12 @@ object FormLogin: TFormLogin
           OnMouseLeave = pnlProfissionaisMouseLeave
         end
         object imgProfissionais: TImage
-          Left = 1
-          Top = 1
-          Width = 64
-          Height = 64
+          Left = -1
+          Top = -3
+          Width = 306
+          Height = 78
           Cursor = crHandPoint
+          Align = alCustom
           Picture.Data = {
             0954506E67496D61676589504E470D0A1A0A0000000D49484452000000400000
             00400806000000AA6971DE000000097048597300000EC300000EC301C76FA864
@@ -5570,8 +5568,6 @@ object FormLogin: TFormLogin
             3BDF7919B130DD6FC4018075F6D30077E408006E8AA3AB874717A2AA3116921C
             39004710DA4250C3195875A8B845D9FC7FC117FF3A5BDB13A8EDBFCF3D00FF07
             1D779A8C30501B980000000049454E44AE426082}
-          Proportional = True
-          Stretch = True
           OnClick = pnlProfissionaisClick
           OnMouseEnter = pnlProfissionaisMouseEnter
           OnMouseLeave = pnlProfissionaisMouseLeave
@@ -5614,10 +5610,10 @@ object FormLogin: TFormLogin
           OnMouseLeave = pnlConsultasMouseLeave
         end
         object imgConsultas: TImage
-          Left = -3
-          Top = 2
-          Width = 64
-          Height = 64
+          Left = -6
+          Top = -1
+          Width = 277
+          Height = 77
           Cursor = crHandPoint
           Picture.Data = {
             0954506E67496D61676589504E470D0A1A0A0000000D49484452000000400000
@@ -5670,8 +5666,7 @@ object FormLogin: TFormLogin
             8E634BA8ABCBEB9EF26C1AFF4D67DE5771007840EC8718636CEA2B498B1F68EC
             5E5F8DD5B05811B2D4F54A007A8A32006207109B32006207109B32006207109B
             32006207109BFE017EC1BB5F32E5DA030000000049454E44AE426082}
-          Proportional = True
-          Stretch = True
+          OnClick = pnlConsultasClick
           OnMouseEnter = pnlConsultasMouseEnter
           OnMouseLeave = pnlConsultasMouseLeave
         end
@@ -5691,9 +5686,9 @@ object FormLogin: TFormLogin
         OnMouseLeave = pnlProcedimentosMouseLeave
         object lblProcedimentos: TLabel
           AlignWithMargins = True
-          Left = 88
-          Top = 18
-          Width = 134
+          Left = 89
+          Top = 19
+          Width = 148
           Height = 25
           Cursor = crHandPoint
           Margins.Left = 105
@@ -5715,9 +5710,9 @@ object FormLogin: TFormLogin
         end
         object imgProcedimentos: TImage
           Left = -1
-          Top = 1
-          Width = 64
-          Height = 64
+          Top = -3
+          Width = 272
+          Height = 77
           Cursor = crHandPoint
           Picture.Data = {
             0954506E67496D61676589504E470D0A1A0A0000000D49484452000000400000
@@ -5778,8 +5773,6 @@ object FormLogin: TFormLogin
             296ACBAD535EDD0A55B03415CC8E23EEAF30020EE79223C0B703BE4B8E00DF0E
             F82E39027C3BE0BBE408F0ED80EF52E909F807E051D65FB9D2AB0D0000000049
             454E44AE426082}
-          Proportional = True
-          Stretch = True
           OnClick = pnlProcedimentosClick
           OnMouseEnter = pnlProcedimentosMouseEnter
           OnMouseLeave = pnlProcedimentosMouseLeave
@@ -5823,10 +5816,10 @@ object FormLogin: TFormLogin
           OnMouseLeave = pnlEncerrarSistemaMouseLeave
         end
         object imgEncerrarSistema: TImage
-          Left = -2
-          Top = 0
-          Width = 64
-          Height = 64
+          Left = -5
+          Top = -2
+          Width = 273
+          Height = 75
           Cursor = crHandPoint
           Picture.Data = {
             0954506E67496D61676589504E470D0A1A0A0000000D49484452000000400000
@@ -5865,8 +5858,6 @@ object FormLogin: TFormLogin
             301B060973BC9CE55A000A88150C42BD65FE0AD1AB6E279CBE42E77A000A8885
             70F47E319D10EFA1F12EDD8D0F2900379B07407701BACD03A0BB00DDE601D05D
             806EF300E82E40B7FD069E1F625F86F3F1F90000000049454E44AE426082}
-          Proportional = True
-          Stretch = True
           OnClick = btnEncerrarSistemaClick
           OnMouseEnter = pnlEncerrarSistemaMouseEnter
           OnMouseLeave = pnlEncerrarSistemaMouseLeave
@@ -5911,10 +5902,10 @@ object FormLogin: TFormLogin
           ExplicitHeight = 25
         end
         object imgRelatorios: TImage
-          Left = -4
-          Top = 1
-          Width = 64
-          Height = 64
+          Left = -6
+          Top = -2
+          Width = 277
+          Height = 99
           Cursor = crHandPoint
           Picture.Data = {
             0954506E67496D61676589504E470D0A1A0A0000000D49484452000000400000
@@ -5956,8 +5947,6 @@ object FormLogin: TFormLogin
             FF187E5D061B7977C8F996E72790850DCDE523B86EE368973459A664937C7D1B
             8C4731B51B4CE93F4CA4F65F6692A90404980EC0740908301D80E992F204FC02
             7583057D742B763D0000000049454E44AE426082}
-          Proportional = True
-          Stretch = True
           OnMouseEnter = pnlRelatoriosMouseEnter
           OnMouseLeave = pnlRelatoriosMouseLeave
         end

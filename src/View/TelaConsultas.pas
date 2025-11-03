@@ -1,14 +1,15 @@
-unit TelaConsultas;
+﻿unit TelaConsultas;
 
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.Mask, Vcl.WinXCtrls, Vcl.Grids, Vcl.ComCtrls,
   Vcl.Samples.Calendar, System.Generics.Collections,
   uPacientes, uProfissionais, uProcedimentos, Vcl.WinXCalendars,
-  uConsultasController, uConsultas;
+  uConsultasController, uConsultas, Vcl.ExtDlgs;
 
 type
   TPagConsultas = class(TForm)
@@ -65,6 +66,7 @@ type
     edHoraFim: TMaskEdit;
     btnConfirmarAlteracoes: TPanel;
     lblConfirmarAlteracoes: TLabel;
+    tmrAtualizarStatus: TTimer;
 
     procedure btnXClick(Sender: TObject);
     procedure btnAddClick(Sender: TObject);
@@ -89,19 +91,31 @@ type
     procedure btnConfirmarAlteracoesMouseLeave(Sender: TObject);
     procedure btnAddMouseEnter(Sender: TObject);
     procedure btnAddMouseLeave(Sender: TObject);
+    procedure btnadicionarClick(Sender: TObject);
+    procedure btnSugerirHorarioClick(Sender: TObject);
+    procedure btnLimparHorarioClick(Sender: TObject);
     procedure Panel1MouseEnter(Sender: TObject);
     procedure Panel1MouseLeave(Sender: TObject);
     procedure Panel1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure edHoraInicioKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edHoraInicioKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure cbNomePaciKeyPress(Sender: TObject; var Key: Char);
+    procedure cbNomeProfKeyPress(Sender: TObject; var Key: Char);
+    procedure cbNomeProcKeyPress(Sender: TObject; var Key: Char);
+    procedure edHoraInicioKeyPress(Sender: TObject; var Key: Char);
+    procedure edHoraFimKeyPress(Sender: TObject; var Key: Char);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure CarregarConsultas;
+    procedure tmrAtualizarStatusTimer(Sender: TObject);
 
   private
     Controller: TConsultaController;
     procedure CarregarComboBox;
     procedure AtualizarHora;
+    procedure SugerirHorarioDisponivel;
+    function ConverterParaHora(const Texto: string): TTime;
 
   public
     { Public declarations }
@@ -128,12 +142,12 @@ begin
     sgConsultas.Cells[2, 0] := 'Profissional';
     sgConsultas.Cells[3, 0] := 'Procedimento';
     sgConsultas.Cells[4, 0] := 'Data';
-    sgConsultas.Cells[5, 0] := 'Hora In�cio';
+    sgConsultas.Cells[5, 0] := 'Hora Inicio';
     sgConsultas.Cells[6, 0] := 'Hora Fim';
+    sgConsultas.Cells[7, 0] := 'Status';
 
     I := 1;
-    for Consulta in Lista do
-    begin
+    for Consulta in Lista do begin
       sgConsultas.Cells[0, I] := Consulta.Id.ToString;
       sgConsultas.Cells[1, I] := Consulta.NomePaciente;
       sgConsultas.Cells[2, I] := Consulta.NomeProfissional;
@@ -141,6 +155,21 @@ begin
       sgConsultas.Cells[4, I] := DateToStr(Consulta.Data);
       sgConsultas.Cells[5, I] := FormatDateTime('hh:nn', Consulta.HoraInicio);
       sgConsultas.Cells[6, I] := FormatDateTime('hh:nn', Consulta.HoraFim);
+
+      // Determinar status baseado no campo ativo e na data/hora
+      if Consulta.Ativo then begin
+        if (Consulta.Data > Date) or
+          ((Consulta.Data = Date) and (Consulta.HoraInicio > Time)) then
+          sgConsultas.Cells[7, I] := 'Agendado'
+        else if (Consulta.Data < Date) or
+          ((Consulta.Data = Date) and (Consulta.HoraFim < Time)) then
+          sgConsultas.Cells[7, I] := 'Concluído'
+        else
+          sgConsultas.Cells[7, I] := 'Em Andamento'
+      end
+      else
+        sgConsultas.Cells[7, I] := 'Cancelado';
+
       Inc(I);
     end;
   finally
@@ -150,7 +179,7 @@ end;
 
 procedure TPagConsultas.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  calendar1.Enabled := True;
+  Calendar1.Enabled := True;
   pnlAdd.Visible := False;
   btnAddNovo.Visible := False;
   btnRestaurarNovo.Visible := False;
@@ -158,10 +187,10 @@ begin
   btnAlterarNovo.Visible := False;
   imgLogo1.Visible := True;
   imgLogo2.Visible := False;
-  panel2.Visible := False;
+  Panel2.Visible := False;
   sgConsultas.Visible := False;
-  calendar1.Visible := True;
-  calendar1.Date := EncodeDate(2025,10,1);
+  Calendar1.Visible := True;
+  Calendar1.Date := EncodeDate(2025, 10, 1);
   cbNomePaci.ItemIndex := -1;
   cbNomeProf.ItemIndex := -1;
   cbNomeProc.ItemIndex := -1;
@@ -173,6 +202,10 @@ procedure TPagConsultas.FormCreate(Sender: TObject);
 begin
   Controller := TConsultaController.Create;
   CarregarComboBox;
+
+  // Configurar timer para atualizar status a cada minuto
+  tmrAtualizarStatus.Interval := 60000; // 60 segundos
+  tmrAtualizarStatus.Enabled := True;
 end;
 
 procedure TPagConsultas.FormDestroy(Sender: TObject);
@@ -191,58 +224,104 @@ var
 begin
   ListaPacientes := Controller.BuscarPacientes;
   if Assigned(ListaPacientes) then
-  try
-    for Paciente in ListaPacientes do
-      cbNomePaci.Items.AddObject(Paciente.Nome, TObject(Paciente.Id));
-  finally
-    ListaPacientes.Free;
-  end;
+    try
+      for Paciente in ListaPacientes do
+        cbNomePaci.Items.AddObject(Paciente.Nome, TObject(Paciente.Id));
+    finally
+      ListaPacientes.Free;
+    end;
   cbNomePaci.ItemIndex := -1;
   ListaProfissionais := Controller.BuscarProfissionais;
   if Assigned(ListaProfissionais) then
-  try
-    for Profissional in ListaProfissionais do
-      cbNomeProf.Items.AddObject(Profissional.Nome, TObject(Profissional.Id));
-  finally
-    ListaProfissionais.Free;
-  end;
+    try
+      for Profissional in ListaProfissionais do
+        cbNomeProf.Items.AddObject(Profissional.Nome, TObject(Profissional.Id));
+    finally
+      ListaProfissionais.Free;
+    end;
   cbNomeProf.ItemIndex := -1;
   ListaProcedimentos := Controller.BuscarProcedimentos;
   if Assigned(ListaProcedimentos) then
-  try
-    for Procedimento in ListaProcedimentos do
-      cbNomeProc.Items.AddObject(Procedimento.Nome, TObject(Procedimento.Id));
-  finally
-    ListaProcedimentos.Free;
-  end;
+    try
+      for Procedimento in ListaProcedimentos do
+        cbNomeProc.Items.AddObject(Procedimento.Nome, TObject(Procedimento.Id));
+    finally
+      ListaProcedimentos.Free;
+    end;
   cbNomeProc.ItemIndex := -1;
 end;
 
 procedure TPagConsultas.AtualizarHora;
 var
-  HoraInicio, HoraFim: TDateTime;
+  HoraInicio: TTime;
   IdProcedimento: Integer;
+  HoraFimCalculada: TDateTime;
 begin
-  if cbNomeProc.ItemIndex = -1 then Exit;
+  if cbNomeProc.ItemIndex = -1 then
+    Exit;
 
-  if not TryStrToTime(edHoraInicio.Text, HoraInicio) then
-  begin
-    ShowMessage('Hora de in�cio inv�lida!');
+  // Usar nossa funcao de conversao
+  HoraInicio := ConverterParaHora(edHoraInicio.Text);
+
+  if (HoraInicio = 0) and (edHoraInicio.Text <> '') then begin
+    ShowMessage('Hora de inicio invalida! Use o formato HH:MM');
     Exit;
   end;
 
   IdProcedimento := Integer(cbNomeProc.Items.Objects[cbNomeProc.ItemIndex]);
-  HoraFim := Controller.CalcularHoraFim(HoraInicio, IdProcedimento);
-  edHoraFim.Text := FormatDateTime('hh:nn', HoraFim);
+  HoraFimCalculada := Controller.CalcularHoraFim(HoraInicio, IdProcedimento);
+  edHoraFim.Text := FormatDateTime('hh:nn', HoraFimCalculada);
 end;
 
-procedure TPagConsultas.edHoraInicioKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+procedure TPagConsultas.edHoraInicioKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
 begin
-  if Key = VK_RETURN then
-  begin
+  if Key = VK_RETURN then begin
     Key := 0;
     AtualizarHora;
     edHoraFim.SetFocus;
+  end;
+end;
+
+procedure TPagConsultas.cbNomePaciKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then begin
+    Key := #0; // bloqueia o som
+    cbNomeProf.SetFocus;
+  end;
+end;
+
+procedure TPagConsultas.cbNomeProfKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then begin
+    Key := #0; // bloqueia o som
+    cbNomeProc.SetFocus;
+  end;
+end;
+
+procedure TPagConsultas.cbNomeProcKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then begin
+    Key := #0; // bloqueia o som
+    edHoraInicio.SetFocus;
+  end;
+end;
+
+procedure TPagConsultas.edHoraInicioKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then begin
+    Key := #0; // bloqueia o som
+    AtualizarHora;
+    edHoraFim.SetFocus;
+  end;
+end;
+
+procedure TPagConsultas.edHoraFimKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then begin
+    Key := #0; // bloqueia o som
+    // Chama o evento do botão adicionar
+    btnadicionarClick(btnadicionar);
   end;
 end;
 
@@ -251,11 +330,17 @@ begin
   if sgConsultas.Visible then
     sgConsultas.Visible := False;
 
-  calendar1.Visible := True;
-  panel2.Visible := False;
+  Calendar1.Visible := True;
+  Panel2.Visible := False;
 
-  if Calendar1.Date > 0 then
-  begin
+  if Calendar1.Date > 0 then begin
+    // Validar se a data selecionada nao e do passado
+    if Calendar1.Date < Date then begin
+      ShowMessage
+        ('Data invalida! Nao e possivel agendar consultas para datas passadas.');
+      Exit;
+    end;
+
     DateTimePicker1.Date := Calendar1.Date;
     Calendar1.Enabled := False;
   end;
@@ -263,8 +348,7 @@ begin
   pnlRestaurar.Visible := False;
   btnRestaurarNovo.Visible := False;
 
-  if btnAlterarNovo.Visible then
-  begin
+  if btnAlterarNovo.Visible then begin
     cbNomePaci.ItemIndex := -1;
     cbNomeProf.ItemIndex := -1;
     cbNomeProc.ItemIndex := -1;
@@ -282,20 +366,20 @@ begin
 end;
 
 procedure TPagConsultas.btnCancelarClick(Sender: TObject);
-  begin
-    calendar1.Enabled := True;
-    pnlAdd.Visible := False;
-    btnAddNovo.Visible := False;
-    btnRestaurarNovo.Visible := False;
-    pnlRestaurar.Visible := false;
-    btnAlterarNovo.Visible := False;
-    imgLogo1.Visible := True;
-    imgLogo2.visible := False;
-    panel2.Visible := False;
-    sgConsultas.Visible := False;
-    calendar1.Visible := True;
-    calendar1.Date := 01/10/2025;
-  end;
+begin
+  Calendar1.Enabled := True;
+  pnlAdd.Visible := False;
+  btnAddNovo.Visible := False;
+  btnRestaurarNovo.Visible := False;
+  pnlRestaurar.Visible := False;
+  btnAlterarNovo.Visible := False;
+  imgLogo1.Visible := True;
+  imgLogo2.Visible := False;
+  Panel2.Visible := False;
+  sgConsultas.Visible := False;
+  Calendar1.Visible := True;
+  Calendar1.Date := 01 / 10 / 2025;
+end;
 
 procedure TPagConsultas.btnLimparClick(Sender: TObject);
 begin
@@ -328,105 +412,363 @@ begin
   sgConsultas.ColWidths[5] := 120;
   sgConsultas.ColWidths[6] := 120;
 
-  calendar1.Visible := False;
-  panel2.Visible := True;
+  Calendar1.Visible := False;
+  Panel2.Visible := True;
 end;
 
 procedure TPagConsultas.btnAddMouseEnter(Sender: TObject);
-  begin
-    btnAdd.Color := $00F78B2B;
-  end;
+begin
+  btnAdd.Color := $00F78B2B;
+end;
+
 procedure TPagConsultas.btnAddMouseLeave(Sender: TObject);
-  begin
-    btnAdd.Color := $007C3E05;
-  end;
+begin
+  btnAdd.Color := $007C3E05;
+end;
 
 procedure TPagConsultas.btnadicionarMouseEnter(Sender: TObject);
-  begin
-    btnadicionar.Color := $00C46106;
-  end;
+begin
+  btnadicionar.Color := $00C46106;
+end;
+
 procedure TPagConsultas.btnadicionarMouseLeave(Sender: TObject);
-  begin
-    btnadicionar.Color := $007C3E05;
-  end;
+begin
+  btnadicionar.Color := $007C3E05;
+end;
 
 procedure TPagConsultas.btnAlterarMouseEnter(Sender: TObject);
-  begin
-    btnAlterar.Color := $00F78B2B;
-  end;
+begin
+  btnAlterar.Color := $00F78B2B;
+end;
+
 procedure TPagConsultas.btnAlterarMouseLeave(Sender: TObject);
-  begin
-    btnAlterar.Color := $007C3E05;
-  end;
+begin
+  btnAlterar.Color := $007C3E05;
+end;
 
 procedure TPagConsultas.btnDeletarMouseEnter(Sender: TObject);
-  begin
-    btnDeletar.Color := $00F78B2B;
-  end;
+begin
+  btnDeletar.Color := $00F78B2B;
+end;
+
 procedure TPagConsultas.btnDeletarMouseLeave(Sender: TObject);
-  begin
-    btnDeletar.Color := $007C3E05;
-  end;
+begin
+  btnDeletar.Color := $007C3E05;
+end;
 
 procedure TPagConsultas.btnCancelarMouseEnter(Sender: TObject);
-  begin
-    btnCancelar.Color := $00F78B2B;
-  end;
+begin
+  btnCancelar.Color := $00F78B2B;
+end;
+
 procedure TPagConsultas.btnCancelarMouseLeave(Sender: TObject);
-  begin
-    btnCancelar.Color := $007C3E05;
-  end;
+begin
+  btnCancelar.Color := $007C3E05;
+end;
 
 procedure TPagConsultas.btnRestaurarMouseEnter(Sender: TObject);
-  begin
-    btnRestaurar.Color := $00F78B2B;
-  end;
+begin
+  btnRestaurar.Color := $00F78B2B;
+end;
+
 procedure TPagConsultas.btnRestaurarMouseLeave(Sender: TObject);
-  begin
-    btnRestaurar.Color := $007C3E05;
-  end;
+begin
+  btnRestaurar.Color := $007C3E05;
+end;
 
 procedure TPagConsultas.btnLimparMouseEnter(Sender: TObject);
-  begin
-    btnLimpar.Color := $00F78B2B;
-  end;
+begin
+  btnLimpar.Color := $00F78B2B;
+end;
+
 procedure TPagConsultas.btnLimparMouseLeave(Sender: TObject);
-  begin
-    btnLimpar.Color := $007C3E05;
-  end;
+begin
+  btnLimpar.Color := $007C3E05;
+end;
 
 procedure TPagConsultas.btnSairMouseEnter(Sender: TObject);
-  begin
-    btnSair.Color := $00F78B2B;
-  end;
+begin
+  btnSair.Color := $00F78B2B;
+end;
+
 procedure TPagConsultas.btnSairMouseLeave(Sender: TObject);
-  begin
-    btnSair.Color := $007C3E05;
-  end;
+begin
+  btnSair.Color := $007C3E05;
+end;
 
 procedure TPagConsultas.btnConfirmarAlteracoesMouseEnter(Sender: TObject);
-  begin
-    btnConfirmarAlteracoes.Color := $00C46106;
-  end;
+begin
+  btnConfirmarAlteracoes.Color := $00C46106;
+end;
+
 procedure TPagConsultas.btnConfirmarAlteracoesMouseLeave(Sender: TObject);
-  begin
-    btnConfirmarAlteracoes.Color := $007C3E05;
-  end;
+begin
+  btnConfirmarAlteracoes.Color := $007C3E05;
+end;
 
 procedure TPagConsultas.Panel1MouseEnter(Sender: TObject);
-  begin
-    Panel1.Color := $00F78B2B;
-  end;
-procedure TPagConsultas.Panel1MouseLeave(Sender: TObject);
-  begin
-    Panel1.Color := $007C3E05;
-  end;
+begin
+  Panel1.Color := $00F78B2B;
+end;
 
+procedure TPagConsultas.Panel1MouseLeave(Sender: TObject);
+begin
+  Panel1.Color := $007C3E05;
+end;
 
 procedure TPagConsultas.btnXClick(Sender: TObject);
-  begin
-    Close;
+begin
+  Close;
+end;
+
+procedure TPagConsultas.SugerirHorarioDisponivel;
+var
+  HoraSugerida, HoraFimSugerida: TTime;
+  DataAtual: TDate;
+  HorarioEncontrado: Boolean;
+  I: Integer;
+begin
+  if (cbNomeProf.ItemIndex = -1) or (cbNomeProc.ItemIndex = -1) then begin
+    ShowMessage('Selecione um profissional e um procedimento primeiro!');
+    Exit;
   end;
 
-end.
+  DataAtual := DateTimePicker1.Date;
+  HorarioEncontrado := False;
 
+  // Verificar horários disponíveis a cada 30 minutos
+  for I := 8 to 18 do // Das 8h às 18h
+  begin
+    if HorarioEncontrado then
+      Break;
+
+    HoraSugerida := EncodeTime(I, 0, 0, 0); // Hora cheia
+
+    // Calcular hora fim com base no procedimento
+    HoraFimSugerida := Controller.CalcularHoraFim(HoraSugerida,
+      Integer(cbNomeProc.Items.Objects[cbNomeProc.ItemIndex]));
+
+    // Verificar se o horario esta disponivel
+    if Controller.VerificarHorarioDisponivel(DataAtual, HoraSugerida,
+      HoraFimSugerida, Integer(cbNomeProf.Items.Objects[cbNomeProf.ItemIndex]))
+    then begin
+      // Sugerir o horario encontrado
+      edHoraInicio.Text := FormatDateTime('hh:nn', HoraSugerida);
+      edHoraFim.Text := FormatDateTime('hh:nn', HoraFimSugerida);
+      HorarioEncontrado := True;
+    end;
+
+    // Tentar a cada 30 minutos
+    if not HorarioEncontrado then begin
+      HoraSugerida := EncodeTime(I, 30, 0, 0); // Meia hora
+      HoraFimSugerida := Controller.CalcularHoraFim(HoraSugerida,
+        Integer(cbNomeProc.Items.Objects[cbNomeProc.ItemIndex]));
+
+      if Controller.VerificarHorarioDisponivel(DataAtual, HoraSugerida,
+        HoraFimSugerida, Integer(cbNomeProf.Items.Objects[cbNomeProf.ItemIndex]))
+      then begin
+        edHoraInicio.Text := FormatDateTime('hh:nn', HoraSugerida);
+        edHoraFim.Text := FormatDateTime('hh:nn', HoraFimSugerida);
+        HorarioEncontrado := True;
+      end;
+    end;
+  end;
+
+  if not HorarioEncontrado then begin
+    ShowMessage
+      ('Nao foram encontrados horarios disponiveis para este profissional neste dia.');
+  end
+  else begin
+    ShowMessage('Horario disponivel encontrado!');
+  end;
+end;
+
+procedure TPagConsultas.btnSugerirHorarioClick(Sender: TObject);
+begin
+  SugerirHorarioDisponivel;
+end;
+
+procedure TPagConsultas.btnLimparHorarioClick(Sender: TObject);
+begin
+  edHoraInicio.Clear;
+  edHoraFim.Clear;
+  edHoraInicio.SetFocus;
+end;
+
+function TPagConsultas.ConverterParaHora(const Texto: string): TTime;
+var
+  TextoLimpo: string;
+  Hora, Minuto: Integer;
+begin
+  Result := 0;
+  TextoLimpo := StringReplace(Texto, ' ', '', [rfReplaceAll]);
+  if TextoLimpo = '' then
+    Exit;
+  TextoLimpo := StringReplace(TextoLimpo, ':', '', [rfReplaceAll]);
+
+  // Tentar converter digitos para numeros
+  try
+    if Length(TextoLimpo) >= 2 then begin
+      Hora := StrToInt(Copy(TextoLimpo, 1, 2));
+      Minuto := 0;
+
+      if Length(TextoLimpo) >= 4 then
+        Minuto := StrToInt(Copy(TextoLimpo, 3, 2))
+      else if Length(TextoLimpo) = 3 then
+        Minuto := StrToInt(Copy(TextoLimpo, 3, 1));
+
+      // Validar hora e minuto
+      if (Hora >= 0) and (Hora <= 23) and (Minuto >= 0) and (Minuto <= 59) then
+      begin
+        Result := EncodeTime(Hora, Minuto, 0, 0);
+      end;
+    end;
+  except
+    // Erro ao converter, mantem 0
+  end;
+end;
+
+procedure TPagConsultas.btnadicionarClick(Sender: TObject);
+var
+  PacienteId, ProfissionalId, ProcedimentoId: Integer;
+  Data: TDate;
+  HoraInicio, HoraFim: TTime;
+  Sucesso: Boolean;
+begin
+  // Validar campos obrigatórios
+  if cbNomePaci.ItemIndex = -1 then begin
+    ShowMessage('Selecione um paciente!');
+    cbNomePaci.SetFocus;
+    Exit;
+  end;
+
+  if cbNomeProf.ItemIndex = -1 then begin
+    ShowMessage('Selecione um profissional!');
+    cbNomeProf.SetFocus;
+    Exit;
+  end;
+
+  if cbNomeProc.ItemIndex = -1 then begin
+    ShowMessage('Selecione um procedimento!');
+    cbNomeProc.SetFocus;
+    Exit;
+  end;
+
+  if Trim(edHoraInicio.Text) = '' then begin
+    ShowMessage('Informe a hora de início!');
+    edHoraInicio.SetFocus;
+    Exit;
+  end;
+
+  if Trim(edHoraFim.Text) = '' then begin
+    ShowMessage('Informe a hora de fim!');
+    edHoraFim.SetFocus;
+    Exit;
+  end;
+
+  // Validar se a data não é do passado
+  if Data < Date then begin
+    ShowMessage('Nao e possivel agendar consultas para datas passadas!');
+    DateTimePicker1.SetFocus;
+    Exit;
+  end;
+
+  // Se a data e hoje, validar se a hora de inicio nao e passada
+  if (Data = Date) and (HoraInicio < Time) then begin
+    ShowMessage('Nao e possivel agendar consultas para horarios passados!');
+    edHoraInicio.SetFocus;
+    Exit;
+  end;
+
+  // Obter os valores dos campos
+  PacienteId := Integer(cbNomePaci.Items.Objects[cbNomePaci.ItemIndex]);
+  ProfissionalId := Integer(cbNomeProf.Items.Objects[cbNomeProf.ItemIndex]);
+  ProcedimentoId := Integer(cbNomeProc.Items.Objects[cbNomeProc.ItemIndex]);
+
+  Data := DateTimePicker1.Date;
+
+  // Validar se a data não é do passado
+  if Data < Date then begin
+    ShowMessage('Nao e possivel agendar consultas para datas passadas!');
+    DateTimePicker1.SetFocus;
+    Exit;
+  end;
+
+  // Converter as horas usando a funcao auxiliar
+  HoraInicio := ConverterParaHora(edHoraInicio.Text);
+  HoraFim := ConverterParaHora(edHoraFim.Text);
+
+  if (HoraInicio = 0) and (edHoraInicio.Text <> '') then begin
+    ShowMessage('Hora de inicio invalida! Use o formato HH:MM');
+    edHoraInicio.SetFocus;
+    Exit;
+  end;
+
+  if (HoraFim = 0) and (edHoraFim.Text <> '') then begin
+    ShowMessage('Hora de fim invalida! Use o formato HH:MM');
+    edHoraFim.SetFocus;
+    Exit;
+  end;
+
+  // Validar se a hora nao e passada (para hoje)
+  if (Data = Date) and (HoraInicio < Time) then begin
+    ShowMessage('Nao e possivel agendar consultas para horarios passados!');
+    edHoraInicio.SetFocus;
+    Exit;
+  end;
+
+  // Verificar se a hora de fim e posterior a hora de inicio
+  if HoraFim <= HoraInicio then begin
+    ShowMessage('A hora de fim deve ser posterior a hora de inicio!');
+    edHoraFim.SetFocus;
+    Exit;
+  end;
+
+  // Verificar se o horario esta disponivel
+  if not Controller.VerificarHorarioDisponivel(Data, HoraInicio, HoraFim,
+    ProfissionalId) then begin
+    ShowMessage
+      ('Horario nao esta disponivel! Verifique se ja existe uma consulta agendada neste horario.');
+    edHoraInicio.SetFocus;
+    Exit;
+  end;
+
+  // Tentar adicionar a consulta
+  Sucesso := Controller.AdicionarConsulta(PacienteId, ProfissionalId,
+    ProcedimentoId, Data, HoraInicio, HoraFim);
+
+  if Sucesso then begin
+    ShowMessage('Consulta agendada com sucesso!');
+
+    // Limpar os campos
+    cbNomePaci.ItemIndex := -1;
+    cbNomeProf.ItemIndex := -1;
+    cbNomeProc.ItemIndex := -1;
+    edHoraInicio.Clear;
+    edHoraFim.Clear;
+
+    // Atualizar a lista de consultas se estiver visivel
+    if sgConsultas.Visible then begin
+      CarregarConsultas;
+    end;
+
+    // Fechar o painel de adicao
+    pnlAdd.Visible := False;
+    btnAddNovo.Visible := False;
+    imgLogo2.Visible := False;
+    imgLogo1.Visible := True;
+  end
+  else begin
+    ShowMessage('Erro ao agendar consulta! Tente novamente.');
+  end;
+end;
+
+procedure TPagConsultas.tmrAtualizarStatusTimer(Sender: TObject);
+begin
+  // Atualizar o status das consultas se o grid estiver visivel
+  if sgConsultas.Visible then begin
+    CarregarConsultas;
+  end;
+end;
+
+end.

@@ -11,7 +11,7 @@ type
     PDuracao: TTime;
     PAtivo: Boolean;
   public
-    property Id: Integer read PId write PId;
+    property Id: integer read PId write PId;
     property Nome: String read PNome write PNome;
     property Valor: Double read PValor write PValor;
     property Ativo: Boolean read PAtivo write PAtivo;

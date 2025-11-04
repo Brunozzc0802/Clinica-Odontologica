@@ -3,7 +3,10 @@
     "allow": [
       "Bash(find:*)",
       "Bash(dir:*)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Bash(tree:*)",
+      "Bash(where:*)",
+      "Bash(\"C:\\Program Files (x86)\\Embarcadero\\Studio\\23.0\\bin\\dcc32.exe\":*)"
     ],
     "deny": [],
     "ask": []

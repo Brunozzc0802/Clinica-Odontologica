@@ -1,6 +1,6 @@
 object PagProfissionais: TPagProfissionais
-  Left = 572
-  Top = 166
+  Left = 694
+  Top = 228
   BorderStyle = bsNone
   Caption = 'PagProfissionais'
   ClientHeight = 664

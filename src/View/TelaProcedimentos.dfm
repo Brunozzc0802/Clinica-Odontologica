@@ -1,6 +1,6 @@
 object PagProcedimentos: TPagProcedimentos
-  Left = 551
-  Top = 187
+  Left = 674
+  Top = 208
   BorderStyle = bsNone
   Caption = 'PagProcedimentos'
   ClientHeight = 644

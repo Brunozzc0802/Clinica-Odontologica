@@ -10,7 +10,7 @@ uses
   System.Net.HttpClient, System.Net.HttpClientComponent, System.JSON,
   uPacientesController, uPacientes,
   System.Generics.Collections, Vcl.ComCtrls, Vcl.Mask, DateUtils,
-  uPacientesControllerLog;
+  uPacientesControllerLog, uDadosGlobais, TelaConsultas;
 
 type
   TPagPacientes = class(TForm)
@@ -139,6 +139,7 @@ type
     procedure edEnderecoKeyPress(Sender: TObject; var Key: Char);
     procedure edDataNascKeyPress(Sender: TObject; var Key: Char);
     procedure pesquisarKeyPress(Sender: TObject; var Key: Char);
+    procedure btnConsultasClick(Sender: TObject);
 
   private
     PacienteIdalterar: Integer;
@@ -149,6 +150,7 @@ type
     function IdadeValida(DataNascimento: TDate): Boolean;
   public
     { Public declarations }
+    procedure ConfigurarPermissoes;
   end;
 
 var
@@ -606,6 +608,12 @@ begin
   btnConfirmarAlteracoes.Color := $007C3E05;
 end;
 
+procedure TPagPacientes.btnConsultasClick(Sender: TObject);
+  begin
+    Close;
+    PagConsultas.Show;
+  end;
+
 procedure TPagPacientes.btnConsultasMouseEnter(Sender: TObject);
 begin
   btnConsultas.Color := $00F78B2B;
@@ -858,8 +866,49 @@ begin
   FreeAndNil(PaciController);
 end;
 
+procedure TPagPacientes.ConfigurarPermissoes;
+begin
+  if Assigned(UsuarioLogado) and (UsuarioLogado.Grupo = 'Profissional') then
+  begin
+    // Oculta botões de CRUD para profissionais
+    btnAdd.Visible := False;
+    btnAlterar.Visible := False;
+    btnDeletar.Visible := False;
+    btnRestaurar.Visible := False;
+    btnLimpar.Visible := False;
+
+    // Mantém visíveis apenas pesquisa e consultas
+    btnPesquisar.Visible := True;
+    btnConsultas.Visible := True;
+    btnSair.Visible := True;
+
+    // Reposiciona os botões visíveis para ficarem alinhados na ordem correta
+    btnConsultas.Top := 5;    // Primeiro botão
+    btnPesquisar.Top := 52;   // Segundo botão
+    btnCancelar.Top := 99;
+    btnSair.Top := 146;      // Último botão (no final, posição original)
+  end
+  else
+  begin
+    // Mostra todos os botões para outros grupos
+    btnAdd.Visible := True;
+    btnAlterar.Visible := True;
+    btnDeletar.Visible := True;
+    btnRestaurar.Visible := True;
+    btnPesquisar.Visible := True;
+    btnConsultas.Visible := True;
+    btnLimpar.Visible := True;
+    btnSair.Visible := True;
+
+    btnPesquisar.Top := 99;
+    btnConsultas.Top := 287;
+    btnSair.Top := 381;
+  end;
+end;
+
 procedure TPagPacientes.FormShow(Sender: TObject);
 begin
+  ConfigurarPermissoes;
   CarregarPacientes;
   OrdenarGrid;
   sgPacientes.Row := 0;

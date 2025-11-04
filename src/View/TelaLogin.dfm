@@ -5154,7 +5154,7 @@ object FormLogin: TFormLogin
       end
       object Shape2: TShape
         Left = 9
-        Top = 400
+        Top = 401
         Width = 270
         Height = 73
         Brush.Color = 8142341
@@ -5221,7 +5221,7 @@ object FormLogin: TFormLogin
         OnMouseLeave = pnlUserMouseLeave
         object imgUsuario: TImage
           Left = -1
-          Top = 0
+          Top = -1
           Width = 273
           Height = 70
           Cursor = crHandPoint
@@ -5305,7 +5305,7 @@ object FormLogin: TFormLogin
         end
         object lblUsuarios: TLabel
           AlignWithMargins = True
-          Left = 89
+          Left = 88
           Top = 18
           Width = 77
           Height = 25
@@ -5343,7 +5343,7 @@ object FormLogin: TFormLogin
         OnMouseLeave = pnlPacientesMouseLeave
         object lblPacientes: TLabel
           AlignWithMargins = True
-          Left = 89
+          Left = 88
           Top = 17
           Width = 83
           Height = 25
@@ -5436,7 +5436,7 @@ object FormLogin: TFormLogin
         OnMouseLeave = pnlProfissionaisMouseLeave
         object lblProfissionais: TLabel
           AlignWithMargins = True
-          Left = 89
+          Left = 88
           Top = 18
           Width = 112
           Height = 25
@@ -5686,9 +5686,9 @@ object FormLogin: TFormLogin
         OnMouseLeave = pnlProcedimentosMouseLeave
         object lblProcedimentos: TLabel
           AlignWithMargins = True
-          Left = 89
+          Left = 88
           Top = 19
-          Width = 148
+          Width = 134
           Height = 25
           Cursor = crHandPoint
           Margins.Left = 105
@@ -5782,7 +5782,7 @@ object FormLogin: TFormLogin
         Left = 12
         Top = 484
         Width = 265
-        Height = 65
+        Height = 64
         Cursor = crHandPoint
         BevelOuter = bvNone
         Color = 8142341
@@ -5793,7 +5793,7 @@ object FormLogin: TFormLogin
         OnMouseLeave = pnlEncerrarSistemaMouseLeave
         object lblEncerrarSistema: TLabel
           AlignWithMargins = True
-          Left = 89
+          Left = 88
           Top = 18
           Width = 148
           Height = 25
@@ -5858,14 +5858,14 @@ object FormLogin: TFormLogin
             301B060973BC9CE55A000A88150C42BD65FE0AD1AB6E279CBE42E77A000A8885
             70F47E319D10EFA1F12EDD8D0F2900379B07407701BACD03A0BB00DDE601D05D
             806EF300E82E40B7FD069E1F625F86F3F1F90000000049454E44AE426082}
-          OnClick = btnEncerrarSistemaClick
+          OnClick = pnlEncerrarSistemaClick
           OnMouseEnter = pnlEncerrarSistemaMouseEnter
           OnMouseLeave = pnlEncerrarSistemaMouseLeave
         end
       end
       object pnlRelatorios: TPanel
         Left = 12
-        Top = 403
+        Top = 404
         Width = 264
         Height = 65
         Cursor = crHandPoint

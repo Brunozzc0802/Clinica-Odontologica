@@ -2,6 +2,7 @@ program Clinica_Odontologica;
 
 uses
   Vcl.Forms,
+  uDadosGlobais in '..\src\uDadosGlobais.pas',
   TelaLogin in '..\src\View\TelaLogin.pas' {FormLogin},
   TelaUsuarios in '..\src\View\TelaUsuarios.pas' {PagUsuarios},
   uUsuarios in '..\src\Model\uUsuarios.pas',

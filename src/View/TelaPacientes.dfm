@@ -1,6 +1,6 @@
 object PagPacientes: TPagPacientes
-  Left = 551
-  Top = 187
+  Left = 674
+  Top = 208
   BorderStyle = bsNone
   Caption = 'PagPacientes'
   ClientHeight = 664
@@ -2908,6 +2908,7 @@ object PagPacientes: TPagPacientes
         Color = 8142341
         ParentBackground = False
         TabOrder = 6
+        OnClick = btnConsultasClick
         OnMouseEnter = btnConsultasMouseEnter
         OnMouseLeave = btnConsultasMouseLeave
         object lblConsultas: TLabel
@@ -2932,6 +2933,7 @@ object PagPacientes: TPagPacientes
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnConsultasClick
           OnMouseEnter = btnConsultasMouseEnter
           OnMouseLeave = btnConsultasMouseLeave
           ExplicitWidth = 60

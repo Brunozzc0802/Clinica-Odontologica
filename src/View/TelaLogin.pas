@@ -9,7 +9,8 @@ uses
   Vcl.Imaging.pngimage,
   Vcl.StdCtrls, Vcl.Imaging.jpeg, Vcl.Buttons, System.ImageList,
   Vcl.ImgList, TelaUsuarios, uUsuarios, uUsuariosController, TelaPacientes,
-  TelaProfissionais, TelaProcedimentos, TelaConsultas, uUsuariosControllerLog;
+  TelaProfissionais, TelaProcedimentos, TelaConsultas, uUsuariosControllerLog,
+  uDadosGlobais;
 
 type
   TFormLogin = class(TForm)
@@ -121,16 +122,13 @@ begin
       edUsuario.SetFocus;
       Exit;
     end;
-
     Usuario := UserController.VerificarUsuario(edUsuario.Text,
       edSenha.Text, Msg);
-
-    // 🔹 Aqui o teste que evita o Access Violation
     if Usuario = nil then begin
       ShowMessage(Msg);
       Exit;
     end;
-
+    UsuarioLogado := Usuario;
     if Usuario.Grupo = 'Administrador' then begin
       Sleep(300);
       pnlLogin.Visible := False;
@@ -140,17 +138,13 @@ begin
     end
     else if Usuario.Grupo = 'Recepcionista' then begin
       Shape7.Visible := False;
-      pnlPacientes.Visible := True;
       pnlPacientes.Top := 8;
       Shape6.Top := 5;
-      pnlConsultas.Visible := True;
       pnlConsultas.Top := 86;
       Shape4.Top := 83;
-      pnlRelatorios.Visible := True;
       pnlRelatorios.Top := 168;
       Shape2.Top := 163;
       Shape5.Visible := False;
-      pnlEncerrarSistema.Visible := True;
       pnlEncerrarSistema.Top := 245;
       Shape1.Top := 242;
       Shape3.Visible := False;
@@ -158,18 +152,25 @@ begin
       pnlProfissionais.Visible := False;
       pnlProcedimentos.Visible := False;
       lblBemVindo.Caption := 'Bem-vindo, ' + Usuario.Nome + '!';
-    end
-    else if Usuario.Grupo = 'Profissional' then begin
-      pnlRelatorios.Visible := True;
-      pnlRelatorios.Top := 80;
+    end else if Usuario.Grupo = 'Profissional' then begin
       pnlConsultas.Visible := True;
-      pnlConsultas.Top := 2;
+      pnlConsultas.Top := 8;
+      shape4.Top := 5;
+      pnlPacientes.Visible := True;
+      pnlPacientes.Top := 86;
+      shape6.Top := 83;
+      pnlRelatorios.Visible := True;
+      pnlRelatorios.Top := 164;
+      shape2.Top := 161;
       pnlEncerrarSistema.Visible := True;
-      pnlEncerrarSistema.Top := 160;
+      pnlEncerrarSistema.Top := 242;
+      shape1.Top := 239;
       pnlUser.Visible := False;
-      pnlPacientes.Visible := False;
       pnlProfissionais.Visible := False;
       pnlProcedimentos.Visible := False;
+      shape7.Visible := False;
+      Shape5.Visible := False;
+      shape3.Visible := False;
       lblBemVindo.Caption := 'Bem-vindo, ' + Usuario.Nome + '!';
     end
     else
@@ -251,7 +252,10 @@ begin
   then begin
     Sleep(500);
     Close;
-  end
+  end else begin
+    Exit;
+  end;
+
 end;
 
 procedure TFormLogin.pnlEncerrarSistemaMouseEnter(Sender: TObject);

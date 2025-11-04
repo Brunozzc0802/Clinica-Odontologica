@@ -17,6 +17,7 @@ type
     function VerificarHorarioDisponivel(pData: TDate;
       HoraInicio, HoraFim: TTime; ProfissionalId: Integer): Boolean;
     function AdicionarConsulta(Consulta: TConsulta): Boolean;
+    function AlterarConsulta(Consulta: TConsulta): Boolean;
   end;
 
 implementation
@@ -220,5 +221,47 @@ begin
     Close;
   end;
 end;
+
+function TConsultaRepository.AlterarConsulta(Consulta: TConsulta): Boolean;
+begin
+  with dmUsuarios.queryConsultas do begin
+    Close;
+
+    // Iniciar transação
+    dmUsuarios.FDConnection1.StartTransaction;
+    try
+      SQL.Text := 'UPDATE consultas SET ' +
+        'paciente_id = :paciente_id, ' +
+        'profissional_id = :profissional_id, ' +
+        'procedimento_id = :procedimento_id, ' +
+        'data = :data_update, ' +
+        'horainicio = :horainicio, ' +
+        'horafim = :horafim ' +
+        'WHERE id = :id';
+
+      ParamByName('paciente_id').AsInteger := Consulta.PacienteId;
+      ParamByName('profissional_id').AsInteger := Consulta.ProfissionalId;
+      ParamByName('procedimento_id').AsInteger := Consulta.ProcedimentoId;
+      ParamByName('data_update').AsDate := Consulta.Data;
+      ParamByName('horainicio').AsTime := Consulta.HoraInicio;
+      ParamByName('horafim').AsTime := Consulta.HoraFim;
+      ParamByName('id').AsInteger := Consulta.Id;
+
+      ExecSQL;
+      dmUsuarios.FDConnection1.Commit;
+      Result := True;
+    except
+      on E: Exception do begin
+        dmUsuarios.FDConnection1.Rollback;
+        Result := False;
+        // Log do erro (opcional)
+        // ShowMessage('Erro ao alterar consulta: ' + E.Message);
+      end;
+    end;
+
+    Close;
+  end;
+end;
+
 
 end.

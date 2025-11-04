@@ -19,6 +19,8 @@ type
       HoraInicio, HoraFim: TTime; ProfissionalId: Integer): Boolean;
     function AdicionarConsulta(PacienteId, ProfissionalId, ProcedimentoId
       : Integer; pData: TDate; HoraInicio, HoraFim: TTime): Boolean;
+    function AlterarConsulta(ConsultaId, PacienteId, ProfissionalId, ProcedimentoId
+      : Integer; pData: TDate; HoraInicio, HoraFim: TTime): Boolean;
   end;
 
 implementation
@@ -129,6 +131,42 @@ begin
       Consulta.Ativo := True;
 
       Result := RepoConsul.AdicionarConsulta(Consulta);
+    finally
+      Consulta.Free;
+    end;
+  finally
+    RepoConsul.Free;
+  end;
+end;
+
+function TConsultaController.AlterarConsulta(ConsultaId, PacienteId, ProfissionalId,
+  ProcedimentoId: Integer; pData: TDate; HoraInicio, HoraFim: TTime): Boolean;
+var
+  RepoConsul: TConsultaRepository;
+  Consulta: TConsulta;
+begin
+  Result := False;
+
+  // Verificar se o horário está disponível antes de alterar
+  if not VerificarHorarioDisponivel(pData, HoraInicio, HoraFim, ProfissionalId)
+  then begin
+    Exit;
+  end;
+
+  RepoConsul := TConsultaRepository.Create;
+  try
+    Consulta := TConsulta.Create;
+    try
+      Consulta.Id := ConsultaId;
+      Consulta.PacienteId := PacienteId;
+      Consulta.ProfissionalId := ProfissionalId;
+      Consulta.ProcedimentoId := ProcedimentoId;
+      Consulta.Data := pData;
+      Consulta.HoraInicio := HoraInicio;
+      Consulta.HoraFim := HoraFim;
+      Consulta.Ativo := True;
+
+      Result := RepoConsul.AlterarConsulta(Consulta);
     finally
       Consulta.Free;
     end;

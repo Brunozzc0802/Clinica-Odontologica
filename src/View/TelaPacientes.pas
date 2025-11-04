@@ -868,29 +868,21 @@ end;
 
 procedure TPagPacientes.ConfigurarPermissoes;
 begin
-  if Assigned(UsuarioLogado) and (UsuarioLogado.Grupo = 'Profissional') then
-  begin
-    // Oculta botões de CRUD para profissionais
+  if Assigned(UsuarioLogado) and (UsuarioLogado.Grupo = 'Profissional') then begin
     btnAdd.Visible := False;
     btnAlterar.Visible := False;
     btnDeletar.Visible := False;
     btnRestaurar.Visible := False;
     btnLimpar.Visible := False;
-
-    // Mantém visíveis apenas pesquisa e consultas
     btnPesquisar.Visible := True;
     btnConsultas.Visible := True;
     btnSair.Visible := True;
 
-    // Reposiciona os botões visíveis para ficarem alinhados na ordem correta
-    btnConsultas.Top := 5;    // Primeiro botão
-    btnPesquisar.Top := 52;   // Segundo botão
+    btnConsultas.Top := 5;
+    btnPesquisar.Top := 52;
     btnCancelar.Top := 99;
-    btnSair.Top := 146;      // Último botão (no final, posição original)
-  end
-  else
-  begin
-    // Mostra todos os botões para outros grupos
+    btnSair.Top := 146;
+  end else begin
     btnAdd.Visible := True;
     btnAlterar.Visible := True;
     btnDeletar.Visible := True;

@@ -3146,7 +3146,7 @@ object PagConsultas: TPagConsultas
       Width = 594
       Height = 440
       BorderColor = 14737632
-      Date = 45931.000000000000000000
+      Date = 45962.000000000000000000
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -20
@@ -3177,6 +3177,7 @@ object PagConsultas: TPagConsultas
       ColCount = 8
       TabOrder = 3
       Visible = False
+      OnDrawCell = sgConsultasDrawCell
     end
   end
   object pnlRestaurar: TPanel

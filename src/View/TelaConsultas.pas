@@ -98,6 +98,8 @@ type
     procedure Panel1MouseLeave(Sender: TObject);
     procedure Panel1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure btnAlterarClick(Sender: TObject);
+    procedure btnConfirmarAlteracoesClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure edHoraInicioKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -109,13 +111,19 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure CarregarConsultas;
     procedure tmrAtualizarStatusTimer(Sender: TObject);
+    procedure sgConsultasDrawCell(Sender: TObject; ACol, ARow: LongInt;
+      Rect: TRect; State: TGridDrawState);
 
   private
     Controller: TConsultaController;
+    ConsultaIdAlterar: Integer;
     procedure CarregarComboBox;
     procedure AtualizarHora;
     procedure SugerirHorarioDisponivel;
     function ConverterParaHora(const Texto: string): TTime;
+    procedure CarregarDadosConsultaNaTela;
+    procedure ConfigurarEstadoBotaoAlterar;
+    function ValidarCampos: Boolean;
 
   public
     { Public declarations }
@@ -206,6 +214,11 @@ begin
   // Configurar timer para atualizar status a cada minuto
   tmrAtualizarStatus.Interval := 60000; // 60 segundos
   tmrAtualizarStatus.Enabled := True;
+
+  // Inicializa variáveis e estados
+  ConsultaIdAlterar := 0;
+  btnAlterar.Enabled := False; // Começa desabilitado
+  btnConfirmarAlteracoes.Visible := False;
 end;
 
 procedure TPagConsultas.FormDestroy(Sender: TObject);
@@ -406,6 +419,8 @@ begin
 
   sgConsultas.ColWidths[0] := 50;
   sgConsultas.ColWidths[1] := 120;
+
+  ConfigurarEstadoBotaoAlterar;
   sgConsultas.ColWidths[2] := 120;
   sgConsultas.ColWidths[3] := 120;
   sgConsultas.ColWidths[4] := 120;
@@ -514,6 +529,25 @@ end;
 procedure TPagConsultas.Panel1MouseLeave(Sender: TObject);
 begin
   Panel1.Color := $007C3E05;
+end;
+
+procedure TPagConsultas.sgConsultasDrawCell(Sender: TObject; ACol,
+  ARow: LongInt; Rect: TRect; State: TGridDrawState);
+  var
+  BGColor: TColor;
+begin
+  if gdSelected in State then
+    BGColor := clHighlight
+  else
+    BGColor := clWindow;
+  sgConsultas.Canvas.Brush.Color := BGColor;
+  sgConsultas.Canvas.FillRect(Rect);
+  if gdSelected in State then
+    sgConsultas.Canvas.Font.Color := clHighlightText
+  else
+    sgconsultas.Canvas.Font.Color := clWindowText;
+    sgConsultas.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2,
+    sgConsultas.Cells[ACol, ARow]);
 end;
 
 procedure TPagConsultas.btnXClick(Sender: TObject);
@@ -769,6 +803,194 @@ begin
   if sgConsultas.Visible then begin
     CarregarConsultas;
   end;
+end;
+
+
+procedure TPagConsultas.btnAlterarClick(Sender: TObject);
+var
+  Linha: Integer;
+begin
+  Linha := sgConsultas.Row;
+  if Linha <= 0 then begin
+    ShowMessage('Selecione uma consulta para alterar!');
+    Exit;
+  end;
+
+  if pnlRestaurar.Visible = true then begin
+    pnlRestaurar.Visible := False;
+    btnRestaurarNovo.Visible := False;
+  end;
+
+  // Carrega os dados da consulta selecionada
+  ConsultaIdAlterar := StrToIntDef(sgConsultas.Cells[0, Linha], 0);
+  CarregarDadosConsultaNaTela;
+
+  btnConfirmarAlteracoes.Visible := true;
+  btnAddNovo.Visible := False;
+  btnAlterarNovo.Visible := true;
+  pnlAdd.Visible := true;
+end;
+
+
+procedure TPagConsultas.btnConfirmarAlteracoesClick(Sender: TObject);
+var
+  PacienteId, ProfissionalId, ProcedimentoId: Integer;
+  HoraInicio, HoraFim: TTime;
+begin
+  if ValidarCampos then
+  begin
+    try
+      // Obtém os IDs dos itens selecionados nos combos
+      PacienteId := Integer(cbNomePaci.Items.Objects[cbNomePaci.ItemIndex]);
+      ProfissionalId := Integer(cbNomeProf.Items.Objects[cbNomeProf.ItemIndex]);
+      ProcedimentoId := Integer(cbNomeProc.Items.Objects[cbNomeProc.ItemIndex]);
+      HoraInicio := ConverterParaHora(edHoraInicio.Text);
+      HoraFim := ConverterParaHora(edHoraFim.Text);
+
+      // Chama o controller para alterar a consulta
+      if Controller.AlterarConsulta(ConsultaIdAlterar, PacienteId, ProfissionalId,
+                               ProcedimentoId, DateTimePicker1.Date, HoraInicio, HoraFim) then
+      begin
+        ShowMessage('Consulta alterada com sucesso!');
+        CarregarConsultas;
+        pnlAdd.Visible := False;
+        imgLogo1.Visible := True;
+        imgLogo2.Visible := False;
+        btnConfirmarAlteracoes.Visible := False;
+        ConsultaIdAlterar := 0;
+        ConfigurarEstadoBotaoAlterar;
+      end
+      else
+      begin
+        ShowMessage('Não foi possível alterar a consulta! Verifique o horário.');
+      end;
+    except
+      on E: Exception do
+        ShowMessage('Erro ao alterar consulta: ' + E.Message);
+    end;
+  end;
+end;
+
+procedure TPagConsultas.ConfigurarEstadoBotaoAlterar;
+begin
+  // Botão alterar sempre fica habilitado quando o grid estiver visível
+  // A validação é feita no momento do clique
+  btnAlterar.Enabled := sgConsultas.Visible;
+end;
+
+procedure TPagConsultas.CarregarDadosConsultaNaTela;
+var
+  i: Integer;
+begin
+  if ConsultaIdAlterar <= 0 then Exit;
+
+  // Procura o paciente no combobox
+  for i := 0 to cbNomePaci.Items.Count - 1 do
+  begin
+    if cbNomePaci.Items[i] = sgConsultas.Cells[1, sgConsultas.Row] then
+    begin
+      cbNomePaci.ItemIndex := i;
+      Break;
+    end;
+  end;
+
+  // Procura o profissional no combobox
+  for i := 0 to cbNomeProf.Items.Count - 1 do
+  begin
+    if cbNomeProf.Items[i] = sgConsultas.Cells[2, sgConsultas.Row] then
+    begin
+      cbNomeProf.ItemIndex := i;
+      Break;
+    end;
+  end;
+
+  // Procura o procedimento no combobox
+  for i := 0 to cbNomeProc.Items.Count - 1 do
+  begin
+    if cbNomeProc.Items[i] = sgConsultas.Cells[3, sgConsultas.Row] then
+    begin
+      cbNomeProc.ItemIndex := i;
+      Break;
+    end;
+  end;
+
+  // Carrega data e horários
+  try
+    DateTimePicker1.Date := StrToDate(sgConsultas.Cells[4, sgConsultas.Row]);
+  except
+    // Se não conseguir converter, usa a data atual
+    DateTimePicker1.Date := Date;
+  end;
+
+  edHoraInicio.Text := sgConsultas.Cells[5, sgConsultas.Row];
+  edHoraFim.Text := sgConsultas.Cells[6, sgConsultas.Row];
+
+  // Mostra o botão de confirmar alterações
+  btnConfirmarAlteracoes.Visible := True;
+end;
+
+function TPagConsultas.ValidarCampos: Boolean;
+var
+  HoraInicio, HoraFim: TTime;
+begin
+  Result := False;
+
+  // Valida seleção dos combos
+  if cbNomePaci.ItemIndex = -1 then
+  begin
+    ShowMessage('Selecione um paciente!');
+    cbNomePaci.SetFocus;
+    Exit;
+  end;
+
+  if cbNomeProf.ItemIndex = -1 then
+  begin
+    ShowMessage('Selecione um profissional!');
+    cbNomeProf.SetFocus;
+    Exit;
+  end;
+
+  if cbNomeProc.ItemIndex = -1 then
+  begin
+    ShowMessage('Selecione um procedimento!');
+    cbNomeProc.SetFocus;
+    Exit;
+  end;
+
+  // Valida horários usando o método ConverterParaHora
+  HoraInicio := ConverterParaHora(edHoraInicio.Text);
+  if HoraInicio = 0 then
+  begin
+    ShowMessage('Hora de início inválida!');
+    edHoraInicio.SetFocus;
+    Exit;
+  end;
+
+  HoraFim := ConverterParaHora(edHoraFim.Text);
+  if HoraFim = 0 then
+  begin
+    ShowMessage('Hora de fim inválida!');
+    edHoraFim.SetFocus;
+    Exit;
+  end;
+
+  // Valida se hora fim é maior que hora início
+  if HoraFim <= HoraInicio then
+  begin
+    ShowMessage('Hora fim deve ser maior que hora início!');
+    edHoraFim.SetFocus;
+    Exit;
+  end;
+
+  // Valida se a data não é no passado
+  if DateTimePicker1.Date < Date then
+  begin
+    ShowMessage('Não é possível agendar consultas para datas passadas!');
+    DateTimePicker1.SetFocus;
+    Exit;
+  end;
+
+  Result := True;
 end;
 
 end.

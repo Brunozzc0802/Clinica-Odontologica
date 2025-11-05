@@ -9,7 +9,7 @@ uses
   Vcl.StdCtrls, Vcl.Mask, Vcl.WinXCtrls, Vcl.Grids, Vcl.ComCtrls,
   Vcl.Samples.Calendar, System.Generics.Collections,
   uPacientes, uProfissionais, uProcedimentos, Vcl.WinXCalendars,
-  uConsultasController, uConsultas, Vcl.ExtDlgs;
+  uConsultasController, uConsultas, Vcl.ExtDlgs, uConsultaControllerLog, uDadosGlobais;
 
 type
   TPagConsultas = class(TForm)
@@ -116,8 +116,10 @@ type
 
   private
     Controller: TConsultaController;
+    ConsController: TLogController;
     ConsultaIdAlterar: Integer;
     procedure CarregarComboBox;
+    procedure RecarregarComboBox;
     procedure AtualizarHora;
     procedure SugerirHorarioDisponivel;
     function ConverterParaHora(const Texto: string): TTime;
@@ -264,6 +266,79 @@ begin
   cbNomeProc.ItemIndex := -1;
 end;
 
+procedure TPagConsultas.RecarregarComboBox;
+var
+  ListaPacientes: TObjectList<TPaciente>;
+  ListaProfissionais: TObjectList<TProfissionais>;
+  ListaProcedimentos: TObjectList<TProcedimento>;
+  Paciente: TPaciente;
+  Profissional: TProfissionais;
+  Procedimento: TProcedimento;
+  SelectedIndexPaci, SelectedIndexProf, SelectedIndexProc: Integer;
+  SelectedNamePaci, SelectedNameProf, SelectedNameProc: string;
+begin
+  // Salvar as seleções atuais
+  SelectedIndexPaci := cbNomePaci.ItemIndex;
+  SelectedIndexProf := cbNomeProf.ItemIndex;
+  SelectedIndexProc := cbNomeProc.ItemIndex;
+
+  SelectedNamePaci := '';
+  SelectedNameProf := '';
+  SelectedNameProc := '';
+
+  if SelectedIndexPaci >= 0 then
+    SelectedNamePaci := cbNomePaci.Items[SelectedIndexPaci];
+  if SelectedIndexProf >= 0 then
+    SelectedNameProf := cbNomeProf.Items[SelectedIndexProf];
+  if SelectedIndexProc >= 0 then
+    SelectedNameProc := cbNomeProc.Items[SelectedIndexProc];
+
+  // Limpar os comboboxes
+  cbNomePaci.Clear;
+  cbNomeProf.Clear;
+  cbNomeProc.Clear;
+
+  // Recarregar os dados
+  ListaPacientes := Controller.BuscarPacientes;
+  if Assigned(ListaPacientes) then
+    try
+      for Paciente in ListaPacientes do
+        cbNomePaci.Items.AddObject(Paciente.Nome, TObject(Paciente.Id));
+    finally
+      ListaPacientes.Free;
+    end;
+
+  ListaProfissionais := Controller.BuscarProfissionais;
+  if Assigned(ListaProfissionais) then
+    try
+      for Profissional in ListaProfissionais do
+        cbNomeProf.Items.AddObject(Profissional.Nome, TObject(Profissional.Id));
+    finally
+      ListaProfissionais.Free;
+    end;
+
+  ListaProcedimentos := Controller.BuscarProcedimentos;
+  if Assigned(ListaProcedimentos) then
+    try
+      for Procedimento in ListaProcedimentos do
+        cbNomeProc.Items.AddObject(Procedimento.Nome, TObject(Procedimento.Id));
+    finally
+      ListaProcedimentos.Free;
+    end;
+
+  // Restaurar as seleções
+  cbNomePaci.ItemIndex := -1;
+  cbNomeProf.ItemIndex := -1;
+  cbNomeProc.ItemIndex := -1;
+
+  if SelectedNamePaci <> '' then
+    cbNomePaci.ItemIndex := cbNomePaci.Items.IndexOf(SelectedNamePaci);
+  if SelectedNameProf <> '' then
+    cbNomeProf.ItemIndex := cbNomeProf.Items.IndexOf(SelectedNameProf);
+  if SelectedNameProc <> '' then
+    cbNomeProc.ItemIndex := cbNomeProc.Items.IndexOf(SelectedNameProc);
+end;
+
 procedure TPagConsultas.AtualizarHora;
 var
   HoraInicio: TTime;
@@ -370,6 +445,9 @@ begin
     btnAlterarNovo.Visible := False;
     btnAddNovo.Visible := True;
   end;
+
+  // Recarregar os dados dos comboboxes
+  RecarregarComboBox;
 
   pnlAdd.Visible := True;
   btnadicionar.Visible := True;
@@ -668,6 +746,7 @@ var
   Data: TDate;
   HoraInicio, HoraFim: TTime;
   Sucesso: Boolean;
+  NomePaciente, NomeProfissional, NomeProcedimento: string;
 begin
   // Validar campos obrigatórios
   if cbNomePaci.ItemIndex = -1 then begin
@@ -697,20 +776,6 @@ begin
   if Trim(edHoraFim.Text) = '' then begin
     ShowMessage('Informe a hora de fim!');
     edHoraFim.SetFocus;
-    Exit;
-  end;
-
-  // Validar se a data não é do passado
-  if Data < Date then begin
-    ShowMessage('Nao e possivel agendar consultas para datas passadas!');
-    DateTimePicker1.SetFocus;
-    Exit;
-  end;
-
-  // Se a data e hoje, validar se a hora de inicio nao e passada
-  if (Data = Date) and (HoraInicio < Time) then begin
-    ShowMessage('Nao e possivel agendar consultas para horarios passados!');
-    edHoraInicio.SetFocus;
     Exit;
   end;
 
@@ -772,6 +837,24 @@ begin
     ProcedimentoId, Data, HoraInicio, HoraFim);
 
   if Sucesso then begin
+    // Obter nomes para o log
+    if cbNomePaci.ItemIndex >= 0 then
+      NomePaciente := cbNomePaci.Items[cbNomePaci.ItemIndex];
+    if cbNomeProf.ItemIndex >= 0 then
+      NomeProfissional := cbNomeProf.Items[cbNomeProf.ItemIndex];
+    if cbNomeProc.ItemIndex >= 0 then
+      NomeProcedimento := cbNomeProc.Items[cbNomeProc.ItemIndex];
+
+    // Adicionar log
+    ConsController := TLogController.Create;
+    try
+      ConsController.RegistrarLog(UsuarioLogado.Nome, NomePaciente, NomeProfissional, NomeProcedimento,
+        FormatDateTime('dd/mm/yyyy', Data), FormatDateTime('hh:nn', HoraInicio), 'Agendou Consulta',
+        '');
+    finally
+      ConsController.Free;
+    end;
+
     ShowMessage('Consulta agendada com sucesso!');
 
     // Limpar os campos
@@ -821,6 +904,9 @@ begin
     btnRestaurarNovo.Visible := False;
   end;
 
+  // Recarregar os dados dos comboboxes
+  RecarregarComboBox;
+
   // Carrega os dados da consulta selecionada
   ConsultaIdAlterar := StrToIntDef(sgConsultas.Cells[0, Linha], 0);
   CarregarDadosConsultaNaTela;
@@ -836,6 +922,7 @@ procedure TPagConsultas.btnConfirmarAlteracoesClick(Sender: TObject);
 var
   PacienteId, ProfissionalId, ProcedimentoId: Integer;
   HoraInicio, HoraFim: TTime;
+  NomePaciente, NomeProfissional, NomeProcedimento: string;
 begin
   if ValidarCampos then
   begin
@@ -851,6 +938,23 @@ begin
       if Controller.AlterarConsulta(ConsultaIdAlterar, PacienteId, ProfissionalId,
                                ProcedimentoId, DateTimePicker1.Date, HoraInicio, HoraFim) then
       begin
+        // Adicionar log
+        if cbNomePaci.ItemIndex >= 0 then
+          NomePaciente := cbNomePaci.Items[cbNomePaci.ItemIndex];
+        if cbNomeProf.ItemIndex >= 0 then
+          NomeProfissional := cbNomeProf.Items[cbNomeProf.ItemIndex];
+        if cbNomeProc.ItemIndex >= 0 then
+          NomeProcedimento := cbNomeProc.Items[cbNomeProc.ItemIndex];
+
+        ConsController := TLogController.Create;
+        try
+          ConsController.RegistrarLog(UsuarioLogado.Nome, NomePaciente, NomeProfissional, NomeProcedimento,
+            FormatDateTime('dd/mm/yyyy', DateTimePicker1.Date), FormatDateTime('hh:nn', HoraInicio), 'Alterou Consulta',
+            '');
+        finally
+          ConsController.Free;
+        end;
+
         ShowMessage('Consulta alterada com sucesso!');
         CarregarConsultas;
         pnlAdd.Visible := False;

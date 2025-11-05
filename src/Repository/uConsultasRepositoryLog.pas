@@ -1,19 +1,19 @@
-unit uUsuarioRepositoryLog;
+unit uConsultasRepositoryLog;
 
 interface
 
 uses
-  uUsuarioLog, System.SysUtils, System.IOUtils;
+  uConsultaLog, System.SysUtils, System.IOUtils;
 
 type
   TLogRepository = class
   public
-    procedure Salvar(ALog: TUsuarioLog);
+    procedure Salvar(ALog: TConsultaLog);
   end;
 
 implementation
 
-procedure TLogRepository.Salvar(ALog: TUsuarioLog);
+procedure TLogRepository.Salvar(ALog: TConsultaLog);
 var
   LogFile: TextFile;
   LogDir, LogPath, LogLine: string;
@@ -28,11 +28,18 @@ begin
     if not DirectoryExists(LogDir) then
       ForceDirectories(LogDir);
 
-    LogPath := LogDir + 'usuario_log.txt';
+    LogPath := LogDir + 'consulta_log.txt';
 
-    LogLine := Format('%s | %s | %s | %s | %s | %s', [ALog.UsuarioQueExecutouAcao, ALog.Acao,
-      ALog.Usuario, ALog.Detalhes, ALog.Grupo, FormatDateTime('hh:nn:ss dd-mm-yyyy',
-      ALog.DataHora)]);
+    LogLine := Format('Usuario: %s | %s | Paciente: %s | Profissional: %s | Procedimento: %s | Horario: %s as %s | %s', [
+      ALog.UsuarioQueExecutouAcao,
+      ALog.Acao,
+      ALog.Paciente,
+      ALog.Profissional,
+      ALog.Procedimento,
+      ALog.Data,
+      ALog.Hora,
+      FormatDateTime('hh:nn:ss dd-mm-yyyy', ALog.DataHora)
+    ]);
 
     FileHandle := 0;
     AssignFile(LogFile, LogPath);
@@ -42,12 +49,12 @@ begin
       else
         Rewrite(LogFile);
 
-      FileHandle := 1; // Marca que arquivo foi aberto
+      FileHandle := 1;
 
       WriteLn(LogFile, LogLine);
 
       CloseFile(LogFile);
-      FileHandle := 0; // Marca que arquivo foi fechado
+      FileHandle := 0;
     except
       on E: Exception do begin
         if FileHandle = 1 then begin
@@ -61,7 +68,6 @@ begin
     end;
   except
     on E: Exception do
-      // Re-lan�a exce��o para quem chamou tratar
       raise;
   end;
 end;

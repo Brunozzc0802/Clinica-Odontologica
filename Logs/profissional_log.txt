@@ -3,3 +3,6 @@ Bruno | Adicionado | CPF | 13012574948 | 16:45:52 29-10-2025
 Bruno | Alterado | Cpf | 13012574948 | 16:50:21 29-10-2025
 Teste123 | Alterado | Cpf | 98987987897 | 16:50:31 29-10-2025
 Bruno | Deletado | CPF | 13012574948 | 16:51:01 29-10-2025
+admin | Deletou | Teste123 | CPF | 98987987897 | 15:28:55 05-11-2025
+Sistema | Adicionou Profissional | aaaaaaaa | CPF: 75575757755 | 75575757755 | 16:08:13 05-11-2025
+Sistema | Adicionou Profissional | aaaaaaaaaaaa | CPF: 11112222666 | 11112222666 | 16:09:22 05-11-2025

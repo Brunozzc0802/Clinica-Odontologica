@@ -7,8 +7,9 @@ uses
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.Mask, Vcl.WinXCtrls, Vcl.Grids, uProfissionaisController,
-  uProfissionais,
-  System.Generics.Collections, uProfissionaisControllerLog;
+  uProfissionais, System.Generics.Collections, uProfissionaisControllerLog,
+  System.Net.URLClient,
+  System.Net.HttpClient, System.Net.HttpClientComponent, System.JSON;
 
 type
   TPagProfissionais = class(TForm)
@@ -44,7 +45,6 @@ type
     Label3: TLabel;
     pnlAdd: TPanel;
     EdNome: TEdit;
-    edCEP: TEdit;
     edEndereco: TEdit;
     btnadicionar: TPanel;
     lblAddpaciente: TLabel;
@@ -65,6 +65,8 @@ type
     lblTitulo: TLabel;
     iconPacientes: TImage;
     btnX: TImage;
+    NetHTTPClient1: TNetHTTPClient;
+    edCep: TMaskEdit;
     procedure CarregarGrid;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -128,6 +130,7 @@ type
     procedure edEmailKeyPress(Sender: TObject; var Key: Char);
     procedure edCEPKeyPress(Sender: TObject; var Key: Char);
     procedure edEnderecoKeyPress(Sender: TObject; var Key: Char);
+    function buscarCEP(const CEP: string): Boolean;
   private
     ProfissionaisLista: TObjectList<TProfissionais>;
     ProfissionalIdalterar: Integer;
@@ -156,11 +159,11 @@ begin
     ProfissionaisLista := Controller.BuscarInativos;
 
     sgRestore.Cells[0, 0] := 'ID';
-    sgRestore.Cells[1, 0] := 'Nome do Paciente';
+    sgRestore.Cells[1, 0] := 'Nome do Profissional';
     sgRestore.Cells[2, 0] := 'CPF';
     sgRestore.Cells[3, 0] := 'Telefone';
     sgRestore.Cells[4, 0] := 'Cep';
-    sgRestore.Cells[5, 0] := 'Data de nascimento';
+    sgRestore.Cells[5, 0] := 'Endereço';
     sgRestore.Cells[6, 0] := 'Endere�o';
 
     sgRestore.RowCount := ProfissionaisLista.Count + 1;
@@ -170,8 +173,8 @@ begin
       sgRestore.Cells[1, I + 1] := ProfissionaisLista[I].Nome;
       sgRestore.Cells[2, I + 1] := ProfissionaisLista[I].cpf;
       sgRestore.Cells[3, I + 1] := ProfissionaisLista[I].telefone;
-      sgRestore.Cells[4, I + 1] := ProfissionaisLista[I].Email;
-      sgRestore.Cells[5, I + 1] := ProfissionaisLista[I].cep;
+      sgRestore.Cells[4, I + 1] := ProfissionaisLista[I].CEP;
+      sgRestore.Cells[5, I + 1] := ProfissionaisLista[I].Email;
       sgRestore.Cells[6, I + 1] := ProfissionaisLista[I].endereco;
     end;
   finally
@@ -192,7 +195,8 @@ begin
     Controller.AdicionarProfissional(EdNome.Text, edCPF.Text, edTelefone.Text,
       edEmail.Text, edCEP.Text, edEndereco.Text);
 
-    ProfController.RegistrarLog(EdNome.Text, 'Adicionado', 'CPF', edCPF.Text);
+    ProfController.RegistrarLog('Sistema', EdNome.Text,
+      'Adicionou Profissional', 'CPF: ' + edCPF.Text, edCPF.Text);
     ShowMessage('Profissional adicionado com sucesso!');
     btnAddNovo.Visible := False;
     CarregarGrid;
@@ -404,7 +408,8 @@ begin
   if Id > 0 then begin
     Nome := sgProfissionais.Cells[1, sgProfissionais.Row];
     cpf := sgProfissionais.Cells[2, sgProfissionais.Row];
-    ProfController.RegistrarLog(Nome, 'Deletado', 'CPF', cpf);
+    ProfController.RegistrarLog('Sistema', Nome, 'Deletou Profissional',
+      'CPF: ' + cpf, cpf);
     Controller.DesativarProfissional(Id);
     ShowMessage('Profissional deletado com sucesso!');
     CarregarGrid;
@@ -551,6 +556,42 @@ begin
   Close;
 end;
 
+function TPagProfissionais.buscarCEP(const CEP: string): Boolean;
+var
+  HTTP: TNetHTTPClient;
+  Response: IHTTPResponse;
+  JsonResp: TJSONObject;
+begin
+  Result := False;
+  HTTP := TNetHTTPClient.Create(nil);
+  try
+    Response := HTTP.Get('https://viacep.com.br/ws/' + CEP + '/json/');
+    if Response.StatusCode = 200 then begin
+      JsonResp := TJSONObject.ParseJSONValue(Response.ContentAsString)
+        as TJSONObject;
+      try
+        if JsonResp.GetValue('erro') <> nil then begin
+          ShowMessage('CEP não encontrado!');
+          edCEP.SetFocus;
+          Exit;
+        end;
+
+        edEndereco.Text := JsonResp.GetValue('logradouro').Value;
+        edEndereco.SetFocus;
+        Result := true;
+      finally
+        JsonResp.Free;
+      end;
+    end
+    else begin
+      ShowMessage('CEP não encontrado!');
+      edCEP.SetFocus;
+    end;
+  finally
+    HTTP.Free;
+  end;
+end;
+
 procedure TPagProfissionais.CarregarGrid;
 var
   I: Integer;
@@ -575,7 +616,7 @@ begin
       sgProfissionais.Cells[1, I + 1] := ProfissionaisLista[I].Nome;
       sgProfissionais.Cells[2, I + 1] := ProfissionaisLista[I].cpf;
       sgProfissionais.Cells[3, I + 1] := ProfissionaisLista[I].telefone;
-      sgProfissionais.Cells[4, I + 1] := ProfissionaisLista[I].cep;
+      sgProfissionais.Cells[4, I + 1] := ProfissionaisLista[I].CEP;
       sgProfissionais.Cells[5, I + 1] := ProfissionaisLista[I].endereco;
       sgProfissionais.Cells[6, I + 1] := ProfissionaisLista[I].Email;
     end;
@@ -593,7 +634,8 @@ begin
     Controller.AlterarProfissional(ProfissionalIdalterar, EdNome.Text,
       edCPF.Text, edTelefone.Text, edEmail.Text, edCEP.Text, edEndereco.Text);
 
-    ProfController.RegistrarLog(EdNome.Text, 'Alterado', 'Cpf', edCPF.Text);
+    ProfController.RegistrarLog('Sistema', EdNome.Text, 'Alterou Profissional',
+      'CPF: ' + edCPF.Text, edCPF.Text);
     ShowMessage('Alterações feitas com sucesso!');
     btnAlterarNovo.Visible := False;
     CarregarGrid;
@@ -622,8 +664,8 @@ begin
     Profissional.cpf := sgRestore.Cells[2, sgRestore.Row];
 
     try
-      ProfController.RegistrarLog(Profissional.Nome, 'Restaurado', 'Cpf',
-        Profissional.cpf);
+      ProfController.RegistrarLog('Sistema', Profissional.Nome,
+        'Restaurou Profissional', 'CPF: ' + Profissional.cpf, Profissional.cpf);
       Controller.RestaurarProfissional(ProfissionalId);
       ShowMessage('Profissional restaurado com sucesso!');
       CarregarInativos;
@@ -714,7 +756,7 @@ begin
   ProfController := TLogController.Create;
 
   sgProfissionais.Cells[0, 0] := 'ID';
-  sgProfissionais.Cells[1, 0] := 'Nome do Paciente';
+  sgProfissionais.Cells[1, 0] := 'Nome do Profissional';
   sgProfissionais.Cells[2, 0] := 'CPF';
   sgProfissionais.Cells[3, 0] := 'Telefone';
   sgProfissionais.Cells[4, 0] := 'Cep';
@@ -795,9 +837,9 @@ begin
       sgProfissionais.Cells[1, linha] := Profissional.Nome;
       sgProfissionais.Cells[2, linha] := Profissional.cpf;
       sgProfissionais.Cells[3, linha] := Profissional.telefone;
-      sgProfissionais.Cells[4, linha] := Profissional.Email;
-      sgProfissionais.Cells[5, linha] := Profissional.cep;
-      sgProfissionais.Cells[6, linha] := Profissional.endereco;
+      sgProfissionais.Cells[4, linha] := Profissional.CEP;
+      sgProfissionais.Cells[5, linha] := Profissional.endereco;
+      sgProfissionais.Cells[6, linha] := Profissional.Email;
       Inc(linha);
     end;
   end;
@@ -878,7 +920,7 @@ procedure TPagProfissionais.edCEPKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
     Key := #0; // bloqueia o som
-    edEndereco.SetFocus;
+    buscarCEP(edCEP.Text);
   end;
 end;
 

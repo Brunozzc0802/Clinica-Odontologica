@@ -7,7 +7,9 @@
       "Bash(tree:*)",
       "Bash(where:*)",
       "Bash(\"C:\\Program Files (x86)\\Embarcadero\\Studio\\23.0\\bin\\dcc32.exe\":*)",
-      "Bash(del:*)"
+      "Bash(del:*)",
+      "Bash(dcc32.exe:*)",
+      "Bash(git checkout:*)"
     ],
     "deny": [],
     "ask": []

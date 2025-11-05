@@ -30,8 +30,8 @@ begin
 
     LogPath := LogDir + 'profissional_log.txt';
 
-    LogLine := Format('%s | %s | %s | %s | %s', [ALog.Profissional, ALog.Acao,
-      ALog.Detalhes, ALog.Cpf, FormatDateTime('hh:nn:ss dd-mm-yyyy',
+    LogLine := Format('%s | %s | %s | %s | %s | %s', [ALog.UsuarioQueExecutouAcao, ALog.Acao,
+      ALog.Profissional, ALog.Detalhes, ALog.Cpf, FormatDateTime('hh:nn:ss dd-mm-yyyy',
       ALog.DataHora)]);
 
     FileHandle := 0;

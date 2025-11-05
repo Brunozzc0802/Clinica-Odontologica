@@ -2941,24 +2941,13 @@ object PagProfissionais: TPagProfissionais
         OnKeyDown = EdNomeKeyDown
         OnKeyPress = EdNomeKeyPress
       end
-      object edCEP: TEdit
-        Left = 219
-        Top = 56
-        Width = 169
-        Height = 33
-        AutoSize = False
-        TabOrder = 1
-        TextHint = 'Digite o Cep:'
-        OnKeyDown = edCEPKeyDown
-        OnKeyPress = edCEPKeyPress
-      end
       object edEndereco: TEdit
         Left = 432
         Top = 56
         Width = 147
         Height = 33
         AutoSize = False
-        TabOrder = 2
+        TabOrder = 1
         TextHint = 'Digite o Endere'#231'o:'
         OnKeyPress = edEnderecoKeyPress
       end
@@ -2974,7 +2963,7 @@ object PagProfissionais: TPagProfissionais
         Margins.Bottom = 36
         Color = 8142341
         ParentBackground = False
-        TabOrder = 3
+        TabOrder = 2
         OnClick = btnadicionarClick
         OnMouseEnter = btnadicionarMouseEnter
         OnMouseLeave = btnadicionarMouseLeave
@@ -3018,7 +3007,7 @@ object PagProfissionais: TPagProfissionais
         Margins.Bottom = 36
         Color = 8142341
         ParentBackground = False
-        TabOrder = 4
+        TabOrder = 3
         Visible = False
         OnClick = btnConfirmarAlteracoesClick
         OnMouseEnter = btnConfirmarAlteracoesMouseEnter
@@ -3060,7 +3049,7 @@ object PagProfissionais: TPagProfissionais
         AutoSize = False
         EditMask = '(00) 00000-0009;1;_'
         MaxLength = 15
-        TabOrder = 5
+        TabOrder = 4
         Text = '(  )      -    '
         TextHint = 'Digite o Telefone:'
         OnKeyDown = edTelefoneKeyDown
@@ -3074,7 +3063,7 @@ object PagProfissionais: TPagProfissionais
         AutoSize = False
         EditMask = '000.000.000-00;0;_'
         MaxLength = 14
-        TabOrder = 6
+        TabOrder = 5
         Text = ''
         TextHint = 'Digite o CPF:'
         OnKeyDown = edCPFKeyDown
@@ -3086,10 +3075,22 @@ object PagProfissionais: TPagProfissionais
         Width = 169
         Height = 34
         AutoSize = False
-        TabOrder = 7
+        TabOrder = 6
         TextHint = 'Digite o Email:'
         OnKeyDown = edEmailKeyDown
         OnKeyPress = edEmailKeyPress
+      end
+      object edCep: TMaskEdit
+        Left = 219
+        Top = 56
+        Width = 168
+        Height = 33
+        AutoSize = False
+        EditMask = '00000-000;1;_'
+        MaxLength = 9
+        TabOrder = 7
+        Text = '     -   '
+        OnKeyPress = edCEPKeyPress
       end
     end
     object pnlRestaurar: TPanel
@@ -3332,5 +3333,10 @@ object PagProfissionais: TPagProfissionais
         OnClick = btnXClick
       end
     end
+  end
+  object NetHTTPClient1: TNetHTTPClient
+    UserAgent = 'Embarcadero URI Client/1.0'
+    Left = 362
+    Top = 561
   end
 end

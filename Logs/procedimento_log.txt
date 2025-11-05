@@ -1,0 +1,2 @@
+admin | Adicionou | teste | Valor: 100,00 | Duração: 01:00:00 | 100,00 | 01:00:00 | 15:28:45 05-11-2025
+admin | Deletou | teste | Procedimento deletado do sistema |  |  | 15:28:49 05-11-2025

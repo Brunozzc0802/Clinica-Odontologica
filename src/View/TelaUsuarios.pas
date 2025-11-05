@@ -8,7 +8,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Buttons, Vcl.StdCtrls,
   Vcl.Imaging.pngimage, Vcl.Imaging.jpeg, Vcl.Grids, Vcl.WinXCtrls,
   uUsuariosController, uUsuarios,
-  System.Generics.Collections, uUsuariosControllerLog;
+  System.Generics.Collections, uUsuariosControllerLog, uDadosGlobais;
 
 type
   TPagUsuarios = class(TForm)
@@ -264,7 +264,7 @@ begin
 
       try
         Controller.RestaurarUsuario(Usuario);
-        UserController.RegistrarLog(Usuario.Nome, 'Restaurado', 'Grupo',
+        UserController.RegistrarLog(UsuarioLogado.Nome, Usuario.Nome, 'Restaurou', 'Grupo',
           Usuario.Grupo);
         CarregarInativos;
         ShowMessage('Usuário Restaurado com sucesso!');
@@ -541,8 +541,8 @@ begin
     Controller.AdicionarUsuario(edUsuario.Text, edSenhaUsuario.Text,
       cbGrupo.Text, cbAtivo.ItemIndex = 0);
 
-    UserController.RegistrarLog(edUsuario.Text, 'Adicionado', 'Grupo',
-      cbGrupo.Text);
+    UserController.RegistrarLog(UsuarioLogado.Nome, edUsuario.Text, 'Adicionou', 'Grupo',
+    cbGrupo.Text);
     ShowMessage('Usuário adicionado com sucesso!');
     CarregarUsuarios;
     edUsuario.Clear;
@@ -611,7 +611,7 @@ begin
   try
     Controller.AlterarUsuario(UsuarioIdalterar, edUsuario.Text,
       edSenhaUsuario.Text, cbGrupo.Text, cbAtivo.ItemIndex = 0);
-    UserController.RegistrarLog(edUsuario.Text, 'Alterado', 'Grupo',
+    UserController.RegistrarLog(UsuarioLogado.Nome, edUsuario.Text, 'Alterou', 'Grupo',
       cbGrupo.Text);
     ShowMessage('Alterações feitas com sucesso!');
     btnAlterarNovo.Visible := False;
@@ -654,7 +654,7 @@ begin
       Controller := TUsuarioController.Create;
       try
         Controller.DeletarUsuario(Usuario);
-        UserController.RegistrarLog(Usuario.Nome, 'Deletado', 'Grupo',
+        UserController.RegistrarLog(UsuarioLogado.Nome, Usuario.Nome, 'Deletou', 'Grupo',
           Usuario.Grupo);
         CarregarUsuarios;
         ShowMessage('Usuário deletado com sucesso!');

@@ -1,22 +1,24 @@
-unit uPacienteLog;
+unit uProcedimentoLog;
 
 interface
 
 type
-  TPacienteLog = class
+  TProcedimentoLog = class
   private
     PAcao: string;
     PDataHora: TDateTime;
-    PCPF: string;
+    PProcedimento: string;
     PDetalhes: string;
-    PPaciente: string;
+    PValor: string;
+    PDuracao: string;
     PUsuarioQueExecutouAcao: string;
   public
     property Acao: string read PAcao write PAcao;
     property DataHora: TDateTime read PDataHora write PDataHora;
-    property Cpf: string read PCPF write PCPF;
+    property Procedimento: string read PProcedimento write PProcedimento;
     property Detalhes: string read PDetalhes write PDetalhes;
-    property Paciente: string read PPaciente write PPaciente;
+    property Valor: string read PValor write PValor;
+    property Duracao: string read PDuracao write PDuracao;
     property UsuarioQueExecutouAcao: string read PUsuarioQueExecutouAcao write PUsuarioQueExecutouAcao;
   end;
 

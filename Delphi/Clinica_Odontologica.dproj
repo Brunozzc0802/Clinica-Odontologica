@@ -125,6 +125,7 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
+        <DCCReference Include="..\src\uDadosGlobais.pas"/>
         <DCCReference Include="..\src\View\TelaLogin.pas">
             <Form>FormLogin</Form>
             <FormType>dfm</FormType>
@@ -178,6 +179,12 @@
         <DCCReference Include="..\src\Model\uProfissionaisLog.pas"/>
         <DCCReference Include="..\src\Repository\uProfissionaisRepositoryLog.pas"/>
         <DCCReference Include="..\src\Controller\uProfissionaisControllerLog.pas"/>
+        <DCCReference Include="..\src\Controller\uConsultaControllerLog.pas"/>
+        <DCCReference Include="..\src\Model\uConsultaLog.pas"/>
+        <DCCReference Include="..\src\Repository\uConsultasRepositoryLog.pas"/>
+        <DCCReference Include="..\src\Model\uProcedimentoLog.pas"/>
+        <DCCReference Include="..\src\Controller\uProcedimentosControllerLog.pas"/>
+        <DCCReference Include="..\src\Repository\uProcedimentosRepositoryLog.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

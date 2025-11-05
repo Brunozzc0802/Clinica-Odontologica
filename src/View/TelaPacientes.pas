@@ -277,8 +277,8 @@ begin
 
   Controller.AlterarPaciente(PacienteIdalterar, EdNomePaciente.Text, edCPF.Text,
     edTelefone.Text, edCEP.Text, edEndereco.Text, edDataNasc.Date);
-  PaciController.RegistrarLog(EdNomePaciente.Text, 'Alterado', 'Cpf',
-    edCPF.Text);
+  PaciController.RegistrarLog(UsuarioLogado.Nome, EdNomePaciente.Text,
+    'Alterou', 'Cpf', edCPF.Text);
   ShowMessage('Alterações feitas com sucesso!');
   btnAlterarNovo.Visible := False;
   CarregarPacientes;
@@ -306,8 +306,8 @@ begin
 
     try
       Controller.RestaurarPaciente(PacienteId);
-      PaciController.RegistrarLog(Paciente.Nome, 'Restaurado', 'Cpf',
-        Paciente.Cpf);
+      PaciController.RegistrarLog(UsuarioLogado.Nome, Paciente.Nome,
+        'Restaurou', 'Cpf', Paciente.Cpf);
       ShowMessage('Paciente restaurado com sucesso!');
       CarregarInativos;
       CarregarPacientes;
@@ -341,8 +341,8 @@ begin
   try
     Controller.adicionarPaciente(EdNomePaciente.Text, edCPF.Text,
       edTelefone.Text, edCEP.Text, edEndereco.Text, edDataNasc.Date);
-    PaciController.RegistrarLog(EdNomePaciente.Text, 'Adicionado', 'CPF',
-      edCPF.Text);
+    PaciController.RegistrarLog(UsuarioLogado.Nome, EdNomePaciente.Text,
+      'Adicionou', 'CPF', edCPF.Text);
     ShowMessage('Paciente adicionado com sucesso!');
     CarregarPacientes;
     OrdenarGrid;
@@ -531,7 +531,8 @@ begin
   if Id > 0 then begin
     Nome := sgPacientes.Cells[1, sgPacientes.Row];
     Cpf := sgPacientes.Cells[2, sgPacientes.Row];
-    PaciController.RegistrarLog(Nome, 'Deletado', 'CPF', Cpf);
+    PaciController.RegistrarLog(UsuarioLogado.Nome, Nome, 'Deletou',
+      'CPF', Cpf);
     Controller.DesativarPaciente(Id);
     ShowMessage('Paciente deletado com sucesso!');
     CarregarPacientes;
@@ -609,10 +610,10 @@ begin
 end;
 
 procedure TPagPacientes.btnConsultasClick(Sender: TObject);
-  begin
-    Close;
-    PagConsultas.Show;
-  end;
+begin
+  Close;
+  PagConsultas.Show;
+end;
 
 procedure TPagPacientes.btnConsultasMouseEnter(Sender: TObject);
 begin
@@ -733,7 +734,7 @@ end;
 
 procedure TPagPacientes.btnXClick(Sender: TObject);
 begin
-  close;
+  Close;
   pnlAddPacientes.Visible := False;
   btnAddNovo.Visible := False;
   btnRestaurarNovo.Visible := False;
@@ -755,7 +756,7 @@ var
   Response: IHTTPResponse;
   JsonResp: TJSONObject;
 begin
-  Result := False; // assume falha
+  Result := False;
   HTTP := TNetHTTPClient.Create(nil);
   try
     Response := HTTP.Get('https://viacep.com.br/ws/' + CEP + '/json/');
@@ -764,14 +765,14 @@ begin
         as TJSONObject;
       try
         if JsonResp.GetValue('erro') <> nil then begin
-          ShowMessage('CEP n�o encontrado!');
+          ShowMessage('CEP não encontrado!');
           edCEP.SetFocus;
           Exit;
         end;
 
         edEndereco.Text := JsonResp.GetValue('logradouro').Value;
         edDataNasc.SetFocus;
-        Result := true; // CEP encontrado
+        Result := true;
       finally
         JsonResp.Free;
       end;
@@ -868,29 +869,31 @@ end;
 
 procedure TPagPacientes.ConfigurarPermissoes;
 begin
-  if Assigned(UsuarioLogado) and (UsuarioLogado.Grupo = 'Profissional') then begin
+  if Assigned(UsuarioLogado) and (UsuarioLogado.Grupo = 'Profissional') then
+  begin
     btnAdd.Visible := False;
     btnAlterar.Visible := False;
     btnDeletar.Visible := False;
     btnRestaurar.Visible := False;
     btnLimpar.Visible := False;
-    btnPesquisar.Visible := True;
-    btnConsultas.Visible := True;
-    btnSair.Visible := True;
+    btnPesquisar.Visible := true;
+    btnConsultas.Visible := true;
+    btnSair.Visible := true;
 
     btnConsultas.Top := 5;
     btnPesquisar.Top := 52;
     btnCancelar.Top := 99;
     btnSair.Top := 146;
-  end else begin
-    btnAdd.Visible := True;
-    btnAlterar.Visible := True;
-    btnDeletar.Visible := True;
-    btnRestaurar.Visible := True;
-    btnPesquisar.Visible := True;
-    btnConsultas.Visible := True;
-    btnLimpar.Visible := True;
-    btnSair.Visible := True;
+  end
+  else begin
+    btnAdd.Visible := true;
+    btnAlterar.Visible := true;
+    btnDeletar.Visible := true;
+    btnRestaurar.Visible := true;
+    btnPesquisar.Visible := true;
+    btnConsultas.Visible := true;
+    btnLimpar.Visible := true;
+    btnSair.Visible := true;
 
     btnPesquisar.Top := 99;
     btnConsultas.Top := 287;
@@ -952,7 +955,7 @@ end;
 
 procedure TPagPacientes.lblSairClick(Sender: TObject);
 begin
-  close;
+  Close;
 end;
 
 procedure TPagPacientes.sgPacientesDrawCell(Sender: TObject;
@@ -996,7 +999,7 @@ end;
 procedure TPagPacientes.EdNomePacienteKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
+    Key := #0;
     edCPF.SetFocus;
   end;
 end;
@@ -1004,7 +1007,7 @@ end;
 procedure TPagPacientes.edCPFKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
+    Key := #0;
     edTelefone.SetFocus;
   end;
 end;
@@ -1020,7 +1023,7 @@ end;
 procedure TPagPacientes.edCEPKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
+    Key := #0;
     if edEndereco.CanFocus then
       edEndereco.SetFocus
     else
@@ -1031,7 +1034,7 @@ end;
 procedure TPagPacientes.edEnderecoKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
+    Key := #0;
     edDataNasc.SetFocus;
   end;
 end;
@@ -1039,7 +1042,7 @@ end;
 procedure TPagPacientes.edDataNascKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
+    Key := #0;
     if btnaddPaciente.Visible then
       btnaddPaciente.SetFocus
     else if btnConfirmarAlteracoes.Visible then
@@ -1050,7 +1053,7 @@ end;
 procedure TPagPacientes.pesquisarKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
+    Key := #0;
     sgPacientes.SetFocus;
   end;
 end;

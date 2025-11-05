@@ -8,7 +8,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.WinXPickers, Vcl.Mask, Vcl.StdCtrls,
   Vcl.WinXCtrls, Vcl.Grids, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
   uProcedimentosController, uProcedimentos,
-  System.Generics.Collections;
+  System.Generics.Collections, uProcedimentosControllerLog, uDadosGlobais;
 
 type
   TPagProcedimentos = class(TForm)
@@ -121,6 +121,7 @@ type
   private
     ProcedimentoLista: TObjectList<TProcedimento>;
     Controller: TProcedimentosController;
+    ProcController: TLogController;
     ProcedimentoIdalterar: Integer;
     procedure PesquisarProc(const Filtro: string);
   public
@@ -323,6 +324,15 @@ begin
   try
     Controller.AlterarProcedimento(ProcedimentoIdalterar, EdNome.Text,
       StrToFloat(edValor.Text), StrToTime(edHora.Text));
+
+    ProcController := TLogController.Create;
+    try
+      ProcController.RegistrarLog(UsuarioLogado.Nome, EdNome.Text, 'Alterou',
+        'Valor: ' + edValor.Text + ' | Duração: ' + edHora.Text, edValor.Text, edHora.Text);
+    finally
+      ProcController.Free;
+    end;
+
     ShowMessage('Alterações feitas com sucesso!');
     btnAlterarNovo.Visible := False;
     EdNome.Clear;
@@ -340,6 +350,7 @@ end;
 procedure TPagProcedimentos.ConfirmarRestauracao;
 var
   ProcedimentoId: Integer;
+  Nome: string;
 begin
   if sgRestore.Row > 0 then begin
     ProcedimentoId := StrToIntDef(sgRestore.Cells[0, sgRestore.Row], 0);
@@ -348,7 +359,17 @@ begin
     end;
 
     try
+      Nome := sgRestore.Cells[1, sgRestore.Row];
       Controller.RestaurarProcedimento(ProcedimentoId);
+
+      ProcController := TLogController.Create;
+      try
+        ProcController.RegistrarLog(UsuarioLogado.Nome, Nome, 'Restaurou',
+          'Procedimento restaurado para o sistema', '', '');
+      finally
+        ProcController.Free;
+      end;
+
       ShowMessage('Procedimento restaurado com sucesso!');
       CarregarInativos;
       CarregarGrid;
@@ -392,7 +413,15 @@ begin
     Controller.adicionarProcedimento(EdNome.Text, StrToFloat(edValor.Text),
       StrToTime(edHora.Text));
 
-    ShowMessage('Profissional adicionado com sucesso!');
+    ProcController := TLogController.Create;
+    try
+      ProcController.RegistrarLog(UsuarioLogado.Nome, EdNome.Text, 'Adicionou',
+        'Valor: ' + edValor.Text + ' | Duração: ' + edHora.Text, edValor.Text, edHora.Text);
+    finally
+      ProcController.Free;
+    end;
+
+    ShowMessage('Procedimento adicionado com sucesso!');
     CarregarGrid;
     EdNome.Clear;
     edValor.Clear;
@@ -581,6 +610,7 @@ end;
 procedure TPagProcedimentos.btnDeletarClick(Sender: TObject);
 var
   Id: Integer;
+  Nome: string;
 begin
   if btnAlterarNovo.Visible = true then begin
     btnAlterarNovo.Visible := False;
@@ -589,7 +619,17 @@ begin
 
   Id := StrToIntDef(sgProcedimentos.Cells[0, sgProcedimentos.Row], 0);
   if Id > 0 then begin
+    Nome := sgProcedimentos.Cells[1, sgProcedimentos.Row];
     Controller.DesativarProcedimento(Id);
+
+    ProcController := TLogController.Create;
+    try
+      ProcController.RegistrarLog(UsuarioLogado.Nome, Nome, 'Deletou',
+        'Procedimento deletado do sistema', '', '');
+    finally
+      ProcController.Free;
+    end;
+
     ShowMessage('Procedimento deletado com sucesso!');
     CarregarGrid;
     sgProcedimentos.Row := 0;

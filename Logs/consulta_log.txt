@@ -1,0 +1,2 @@
+admin | Agendado | Bruno | Bruno | Limpeza | 14/11/2025 | 10:00 | Profissional: Bruno | Procedimento: Limpeza | Horário: 14/11/2025 às 10:00 | 15:29:18 05-11-2025
+Usuario: admin | Agendou Consulta | Paciente: Bruno | Profissional: Bruno | Procedimento: Limpeza | Horario: 07/11/2025 as 10:00 | 15:33:34 05-11-2025

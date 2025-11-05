@@ -3,7 +3,7 @@ object FormLogin: TFormLogin
   Top = 0
   Caption = 'FormLogin'
   ClientHeight = 876
-  ClientWidth = 1158
+  ClientWidth = 1867
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -18,15 +18,15 @@ object FormLogin: TFormLogin
   object pnlLogin: TPanel
     Left = 0
     Top = 0
-    Width = 1158
+    Width = 1867
     Height = 876
     Align = alClient
     TabOrder = 0
     DesignSize = (
-      1158
+      1867
       876)
     object imgFundo: TImage
-      Left = 679
+      Left = 1388
       Top = 1
       Width = 478
       Height = 874
@@ -833,19 +833,19 @@ object FormLogin: TFormLogin
     object pnlAzul: TPanel
       Left = 1
       Top = 1
-      Width = 678
+      Width = 1387
       Height = 874
       Align = alClient
       Color = 13204758
       ParentBackground = False
       TabOrder = 0
       DesignSize = (
-        678
+        1387
         874)
       object imgLogoLogin: TImage
         Left = 124
         Top = 259
-        Width = 319
+        Width = 1028
         Height = 302
         Anchors = [akLeft, akTop, akRight, akBottom]
         Center = True
@@ -2569,7 +2569,7 @@ object FormLogin: TFormLogin
       end
     end
     object bordaDoForm: TPanel
-      Left = 697
+      Left = 1406
       Top = 266
       Width = 441
       Height = 583
@@ -3335,19 +3335,19 @@ object FormLogin: TFormLogin
   object pnlTelaPrincipal: TPanel
     Left = 0
     Top = 0
-    Width = 1158
+    Width = 1867
     Height = 876
     Align = alClient
     TabOrder = 1
     Visible = False
     DesignSize = (
-      1158
+      1867
       876)
     object pnlAzulPrincipal: TPanel
       AlignWithMargins = True
       Left = 279
       Top = 2
-      Width = 875
+      Width = 1584
       Height = 870
       Margins.Left = 278
       Margins.Top = 1
@@ -3357,13 +3357,13 @@ object FormLogin: TFormLogin
       TabOrder = 0
       OnClick = pnlConsultasClick
       DesignSize = (
-        875
+        1584
         870)
       object imgLogoPrincipal: TImage
         AlignWithMargins = True
         Left = 81
         Top = 51
-        Width = 743
+        Width = 1452
         Height = 768
         Margins.Left = 80
         Margins.Top = 50
@@ -5092,7 +5092,7 @@ object FormLogin: TFormLogin
       object footerPrincipal: TPanel
         Left = 0
         Top = 837
-        Width = 877
+        Width = 1586
         Height = 41
         Anchors = [akLeft, akRight, akBottom]
         BevelOuter = bvSpace
@@ -5114,7 +5114,7 @@ object FormLogin: TFormLogin
         end
         object lblDataHora: TLabel
           AlignWithMargins = True
-          Left = 823
+          Left = 1532
           Top = 7
           Width = 32
           Height = 26
@@ -5610,8 +5610,8 @@ object FormLogin: TFormLogin
           OnMouseLeave = pnlConsultasMouseLeave
         end
         object imgConsultas: TImage
-          Left = -6
-          Top = -1
+          Left = -4
+          Top = 2
           Width = 277
           Height = 77
           Cursor = crHandPoint

@@ -28,10 +28,10 @@ begin
     if not DirectoryExists(LogDir) then
       ForceDirectories(LogDir);
 
-    LogPath := LogDir + 'pacinte_log.txt';
+    LogPath := LogDir + 'paciente_log.txt';
 
-    LogLine := Format('%s | %s | %s | %s | %s', [ALog.Paciente, ALog.Acao,
-      ALog.Detalhes, ALog.Cpf, FormatDateTime('hh:nn:ss dd-mm-yyyy',
+    LogLine := Format('%s | %s | %s | %s | %s | %s', [ALog.UsuarioQueExecutouAcao, ALog.Acao,
+      ALog.Paciente, ALog.Detalhes, ALog.Cpf, FormatDateTime('hh:nn:ss dd-mm-yyyy',
       ALog.DataHora)]);
 
     FileHandle := 0;

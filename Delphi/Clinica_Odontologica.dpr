@@ -33,7 +33,13 @@ uses
   uPacientesControllerLog in '..\src\Controller\uPacientesControllerLog.pas',
   uProfissionaisLog in '..\src\Model\uProfissionaisLog.pas',
   uProfissionaisRepositoryLog in '..\src\Repository\uProfissionaisRepositoryLog.pas',
-  uProfissionaisControllerLog in '..\src\Controller\uProfissionaisControllerLog.pas';
+  uProfissionaisControllerLog in '..\src\Controller\uProfissionaisControllerLog.pas',
+  uConsultaControllerLog in '..\src\Controller\uConsultaControllerLog.pas',
+  uConsultaLog in '..\src\Model\uConsultaLog.pas',
+  uConsultasRepositoryLog in '..\src\Repository\uConsultasRepositoryLog.pas',
+  uProcedimentoLog in '..\src\Model\uProcedimentoLog.pas',
+  uProcedimentosControllerLog in '..\src\Controller\uProcedimentosControllerLog.pas',
+  uProcedimentosRepositoryLog in '..\src\Repository\uProcedimentosRepositoryLog.pas';
 
 {$R *.res}
 

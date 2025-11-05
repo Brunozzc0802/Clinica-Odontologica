@@ -98,6 +98,7 @@ type
     procedure Panel1MouseLeave(Sender: TObject);
     procedure Panel1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
     procedure btnAlterarClick(Sender: TObject);
     procedure btnConfirmarAlteracoesClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -212,15 +213,21 @@ procedure TPagConsultas.FormCreate(Sender: TObject);
 begin
   Controller := TConsultaController.Create;
   CarregarComboBox;
-
-  // Configurar timer para atualizar status a cada minuto
-  tmrAtualizarStatus.Interval := 60000; // 60 segundos
+  tmrAtualizarStatus.Interval := 60000;
   tmrAtualizarStatus.Enabled := True;
-
-  // Inicializa variáveis e estados
   ConsultaIdAlterar := 0;
-  btnAlterar.Enabled := False; // Começa desabilitado
+  btnAlterar.Enabled := False;
   btnConfirmarAlteracoes.Visible := False;
+end;
+
+procedure TPagConsultas.FormShow(Sender: TObject);
+begin
+  btnDeletar.Top := 52;
+  btnCancelar.Top := 99;
+  btnRestaurar.Top := 146;
+  Panel1.Top := 193;
+  btnLimpar.Top := 240;
+  btnSair.Top := 287;
 end;
 
 procedure TPagConsultas.FormDestroy(Sender: TObject);
@@ -454,6 +461,11 @@ begin
   btnConfirmarAlteracoes.Visible := False;
   imgLogo2.Visible := True;
   imgLogo1.Visible := False;
+
+  // Esconder btnAlterar e mover botões para cima quando adicionando
+  btnAlterar.Visible := False;
+  btnDeletar.Top := 52;    // Posição onde estava o btnAlterar
+  btnCancelar.Top := 99;   // Posição onde estava o btnDeletar
 end;
 
 procedure TPagConsultas.btnCancelarClick(Sender: TObject);
@@ -470,6 +482,14 @@ begin
   sgConsultas.Visible := False;
   Calendar1.Visible := True;
   Calendar1.Date := 01 / 10 / 2025;
+
+  btnAlterar.Visible := False;
+  btnDeletar.Top := 52;
+  btnCancelar.Top := 99;
+  btnRestaurar.Top := 146;
+  Panel1.Top := 193;
+  btnLimpar.Top := 240;
+  btnSair.Top := 287;
 end;
 
 procedure TPagConsultas.btnLimparClick(Sender: TObject);
@@ -493,6 +513,15 @@ begin
   btnAlterarNovo.Visible := False;
 
   sgConsultas.Visible := True;
+
+  btnAlterar.Visible := True;
+  btnDeletar.Top := 99;
+  btnCancelar.Top := 146;
+  btnRestaurar.Top := 193;
+  Panel1.Top := 240;
+  btnLimpar.Top := 287;
+  btnSair.Top := 334;
+
   CarregarConsultas;
 
   sgConsultas.ColWidths[0] := 50;
@@ -507,6 +536,11 @@ begin
 
   Calendar1.Visible := False;
   Panel2.Visible := True;
+
+  // Tornar btnAlterar visível e mover botões para posições originais
+  btnAlterar.Visible := True;
+  btnDeletar.Top := 99;   // Posição original
+  btnCancelar.Top := 146; // Posição original
 end;
 
 procedure TPagConsultas.btnAddMouseEnter(Sender: TObject);
@@ -956,6 +990,7 @@ begin
         end;
 
         ShowMessage('Consulta alterada com sucesso!');
+        btnAlterarNovo.Visible := False;
         CarregarConsultas;
         pnlAdd.Visible := False;
         imgLogo1.Visible := True;

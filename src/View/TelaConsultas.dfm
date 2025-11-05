@@ -14,6 +14,7 @@ object PagConsultas: TPagConsultas
   Position = poDesigned
   OnClose = FormClose
   OnCreate = FormCreate
+  OnShow = FormShow
   TextHeight = 15
   object cabecalho: TPanel
     Left = -306
@@ -2605,6 +2606,8 @@ object PagConsultas: TPagConsultas
         Color = 8142341
         ParentBackground = False
         TabOrder = 1
+        Visible = False
+        OnClick = btnAlterarClick
         OnMouseEnter = btnAlterarMouseEnter
         OnMouseLeave = btnAlterarMouseLeave
         object lblAlterarUsu: TLabel
@@ -3109,6 +3112,7 @@ object PagConsultas: TPagConsultas
         ParentBackground = False
         TabOrder = 7
         Visible = False
+        OnClick = btnConfirmarAlteracoesClick
         OnMouseEnter = btnConfirmarAlteracoesMouseEnter
         OnMouseLeave = btnConfirmarAlteracoesMouseLeave
         object lblConfirmarAlteracoes: TLabel
@@ -3133,6 +3137,7 @@ object PagConsultas: TPagConsultas
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnConfirmarAlteracoesClick
           OnMouseEnter = btnConfirmarAlteracoesMouseEnter
           OnMouseLeave = btnConfirmarAlteracoesMouseLeave
           ExplicitWidth = 130
@@ -3175,6 +3180,9 @@ object PagConsultas: TPagConsultas
       Width = 594
       Height = 440
       ColCount = 8
+      FixedCols = 0
+      RowCount = 1
+      FixedRows = 0
       TabOrder = 3
       Visible = False
       OnDrawCell = sgConsultasDrawCell

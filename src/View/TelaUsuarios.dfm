@@ -2667,7 +2667,7 @@ object PagUsuarios: TPagUsuarios
     Left = 541
     Top = 49
     Width = 153
-    Height = 441
+    Height = 440
     TabOrder = 3
     object btnAddUsu: TPanel
       Left = 8
@@ -3161,7 +3161,7 @@ object PagUsuarios: TPagUsuarios
   end
   object pnlFormAddUsuarios: TPanel
     Left = 8
-    Top = 503
+    Top = 500
     Width = 525
     Height = 132
     BevelOuter = bvNone

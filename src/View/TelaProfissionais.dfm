@@ -3,7 +3,7 @@ object PagProfissionais: TPagProfissionais
   Top = 228
   BorderStyle = bsNone
   Caption = 'PagProfissionais'
-  ClientHeight = 664
+  ClientHeight = 658
   ClientWidth = 769
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,7 +22,7 @@ object PagProfissionais: TPagProfissionais
     Left = 1
     Top = 41
     Width = 766
-    Height = 620
+    Height = 615
     Margins.Left = 305
     Margins.Top = 1
     Color = 8142341

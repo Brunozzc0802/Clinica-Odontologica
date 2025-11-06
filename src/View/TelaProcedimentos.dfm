@@ -3,7 +3,7 @@ object PagProcedimentos: TPagProcedimentos
   Top = 208
   BorderStyle = bsNone
   Caption = 'PagProcedimentos'
-  ClientHeight = 644
+  ClientHeight = 638
   ClientWidth = 769
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -112,7 +112,7 @@ object PagProcedimentos: TPagProcedimentos
     Left = 1
     Top = 41
     Width = 766
-    Height = 600
+    Height = 595
     Margins.Left = 305
     Margins.Top = 1
     Color = 8142341

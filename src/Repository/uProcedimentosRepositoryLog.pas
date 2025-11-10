@@ -30,9 +30,19 @@ begin
 
     LogPath := LogDir + 'procedimento_log.txt';
 
-    LogLine := Format('%s | %s | %s | %s | %s | %s | %s', [ALog.UsuarioQueExecutouAcao, ALog.Acao,
-      ALog.Procedimento, ALog.Detalhes, ALog.Valor, ALog.Duracao, FormatDateTime('hh:nn:ss dd-mm-yyyy',
-      ALog.DataHora)]);
+    // Construir a linha do log com formato melhorado
+  if (ALog.Valor <> '') and (ALog.Duracao <> '') then
+    LogLine := Format('%s | %s | %s | Valor: %s | Duraço: %s | %s', [ALog.UsuarioQueExecutouAcao,
+      ALog.Acao, ALog.Procedimento, ALog.Valor, ALog.Duracao, FormatDateTime('hh:nn:ss dd-mm-yyyy', ALog.DataHora)])
+  else if (ALog.Valor <> '') then
+    LogLine := Format('%s | %s | %s | Valor: %s | %s', [ALog.UsuarioQueExecutouAcao,
+      ALog.Acao, ALog.Procedimento, ALog.Valor, FormatDateTime('hh:nn:ss dd-mm-yyyy', ALog.DataHora)])
+  else if (ALog.Duracao <> '') then
+    LogLine := Format('%s | %s | %s | Duração: %s | %s', [ALog.UsuarioQueExecutouAcao,
+      ALog.Acao, ALog.Procedimento, ALog.Duracao, FormatDateTime('hh:nn:ss dd-mm-yyyy', ALog.DataHora)])
+  else
+    LogLine := Format('%s | %s | %s | %s', [ALog.UsuarioQueExecutouAcao,
+      ALog.Acao, ALog.Procedimento, FormatDateTime('hh:nn:ss dd-mm-yyyy', ALog.DataHora)]);
 
     FileHandle := 0;
     AssignFile(LogFile, LogPath);

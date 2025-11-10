@@ -1,6 +1,6 @@
 object PagConsultas: TPagConsultas
-  Left = 674
-  Top = 228
+  Left = 572
+  Top = 166
   BorderStyle = bsNone
   Caption = 'PagConsultas'
   ClientHeight = 627

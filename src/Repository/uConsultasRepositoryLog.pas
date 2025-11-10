@@ -30,7 +30,7 @@ begin
 
     LogPath := LogDir + 'consulta_log.txt';
 
-    LogLine := Format('Usuario: %s | %s | Paciente: %s | Profissional: %s | Procedimento: %s | Horario: %s as %s | %s', [
+    LogLine := Format('Usuario: %s | %s | Paciente: %s | Profissional: %s | Procedimento: %s | Dia: %s | Horário: %s | %s', [
       ALog.UsuarioQueExecutouAcao,
       ALog.Acao,
       ALog.Paciente,

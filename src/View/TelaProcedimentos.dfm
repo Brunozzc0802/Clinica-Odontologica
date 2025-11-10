@@ -3009,9 +3009,9 @@ object PagProcedimentos: TPagProcedimentos
     end
     object pnlAdd: TPanel
       Left = 9
-      Top = 467
+      Top = 460
       Width = 592
-      Height = 117
+      Height = 120
       Color = 15790320
       ParentBackground = False
       TabOrder = 3
@@ -3019,7 +3019,7 @@ object PagProcedimentos: TPagProcedimentos
       object btnadicionar: TPanel
         AlignWithMargins = True
         Left = 8
-        Top = 66
+        Top = 80
         Width = 571
         Height = 32
         Margins.Left = 10
@@ -3063,7 +3063,7 @@ object PagProcedimentos: TPagProcedimentos
       object btnConfirmarAlteracoes: TPanel
         AlignWithMargins = True
         Left = 8
-        Top = 66
+        Top = 80
         Width = 571
         Height = 32
         Margins.Left = 10

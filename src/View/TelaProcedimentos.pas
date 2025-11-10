@@ -328,7 +328,7 @@ begin
     ProcController := TLogController.Create;
     try
       ProcController.RegistrarLog(UsuarioLogado.Nome, EdNome.Text, 'Alterou',
-        'Valor: ' + edValor.Text + ' | Duração: ' + edHora.Text, edValor.Text, edHora.Text);
+        '', edValor.Text, edHora.Text);
     finally
       ProcController.Free;
     end;
@@ -415,8 +415,7 @@ begin
 
     ProcController := TLogController.Create;
     try
-      ProcController.RegistrarLog(UsuarioLogado.Nome, EdNome.Text, 'Adicionou',
-        'Valor: ' + edValor.Text + ' | Duração: ' + edHora.Text, edValor.Text, edHora.Text);
+      ProcController.RegistrarLog(UsuarioLogado.Nome, 'Adicionou', EdNome.Text, 'Duração', edValor.Text,edHora.Text);
     finally
       ProcController.Free;
     end;

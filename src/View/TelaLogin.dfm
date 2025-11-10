@@ -5946,6 +5946,7 @@ object FormLogin: TFormLogin
             FF187E5D061B7977C8F996E72790850DCDE523B86EE368973459A664937C7D1B
             8C4731B51B4CE93F4CA4F65F6692A90404980EC0740908301D80E992F204FC02
             7583057D742B763D0000000049454E44AE426082}
+          OnClick = imgRelatoriosClick
           OnMouseEnter = pnlRelatoriosMouseEnter
           OnMouseLeave = pnlRelatoriosMouseLeave
         end

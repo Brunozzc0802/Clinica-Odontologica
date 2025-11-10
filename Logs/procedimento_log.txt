@@ -1,3 +1,7 @@
 admin | Deletou | cccccccc | 15:21:11 10-11-2025
 admin | Adicionou | ccccccccccc | Valor: 800,00 | Duração: 10:00:00 | 15:21:21 10-11-2025
 admin | dddddddd | Adicionou | Valor: 080,00 | Duracao: 01:00:00 | 15:30:14 10-11-2025
+admin | Deletou | dddddddd | 15:51:14 10-11-2025
+admin | Deletou | ccccccccccc | 15:51:16 10-11-2025
+admin | Deletou | bbbbbb | 15:51:18 10-11-2025
+admin | Deletou | aaaaaaaaaaaaa | 15:51:21 10-11-2025

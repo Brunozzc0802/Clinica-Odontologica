@@ -10,7 +10,7 @@ uses
   Vcl.StdCtrls, Vcl.Imaging.jpeg, Vcl.Buttons, System.ImageList,
   Vcl.ImgList, TelaUsuarios, uUsuarios, uUsuariosController, TelaPacientes,
   TelaProfissionais, TelaProcedimentos, TelaConsultas, uUsuariosControllerLog,
-  uDadosGlobais;
+  uDadosGlobais, TelaRelatorios;
 
 type
   TFormLogin = class(TForm)
@@ -95,6 +95,7 @@ type
     procedure pnlConsultasClick(Sender: TObject);
     procedure edSenhaKeyPress(Sender: TObject; var Key: Char);
     procedure edUsuarioKeyPress(Sender: TObject; var Key: Char);
+    procedure imgRelatoriosClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -228,6 +229,11 @@ begin
   ImgOlhoAberto.Visible := True;
   ImgOlhoFechado.Visible := False;
 end;
+
+procedure TFormLogin.imgRelatoriosClick(Sender: TObject);
+  begin
+    PagRelatorios.Show;
+  end;
 
 procedure TFormLogin.pnlConsultasClick(Sender: TObject);
 begin

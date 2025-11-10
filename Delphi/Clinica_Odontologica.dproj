@@ -185,6 +185,10 @@
         <DCCReference Include="..\src\Model\uProcedimentoLog.pas"/>
         <DCCReference Include="..\src\Controller\uProcedimentosControllerLog.pas"/>
         <DCCReference Include="..\src\Repository\uProcedimentosRepositoryLog.pas"/>
+        <DCCReference Include="..\src\View\TelaRelatorios.pas">
+            <Form>PagRelatorios</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

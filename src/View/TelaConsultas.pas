@@ -1343,11 +1343,6 @@ begin
     Exit;
   end;
 
-  // Pergunta ao usuário se realmente deseja restaurar
-  if MessageDlg('Tem certeza que deseja restaurar esta consulta?',
-    mtConfirmation, [mbYes, mbNo], 0) = mrNo then
-    Exit;
-
   try
     // Obter o ID da consulta selecionada
     ConsultaId := StrToIntDef(sgRestore.Cells[0, Linha], 0);

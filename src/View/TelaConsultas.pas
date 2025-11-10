@@ -9,7 +9,8 @@ uses
   Vcl.StdCtrls, Vcl.Mask, Vcl.WinXCtrls, Vcl.Grids, Vcl.ComCtrls,
   Vcl.Samples.Calendar, System.Generics.Collections,
   uPacientes, uProfissionais, uProcedimentos, Vcl.WinXCalendars,
-  uConsultasController, uConsultas, Vcl.ExtDlgs, uConsultaControllerLog, uDadosGlobais;
+  uConsultasController, uConsultas, Vcl.ExtDlgs, uConsultaControllerLog,
+  uDadosGlobais;
 
 type
   TPagConsultas = class(TForm)
@@ -46,7 +47,6 @@ type
     imgRestore: TImage;
     Label6: TLabel;
     imgXrestore: TImage;
-    sgRestore: TStringGrid;
     btnCRestore: TPanel;
     lblRestore: TLabel;
     cbNomePaci: TComboBox;
@@ -67,6 +67,7 @@ type
     btnConfirmarAlteracoes: TPanel;
     lblConfirmarAlteracoes: TLabel;
     tmrAtualizarStatus: TTimer;
+    sgRestore: TStringGrid;
 
     procedure btnXClick(Sender: TObject);
     procedure btnAddClick(Sender: TObject);
@@ -114,6 +115,14 @@ type
     procedure tmrAtualizarStatusTimer(Sender: TObject);
     procedure sgConsultasDrawCell(Sender: TObject; ACol, ARow: LongInt;
       Rect: TRect; State: TGridDrawState);
+    procedure btnDeletarClick(Sender: TObject);
+    procedure btnRestaurarClick(Sender: TObject);
+    procedure imgXrestoreClick(Sender: TObject);
+    procedure btnCRestoreClick(Sender: TObject);
+    procedure sgRestoreDrawCell(Sender: TObject; ACol, ARow: LongInt;
+      Rect: TRect; State: TGridDrawState);
+    procedure btnCRestoreMouseEnter(Sender: TObject);
+    procedure btnCRestoreMouseLeave(Sender: TObject);
 
   private
     Controller: TConsultaController;
@@ -127,6 +136,7 @@ type
     procedure CarregarDadosConsultaNaTela;
     procedure ConfigurarEstadoBotaoAlterar;
     function ValidarCampos: Boolean;
+    procedure CarregarConsultasCanceladas;
 
   public
     { Public declarations }
@@ -207,6 +217,16 @@ begin
   cbNomeProc.ItemIndex := -1;
   edHoraInicio.Clear;
   edHoraFim.Clear;
+
+  if sgConsultas.Visible = False then begin
+    btnAlterar.Visible := False;
+    btnDeletar.Top := 52;
+    btnCancelar.Top := 99;
+    btnRestaurar.Top := 146;
+    Panel1.Top := 193;
+    btnLimpar.Top := 240;
+    btnSair.Top := 287;
+  end;
 end;
 
 procedure TPagConsultas.FormCreate(Sender: TObject);
@@ -431,11 +451,19 @@ begin
   if Calendar1.Date > 0 then begin
     // Validar se a data selecionada nao e do passado
     if Calendar1.Date < Date then begin
-      ShowMessage
-        ('Data invalida! Nao e possivel agendar consultas para datas passadas.');
+      ShowMessage('Selecione uma data válida');
       Exit;
     end;
 
+    if sgConsultas.Visible = False then begin
+      btnAlterar.Visible := False;
+      btnDeletar.Top := 52;
+      btnCancelar.Top := 99;
+      btnRestaurar.Top := 146;
+      Panel1.Top := 193;
+      btnLimpar.Top := 240;
+      btnSair.Top := 287;
+    end;
     DateTimePicker1.Date := Calendar1.Date;
     Calendar1.Enabled := False;
   end;
@@ -455,17 +483,11 @@ begin
 
   // Recarregar os dados dos comboboxes
   RecarregarComboBox;
-
   pnlAdd.Visible := True;
   btnadicionar.Visible := True;
   btnConfirmarAlteracoes.Visible := False;
   imgLogo2.Visible := True;
   imgLogo1.Visible := False;
-
-  // Esconder btnAlterar e mover botões para cima quando adicionando
-  btnAlterar.Visible := False;
-  btnDeletar.Top := 52;    // Posição onde estava o btnAlterar
-  btnCancelar.Top := 99;   // Posição onde estava o btnDeletar
 end;
 
 procedure TPagConsultas.btnCancelarClick(Sender: TObject);
@@ -483,13 +505,15 @@ begin
   Calendar1.Visible := True;
   Calendar1.Date := 01 / 10 / 2025;
 
-  btnAlterar.Visible := False;
-  btnDeletar.Top := 52;
-  btnCancelar.Top := 99;
-  btnRestaurar.Top := 146;
-  Panel1.Top := 193;
-  btnLimpar.Top := 240;
-  btnSair.Top := 287;
+  if sgConsultas.Visible = False then begin
+    btnAlterar.Visible := False;
+    btnDeletar.Top := 52;
+    btnCancelar.Top := 99;
+    btnRestaurar.Top := 146;
+    Panel1.Top := 193;
+    btnLimpar.Top := 240;
+    btnSair.Top := 287;
+  end;
 end;
 
 procedure TPagConsultas.btnLimparClick(Sender: TObject);
@@ -539,7 +563,7 @@ begin
 
   // Tornar btnAlterar visível e mover botões para posições originais
   btnAlterar.Visible := True;
-  btnDeletar.Top := 99;   // Posição original
+  btnDeletar.Top := 99; // Posição original
   btnCancelar.Top := 146; // Posição original
 end;
 
@@ -643,9 +667,19 @@ begin
   Panel1.Color := $007C3E05;
 end;
 
-procedure TPagConsultas.sgConsultasDrawCell(Sender: TObject; ACol,
-  ARow: LongInt; Rect: TRect; State: TGridDrawState);
-  var
+procedure TPagConsultas.btnCRestoreMouseEnter(Sender: TObject);
+begin
+  btnCRestore.Color := $00F8973F;
+end;
+
+procedure TPagConsultas.btnCRestoreMouseLeave(Sender: TObject);
+begin
+  btnCRestore.Color := $00F78B2B;
+end;
+
+procedure TPagConsultas.sgConsultasDrawCell(Sender: TObject;
+  ACol, ARow: LongInt; Rect: TRect; State: TGridDrawState);
+var
   BGColor: TColor;
 begin
   if gdSelected in State then
@@ -657,9 +691,28 @@ begin
   if gdSelected in State then
     sgConsultas.Canvas.Font.Color := clHighlightText
   else
-    sgconsultas.Canvas.Font.Color := clWindowText;
-    sgConsultas.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2,
+    sgConsultas.Canvas.Font.Color := clWindowText;
+  sgConsultas.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2,
     sgConsultas.Cells[ACol, ARow]);
+end;
+
+procedure TPagConsultas.sgRestoreDrawCell(Sender: TObject; ACol, ARow: LongInt;
+  Rect: TRect; State: TGridDrawState);
+var
+  BGColor: TColor;
+begin
+  if gdSelected in State then
+    BGColor := clHighlight
+  else
+    BGColor := clWindow;
+  sgRestore.Canvas.Brush.Color := BGColor;
+  sgRestore.Canvas.FillRect(Rect);
+  if gdSelected in State then
+    sgRestore.Canvas.Font.Color := clHighlightText
+  else
+    sgRestore.Canvas.Font.Color := clWindowText;
+    sgRestore.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2,
+    sgRestore.Cells[ACol, ARow]);
 end;
 
 procedure TPagConsultas.btnXClick(Sender: TObject);
@@ -882,9 +935,9 @@ begin
     // Adicionar log
     ConsController := TLogController.Create;
     try
-      ConsController.RegistrarLog(UsuarioLogado.Nome, NomePaciente, NomeProfissional, NomeProcedimento,
-        FormatDateTime('dd/mm/yyyy', Data), FormatDateTime('hh:nn', HoraInicio), 'Agendou Consulta',
-        '');
+      ConsController.RegistrarLog(UsuarioLogado.Nome, NomePaciente,
+        NomeProfissional, NomeProcedimento, FormatDateTime('dd/mm/yyyy', Data),
+        FormatDateTime('hh:nn', HoraInicio), 'Agendou Consulta', '');
     finally
       ConsController.Free;
     end;
@@ -922,7 +975,6 @@ begin
   end;
 end;
 
-
 procedure TPagConsultas.btnAlterarClick(Sender: TObject);
 var
   Linha: Integer;
@@ -933,7 +985,7 @@ begin
     Exit;
   end;
 
-  if pnlRestaurar.Visible = true then begin
+  if pnlRestaurar.Visible = True then begin
     pnlRestaurar.Visible := False;
     btnRestaurarNovo.Visible := False;
   end;
@@ -945,12 +997,11 @@ begin
   ConsultaIdAlterar := StrToIntDef(sgConsultas.Cells[0, Linha], 0);
   CarregarDadosConsultaNaTela;
 
-  btnConfirmarAlteracoes.Visible := true;
+  btnConfirmarAlteracoes.Visible := True;
   btnAddNovo.Visible := False;
-  btnAlterarNovo.Visible := true;
-  pnlAdd.Visible := true;
+  btnAlterarNovo.Visible := True;
+  pnlAdd.Visible := True;
 end;
-
 
 procedure TPagConsultas.btnConfirmarAlteracoesClick(Sender: TObject);
 var
@@ -958,8 +1009,7 @@ var
   HoraInicio, HoraFim: TTime;
   NomePaciente, NomeProfissional, NomeProcedimento: string;
 begin
-  if ValidarCampos then
-  begin
+  if ValidarCampos then begin
     try
       // Obtém os IDs dos itens selecionados nos combos
       PacienteId := Integer(cbNomePaci.Items.Objects[cbNomePaci.ItemIndex]);
@@ -969,9 +1019,9 @@ begin
       HoraFim := ConverterParaHora(edHoraFim.Text);
 
       // Chama o controller para alterar a consulta
-      if Controller.AlterarConsulta(ConsultaIdAlterar, PacienteId, ProfissionalId,
-                               ProcedimentoId, DateTimePicker1.Date, HoraInicio, HoraFim) then
-      begin
+      if Controller.AlterarConsulta(ConsultaIdAlterar, PacienteId,
+        ProfissionalId, ProcedimentoId, DateTimePicker1.Date, HoraInicio,
+        HoraFim) then begin
         // Adicionar log
         if cbNomePaci.ItemIndex >= 0 then
           NomePaciente := cbNomePaci.Items[cbNomePaci.ItemIndex];
@@ -982,9 +1032,10 @@ begin
 
         ConsController := TLogController.Create;
         try
-          ConsController.RegistrarLog(UsuarioLogado.Nome, NomePaciente, NomeProfissional, NomeProcedimento,
-            FormatDateTime('dd/mm/yyyy', DateTimePicker1.Date), FormatDateTime('hh:nn', HoraInicio), 'Alterou Consulta',
-            '');
+          ConsController.RegistrarLog(UsuarioLogado.Nome, NomePaciente,
+            NomeProfissional, NomeProcedimento, FormatDateTime('dd/mm/yyyy',
+            DateTimePicker1.Date), FormatDateTime('hh:nn', HoraInicio),
+            'Alterou Consulta', '');
         finally
           ConsController.Free;
         end;
@@ -999,9 +1050,9 @@ begin
         ConsultaIdAlterar := 0;
         ConfigurarEstadoBotaoAlterar;
       end
-      else
-      begin
-        ShowMessage('Não foi possível alterar a consulta! Verifique o horário.');
+      else begin
+        ShowMessage
+          ('Não foi possível alterar a consulta! Verifique o horário.');
       end;
     except
       on E: Exception do
@@ -1012,43 +1063,36 @@ end;
 
 procedure TPagConsultas.ConfigurarEstadoBotaoAlterar;
 begin
-  // Botão alterar sempre fica habilitado quando o grid estiver visível
-  // A validação é feita no momento do clique
   btnAlterar.Enabled := sgConsultas.Visible;
 end;
 
 procedure TPagConsultas.CarregarDadosConsultaNaTela;
 var
-  i: Integer;
+  I: Integer;
 begin
-  if ConsultaIdAlterar <= 0 then Exit;
+  if ConsultaIdAlterar <= 0 then
+    Exit;
 
   // Procura o paciente no combobox
-  for i := 0 to cbNomePaci.Items.Count - 1 do
-  begin
-    if cbNomePaci.Items[i] = sgConsultas.Cells[1, sgConsultas.Row] then
-    begin
-      cbNomePaci.ItemIndex := i;
+  for I := 0 to cbNomePaci.Items.Count - 1 do begin
+    if cbNomePaci.Items[I] = sgConsultas.Cells[1, sgConsultas.Row] then begin
+      cbNomePaci.ItemIndex := I;
       Break;
     end;
   end;
 
   // Procura o profissional no combobox
-  for i := 0 to cbNomeProf.Items.Count - 1 do
-  begin
-    if cbNomeProf.Items[i] = sgConsultas.Cells[2, sgConsultas.Row] then
-    begin
-      cbNomeProf.ItemIndex := i;
+  for I := 0 to cbNomeProf.Items.Count - 1 do begin
+    if cbNomeProf.Items[I] = sgConsultas.Cells[2, sgConsultas.Row] then begin
+      cbNomeProf.ItemIndex := I;
       Break;
     end;
   end;
 
   // Procura o procedimento no combobox
-  for i := 0 to cbNomeProc.Items.Count - 1 do
-  begin
-    if cbNomeProc.Items[i] = sgConsultas.Cells[3, sgConsultas.Row] then
-    begin
-      cbNomeProc.ItemIndex := i;
+  for I := 0 to cbNomeProc.Items.Count - 1 do begin
+    if cbNomeProc.Items[I] = sgConsultas.Cells[3, sgConsultas.Row] then begin
+      cbNomeProc.ItemIndex := I;
       Break;
     end;
   end;
@@ -1075,22 +1119,19 @@ begin
   Result := False;
 
   // Valida seleção dos combos
-  if cbNomePaci.ItemIndex = -1 then
-  begin
+  if cbNomePaci.ItemIndex = -1 then begin
     ShowMessage('Selecione um paciente!');
     cbNomePaci.SetFocus;
     Exit;
   end;
 
-  if cbNomeProf.ItemIndex = -1 then
-  begin
+  if cbNomeProf.ItemIndex = -1 then begin
     ShowMessage('Selecione um profissional!');
     cbNomeProf.SetFocus;
     Exit;
   end;
 
-  if cbNomeProc.ItemIndex = -1 then
-  begin
+  if cbNomeProc.ItemIndex = -1 then begin
     ShowMessage('Selecione um procedimento!');
     cbNomeProc.SetFocus;
     Exit;
@@ -1098,32 +1139,28 @@ begin
 
   // Valida horários usando o método ConverterParaHora
   HoraInicio := ConverterParaHora(edHoraInicio.Text);
-  if HoraInicio = 0 then
-  begin
+  if HoraInicio = 0 then begin
     ShowMessage('Hora de início inválida!');
     edHoraInicio.SetFocus;
     Exit;
   end;
 
   HoraFim := ConverterParaHora(edHoraFim.Text);
-  if HoraFim = 0 then
-  begin
+  if HoraFim = 0 then begin
     ShowMessage('Hora de fim inválida!');
     edHoraFim.SetFocus;
     Exit;
   end;
 
   // Valida se hora fim é maior que hora início
-  if HoraFim <= HoraInicio then
-  begin
+  if HoraFim <= HoraInicio then begin
     ShowMessage('Hora fim deve ser maior que hora início!');
     edHoraFim.SetFocus;
     Exit;
   end;
 
   // Valida se a data não é no passado
-  if DateTimePicker1.Date < Date then
-  begin
+  if DateTimePicker1.Date < Date then begin
     ShowMessage('Não é possível agendar consultas para datas passadas!');
     DateTimePicker1.SetFocus;
     Exit;
@@ -1132,4 +1169,227 @@ begin
   Result := True;
 end;
 
+procedure TPagConsultas.btnDeletarClick(Sender: TObject);
+var
+  Linha, ConsultaId: Integer;
+  NomePaciente, NomeProfissional, NomeProcedimento: string;
+  DataConsulta: string;
+  HoraInicio: string;
+begin
+  // Verifica se há uma linha selecionada no grid
+  Linha := sgConsultas.Row;
+  if Linha <= 0 then begin
+    ShowMessage('Selecione uma consulta para deletar!');
+    Exit;
+  end;
+
+  try
+    // Obter o ID da consulta selecionada
+    ConsultaId := StrToIntDef(sgConsultas.Cells[0, Linha], 0);
+
+    if ConsultaId = 0 then begin
+      ShowMessage('Consulta inválida!');
+      Exit;
+    end;
+
+    // Obter dados para o log
+    NomePaciente := sgConsultas.Cells[1, Linha];
+    NomeProfissional := sgConsultas.Cells[2, Linha];
+    NomeProcedimento := sgConsultas.Cells[3, Linha];
+    DataConsulta := sgConsultas.Cells[4, Linha];
+    HoraInicio := sgConsultas.Cells[5, Linha];
+
+    // Chama o controller para desativar a consulta
+    if Controller.DesativarConsulta(ConsultaId) then begin
+      // Registrar log
+      ConsController := TLogController.Create;
+      try
+        ConsController.RegistrarLog(UsuarioLogado.Nome, NomePaciente,
+          NomeProfissional, NomeProcedimento, DataConsulta, HoraInicio,
+          'Cancelou Consulta', '');
+      finally
+        ConsController.Free;
+      end;
+
+      ShowMessage('Consulta deletada com sucesso!');
+
+      // Recarrega o grid
+      CarregarConsultas;
+    end
+    else begin
+      ShowMessage('Erro ao cancelar consulta! Tente novamente.');
+    end;
+  except
+    on E: Exception do begin
+      ShowMessage('Erro ao cancelar consulta: ' + E.Message);
+    end;
+  end;
+end;
+
+procedure TPagConsultas.CarregarConsultasCanceladas;
+var
+  Lista: TObjectList<TConsulta>;
+  Consulta: TConsulta;
+  I: Integer;
+begin
+  Lista := Controller.BuscarConsultasCanceladas;
+  try
+    sgRestore.RowCount := Lista.Count + 1;
+    sgRestore.Cells[0, 0] := 'ID';
+    sgRestore.Cells[1, 0] := 'Paciente';
+    sgRestore.Cells[2, 0] := 'Profissional';
+    sgRestore.Cells[3, 0] := 'Procedimento';
+    sgRestore.Cells[4, 0] := 'Data';
+    sgRestore.Cells[5, 0] := 'Hora Inicio';
+    sgRestore.Cells[6, 0] := 'Hora Fim';
+    sgRestore.Cells[7, 0] := 'Status';
+
+    I := 1;
+    for Consulta in Lista do begin
+      sgRestore.Cells[0, I] := Consulta.Id.ToString;
+      sgRestore.Cells[1, I] := Consulta.NomePaciente;
+      sgRestore.Cells[2, I] := Consulta.NomeProfissional;
+      sgRestore.Cells[3, I] := Consulta.NomeProcedimento;
+      sgRestore.Cells[4, I] := DateToStr(Consulta.Data);
+      sgRestore.Cells[5, I] := FormatDateTime('hh:nn', Consulta.HoraInicio);
+      sgRestore.Cells[6, I] := FormatDateTime('hh:nn', Consulta.HoraFim);
+      sgRestore.Cells[7, I] := 'Cancelado';
+      // Mostra apenas "Cancelado" no grid de restauração
+
+      Inc(I);
+    end;
+  finally
+    Lista.Free;
+  end;
+end;
+
+procedure TPagConsultas.btnRestaurarClick(Sender: TObject);
+begin
+  // Esconder elementos visuais
+  pnlAdd.Visible := False;
+  btnAddNovo.Visible := False;
+  btnAlterarNovo.Visible := False;
+  if sgConsultas.Visible = False then begin
+    Calendar1.Visible := True;
+    btnAlterar.Visible := False;
+    btnDeletar.Top := 52;
+    btnCancelar.Top := 99;
+    btnRestaurar.Top := 146;
+    Panel1.Top := 193;
+    btnLimpar.Top := 240;
+    btnSair.Top := 287;
+  end;
+
+  if Calendar1.Visible = False then begin
+    sgConsultas.Visible := True;
+  end;
+
+  Panel2.Visible := False;
+  imgLogo1.Visible := False;
+  imgLogo2.Visible := True;
+
+  // Mostrar painel de restauração
+  pnlRestaurar.Visible := True;
+  btnRestaurarNovo.Visible := True;
+  sgRestore.Visible := True;
+
+  // Carregar consultas canceladas no grid
+  CarregarConsultasCanceladas;
+
+  // Configurar larguras das colunas do grid de restauração
+  sgRestore.ColWidths[0] := 50;
+  sgRestore.ColWidths[1] := 120;
+  sgRestore.ColWidths[2] := 120;
+  sgRestore.ColWidths[3] := 120;
+  sgRestore.ColWidths[4] := 120;
+  sgRestore.ColWidths[5] := 120;
+  sgRestore.ColWidths[6] := 120;
+  sgRestore.ColWidths[7] := 120;
+end;
+
+procedure TPagConsultas.imgXrestoreClick(Sender: TObject);
+begin
+  // Esconder painel de restauração
+  pnlRestaurar.Visible := False;
+  btnRestaurarNovo.Visible := False;
+  sgRestore.Visible := False;
+
+  // Restaurar visibilidade padrão
+  Calendar1.Visible := True;
+  imgLogo1.Visible := True;
+  imgLogo2.Visible := False;
+
+  // Reposicionar botões para posições originais
+  btnAlterar.Visible := True;
+  btnDeletar.Top := 52;
+  btnCancelar.Top := 99;
+  btnRestaurar.Top := 146;
+  Panel1.Top := 193;
+  btnLimpar.Top := 240;
+  btnSair.Top := 287;
+end;
+
+procedure TPagConsultas.btnCRestoreClick(Sender: TObject);
+var
+  Linha, ConsultaId: Integer;
+  NomePaciente, NomeProfissional, NomeProcedimento: string;
+  DataConsulta: string;
+  HoraInicio: string;
+begin
+  // Verifica se há uma linha selecionada no grid de restauração
+  Linha := sgRestore.Row;
+  if Linha <= 0 then begin
+    ShowMessage('Selecione uma consulta para restaurar!');
+    Exit;
+  end;
+
+  // Pergunta ao usuário se realmente deseja restaurar
+  if MessageDlg('Tem certeza que deseja restaurar esta consulta?',
+    mtConfirmation, [mbYes, mbNo], 0) = mrNo then
+    Exit;
+
+  try
+    // Obter o ID da consulta selecionada
+    ConsultaId := StrToIntDef(sgRestore.Cells[0, Linha], 0);
+
+    if ConsultaId = 0 then begin
+      ShowMessage('Consulta inválida!');
+      Exit;
+    end;
+
+    // Obter dados para o log
+    NomePaciente := sgRestore.Cells[1, Linha];
+    NomeProfissional := sgRestore.Cells[2, Linha];
+    NomeProcedimento := sgRestore.Cells[3, Linha];
+    DataConsulta := sgRestore.Cells[4, Linha];
+    HoraInicio := sgRestore.Cells[5, Linha];
+
+    // Chama o controller para restaurar a consulta
+    if Controller.RestaurarConsulta(ConsultaId) then begin
+      // Registrar log
+      ConsController := TLogController.Create;
+      try
+        ConsController.RegistrarLog(UsuarioLogado.Nome, NomePaciente,
+          NomeProfissional, NomeProcedimento, DataConsulta, HoraInicio,
+          'Restaurou Consulta', '');
+      finally
+        ConsController.Free;
+      end;
+
+      ShowMessage('Consulta restaurada com sucesso!');
+
+      // Recarrega os grids
+      CarregarConsultasCanceladas;
+      CarregarConsultas;
+      sgRestore.Row := 0;
+    end
+    else begin
+      ShowMessage('Erro ao restaurar consulta! Tente novamente.');
+    end;
+  except
+    on E: Exception do begin
+      ShowMessage('Erro ao restaurar consulta: ' + E.Message);
+    end;
+  end;
+end;
 end.

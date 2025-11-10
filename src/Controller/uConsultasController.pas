@@ -21,6 +21,9 @@ type
       : Integer; pData: TDate; HoraInicio, HoraFim: TTime): Boolean;
     function AlterarConsulta(ConsultaId, PacienteId, ProfissionalId, ProcedimentoId
       : Integer; pData: TDate; HoraInicio, HoraFim: TTime): Boolean;
+    function DesativarConsulta(ConsultaId: Integer): Boolean;
+    function RestaurarConsulta(ConsultaId: Integer): Boolean;
+    function BuscarConsultasCanceladas: TObjectList<TConsulta>;
   end;
 
 implementation
@@ -170,6 +173,42 @@ begin
     finally
       Consulta.Free;
     end;
+  finally
+    RepoConsul.Free;
+  end;
+end;
+
+function TConsultaController.DesativarConsulta(ConsultaId: Integer): Boolean;
+var
+  RepoConsul: TConsultaRepository;
+begin
+  RepoConsul := TConsultaRepository.Create;
+  try
+    Result := RepoConsul.DesativarConsulta(ConsultaId);
+  finally
+    RepoConsul.Free;
+  end;
+end;
+
+function TConsultaController.RestaurarConsulta(ConsultaId: Integer): Boolean;
+var
+  RepoConsul: TConsultaRepository;
+begin
+  RepoConsul := TConsultaRepository.Create;
+  try
+    Result := RepoConsul.RestaurarConsulta(ConsultaId);
+  finally
+    RepoConsul.Free;
+  end;
+end;
+
+function TConsultaController.BuscarConsultasCanceladas: TObjectList<TConsulta>;
+var
+  RepoConsul: TConsultaRepository;
+begin
+  RepoConsul := TConsultaRepository.Create;
+  try
+    Result := RepoConsul.ListarConsultasCanceladas;
   finally
     RepoConsul.Free;
   end;

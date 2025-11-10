@@ -2647,6 +2647,7 @@ object PagConsultas: TPagConsultas
         Color = 8142341
         ParentBackground = False
         TabOrder = 2
+        OnClick = btnDeletarClick
         OnMouseEnter = btnDeletarMouseEnter
         OnMouseLeave = btnDeletarMouseLeave
         object lblDeletar: TLabel
@@ -2727,6 +2728,7 @@ object PagConsultas: TPagConsultas
         Color = 8142341
         ParentBackground = False
         TabOrder = 4
+        OnClick = btnRestaurarClick
         OnMouseEnter = btnRestaurarMouseEnter
         OnMouseLeave = btnRestaurarMouseLeave
         object lblRestaurar: TLabel
@@ -3244,7 +3246,7 @@ object PagConsultas: TPagConsultas
       ParentFont = False
     end
     object imgXrestore: TImage
-      Left = 473
+      Left = 475
       Top = 7
       Width = 16
       Height = 16
@@ -3262,34 +3264,26 @@ object PagConsultas: TPagConsultas
         00D89B0031671BA6236DAC86D00FF3439A98B3201430A70D93317A47CC100A99
         3F0D0BFD270C8890D454E12ADDDEFD31E2880127248D9039003931A08E642E8D
         1A59E60C6426631DBE013A6F900B7B89246D0000000049454E44AE426082}
-    end
-    object sgRestore: TStringGrid
-      Left = 5
-      Top = 37
-      Width = 489
-      Height = 232
-      ColCount = 7
-      DefaultColWidth = 78
-      FixedCols = 0
-      RowCount = 1
-      FixedRows = 0
-      TabOrder = 0
+      OnClick = imgXrestoreClick
     end
     object btnCRestore: TPanel
       Left = 4
       Top = 273
-      Width = 489
+      Width = 488
       Height = 30
       Cursor = crHandPoint
       BevelOuter = bvNone
       Color = 16223019
       ParentBackground = False
-      TabOrder = 1
+      TabOrder = 0
+      OnClick = btnCRestoreClick
+      OnMouseEnter = btnCRestoreMouseEnter
+      OnMouseLeave = btnCRestoreMouseLeave
       object lblRestore: TLabel
         AlignWithMargins = True
         Left = 1
         Top = 5
-        Width = 487
+        Width = 486
         Height = 24
         Cursor = crHandPoint
         Margins.Left = 1
@@ -3307,13 +3301,29 @@ object PagConsultas: TPagConsultas
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
+        OnClick = btnCRestoreClick
+        OnMouseEnter = btnCRestoreMouseEnter
+        OnMouseLeave = btnCRestoreMouseLeave
         ExplicitWidth = 58
         ExplicitHeight = 17
       end
     end
+    object sgRestore: TStringGrid
+      Left = 5
+      Top = 35
+      Width = 488
+      Height = 232
+      ColCount = 8
+      DefaultColWidth = 78
+      FixedCols = 0
+      RowCount = 1
+      FixedRows = 0
+      TabOrder = 1
+      OnDrawCell = sgRestoreDrawCell
+    end
   end
   object tmrAtualizarStatus: TTimer
     Left = 680
-    Top = 464
+    Top = 488
   end
 end

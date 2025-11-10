@@ -18,6 +18,9 @@ type
       HoraInicio, HoraFim: TTime; ProfissionalId: Integer): Boolean;
     function AdicionarConsulta(Consulta: TConsulta): Boolean;
     function AlterarConsulta(Consulta: TConsulta): Boolean;
+    function DesativarConsulta(ConsultaId: Integer): Boolean;
+    function RestaurarConsulta(ConsultaId: Integer): Boolean;
+    function ListarConsultasCanceladas: TObjectList<TConsulta>;
   end;
 
 implementation
@@ -263,5 +266,96 @@ begin
   end;
 end;
 
+function TConsultaRepository.DesativarConsulta(ConsultaId: Integer): Boolean;
+begin
+  with dmUsuarios.queryConsultas do begin
+    Close;
+
+    // Iniciar transação
+    dmUsuarios.FDConnection1.StartTransaction;
+    try
+      SQL.Text := 'UPDATE consultas SET ativo = FALSE WHERE id = :id';
+      ParamByName('id').AsInteger := ConsultaId;
+      ExecSQL;
+
+      dmUsuarios.FDConnection1.Commit;
+      Result := True;
+    except
+      on E: Exception do begin
+        if dmUsuarios.FDConnection1.InTransaction then
+          dmUsuarios.FDConnection1.Rollback;
+        Result := False;
+      end;
+    end;
+
+    Close;
+  end;
+end;
+
+function TConsultaRepository.RestaurarConsulta(ConsultaId: Integer): Boolean;
+begin
+  with dmUsuarios.queryConsultas do begin
+    Close;
+
+    // Iniciar transação
+    dmUsuarios.FDConnection1.StartTransaction;
+    try
+      SQL.Text := 'UPDATE consultas SET ativo = TRUE WHERE id = :id';
+      ParamByName('id').AsInteger := ConsultaId;
+      ExecSQL;
+
+      dmUsuarios.FDConnection1.Commit;
+      Result := True;
+    except
+      on E: Exception do begin
+        if dmUsuarios.FDConnection1.InTransaction then
+          dmUsuarios.FDConnection1.Rollback;
+        Result := False;
+      end;
+    end;
+
+    Close;
+  end;
+end;
+
+function TConsultaRepository.ListarConsultasCanceladas: TObjectList<TConsulta>;
+var
+  Consulta: TConsulta;
+begin
+  Result := TObjectList<TConsulta>.Create(True);
+  with dmUsuarios.queryConsultas do begin
+    Close;
+    SQL.Text := 'SELECT ' + '  c.id, ' +
+      '  c.paciente_id, p.nome AS nome_paciente, ' +
+      '  c.profissional_id, pr.nome AS nome_profissional, ' +
+      '  c.procedimento_id, proc.nome AS nome_procedimento, ' +
+      '  c.data, c.horainicio, c.horafim, c.ativo ' + 'FROM consultas c ' +
+      'INNER JOIN pacientes p ON c.paciente_id = p.id ' +
+      'INNER JOIN profissionais pr ON c.profissional_id = pr.id ' +
+      'INNER JOIN procedimentos proc ON c.procedimento_id = proc.id ' +
+      'WHERE c.ativo = FALSE ' + 'ORDER BY c.data DESC, c.horainicio DESC';
+    Open;
+
+    while not Eof do begin
+      Consulta := TConsulta.Create;
+      Consulta.Id := FieldByName('id').AsInteger;
+      Consulta.PacienteId := FieldByName('paciente_id').AsInteger;
+      Consulta.ProfissionalId := FieldByName('profissional_id').AsInteger;
+      Consulta.ProcedimentoId := FieldByName('procedimento_id').AsInteger;
+      Consulta.Data := FieldByName('data').AsDateTime;
+      Consulta.HoraInicio := FieldByName('horainicio').AsDateTime;
+      Consulta.HoraFim := FieldByName('horafim').AsDateTime;
+      Consulta.Ativo := FieldByName('ativo').AsBoolean;
+
+      // Nomes extras para exibição no grid
+      Consulta.NomePaciente := FieldByName('nome_paciente').AsString;
+      Consulta.NomeProfissional := FieldByName('nome_profissional').AsString;
+      Consulta.NomeProcedimento := FieldByName('nome_procedimento').AsString;
+
+      Result.Add(Consulta);
+      Next;
+    end;
+  end;
+end;
 
 end.

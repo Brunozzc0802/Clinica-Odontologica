@@ -3355,7 +3355,6 @@ object FormLogin: TFormLogin
       Color = 13204758
       ParentBackground = False
       TabOrder = 0
-      OnClick = pnlConsultasClick
       DesignSize = (
         1584
         870)
@@ -5145,9 +5144,9 @@ object FormLogin: TFormLogin
       Visible = False
       object Shape1: TShape
         Left = 9
-        Top = 480
+        Top = 481
         Width = 270
-        Height = 73
+        Height = 71
         Brush.Color = 8142341
         Pen.Color = clWhite
         Shape = stRoundRect
@@ -5163,7 +5162,7 @@ object FormLogin: TFormLogin
       end
       object Shape3: TShape
         Left = 9
-        Top = 319
+        Top = 321
         Width = 270
         Height = 73
         Brush.Color = 8142341
@@ -5172,7 +5171,7 @@ object FormLogin: TFormLogin
       end
       object Shape4: TShape
         Left = 9
-        Top = 238
+        Top = 240
         Width = 270
         Height = 73
         Brush.Color = 8142341
@@ -5181,7 +5180,7 @@ object FormLogin: TFormLogin
       end
       object Shape5: TShape
         Left = 9
-        Top = 157
+        Top = 159
         Width = 270
         Height = 73
         Brush.Color = 8142341
@@ -5190,7 +5189,7 @@ object FormLogin: TFormLogin
       end
       object Shape6: TShape
         Left = 9
-        Top = 78
+        Top = 80
         Width = 270
         Height = 72
         Brush.Color = 8142341
@@ -5199,16 +5198,16 @@ object FormLogin: TFormLogin
       end
       object Shape7: TShape
         Left = 9
-        Top = 3
+        Top = 5
         Width = 270
-        Height = 70
+        Height = 69
         Brush.Color = 8142341
         Pen.Color = clWhite
         Shape = stRoundRect
       end
       object pnlUser: TPanel
         Left = 12
-        Top = 6
+        Top = 7
         Width = 264
         Height = 63
         Cursor = crHandPoint
@@ -5330,7 +5329,7 @@ object FormLogin: TFormLogin
       end
       object pnlPacientes: TPanel
         Left = 12
-        Top = 81
+        Top = 83
         Width = 264
         Height = 65
         Cursor = crHandPoint
@@ -5423,7 +5422,7 @@ object FormLogin: TFormLogin
       end
       object pnlProfissionais: TPanel
         Left = 12
-        Top = 160
+        Top = 162
         Width = 264
         Height = 65
         Cursor = crHandPoint
@@ -5575,7 +5574,7 @@ object FormLogin: TFormLogin
       end
       object pnlConsultas: TPanel
         Left = 12
-        Top = 241
+        Top = 242
         Width = 264
         Height = 65
         Cursor = crHandPoint
@@ -5610,8 +5609,8 @@ object FormLogin: TFormLogin
           OnMouseLeave = pnlConsultasMouseLeave
         end
         object imgConsultas: TImage
-          Left = -4
-          Top = 2
+          Left = -6
+          Top = 1
           Width = 277
           Height = 77
           Cursor = crHandPoint
@@ -5673,7 +5672,7 @@ object FormLogin: TFormLogin
       end
       object pnlProcedimentos: TPanel
         Left = 12
-        Top = 323
+        Top = 325
         Width = 264
         Height = 65
         Cursor = crHandPoint

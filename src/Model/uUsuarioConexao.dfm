@@ -62,7 +62,7 @@ object dmUsuarios: TdmUsuarios
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45973.624961446800000000
-    ReportOptions.LastChange = 45973.626909317130000000
+    ReportOptions.LastChange = 45973.653706527780000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -173,7 +173,7 @@ object dmUsuarios: TdmUsuarios
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = []
-          Fill.BackColor = clGray
+          Fill.BackColor = 11102482
           HAlign = haCenter
           Memo.UTF8W = (
             'Report')
@@ -196,6 +196,8 @@ object dmUsuarios: TdmUsuarios
           AllowVectorExport = True
           Width = 718.110236220472000000
           Height = 22.677180000000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -13
@@ -210,6 +212,8 @@ object dmUsuarios: TdmUsuarios
           AllowVectorExport = True
           Width = 78.000000000000000000
           Height = 22.677180000000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
           Font.Height = -13
@@ -226,6 +230,8 @@ object dmUsuarios: TdmUsuarios
           Left = 78.000000000000000000
           Width = 99.000000000000000000
           Height = 22.677180000000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
           Font.Height = -13
@@ -258,6 +264,8 @@ object dmUsuarios: TdmUsuarios
           Left = 255.000000000000000000
           Width = 111.000000000000000000
           Height = 22.677180000000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
           Font.Height = -13
@@ -274,6 +282,8 @@ object dmUsuarios: TdmUsuarios
           Left = 366.000000000000000000
           Width = 78.000000000000000000
           Height = 22.677180000000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
           Font.Height = -13
@@ -290,6 +300,8 @@ object dmUsuarios: TdmUsuarios
           Left = 444.000000000000000000
           Width = 78.000000000000000000
           Height = 22.677180000000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clMaroon
           Font.Height = -13

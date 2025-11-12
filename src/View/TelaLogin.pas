@@ -55,9 +55,7 @@ type
     imgProcedimentos: TImage;
     imgEncerrarSistema: TImage;
     footerPrincipal: TPanel;
-    lblBemVindo: TLabel;
     Timer1: TTimer;
-    lblDataHora: TLabel;
     Shape1: TShape;
     Shape2: TShape;
     Shape3: TShape;
@@ -65,6 +63,13 @@ type
     Shape5: TShape;
     Shape6: TShape;
     Shape7: TShape;
+    Image1: TImage;
+    Shape8: TShape;
+    Panel1: TPanel;
+    lblDataHora: TLabel;
+    Shape9: TShape;
+    Panel2: TPanel;
+    lblBemVindo: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnEntrarMouseEnter(Sender: TObject);
     procedure btnEntrarMouseLeave(Sender: TObject);
@@ -96,6 +101,7 @@ type
     procedure edSenhaKeyPress(Sender: TObject; var Key: Char);
     procedure edUsuarioKeyPress(Sender: TObject; var Key: Char);
     procedure imgRelatoriosClick(Sender: TObject);
+    procedure Image1Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -152,7 +158,7 @@ begin
       pnlUser.Visible := False;
       pnlProfissionais.Visible := False;
       pnlProcedimentos.Visible := False;
-      lblBemVindo.Caption := 'Bem-vindo, ' + Usuario.Nome + '!';
+      lblBemVindo.Caption := 'Bem-vindo: ' + Usuario.Nome + '!';
     end else if Usuario.Grupo = 'Profissional' then begin
       pnlConsultas.Visible := True;
       pnlConsultas.Top := 8;
@@ -172,14 +178,14 @@ begin
       shape7.Visible := False;
       Shape5.Visible := False;
       shape3.Visible := False;
-      lblBemVindo.Caption := 'Bem-vindo, ' + Usuario.Nome + '!';
+      lblBemVindo.Caption := 'Bem-vindo: ' + Usuario.Nome + '!';
     end
     else
       Sleep(300);
     pnlLogin.Visible := False;
     pnlTelaPrincipal.Visible := True;
     pnlFundoLateral.Visible := True;
-    lblBemVindo.Caption := 'Bem-vindo, ' + Usuario.Nome + '!';
+    lblBemVindo.Caption := 'Bem-vindo: ' + Usuario.Nome + '!';
   finally
     UserController.Free;
   end;
@@ -215,6 +221,15 @@ procedure TFormLogin.FormCreate(Sender: TObject);
 begin
   lblLogin.font.Color := $00C97D16;
 end;
+
+procedure TFormLogin.Image1Click(Sender: TObject);
+  begin
+    Sleep(200);
+    pnlLogin.Visible := True;
+    edUsuario.Clear;
+    edSenha.Clear;
+    pnlTelaPrincipal.Visible := False;
+  end;
 
 procedure TFormLogin.ImgOlhoAbertoClick(Sender: TObject);
 begin

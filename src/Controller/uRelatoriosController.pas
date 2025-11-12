@@ -24,6 +24,9 @@ type
     function GerarRelatorioProcedimento(ProcedimentoId: integer; DataInicio, DataFim: TDateTime): TFDQuery;
     function GerarRelatorioConsultasPorData(DataSelecionada: TDateTime): TFDQuery;
     procedure GerarRelatorioConsultasFastReport(DataSelecionada: TDateTime);
+    function ContarConsultasConcluidas: Integer;
+    function ContarConsultasAgendadas: Integer;
+    function ContarConsultasCanceladas: Integer;
     function ValidarDatasRelatorio(DataInicio, DataFim: TDateTime): Boolean;
   end;
 
@@ -193,6 +196,39 @@ begin
   except
     on E: Exception do
       ShowMessage('Erro ao gerar relatório: ' + E.Message);
+  end;
+end;
+
+function TRelatoriosController.ContarConsultasConcluidas: Integer;
+begin
+  try
+    Result := RepoRela.ContarConsultasConcluidas;
+  except
+    on E: Exception do begin
+      raise Exception.Create('Erro ao contar consultas concluídas: ' + E.Message);
+    end;
+  end;
+end;
+
+function TRelatoriosController.ContarConsultasAgendadas: Integer;
+begin
+  try
+    Result := RepoRela.ContarConsultasAgendadas;
+  except
+    on E: Exception do begin
+      raise Exception.Create('Erro ao contar consultas agendadas: ' + E.Message);
+    end;
+  end;
+end;
+
+function TRelatoriosController.ContarConsultasCanceladas: Integer;
+begin
+  try
+    Result := RepoRela.ContarConsultasCanceladas;
+  except
+    on E: Exception do begin
+      raise Exception.Create('Erro ao contar consultas canceladas: ' + E.Message);
+    end;
   end;
 end;
 

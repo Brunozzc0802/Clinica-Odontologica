@@ -15,6 +15,9 @@ type
     function GerarRelatorioPorProfissional(ProfissionalId: integer; DataInicio, DataFim: TDateTime): TFDQuery;
     function GerarRelatorioPorProcedimento(ProcedimentoId: integer; DataInicio, DataFim: TDateTime): TFDQuery;
     function GerarRelatorioConsultasPorData(DataSelecionada: TDateTime): TFDQuery;
+    function ContarConsultasConcluidas: Integer;
+    function ContarConsultasAgendadas: Integer;
+    function ContarConsultasCanceladas: Integer;
   end;
 
 implementation
@@ -171,6 +174,81 @@ begin
 
     ParamByName('data_selecionada').AsDate := DataSelecionada;
     Open;
+  end;
+end;
+
+function TRelatoriosRepository.ContarConsultasConcluidas: Integer;
+var
+  Query: TFDQuery;
+begin
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := dmUsuarios.FDConnection1;
+
+    with Query do begin
+      Close;
+      SQL.Clear;
+      SQL.Text :=
+        'SELECT COUNT(*) as total FROM consultas ' +
+        'WHERE ativo = TRUE AND ( ' +
+        '  (data < CURRENT_DATE) OR ' +
+        '  (data = CURRENT_DATE AND horafim < CURRENT_TIME) ' +
+        ')';
+
+      Open;
+
+      Result := FieldByName('total').AsInteger;
+    end;
+  finally
+    Query.Free;
+  end;
+end;
+
+function TRelatoriosRepository.ContarConsultasAgendadas: Integer;
+var
+  Query: TFDQuery;
+begin
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := dmUsuarios.FDConnection1;
+
+    with Query do begin
+      Close;
+      SQL.Clear;
+      SQL.Text :=
+        'SELECT COUNT(*) as total FROM consultas ' +
+        'WHERE ativo = TRUE AND ( ' +
+        '  (data > CURRENT_DATE) OR ' +
+        '  (data = CURRENT_DATE AND horainicio > CURRENT_TIME) ' +
+        ')';
+
+      Open;
+
+      Result := FieldByName('total').AsInteger;
+    end;
+  finally
+    Query.Free;
+  end;
+end;
+
+function TRelatoriosRepository.ContarConsultasCanceladas: Integer;
+var
+  Query: TFDQuery;
+begin
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := dmUsuarios.FDConnection1;
+
+    with Query do begin
+      Close;
+      SQL.Clear;
+      SQL.Text := 'SELECT COUNT(*) as total FROM consultas WHERE ativo = FALSE';
+      Open;
+
+      Result := FieldByName('total').AsInteger;
+    end;
+  finally
+    Query.Free;
   end;
 end;
 

@@ -159,25 +159,26 @@ begin
       pnlProfissionais.Visible := False;
       pnlProcedimentos.Visible := False;
       lblBemVindo.Caption := 'Bem-vindo: ' + Usuario.Nome + '!';
-    end else if Usuario.Grupo = 'Profissional' then begin
+    end
+    else if Usuario.Grupo = 'Profissional' then begin
       pnlConsultas.Visible := True;
       pnlConsultas.Top := 8;
-      shape4.Top := 5;
+      Shape4.Top := 5;
       pnlPacientes.Visible := True;
       pnlPacientes.Top := 86;
-      shape6.Top := 83;
+      Shape6.Top := 83;
       pnlRelatorios.Visible := True;
       pnlRelatorios.Top := 164;
-      shape2.Top := 161;
+      Shape2.Top := 161;
       pnlEncerrarSistema.Visible := True;
       pnlEncerrarSistema.Top := 242;
-      shape1.Top := 239;
+      Shape1.Top := 239;
       pnlUser.Visible := False;
       pnlProfissionais.Visible := False;
       pnlProcedimentos.Visible := False;
-      shape7.Visible := False;
+      Shape7.Visible := False;
       Shape5.Visible := False;
-      shape3.Visible := False;
+      Shape3.Visible := False;
       lblBemVindo.Caption := 'Bem-vindo: ' + Usuario.Nome + '!';
     end
     else
@@ -223,13 +224,13 @@ begin
 end;
 
 procedure TFormLogin.Image1Click(Sender: TObject);
-  begin
-    Sleep(200);
-    pnlLogin.Visible := True;
-    edUsuario.Clear;
-    edSenha.Clear;
-    pnlTelaPrincipal.Visible := False;
-  end;
+begin
+  Sleep(400);
+  pnlLogin.Visible := True;
+  edUsuario.Clear;
+  edSenha.Clear;
+  pnlTelaPrincipal.Visible := False;
+end;
 
 procedure TFormLogin.ImgOlhoAbertoClick(Sender: TObject);
 begin
@@ -246,13 +247,23 @@ begin
 end;
 
 procedure TFormLogin.imgRelatoriosClick(Sender: TObject);
-  begin
-    PagRelatorios.Show;
-  end;
+begin
+  PagRelatorios.Show;
+  PagUsuarios.Close;
+  PagPacientes.Close;
+  PagProfissionais.Close;
+  PagConsultas.Close;
+  PagProfissionais.Close;
+end;
 
 procedure TFormLogin.pnlConsultasClick(Sender: TObject);
 begin
   PagConsultas.Show;
+  PagUsuarios.Close;
+  PagPacientes.Close;
+  PagProfissionais.Close;
+  PagProcedimentos.Close;
+  PagRelatorios.Close;
 end;
 
 procedure TFormLogin.pnlConsultasMouseEnter(Sender: TObject);
@@ -273,7 +284,8 @@ begin
   then begin
     Sleep(500);
     Close;
-  end else begin
+  end
+  else begin
     Exit;
   end;
 
@@ -296,6 +308,9 @@ begin
   PagPacientes.Show;
   PagUsuarios.Close;
   PagProfissionais.Close;
+  PagRelatorios.Close;
+  PagConsultas.Close;
+  PagProcedimentos.Close;
 end;
 
 procedure TFormLogin.pnlPacientesMouseEnter(Sender: TObject);
@@ -316,6 +331,8 @@ begin
   PagProfissionais.Close;
   PagPacientes.Close;
   PagUsuarios.Close;
+  PagConsultas.Close;
+  PagRelatorios.Close;
 end;
 
 procedure TFormLogin.pnlProcedimentosMouseEnter(Sender: TObject);
@@ -335,6 +352,9 @@ begin
   PagProfissionais.Show;
   PagPacientes.Close;
   PagUsuarios.Close;
+  PagRelatorios.Close;
+  PagConsultas.Close;
+  PagProcedimentos.Close;
 end;
 
 procedure TFormLogin.pnlProfissionaisMouseEnter(Sender: TObject);
@@ -366,6 +386,9 @@ begin
   PagUsuarios.Show;
   PagPacientes.Close;
   PagProfissionais.Close;
+  PagRelatorios.Close;
+  PagConsultas.Close;
+  PagProcedimentos.Close;
 end;
 
 procedure TFormLogin.pnlUserMouseEnter(Sender: TObject);

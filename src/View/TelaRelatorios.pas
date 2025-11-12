@@ -70,6 +70,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure cbProfDropDown(Sender: TObject);
     procedure cbProcDropDown(Sender: TObject);
+    procedure AtualizarContadores;
 
   private
     { Private declarations }
@@ -152,6 +153,7 @@ procedure TPagRelatorios.lblGerarProfMouseLeave(Sender: TObject);
 procedure TPagRelatorios.FormCreate(Sender: TObject);
 begin
   RelatorioController := TRelatoriosController.Create;
+  AtualizarContadores;
 end;
 
 procedure TPagRelatorios.FormDestroy(Sender: TObject);
@@ -187,6 +189,26 @@ begin
   if Assigned(RelatorioController) then begin
     DataSelecionada := DateTimePicker1.Date;
     RelatorioController.GerarRelatorioConsultasFastReport(DataSelecionada);
+  end;
+end;
+
+procedure TPagRelatorios.AtualizarContadores;
+var
+  TotalConcluidas, TotalAgendadas, TotalCanceladas: Integer;
+begin
+  try
+    if Assigned(RelatorioController) then begin
+      TotalConcluidas := RelatorioController.ContarConsultasConcluidas;
+      TotalAgendadas := RelatorioController.ContarConsultasAgendadas;
+      TotalCanceladas := RelatorioController.ContarConsultasCanceladas;
+
+      lblConsulConclu.Caption := IntToStr(TotalConcluidas);
+      lblConsulAgend.Caption := IntToStr(TotalAgendadas);
+      lblConsulCance.Caption := IntToStr(TotalCanceladas);
+    end;
+  except
+    on E: Exception do
+      ShowMessage('Erro ao atualizar contadores: ' + E.Message);
   end;
 end;
 

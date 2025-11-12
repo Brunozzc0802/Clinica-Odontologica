@@ -189,6 +189,8 @@
             <Form>PagRelatorios</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="..\src\Repository\uRelatoriosRepository.pas"/>
+        <DCCReference Include="..\src\Controller\uRelatoriosController.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<TfrxReport Version="2026.1.1" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="692223" PreviewOptions.Zoom="1" PrintOptions.Printer="Default" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="45973,6249614468" ReportOptions.Description.Text="" ReportOptions.LastChange="45973,6269093171" ScriptLanguage="PascalScript" ScriptText.Text="&#13;&#10;begin&#13;&#10;&#13;&#10;end.">
+  <Datasets>
+    <item DataSet="dtRelaConsul" DataSetName="dtRelaConsul"/>
+  </Datasets>
+  <Styles>
+    <item Name="Title" Font.Charset="1" Font.Color="16777215" Font.Height="-16" Font.Name="Arial" Font.Style="1" Frame.Typ="0" Fill.BackColor="8421504"/>
+    <item Name="Header" Font.Charset="1" Font.Color="128" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="0"/>
+    <item Name="Group header" Font.Charset="1" Font.Color="128" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="0" Fill.BackColor="16053492"/>
+    <item Name="Data" Font.Charset="1" Font.Color="-16777208" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="0"/>
+    <item Name="Group footer" Font.Charset="1" Font.Color="-16777208" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="0"/>
+    <item Name="Header line" Font.Charset="1" Font.Color="-16777208" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="8" Frame.Width="2"/>
+  </Styles>
+  <TfrxDataPage Name="Data" HGuides.Text="" VGuides.Text="" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="Page1" HGuides.Text="" VGuides.Text="" PaperWidth="210" PaperHeight="297" PaperSize="9" LeftMargin="10" RightMargin="10" TopMargin="10" BottomMargin="10" ColumnWidth="0" ColumnPositions.Text="" Frame.Typ="0" MirrorMode="0">
+    <TfrxReportTitle Name="Relatorio_Consultas" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="26,45671" Left="0" Top="18,89765" Width="718,1107">
+      <TfrxMemoView Name="Consultas" Align="baWidth" AllowVectorExport="True" Left="0" Top="0" Width="718,110717773438" Height="22,67718" ContentScaleOptions.Constraints.MaxIterationValue="0" ContentScaleOptions.Constraints.MinIterationValue="0" Font.Charset="1" Font.Color="16777215" Font.Height="-16" Font.Name="Arial" Font.Style="1" Frame.Typ="0" Fill.BackColor="8421504" HAlign="haCenter" ParentFont="False" Style="Title" VAlign="vaCenter" Text="Report"/>
+    </TfrxReportTitle>
+    <TfrxPageHeader Name="PageHeader1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="22,67718" Left="0" Top="68,03154" Width="718,1107">
+      <TfrxMemoView Name="Memo2" AllowVectorExport="True" Left="0" Top="0" Width="718,110236220472" Height="22,67718" Font.Charset="1" Font.Color="-16777208" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="8" Frame.Width="2" ParentFont="False" Style="Header line" Text=""/>
+      <TfrxMemoView Name="Memo3" AllowVectorExport="True" Left="0" Top="0" Width="78" Height="22,67718" Font.Charset="1" Font.Color="128" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="0" ParentFont="False" Style="Header" Text="id"/>
+      <TfrxMemoView Name="Memo4" AllowVectorExport="True" Left="78" Top="0" Width="99" Height="22,67718" Font.Charset="1" Font.Color="128" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="0" ParentFont="False" Style="Header" Text="profissional_id"/>
+      <TfrxMemoView Name="Memo5" AllowVectorExport="True" Left="177" Top="0" Width="78" Height="22,67718" Font.Charset="1" Font.Color="128" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="0" ParentFont="False" Style="Header" Text="paciente_id"/>
+      <TfrxMemoView Name="Memo6" AllowVectorExport="True" Left="255" Top="0" Width="111" Height="22,67718" Font.Charset="1" Font.Color="128" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="0" ParentFont="False" Style="Header" Text="procedimento_id"/>
+      <TfrxMemoView Name="Memo7" AllowVectorExport="True" Left="366" Top="0" Width="78" Height="22,67718" Font.Charset="1" Font.Color="128" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="0" ParentFont="False" Style="Header" Text="horainicio"/>
+      <TfrxMemoView Name="Memo8" AllowVectorExport="True" Left="444" Top="0" Width="78" Height="22,67718" Font.Charset="1" Font.Color="128" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="0" ParentFont="False" Style="Header" Text="horafim"/>
+    </TfrxPageHeader>
+    <TfrxGroupHeader Name="GroupHeader1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="26,45671" Left="0" Top="151,1812" Width="718,1107" KeepWithData="False" Condition="dtRelaConsul.&#34;data&#34;">
+      <TfrxMemoView Name="Memo9" Align="baWidth" AllowVectorExport="True" Left="0" Top="0" Width="718,110717773438" Height="22,67718" DataField="data" DataSet="dtRelaConsul" DataSetName="dtRelaConsul" Font.Charset="1" Font.Color="128" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="0" Fill.BackColor="16053492" ParentFont="False" Style="Group header" VAlign="vaCenter" Text="[dtRelaConsul.&#34;data&#34;]"/>
+    </TfrxGroupHeader>
+    <TfrxMasterData Name="MasterData1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="18,89765" Left="0" Top="200,31509" Width="718,1107" ColumnWidth="0" ColumnGap="0" DataSet="dtRelaConsul" DataSetName="dtRelaConsul" RowCount="0">
+      <TfrxMemoView Name="Memo10" AllowVectorExport="True" Left="0" Top="0" Width="78" Height="18,89765" DataField="id" DataSet="dtRelaConsul" DataSetName="dtRelaConsul" Font.Charset="1" Font.Color="-16777208" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="0" ParentFont="False" Style="Data" Text="[dtRelaConsul.&#34;id&#34;]"/>
+      <TfrxMemoView Name="Memo11" AllowVectorExport="True" Left="78" Top="0" Width="99" Height="18,89765" DataField="profissional_id" DataSet="dtRelaConsul" DataSetName="dtRelaConsul" Font.Charset="1" Font.Color="-16777208" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="0" ParentFont="False" Style="Data" Text="[dtRelaConsul.&#34;profissional_id&#34;]"/>
+      <TfrxMemoView Name="Memo12" AllowVectorExport="True" Left="177" Top="0" Width="78" Height="18,89765" DataField="paciente_id" DataSet="dtRelaConsul" DataSetName="dtRelaConsul" Font.Charset="1" Font.Color="-16777208" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="0" ParentFont="False" Style="Data" Text="[dtRelaConsul.&#34;paciente_id&#34;]"/>
+      <TfrxMemoView Name="Memo13" AllowVectorExport="True" Left="255" Top="0" Width="111" Height="18,89765" DataField="procedimento_id" DataSet="dtRelaConsul" DataSetName="dtRelaConsul" Font.Charset="1" Font.Color="-16777208" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="0" ParentFont="False" Style="Data" Text="[dtRelaConsul.&#34;procedimento_id&#34;]"/>
+      <TfrxMemoView Name="Memo14" AllowVectorExport="True" Left="366" Top="0" Width="78" Height="18,89765" DataField="horainicio" DataSet="dtRelaConsul" DataSetName="dtRelaConsul" Font.Charset="1" Font.Color="-16777208" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="0" ParentFont="False" Style="Data" Text="[dtRelaConsul.&#34;horainicio&#34;]"/>
+      <TfrxMemoView Name="Memo15" AllowVectorExport="True" Left="444" Top="0" Width="78" Height="18,89765" DataField="horafim" DataSet="dtRelaConsul" DataSetName="dtRelaConsul" Font.Charset="1" Font.Color="-16777208" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="0" ParentFont="False" Style="Data" Text="[dtRelaConsul.&#34;horafim&#34;]"/>
+    </TfrxMasterData>
+    <TfrxGroupFooter Name="GroupFooter1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="0" Left="0" Top="241,88992" Width="718,1107" KeepWithData="False"/>
+    <TfrxPageFooter Name="PageFooter1" FillType="ftBrush" FillGap.Top="0" FillGap.Left="0" FillGap.Bottom="0" FillGap.Right="0" Frame.Typ="0" Height="26,45671" Left="0" Top="302,3624" Width="718,1107">
+      <TfrxMemoView Name="Memo16" Align="baWidth" AllowVectorExport="True" Left="0" Top="0" Width="718,110717773438" Height="0" Frame.Typ="4" Frame.Width="2" Text=""/>
+      <TfrxMemoView Name="Memo17" AllowVectorExport="True" Left="0" Top="1" Width="0" Height="22,67718" AutoWidth="True" Frame.Typ="0" Text="[Date] [Time]"/>
+      <TfrxMemoView Name="Memo18" Align="baRight" AllowVectorExport="True" Left="642,520117773438" Top="1" Width="75,5906" Height="22,67718" Frame.Typ="0" HAlign="haRight" Text="Page [Page#]"/>
+    </TfrxPageFooter>
+  </TfrxReportPage>
+</TfrxReport>

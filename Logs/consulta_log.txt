@@ -6,3 +6,4 @@ Usuario: admin | Restaurou Consulta | Paciente: oaoao | Profissional: Guilherme 
 Usuario: admin | Cancelou Consulta | Paciente: Bruno | Profissional: Guilherme | Procedimento: Limpeza | Dia: 04/11/2025 | Horário: 16:10 | 15:50:39 10-11-2025
 Usuario: admin | Cancelou Consulta | Paciente: oaoao | Profissional: Guilherme | Procedimento: Limpeza | Dia: 10/11/2025 | Horário: 15:51 | 15:50:41 10-11-2025
 Usuario: admin | Restaurou Consulta | Paciente: oaoao | Profissional: Guilherme | Procedimento: Limpeza | Dia: 10/11/2025 | Horário: 15:51 | 15:50:49 10-11-2025
+Usuario: admin | Agendou Consulta | Paciente: Bruno | Profissional: Guilherme | Procedimento: Canal | Dia: 13/11/2025 | Horário: 10:00 | 15:26:22 12-11-2025

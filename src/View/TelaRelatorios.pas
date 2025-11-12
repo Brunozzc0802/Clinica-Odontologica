@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
-  Vcl.StdCtrls, VCLTee.TeCanvas, Vcl.ComCtrls;
+  Vcl.StdCtrls, VCLTee.TeCanvas, Vcl.ComCtrls, uRelatoriosController;
 
 type
   TPagRelatorios = class(TForm)
@@ -28,42 +28,52 @@ type
     DateTimePicker1: TDateTimePicker;
     Shape4: TShape;
     Panel1: TPanel;
-    Label3: TLabel;
-    btnGerarRelatório: TLabel;
+    lblGerarConsul: TLabel;
     pnlProf: TPanel;
     Bevel4: TBevel;
     Label4: TLabel;
     Shape5: TShape;
     Panel3: TPanel;
-    Label5: TLabel;
-    Label6: TLabel;
+    lblGerarProf: TLabel;
     cbProf: TComboBox;
     pnlProcedimento: TPanel;
     Bevel5: TBevel;
     Label7: TLabel;
     Shape6: TShape;
     Panel5: TPanel;
-    Label8: TLabel;
+    lblGerarProc: TLabel;
     Label9: TLabel;
     cbProc: TComboBox;
     btnX: TImage;
     Shape7: TShape;
     Label10: TLabel;
-    Label11: TLabel;
+    lblConsulConclu: TLabel;
     Image1: TImage;
     Shape8: TShape;
     Shape9: TShape;
     Image2: TImage;
     Label12: TLabel;
-    Label13: TLabel;
+    lblConsulAgend: TLabel;
     Image3: TImage;
     Label14: TLabel;
-    Label15: TLabel;
+    lblConsulCance: TLabel;
     procedure btnXClick(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
+    procedure lblGerarConsulMouseEnter(Sender: TObject);
+    procedure lblGerarConsulMouseLeave(Sender: TObject);
+    procedure lblGerarConsulClick(Sender: TObject);
+    procedure lblGerarProfMouseEnter(Sender: TObject);
+    procedure lblGerarProfMouseLeave(Sender: TObject);
+    procedure lblGerarProcMouseEnter(Sender: TObject);
+    procedure lblGerarProcMouseLeave(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure cbProfDropDown(Sender: TObject);
+    procedure cbProcDropDown(Sender: TObject);
 
   private
     { Private declarations }
+    RelatorioController: TRelatoriosController;
   public
     { Public declarations }
   end;
@@ -97,5 +107,87 @@ procedure TPagRelatorios.ComboBox1Change(Sender: TObject);
     end;
   end;
 
+procedure TPagRelatorios.lblGerarConsulMouseEnter(Sender: TObject);
+  begin
+    Panel1.Color := $00A96912;
+    shape4.Brush.Color := $00A96912;
+    shape4.Pen.Color := $00A96912;
+  end;
+
+procedure TPagRelatorios.lblGerarConsulMouseLeave(Sender: TObject);
+  begin
+    Panel1.Color := $00C97D16;
+    Shape4.Brush.Color := $00C97D16;
+    Shape4.Pen.Color := $00C97D16;
+  end;
+
+procedure TPagRelatorios.lblGerarProcMouseEnter(Sender: TObject);
+  begin
+    Panel5.Color := $00A96912;
+    shape6.Brush.Color := $00A96912;
+    shape6.Pen.Color := $00A96912;
+  end;
+
+procedure TPagRelatorios.lblGerarProcMouseLeave(Sender: TObject);
+  begin
+    Panel5.Color := $00C97D16;
+    Shape6.Brush.Color := $00C97D16;
+    Shape6.Pen.Color := $00C97D16;
+  end;
+
+procedure TPagRelatorios.lblGerarProfMouseEnter(Sender: TObject);
+  begin
+    Panel3.Color := $00A96912;
+    shape5.Brush.Color := $00A96912;
+    shape5.Pen.Color := $00A96912;
+  end;
+
+procedure TPagRelatorios.lblGerarProfMouseLeave(Sender: TObject);
+  begin
+    Panel3.Color := $00C97D16;
+    Shape5.Brush.Color := $00C97D16;
+    Shape5.Pen.Color := $00C97D16;
+  end;
+
+procedure TPagRelatorios.FormCreate(Sender: TObject);
+begin
+  RelatorioController := TRelatoriosController.Create;
+end;
+
+procedure TPagRelatorios.FormDestroy(Sender: TObject);
+begin
+  pnlConsulta.Visible := False;
+  pnlProcedimento.Visible := False;
+  pnlProf.Visible := False;
+  ComboBox1.ItemIndex := -1;
+  cbProf.ItemIndex := -1;
+  cbProc.ItemIndex := -1;
+  DateTimePicker1.Date := 01/11/2025;
+  FreeAndNil(RelatorioController);
+end;
+
+procedure TPagRelatorios.cbProfDropDown(Sender: TObject);
+begin
+  if Assigned(RelatorioController) then begin
+    RelatorioController.CarregarProfissionaisNoComboBox(cbProf);
+  end;
+end;
+
+procedure TPagRelatorios.cbProcDropDown(Sender: TObject);
+begin
+  if Assigned(RelatorioController) then begin
+    RelatorioController.CarregarProcedimentosNoComboBox(cbProc);
+  end;
+end;
+
+procedure TPagRelatorios.lblGerarConsulClick(Sender: TObject);
+var
+  DataSelecionada: TDateTime;
+begin
+  if Assigned(RelatorioController) then begin
+    DataSelecionada := DateTimePicker1.Date;
+    RelatorioController.GerarRelatorioConsultasFastReport(DataSelecionada);
+  end;
+end;
 
 end.

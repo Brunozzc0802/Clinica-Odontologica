@@ -12,7 +12,6 @@ uses
   TelaPacientes in '..\src\View\TelaPacientes.pas' {PagPacientes},
   uPacientes in '..\src\Model\uPacientes.pas',
   uPacientesRepository in '..\src\Repository\uPacientesRepository.pas',
-
   uPacientesController in '..\src\Controller\uPacientesController.pas' {$R *.res},
   TelaProfissionais in '..\src\View\TelaProfissionais.pas' {PagProfissionais},
   uProfissionais in '..\src\Model\uProfissionais.pas',
@@ -41,7 +40,9 @@ uses
   uProcedimentoLog in '..\src\Model\uProcedimentoLog.pas',
   uProcedimentosControllerLog in '..\src\Controller\uProcedimentosControllerLog.pas',
   uProcedimentosRepositoryLog in '..\src\Repository\uProcedimentosRepositoryLog.pas',
-  TelaRelatorios in '..\src\View\TelaRelatorios.pas' {PagRelatorios};
+  TelaRelatorios in '..\src\View\TelaRelatorios.pas' {PagRelatorios},
+  uRelatoriosRepository in '..\src\Repository\uRelatoriosRepository.pas',
+  uRelatoriosController in '..\src\Controller\uRelatoriosController.pas';
 
 {$R *.res}
 

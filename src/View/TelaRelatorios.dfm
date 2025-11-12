@@ -1,6 +1,6 @@
-﻿object PagRelatorios: TPagRelatorios
-  Left = 409
-  Top = 145
+object PagRelatorios: TPagRelatorios
+  Left = 613
+  Top = 249
   BorderStyle = bsNone
   Caption = 'PagRelatorios'
   ClientHeight = 555
@@ -12,6 +12,8 @@
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poDesigned
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   TextHeight = 15
   object cabecalho: TPanel
     Left = -306
@@ -38,8 +40,6 @@
       Color = 11293958
       ParentBackground = False
       TabOrder = 0
-      ExplicitLeft = 307
-      ExplicitWidth = 903
       object lblTitulo: TLabel
         Left = 44
         Top = 8
@@ -202,7 +202,7 @@
       Font.Style = [fsBold, fsItalic]
       ParentFont = False
     end
-    object Label11: TLabel
+    object lblConsulConclu: TLabel
       Left = 589
       Top = 92
       Width = 24
@@ -328,7 +328,7 @@
       Font.Style = [fsBold, fsItalic]
       ParentFont = False
     end
-    object Label13: TLabel
+    object lblConsulAgend: TLabel
       Left = 589
       Top = 256
       Width = 24
@@ -394,9 +394,9 @@
       Font.Style = [fsBold, fsItalic]
       ParentFont = False
     end
-    object Label15: TLabel
+    object lblConsulCance: TLabel
       Left = 589
-      Top = 410
+      Top = 411
       Width = 24
       Height = 29
       Alignment = taCenter
@@ -413,6 +413,8 @@
       Top = 100
       Width = 209
       Height = 23
+      BevelInner = bvNone
+      BevelOuter = bvNone
       Style = csDropDownList
       TabOrder = 0
       TextHint = 'Exemplo: Relat'#243'rio de Consulta'
@@ -459,6 +461,8 @@
         Brush.Color = 13204758
         Pen.Color = 13224393
         Shape = stRoundRect
+        OnMouseEnter = lblGerarConsulMouseEnter
+        OnMouseLeave = lblGerarConsulMouseLeave
       end
       object DateTimePicker1: TDateTimePicker
         Left = 57
@@ -478,7 +482,9 @@
         Color = 13204758
         ParentBackground = False
         TabOrder = 1
-        object Label3: TLabel
+        OnMouseEnter = lblGerarConsulMouseEnter
+        OnMouseLeave = lblGerarConsulMouseLeave
+        object lblGerarConsul: TLabel
           AlignWithMargins = True
           Left = 3
           Top = 8
@@ -494,23 +500,11 @@
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
+          OnClick = lblGerarConsulClick
+          OnMouseEnter = lblGerarConsulMouseEnter
+          OnMouseLeave = lblGerarConsulMouseLeave
           ExplicitWidth = 99
           ExplicitHeight = 17
-        end
-        object btnGerarRelatório: TLabel
-          AlignWithMargins = True
-          Left = 0
-          Top = -3
-          Width = 275
-          Height = 41
-          Margins.Top = 8
-          Alignment = taCenter
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
         end
       end
     end
@@ -551,6 +545,8 @@
         Brush.Color = 13204758
         Pen.Color = 13224393
         Shape = stRoundRect
+        OnMouseEnter = lblGerarProfMouseEnter
+        OnMouseLeave = lblGerarProfMouseLeave
       end
       object Panel3: TPanel
         Left = 30
@@ -561,7 +557,9 @@
         Color = 13204758
         ParentBackground = False
         TabOrder = 0
-        object Label5: TLabel
+        OnMouseEnter = lblGerarProfMouseEnter
+        OnMouseLeave = lblGerarProfMouseLeave
+        object lblGerarProf: TLabel
           AlignWithMargins = True
           Left = 3
           Top = 8
@@ -577,23 +575,10 @@
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
+          OnMouseEnter = lblGerarProfMouseEnter
+          OnMouseLeave = lblGerarProfMouseLeave
           ExplicitWidth = 99
           ExplicitHeight = 17
-        end
-        object Label6: TLabel
-          AlignWithMargins = True
-          Left = 0
-          Top = -3
-          Width = 4
-          Height = 17
-          Margins.Top = 8
-          Alignment = taCenter
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
         end
       end
       object cbProf: TComboBox
@@ -601,13 +586,15 @@
         Top = 112
         Width = 209
         Height = 23
+        Style = csDropDownList
         TabOrder = 1
         TextHint = 'Selecione o Profissional:'
+        OnDropDown = cbProfDropDown
       end
     end
     object pnlProcedimento: TPanel
       Left = 41
-      Top = 191
+      Top = 208
       Width = 335
       Height = 249
       BevelOuter = bvNone
@@ -642,6 +629,8 @@
         Brush.Color = 13204758
         Pen.Color = 13224393
         Shape = stRoundRect
+        OnMouseEnter = lblGerarProcMouseEnter
+        OnMouseLeave = lblGerarProcMouseLeave
       end
       object Label9: TLabel
         AlignWithMargins = True
@@ -668,7 +657,9 @@
         Color = 13204758
         ParentBackground = False
         TabOrder = 0
-        object Label8: TLabel
+        OnMouseEnter = lblGerarProcMouseEnter
+        OnMouseLeave = lblGerarProcMouseLeave
+        object lblGerarProc: TLabel
           AlignWithMargins = True
           Left = 3
           Top = 8
@@ -684,6 +675,8 @@
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
+          OnMouseEnter = lblGerarProcMouseEnter
+          OnMouseLeave = lblGerarProcMouseLeave
           ExplicitWidth = 99
           ExplicitHeight = 17
         end
@@ -696,6 +689,7 @@
         Style = csDropDownList
         TabOrder = 1
         TextHint = 'Selecione o Procedimento'
+        OnDropDown = cbProcDropDown
       end
     end
   end

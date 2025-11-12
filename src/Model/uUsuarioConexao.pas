@@ -8,7 +8,8 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.PG,
   FireDAC.Phys.PGDef, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client,
   FireDAC.DAPt,
-  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DAPt.Intf, FireDAC.Comp.DataSet;
+  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DAPt.Intf, FireDAC.Comp.DataSet,
+  frxSmartMemo, frxClass, frxDBSet, frCoreClasses;
 
 type
   TdmUsuarios = class(TDataModule)
@@ -19,6 +20,9 @@ type
     queryProfissionais: TFDQuery;
     queryProcedimentos: TFDQuery;
     queryConsultas: TFDQuery;
+    queryRelaConsul: TFDQuery;
+    frxReport1: TfrxReport;
+    dtRelaConsul: TfrxDBDataset;
   private
     { Private declarations }
   public

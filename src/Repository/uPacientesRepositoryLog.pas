@@ -23,7 +23,7 @@ begin
     Exit;
 
   try
-    LogDir := 'C:\Users\Bruno Tesser\Desktop\Clinica odontologica alves\Clinica-Odontologica\Logs\';
+    LogDir := 'C:\Users\alves.4948\Desktop\CLINICA PROJETO\Clinica-Odontologica\Logs\';
 
     if not DirectoryExists(LogDir) then
       ForceDirectories(LogDir);

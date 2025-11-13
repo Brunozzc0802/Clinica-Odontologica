@@ -23,14 +23,14 @@ begin
     Exit;
 
   try
-    LogDir := 'C:\Users\Bruno Tesser\Desktop\Clinica odontologica alves\Clinica-Odontologica\Logs\';
+    LogDir := 'C:\Users\alves.4948\Desktop\CLINICA PROJETO\Clinica-Odontologica\Logs\';
 
     if not DirectoryExists(LogDir) then
       ForceDirectories(LogDir);
 
     LogPath := LogDir + 'procedimento_log.txt';
 
-    // Construir a linha do log com formato melhorado
+    // Construir a linha do log
   if (ALog.Valor <> '') and (ALog.Duracao <> '') then
     LogLine := Format('%s | %s | %s | Valor: %s | Duraço: %s | %s', [ALog.UsuarioQueExecutouAcao,
       ALog.Acao, ALog.Procedimento, ALog.Valor, ALog.Duracao, FormatDateTime('hh:nn:ss dd-mm-yyyy', ALog.DataHora)])

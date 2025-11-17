@@ -316,7 +316,7 @@ object PagRelatorios: TPagRelatorios
     end
     object Label12: TLabel
       Left = 499
-      Top = 213
+      Top = 216
       Width = 215
       Height = 29
       Alignment = taCenter
@@ -382,11 +382,11 @@ object PagRelatorios: TPagRelatorios
     end
     object Label14: TLabel
       Left = 499
-      Top = 369
+      Top = 368
       Width = 215
       Height = 29
       Alignment = taCenter
-      Caption = 'Consultas Conceladas'
+      Caption = 'Consultas Canceladas'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
       Font.Height = -24
@@ -488,8 +488,8 @@ object PagRelatorios: TPagRelatorios
           AlignWithMargins = True
           Left = 3
           Top = 8
-          Width = 266
-          Height = 23
+          Width = 99
+          Height = 17
           Margins.Top = 8
           Align = alClient
           Alignment = taCenter
@@ -503,8 +503,6 @@ object PagRelatorios: TPagRelatorios
           OnClick = lblGerarConsulClick
           OnMouseEnter = lblGerarConsulMouseEnter
           OnMouseLeave = lblGerarConsulMouseLeave
-          ExplicitWidth = 99
-          ExplicitHeight = 17
         end
       end
     end
@@ -563,8 +561,8 @@ object PagRelatorios: TPagRelatorios
           AlignWithMargins = True
           Left = 3
           Top = 8
-          Width = 266
-          Height = 23
+          Width = 99
+          Height = 17
           Margins.Top = 8
           Align = alClient
           Alignment = taCenter
@@ -575,10 +573,9 @@ object PagRelatorios: TPagRelatorios
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
+          OnClick = lblGerarRelaProfClick
           OnMouseEnter = lblGerarProfMouseEnter
           OnMouseLeave = lblGerarProfMouseLeave
-          ExplicitWidth = 99
-          ExplicitHeight = 17
         end
       end
       object cbProf: TComboBox
@@ -594,7 +591,7 @@ object PagRelatorios: TPagRelatorios
     end
     object pnlProcedimento: TPanel
       Left = 41
-      Top = 208
+      Top = 206
       Width = 335
       Height = 249
       BevelOuter = bvNone
@@ -663,8 +660,8 @@ object PagRelatorios: TPagRelatorios
           AlignWithMargins = True
           Left = 3
           Top = 8
-          Width = 266
-          Height = 23
+          Width = 99
+          Height = 17
           Margins.Top = 8
           Align = alClient
           Alignment = taCenter
@@ -677,8 +674,6 @@ object PagRelatorios: TPagRelatorios
           ParentFont = False
           OnMouseEnter = lblGerarProcMouseEnter
           OnMouseLeave = lblGerarProcMouseLeave
-          ExplicitWidth = 99
-          ExplicitHeight = 17
         end
       end
       object cbProc: TComboBox

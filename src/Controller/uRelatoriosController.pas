@@ -5,7 +5,7 @@ interface
 uses
   uRelatoriosRepository, uProfissionais, uProcedimentos, System.SysUtils,
   System.Generics.Collections, Vcl.Forms, Vcl.StdCtrls, FireDAC.Comp.Client,
-  uUsuarioConexao, Vcl.Dialogs, frxClass;
+  uUsuarioConexao, Vcl.Dialogs, frxClass, System.DateUtils, Vcl.Controls;
 
 type
   TRelatoriosController = class
@@ -20,10 +20,10 @@ type
     procedure CarregarProfissionaisNoComboBox(ComboBox: TComboBox);
     procedure CarregarProcedimentosNoComboBox(ComboBox: TComboBox);
     function GerarRelatorioConsultas(DataInicio, DataFim: TDateTime): TFDQuery;
-    function GerarRelatorioProfissional(ProfissionalId: integer; DataInicio, DataFim: TDateTime): TFDQuery;
-    function GerarRelatorioProcedimento(ProcedimentoId: integer; DataInicio, DataFim: TDateTime): TFDQuery;
+        function GerarRelatorioProcedimento(ProcedimentoId: integer; DataInicio, DataFim: TDateTime): TFDQuery;
     function GerarRelatorioConsultasPorData(DataSelecionada: TDateTime): TFDQuery;
     procedure GerarRelatorioConsultasFastReport(DataSelecionada: TDateTime);
+    procedure GerarRelatorioProfissionalFastReport(ComboBox: TComboBox);
     function ContarConsultasConcluidas: Integer;
     function ContarConsultasAgendadas: Integer;
     function ContarConsultasCanceladas: Integer;
@@ -122,13 +122,6 @@ begin
   Result := RepoRela.GerarRelatorioConsultasPorPeriodo(DataInicio, DataFim);
 end;
 
-function TRelatoriosController.GerarRelatorioProfissional(ProfissionalId: integer; DataInicio, DataFim: TDateTime): TFDQuery;
-begin
-  if not ValidarDatasRelatorio(DataInicio, DataFim) then
-    raise Exception.Create('Data de início não pode ser maior que a data de fim');
-
-  Result := RepoRela.GerarRelatorioPorProfissional(ProfissionalId, DataInicio, DataFim);
-end;
 
 function TRelatoriosController.GerarRelatorioProcedimento(ProcedimentoId: integer; DataInicio, DataFim: TDateTime): TFDQuery;
 begin
@@ -137,6 +130,7 @@ begin
 
   Result := RepoRela.GerarRelatorioPorProcedimento(ProcedimentoId, DataInicio, DataFim);
 end;
+
 
 function TRelatoriosController.ValidarDatasRelatorio(DataInicio, DataFim: TDateTime): Boolean;
 begin
@@ -184,7 +178,7 @@ begin
 
     dmUsuarios.dtRelaConsul.DataSet := dmUsuarios.queryRelaConsul;
 
-    RelatorioPath := 'C:\Users\bruno\OneDrive\Desktop\Projeto empresa\Clinica-Odontologica\assets\Relatórios\RelatorioConsultas1.fr3';
+    RelatorioPath := 'C:\Users\Bruno Tesser\Desktop\Clinica odontologica alves\Clinica-Odontologica\assets\Relatórios\RelatorioConsultas1.fr3';
 
     if not FileExists(RelatorioPath) then begin
       ShowMessage('Arquivo de relatório não encontrado: ' + RelatorioPath);
@@ -229,6 +223,51 @@ begin
     on E: Exception do begin
       raise Exception.Create('Erro ao contar consultas canceladas: ' + E.Message);
     end;
+  end;
+end;
+
+procedure TRelatoriosController.GerarRelatorioProfissionalFastReport(ComboBox: TComboBox);
+var
+  RelatorioPath: string;
+  ProfissionalId: Integer;
+begin
+  try
+    if not Assigned(ComboBox) or (ComboBox.ItemIndex < 0) then
+    begin
+      ShowMessage('Selecione um profissional');
+      Exit;
+    end;
+
+    ProfissionalId := Integer(ComboBox.Items.Objects[ComboBox.ItemIndex]);
+
+    with dmUsuarios.queryRelaProf do
+    begin
+      Close;
+      ParamByName('profissional_id').AsInteger := ProfissionalId;
+      Open();
+
+      if IsEmpty then
+      begin
+        ShowMessage('Nenhuma consulta encontrada para este profissional');
+        Exit;
+      end;
+    end;
+
+    dmUsuarios.dtRelaProf.DataSet := dmUsuarios.queryRelaProf;
+    RelatorioPath := 'C:\Users\Bruno Tesser\Desktop\Clinica odontologica alves\Clinica-Odontologica\assets\Relatórios\RelatorioPorProfissionais1.fr3';
+
+    if not FileExists(RelatorioPath) then
+    begin
+      ShowMessage('Arquivo de relatório não encontrado: ' + RelatorioPath);
+      Exit;
+    end;
+
+    dmUsuarios.frxReport2.LoadFromFile(RelatorioPath);
+    dmUsuarios.frxReport2.ShowReport();
+
+  except
+    on E: Exception do
+      ShowMessage('Erro ao gerar relatório: ' + E.Message);
   end;
 end;
 

@@ -120,7 +120,7 @@ begin
       'AND c.ativo = TRUE ' +
       'ORDER BY c.data, c.horas';
 
-    ParamByName('profissional_id').AsInteger := ProfissionalId;
+    ParamByName('id_profissional').AsInteger := ProfissionalId;
     ParamByName('data_inicio').AsDate := DataInicio;
     ParamByName('data_fim').AsDate := DataFim;
     Open;

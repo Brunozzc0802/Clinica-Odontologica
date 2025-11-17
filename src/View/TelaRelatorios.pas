@@ -1,4 +1,4 @@
-unit TelaRelatorios;
+﻿unit TelaRelatorios;
 
 interface
 
@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
-  Vcl.StdCtrls, VCLTee.TeCanvas, Vcl.ComCtrls, uRelatoriosController;
+  Vcl.StdCtrls, VCLTee.TeCanvas, Vcl.ComCtrls, uRelatoriosController, System.DateUtils;
 
 type
   TPagRelatorios = class(TForm)
@@ -62,15 +62,16 @@ type
     procedure lblGerarConsulMouseEnter(Sender: TObject);
     procedure lblGerarConsulMouseLeave(Sender: TObject);
     procedure lblGerarConsulClick(Sender: TObject);
-    procedure lblGerarProfMouseEnter(Sender: TObject);
-    procedure lblGerarProfMouseLeave(Sender: TObject);
-    procedure lblGerarProcMouseEnter(Sender: TObject);
-    procedure lblGerarProcMouseLeave(Sender: TObject);
+  procedure lblGerarProfMouseEnter(Sender: TObject);
+  procedure lblGerarProfMouseLeave(Sender: TObject);
+  procedure lblGerarProcMouseEnter(Sender: TObject);
+  procedure lblGerarProcMouseLeave(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure cbProfDropDown(Sender: TObject);
     procedure cbProcDropDown(Sender: TObject);
     procedure AtualizarContadores;
+    procedure lblGerarRelaProfClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -136,19 +137,6 @@ procedure TPagRelatorios.lblGerarProcMouseLeave(Sender: TObject);
     Shape6.Pen.Color := $00C97D16;
   end;
 
-procedure TPagRelatorios.lblGerarProfMouseEnter(Sender: TObject);
-  begin
-    Panel3.Color := $00A96912;
-    shape5.Brush.Color := $00A96912;
-    shape5.Pen.Color := $00A96912;
-  end;
-
-procedure TPagRelatorios.lblGerarProfMouseLeave(Sender: TObject);
-  begin
-    Panel3.Color := $00C97D16;
-    Shape5.Brush.Color := $00C97D16;
-    Shape5.Pen.Color := $00C97D16;
-  end;
 
 procedure TPagRelatorios.FormCreate(Sender: TObject);
 begin
@@ -192,6 +180,20 @@ begin
   end;
 end;
 
+procedure TPagRelatorios.lblGerarProfMouseEnter(Sender: TObject);
+begin
+  Panel3.Color := $00A96912;
+  shape5.Brush.Color := $00A96912;
+  shape5.Pen.Color := $00A96912;
+end;
+
+procedure TPagRelatorios.lblGerarProfMouseLeave(Sender: TObject);
+begin
+  Panel3.Color := $00C97D16;
+  Shape5.Brush.Color := $00C97D16;
+  Shape5.Pen.Color := $00C97D16;
+end;
+
 procedure TPagRelatorios.AtualizarContadores;
 var
   TotalConcluidas, TotalAgendadas, TotalCanceladas: Integer;
@@ -210,6 +212,12 @@ begin
     on E: Exception do
       ShowMessage('Erro ao atualizar contadores: ' + E.Message);
   end;
+end;
+
+procedure TPagRelatorios.lblGerarRelaProfClick(Sender: TObject);
+begin
+  if Assigned(RelatorioController) then
+    RelatorioController.GerarRelatorioProfissionalFastReport(cbProf);
 end;
 
 end.

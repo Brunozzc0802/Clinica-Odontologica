@@ -23,6 +23,9 @@ type
     queryRelaConsul: TFDQuery;
     frxReport1: TfrxReport;
     dtRelaConsul: TfrxDBDataset;
+    queryRelaProf: TFDQuery;
+    frxReport2: TfrxReport;
+    dtRelaProf: TfrxDBDataset;
   private
     { Private declarations }
   public

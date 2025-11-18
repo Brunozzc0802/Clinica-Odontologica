@@ -170,7 +170,7 @@ begin
       UsuarioLista.Free;
     UsuarioLista := Controller.BuscarInativos;
 
-    // Cabe�alho
+    // Cabeçalho
     sgRestore.Cells[0, 0] := 'ID';
     sgRestore.Cells[1, 0] := 'Nome de Usuário';
     sgRestore.Cells[2, 0] := 'Senha';
@@ -264,8 +264,8 @@ begin
 
       try
         Controller.RestaurarUsuario(Usuario);
-        UserController.RegistrarLog(UsuarioLogado.Nome, Usuario.Nome, 'Restaurou', 'Grupo',
-          Usuario.Grupo);
+        UserController.RegistrarLog(UsuarioLogado.Nome, Usuario.Nome,
+          'Restaurou', 'Grupo', Usuario.Grupo);
         CarregarInativos;
         ShowMessage('Usuário Restaurado com sucesso!');
       finally
@@ -283,7 +283,6 @@ begin
   end;
 end;
 
-// a��o de fechar o formulario\\
 procedure TPagUsuarios.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   FreeAndNil(UserController);
@@ -300,7 +299,6 @@ begin
   imgLogoUsuarios1.Visible := True;
 end;
 
-// cria��o da tela de usuarios\\
 procedure TPagUsuarios.FormCreate(Sender: TObject);
 begin
   Controller := TUsuarioController.Create;
@@ -310,7 +308,6 @@ begin
   imgLogoUsuarios2.Visible := False;
   btnAddNovo.Visible := False;
 
-  // configura��es grid\\
   sgUsuarios.Cells[0, 0] := 'ID';
   sgUsuarios.Cells[1, 0] := 'Nome de Usuário';
   sgUsuarios.Cells[2, 0] := 'Senha';
@@ -339,13 +336,11 @@ begin
   CarregarUsuarios;
 end;
 
-// Barra de pesquisa\\
 procedure TPagUsuarios.pesquisarUsuarioChange(Sender: TObject);
 begin
   PesquisarUsuarios(pesquisarUsuario.Text);
 end;
 
-// cor de fundo e senha em * no grid de restaurar\\
 procedure TPagUsuarios.sgRestoreDrawCell(Sender: TObject; ACol, ARow: LongInt;
   Rect: TRect; State: TGridDrawState);
 var
@@ -363,7 +358,8 @@ begin
     sgRestore.Canvas.Font.Color := clHighlightText
   else
     sgRestore.Canvas.Font.Color := clWindowText;
-  if (ARow > 0) and Assigned(UsuarioLista) and (ARow <= UsuarioLista.Count) then begin
+  if (ARow > 0) and Assigned(UsuarioLista) and (ARow <= UsuarioLista.Count) then
+  begin
     if ACol = 2 then
       TextToDraw := StringOfChar('*', Length(sgRestore.Cells[ACol, ARow]))
     else
@@ -375,7 +371,6 @@ begin
   sgRestore.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2, TextToDraw);
 end;
 
-// cor de fundo e senha em *\\
 procedure TPagUsuarios.sgUsuariosDrawCell(Sender: TObject; ACol, ARow: LongInt;
   Rect: TRect; State: TGridDrawState);
 var
@@ -393,7 +388,8 @@ begin
     sgUsuarios.Canvas.Font.Color := clHighlightText
   else
     sgUsuarios.Canvas.Font.Color := clWindowText;
-  if (ARow > 0) and Assigned(UsuarioLista) and (ARow <= UsuarioLista.Count) then begin
+  if (ARow > 0) and Assigned(UsuarioLista) and (ARow <= UsuarioLista.Count) then
+  begin
     if ACol = 2 then
       TextToDraw := StringOfChar('*', Length(sgUsuarios.Cells[ACol, ARow]))
     else
@@ -405,7 +401,6 @@ begin
   sgUsuarios.Canvas.TextRect(Rect, Rect.Left + 2, Rect.Top + 2, TextToDraw);
 end;
 
-// click do botao adicionar usuario\\
 procedure TPagUsuarios.btnAdicionarUsuarioClick(Sender: TObject);
 begin
   AdicionarUsuarios;
@@ -415,7 +410,6 @@ begin
   imgLogoUsuarios2.Visible := False;
 end;
 
-// click cancelar adicionar usuario\\
 procedure TPagUsuarios.btnCancelarUsuClick(Sender: TObject);
 begin
   btnConfirmarAlteracoes.Visible := False;
@@ -436,17 +430,15 @@ begin
 
 end;
 
-// botao de X\\
 procedure TPagUsuarios.btnXUsuariosClick(Sender: TObject);
 begin
   Close;
 end;
 
-// comando para quando apertar enter nos controles editáveis\\
 procedure TPagUsuarios.edUsuarioKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
+    Key := #0;
     edSenhaUsuario.SetFocus;
   end;
 end;
@@ -454,7 +446,7 @@ end;
 procedure TPagUsuarios.edSenhaUsuarioKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
+    Key := #0;
     cbAtivo.SetFocus;
   end;
 end;
@@ -462,7 +454,7 @@ end;
 procedure TPagUsuarios.cbAtivoKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
+    Key := #0;
     cbGrupo.SetFocus;
   end;
 end;
@@ -470,8 +462,7 @@ end;
 procedure TPagUsuarios.cbGrupoKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
-    // Verifica qual botão está visível e dá foco nele
+    Key := #0;
     if btnAdicionarUsuario.Visible then
       btnAdicionarUsuario.SetFocus
     else if btnConfirmarAlteracoes.Visible then
@@ -482,7 +473,7 @@ end;
 procedure TPagUsuarios.pesquisarUsuarioKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
+    Key := #0;
     sgUsuarios.SetFocus;
   end;
 end;
@@ -491,7 +482,7 @@ procedure TPagUsuarios.btnAdicionarUsuarioKeyPress(Sender: TObject;
   var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
+    Key := #0;
     btnAdicionarUsuarioClick(nil);
   end;
 end;
@@ -500,19 +491,17 @@ procedure TPagUsuarios.btnConfirmarAlteracoesKeyPress(Sender: TObject;
   var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
+    Key := #0;
     btnConfirmarAlteracoesClick(nil);
   end;
 end;
 
-// Click do botao sair\\
 procedure TPagUsuarios.btnSairUsuClick(Sender: TObject);
 begin
   Sleep(500);
   Close;
 end;
 
-// Click do botao limpar\\
 procedure TPagUsuarios.btnLimparUsuClick(Sender: TObject);
 begin
   if pnlFormAddUsuarios.Visible = True then begin
@@ -528,7 +517,6 @@ begin
 
 end;
 
-// Click do bot�o de adicionar usuarios e mandar para o banco\\
 procedure TPagUsuarios.AdicionarUsuarios;
 begin
   try
@@ -541,8 +529,8 @@ begin
     Controller.AdicionarUsuario(edUsuario.Text, edSenhaUsuario.Text,
       cbGrupo.Text, cbAtivo.ItemIndex = 0);
 
-    UserController.RegistrarLog(UsuarioLogado.Nome, edUsuario.Text, 'Adicionou', 'Grupo',
-    cbGrupo.Text);
+    UserController.RegistrarLog(UsuarioLogado.Nome, edUsuario.Text, 'Adicionou',
+      'Grupo', cbGrupo.Text);
     ShowMessage('Usuário adicionado com sucesso!');
     CarregarUsuarios;
     edUsuario.Clear;
@@ -553,7 +541,6 @@ begin
   end;
 end;
 
-// bot�o de adicionar novo dos bot�es laterais\\
 procedure TPagUsuarios.btnAddNovoClick(Sender: TObject);
 begin
   if btnAddNovo.Visible = True then begin
@@ -565,7 +552,6 @@ begin
 
 end;
 
-// bot�o de adicionar dos bot�es laterais\\
 procedure TPagUsuarios.btnAddUsuClick(Sender: TObject);
 begin
   if pnlRestaurar.Visible = True then begin
@@ -590,16 +576,16 @@ begin
     pesquisarUsuario.Visible := False;
     btnNovoPesquisar.Visible := False;
   end;
-  btnAlterarNovo.Visible := False;
-  btnAddNovo.Visible := True;
-  btnNovoPesquisar.Visible := False;
-  btnRestaurarNovo.Visible := False;
-  btnConfirmarAlteracoes.Visible := False;
-  btnAdicionarUsuario.Visible := True;
-  pnlFormAddUsuarios.Visible := True;
-  imgLogoUsuarios2.Visible := True;
-  imgLogoUsuarios1.Visible := False;
-  edUsuario.SetFocus;
+    btnAlterarNovo.Visible := False;
+    btnAddNovo.Visible := True;
+    btnNovoPesquisar.Visible := False;
+    btnRestaurarNovo.Visible := False;
+    btnConfirmarAlteracoes.Visible := False;
+    btnAdicionarUsuario.Visible := True;
+    pnlFormAddUsuarios.Visible := True;
+    imgLogoUsuarios2.Visible := True;
+    imgLogoUsuarios1.Visible := False;
+    edUsuario.SetFocus;
 end;
 
 procedure TPagUsuarios.btnConfirmarAlteracoesClick(Sender: TObject);
@@ -611,8 +597,8 @@ begin
   try
     Controller.AlterarUsuario(UsuarioIdalterar, edUsuario.Text,
       edSenhaUsuario.Text, cbGrupo.Text, cbAtivo.ItemIndex = 0);
-    UserController.RegistrarLog(UsuarioLogado.Nome, edUsuario.Text, 'Alterou', 'Grupo',
-      cbGrupo.Text);
+    UserController.RegistrarLog(UsuarioLogado.Nome, edUsuario.Text, 'Alterou',
+      'Grupo', cbGrupo.Text);
     ShowMessage('Alterações feitas com sucesso!');
     btnAlterarNovo.Visible := False;
     CarregarUsuarios;
@@ -621,7 +607,6 @@ begin
   end;
 end;
 
-// click do botao de deletar usuario\\
 procedure TPagUsuarios.btnDeletarUsuClick(Sender: TObject);
 var
   LinhaDelet: Integer;
@@ -654,8 +639,8 @@ begin
       Controller := TUsuarioController.Create;
       try
         Controller.DeletarUsuario(Usuario);
-        UserController.RegistrarLog(UsuarioLogado.Nome, Usuario.Nome, 'Deletou', 'Grupo',
-          Usuario.Grupo);
+        UserController.RegistrarLog(UsuarioLogado.Nome, Usuario.Nome, 'Deletou',
+          'Grupo', Usuario.Grupo);
         CarregarUsuarios;
         ShowMessage('Usuário deletado com sucesso!');
         sgUsuarios.Row := 0;
@@ -671,7 +656,6 @@ begin
     ShowMessage('Selecione um usuário para deletar.');
 end;
 
-// Click do botao de pesquisar\\
 procedure TPagUsuarios.btnPesquisarUsuClick(Sender: TObject);
 begin
   if pnlRestaurar.Visible = True then begin
@@ -697,7 +681,6 @@ begin
   end;
 end;
 
-// click do botao de alterar\\
 procedure TPagUsuarios.btnAlterarNovoClick(Sender: TObject);
 begin
   if btnAlterarNovo.Visible = True then begin
@@ -760,7 +743,6 @@ begin
   pnlFormAddUsuarios.Visible := True;
 end;
 
-// Click do botao de restaurar\\
 procedure TPagUsuarios.btnRestaurarUsuClick(Sender: TObject);
 begin
   if pnlFormAddUsuarios.Visible = True then begin
@@ -795,7 +777,6 @@ begin
 
 end;
 
-// Click do bot�o de confirmar restaurar\\
 procedure TPagUsuarios.btnCRestoreClick(Sender: TObject);
 begin
   ConfirmarRestauracao;

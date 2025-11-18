@@ -1,3 +1,6 @@
 admin | Adicionado | aaaa | CPF | 12311111111 | 14:51:23 05-11-2025
 admin | Deletou | aaaa | CPF | 12311111111 | 15:29:00 05-11-2025
 admin | Adicionou | oaoao | CPF | 10000000000 | 15:39:59 05-11-2025
+admin | Restaurou | Patrícia Ribeiro | Cpf | 161.161.161-61 | 16:32:00 18-11-2025
+admin | Restaurou | Laura Martins | Cpf | 121.121.121-21 | 16:32:03 18-11-2025
+admin | Restaurou | Gabriela Melo | Cpf | 777.777.777-77 | 16:32:04 18-11-2025

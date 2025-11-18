@@ -167,15 +167,14 @@ begin
       pnlPacientes.Visible := True;
       pnlPacientes.Top := 86;
       Shape6.Top := 83;
-      pnlRelatorios.Visible := True;
-      pnlRelatorios.Top := 164;
-      Shape2.Top := 161;
       pnlEncerrarSistema.Visible := True;
-      pnlEncerrarSistema.Top := 242;
-      Shape1.Top := 239;
+      pnlEncerrarSistema.Top := 164;
+      Shape1.Top := 161;
       pnlUser.Visible := False;
       pnlProfissionais.Visible := False;
       pnlProcedimentos.Visible := False;
+      pnlRelatorios.Visible := False;
+      Shape2.Visible := False;
       Shape7.Visible := False;
       Shape5.Visible := False;
       Shape3.Visible := False;
@@ -205,7 +204,7 @@ end;
 procedure TFormLogin.edSenhaKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
+    Key := #0;
     btnEntrarClick(nil);
   end;
 end;
@@ -254,6 +253,7 @@ begin
   PagProfissionais.Close;
   PagConsultas.Close;
   PagProfissionais.Close;
+  PagProcedimentos.Close;
 end;
 
 procedure TFormLogin.pnlConsultasClick(Sender: TObject);

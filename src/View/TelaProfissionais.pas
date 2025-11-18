@@ -186,14 +186,14 @@ procedure TPagProfissionais.adicionarProf;
 begin
   try
     if (EdNome.Text = '') or (edCPF.Text = '') or (edTelefone.Text = '') or
-      (edCEP.Text = '') or (edEmail.Text = '') or (edEndereco.Text = '') then
+      (edCep.Text = '') or (edEmail.Text = '') or (edEndereco.Text = '') then
     begin
       ShowMessage('Preencha todos os campos');
       Exit;
     end;
 
     Controller.AdicionarProfissional(EdNome.Text, edCPF.Text, edTelefone.Text,
-      edEmail.Text, edCEP.Text, edEndereco.Text);
+      edEmail.Text, edCep.Text, edEndereco.Text);
 
     ProfController.RegistrarLog('Sistema', EdNome.Text,
       'Adicionou Profissional', 'CPF: ' + edCPF.Text, edCPF.Text);
@@ -203,7 +203,7 @@ begin
     EdNome.clear;
     edCPF.clear;
     edTelefone.clear;
-    edCEP.clear;
+    edCep.clear;
     edEndereco.clear;
     edEmail.clear;
     pnlAdd.Visible := False;
@@ -220,7 +220,7 @@ begin
 
   if (btnAlterarNovo.Visible = true) then begin
     EdNome.clear;
-    edCEP.clear;
+    edCep.clear;
     edEndereco.clear;
     edEmail.clear;
     edTelefone.clear;
@@ -249,7 +249,7 @@ begin
   EdNome.clear;
   edCPF.clear;
   edTelefone.clear;
-  edCEP.clear;
+  edCep.clear;
   edEndereco.clear;
   edEmail.clear;
   pnlAdd.Visible := true;
@@ -312,7 +312,7 @@ begin
   edCPF.Text := sgProfissionais.Cells[2, linha];
   edTelefone.Text := sgProfissionais.Cells[3, linha];
   edEmail.Text := sgProfissionais.Cells[6, linha];
-  edCEP.Text := sgProfissionais.Cells[4, linha];
+  edCep.Text := sgProfissionais.Cells[4, linha];
   edEndereco.Text := sgProfissionais.Cells[5, linha];
 
   btnConfirmarAlteracoes.Visible := true;
@@ -468,7 +468,7 @@ begin
     EdNome.clear;
     edCPF.clear;
     edTelefone.clear;
-    edCEP.clear;
+    edCep.clear;
     edEndereco.clear;
     edEmail.clear;
     EdNome.SetFocus;
@@ -572,7 +572,7 @@ begin
       try
         if JsonResp.GetValue('erro') <> nil then begin
           ShowMessage('CEP não encontrado!');
-          edCEP.SetFocus;
+          edCep.SetFocus;
           Exit;
         end;
 
@@ -585,7 +585,7 @@ begin
     end
     else begin
       ShowMessage('CEP não encontrado!');
-      edCEP.SetFocus;
+      edCep.SetFocus;
     end;
   finally
     HTTP.Free;
@@ -632,7 +632,7 @@ begin
   end;
   try
     Controller.AlterarProfissional(ProfissionalIdalterar, EdNome.Text,
-      edCPF.Text, edTelefone.Text, edEmail.Text, edCEP.Text, edEndereco.Text);
+      edCPF.Text, edTelefone.Text, edEmail.Text, edCep.Text, edEndereco.Text);
 
     ProfController.RegistrarLog('Sistema', EdNome.Text, 'Alterou Profissional',
       'CPF: ' + edCPF.Text, edCPF.Text);
@@ -704,7 +704,7 @@ procedure TPagProfissionais.edEmailKeyDown(Sender: TObject; var Key: Word;
 begin
   if Key = VK_RETURN then begin
     Key := 0;
-    edCEP.SetFocus;
+    edCep.SetFocus;
   end;
 end;
 
@@ -741,7 +741,7 @@ begin
     EdNome.clear;
     edCPF.clear;
     edTelefone.clear;
-    edCEP.clear;
+    edCep.clear;
     edEndereco.clear;
     edEmail.clear;
     EdNome.SetFocus;
@@ -887,7 +887,7 @@ end;
 procedure TPagProfissionais.EdNomeKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
+    Key := #0;
     edCPF.SetFocus;
   end;
 end;
@@ -895,7 +895,7 @@ end;
 procedure TPagProfissionais.edCPFKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
+    Key := #0;
     edTelefone.SetFocus;
   end;
 end;
@@ -903,7 +903,7 @@ end;
 procedure TPagProfissionais.edTelefoneKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
+    Key := #0;
     edEmail.SetFocus;
   end;
 end;
@@ -911,24 +911,23 @@ end;
 procedure TPagProfissionais.edEmailKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
-    edCEP.SetFocus;
+    Key := #0;
+    edCep.SetFocus;
   end;
 end;
 
 procedure TPagProfissionais.edCEPKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
-    buscarCEP(edCEP.Text);
+    Key := #0;
+    buscarCEP(edCep.Text);
   end;
 end;
 
 procedure TPagProfissionais.edEnderecoKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
-    // Verifica qual botão está visível para dar foco
+    Key := #0;
     if btnadicionar.Visible then
       btnadicionar.SetFocus
     else if btnConfirmarAlteracoes.Visible then

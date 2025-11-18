@@ -350,7 +350,6 @@ begin
     btnAddNovo.Visible := False;
     pnlAddPacientes.Visible := False;
 
-    // Limpa campos
     EdNomePaciente.Clear;
     edCPF.Clear;
     edTelefone.Clear;
@@ -1015,7 +1014,7 @@ end;
 procedure TPagPacientes.edTelefoneKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
+    Key := #0;
     edCEP.SetFocus;
   end;
 end;

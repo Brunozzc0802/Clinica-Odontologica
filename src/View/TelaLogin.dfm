@@ -22,7 +22,6 @@ object FormLogin: TFormLogin
     Height = 876
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 1867
     DesignSize = (
       1901
       876)
@@ -840,7 +839,6 @@ object FormLogin: TFormLogin
       Color = 13204758
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 1387
       DesignSize = (
         1421
         874)
@@ -2580,7 +2578,6 @@ object FormLogin: TFormLogin
       Color = clBackground
       ParentBackground = False
       TabOrder = 1
-      ExplicitLeft = 1406
       object pnlFormLogin: TPanel
         AlignWithMargins = True
         Left = 2
@@ -3343,7 +3340,6 @@ object FormLogin: TFormLogin
     Align = alClient
     TabOrder = 1
     Visible = False
-    ExplicitWidth = 1867
     DesignSize = (
       1901
       876)
@@ -3360,9 +3356,6 @@ object FormLogin: TFormLogin
       Color = 13204758
       ParentBackground = False
       TabOrder = 0
-      ExplicitLeft = 282
-      ExplicitTop = 3
-      ExplicitWidth = 1584
       DesignSize = (
         1618
         870)
@@ -5151,7 +5144,7 @@ object FormLogin: TFormLogin
             Font.Name = 'Segoe UI'
             Font.Style = [fsBold]
             ParentFont = False
-            ExplicitLeft = 113
+            ExplicitHeight = 21
           end
         end
         object Panel2: TPanel

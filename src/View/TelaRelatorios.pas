@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
-  Vcl.StdCtrls, VCLTee.TeCanvas, Vcl.ComCtrls, uRelatoriosController, System.DateUtils;
+  Vcl.StdCtrls, VCLTee.TeCanvas, Vcl.ComCtrls, uRelatoriosController,
+  System.DateUtils;
 
 type
   TPagRelatorios = class(TForm)
@@ -62,10 +63,10 @@ type
     procedure lblGerarConsulMouseEnter(Sender: TObject);
     procedure lblGerarConsulMouseLeave(Sender: TObject);
     procedure lblGerarConsulClick(Sender: TObject);
-  procedure lblGerarProfMouseEnter(Sender: TObject);
-  procedure lblGerarProfMouseLeave(Sender: TObject);
-  procedure lblGerarProcMouseEnter(Sender: TObject);
-  procedure lblGerarProcMouseLeave(Sender: TObject);
+    procedure lblGerarProfMouseEnter(Sender: TObject);
+    procedure lblGerarProfMouseLeave(Sender: TObject);
+    procedure lblGerarProcMouseEnter(Sender: TObject);
+    procedure lblGerarProcMouseLeave(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure cbProfDropDown(Sender: TObject);
@@ -93,50 +94,51 @@ begin
 end;
 
 procedure TPagRelatorios.ComboBox1Change(Sender: TObject);
-  begin
-    if ComboBox1.ItemIndex = 0 then begin
-      pnlConsulta.Visible := True;
-      pnlProf.Visible := False;
-      pnlProcedimento.Visible := False;
-    end else if Combobox1.ItemIndex = 1 then begin
-      pnlProf.Visible := True;
-      pnlConsulta.Visible := False;
-      pnlProcedimento.Visible := False
-    end else begin
-      pnlProcedimento.Visible := True;
-      pnlConsulta.Visible := False;
-      pnlProf.Visible := False;
-    end;
+begin
+  if ComboBox1.ItemIndex = 0 then begin
+    pnlConsulta.Visible := True;
+    pnlProf.Visible := False;
+    pnlProcedimento.Visible := False;
+  end
+  else if ComboBox1.ItemIndex = 1 then begin
+    pnlProf.Visible := True;
+    pnlConsulta.Visible := False;
+    pnlProcedimento.Visible := False
+  end
+  else begin
+    pnlProcedimento.Visible := True;
+    pnlConsulta.Visible := False;
+    pnlProf.Visible := False;
   end;
+end;
 
 procedure TPagRelatorios.lblGerarConsulMouseEnter(Sender: TObject);
-  begin
-    Panel1.Color := $00A96912;
-    shape4.Brush.Color := $00A96912;
-    shape4.Pen.Color := $00A96912;
-  end;
+begin
+  Panel1.Color := $00A96912;
+  Shape4.Brush.Color := $00A96912;
+  Shape4.Pen.Color := $00A96912;
+end;
 
 procedure TPagRelatorios.lblGerarConsulMouseLeave(Sender: TObject);
-  begin
-    Panel1.Color := $00C97D16;
-    Shape4.Brush.Color := $00C97D16;
-    Shape4.Pen.Color := $00C97D16;
-  end;
+begin
+  Panel1.Color := $00C97D16;
+  Shape4.Brush.Color := $00C97D16;
+  Shape4.Pen.Color := $00C97D16;
+end;
 
 procedure TPagRelatorios.lblGerarProcMouseEnter(Sender: TObject);
-  begin
-    Panel5.Color := $00A96912;
-    shape6.Brush.Color := $00A96912;
-    shape6.Pen.Color := $00A96912;
-  end;
+begin
+  Panel5.Color := $00A96912;
+  Shape6.Brush.Color := $00A96912;
+  Shape6.Pen.Color := $00A96912;
+end;
 
 procedure TPagRelatorios.lblGerarProcMouseLeave(Sender: TObject);
-  begin
-    Panel5.Color := $00C97D16;
-    Shape6.Brush.Color := $00C97D16;
-    Shape6.Pen.Color := $00C97D16;
-  end;
-
+begin
+  Panel5.Color := $00C97D16;
+  Shape6.Brush.Color := $00C97D16;
+  Shape6.Pen.Color := $00C97D16;
+end;
 
 procedure TPagRelatorios.FormCreate(Sender: TObject);
 begin
@@ -152,7 +154,7 @@ begin
   ComboBox1.ItemIndex := -1;
   cbProf.ItemIndex := -1;
   cbProc.ItemIndex := -1;
-  DateTimePicker1.Date := 01/11/2025;
+  DateTimePicker1.Date := 01 / 11 / 2025;
   FreeAndNil(RelatorioController);
 end;
 
@@ -183,8 +185,8 @@ end;
 procedure TPagRelatorios.lblGerarProfMouseEnter(Sender: TObject);
 begin
   Panel3.Color := $00A96912;
-  shape5.Brush.Color := $00A96912;
-  shape5.Pen.Color := $00A96912;
+  Shape5.Brush.Color := $00A96912;
+  Shape5.Pen.Color := $00A96912;
 end;
 
 procedure TPagRelatorios.lblGerarProfMouseLeave(Sender: TObject);

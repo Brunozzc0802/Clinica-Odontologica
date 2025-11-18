@@ -488,8 +488,8 @@ object PagRelatorios: TPagRelatorios
           AlignWithMargins = True
           Left = 3
           Top = 8
-          Width = 99
-          Height = 17
+          Width = 266
+          Height = 23
           Margins.Top = 8
           Align = alClient
           Alignment = taCenter
@@ -503,6 +503,8 @@ object PagRelatorios: TPagRelatorios
           OnClick = lblGerarConsulClick
           OnMouseEnter = lblGerarConsulMouseEnter
           OnMouseLeave = lblGerarConsulMouseLeave
+          ExplicitWidth = 99
+          ExplicitHeight = 17
         end
       end
     end
@@ -561,8 +563,8 @@ object PagRelatorios: TPagRelatorios
           AlignWithMargins = True
           Left = 3
           Top = 8
-          Width = 99
-          Height = 17
+          Width = 266
+          Height = 23
           Margins.Top = 8
           Align = alClient
           Alignment = taCenter
@@ -576,6 +578,8 @@ object PagRelatorios: TPagRelatorios
           OnClick = lblGerarRelaProfClick
           OnMouseEnter = lblGerarProfMouseEnter
           OnMouseLeave = lblGerarProfMouseLeave
+          ExplicitWidth = 99
+          ExplicitHeight = 17
         end
       end
       object cbProf: TComboBox
@@ -660,8 +664,8 @@ object PagRelatorios: TPagRelatorios
           AlignWithMargins = True
           Left = 3
           Top = 8
-          Width = 99
-          Height = 17
+          Width = 266
+          Height = 23
           Margins.Top = 8
           Align = alClient
           Alignment = taCenter
@@ -674,6 +678,8 @@ object PagRelatorios: TPagRelatorios
           ParentFont = False
           OnMouseEnter = lblGerarProcMouseEnter
           OnMouseLeave = lblGerarProcMouseLeave
+          ExplicitWidth = 99
+          ExplicitHeight = 17
         end
       end
       object cbProc: TComboBox

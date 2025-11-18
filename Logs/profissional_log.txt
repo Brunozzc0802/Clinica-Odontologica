@@ -6,3 +6,4 @@ Bruno | Deletado | CPF | 13012574948 | 16:51:01 29-10-2025
 admin | Deletou | Teste123 | CPF | 98987987897 | 15:28:55 05-11-2025
 Sistema | Adicionou Profissional | aaaaaaaa | CPF: 75575757755 | 75575757755 | 16:08:13 05-11-2025
 Sistema | Adicionou Profissional | aaaaaaaaaaaa | CPF: 11112222666 | 11112222666 | 16:09:22 05-11-2025
+Sistema | Restaurou Profissional | Aux. Limpeza Fábio | CPF: 151.617.819-01 | 151.617.819-01 | 16:32:19 18-11-2025

@@ -415,7 +415,8 @@ begin
 
     ProcController := TLogController.Create;
     try
-      ProcController.RegistrarLog(UsuarioLogado.Nome, 'Adicionou', EdNome.Text, 'Duração', edValor.Text,edHora.Text);
+      ProcController.RegistrarLog(UsuarioLogado.Nome, 'Adicionou', EdNome.Text,
+        'Duração', edValor.Text, edHora.Text);
     finally
       ProcController.Free;
     end;
@@ -751,7 +752,7 @@ end;
 procedure TPagProcedimentos.EdNomeKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
+    Key := #0;
     edValor.SetFocus;
   end;
 end;
@@ -759,7 +760,7 @@ end;
 procedure TPagProcedimentos.edValorKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
+    Key := #0;
     edHora.SetFocus;
   end;
 end;
@@ -767,7 +768,7 @@ end;
 procedure TPagProcedimentos.edHoraKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
+    Key := #0;
     if btnadicionar.Visible then
       btnadicionar.SetFocus
     else if btnConfirmarAlteracoes.Visible then
@@ -778,7 +779,7 @@ end;
 procedure TPagProcedimentos.pesquisarKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then begin
-    Key := #0; // bloqueia o som
+    Key := #0;
     sgProcedimentos.SetFocus;
   end;
 end;

@@ -49,14 +49,14 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TdmUsuarios, dmUsuarios);
+  Application.CreateForm(TPagRelatorios, PagRelatorios);
   Application.CreateForm(TFormLogin, FormLogin);
   Application.CreateForm(TPagUsuarios, PagUsuarios);
-  Application.CreateForm(TdmUsuarios, dmUsuarios);
   Application.CreateForm(TPagConsultas, PagConsultas);
   Application.CreateForm(TPagProcedimentos, PagProcedimentos);
   Application.CreateForm(TPagPacientes, PagPacientes);
   Application.CreateForm(TPagProfissionais, PagProfissionais);
-  Application.CreateForm(TPagRelatorios, PagRelatorios);
   Application.Run;
 
 end.

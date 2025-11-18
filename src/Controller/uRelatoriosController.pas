@@ -178,7 +178,7 @@ begin
 
     dmUsuarios.dtRelaConsul.DataSet := dmUsuarios.queryRelaConsul;
 
-    RelatorioPath := '"C:\Users\bruno\OneDrive\Desktop\Projeto empresa\Clinica-Odontologica\assets\Relatórios\RelatorioConsultas1.fr3"';
+    RelatorioPath := '  C:\Users\bruno\OneDrive\Desktop\Projeto empresa\Clinica-Odontologica\assets\Relatórios\RelatorioConsultas1.fr3';
 
     if not FileExists(RelatorioPath) then begin
       ShowMessage('Arquivo de relatório não encontrado: ' + RelatorioPath);
@@ -254,7 +254,7 @@ begin
     end;
 
     dmUsuarios.dtRelaProf.DataSet := dmUsuarios.queryRelaProf;
-    RelatorioPath := '"C:\Users\bruno\OneDrive\Desktop\Projeto empresa\Clinica-Odontologica\assets\Relatórios\RelatorioPorProfissionais1.fr3"';
+    RelatorioPath := 'C:\Users\bruno\OneDrive\Desktop\Projeto empresa\Clinica-Odontologica\assets\Relatórios\RelatorioPorProfissionais1.fr3';
 
     if not FileExists(RelatorioPath) then
     begin

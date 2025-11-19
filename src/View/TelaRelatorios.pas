@@ -73,6 +73,7 @@ type
     procedure cbProcDropDown(Sender: TObject);
     procedure AtualizarContadores;
     procedure lblGerarRelaProfClick(Sender: TObject);
+    procedure lblGerarProcClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -220,6 +221,13 @@ procedure TPagRelatorios.lblGerarRelaProfClick(Sender: TObject);
 begin
   if Assigned(RelatorioController) then
     RelatorioController.GerarRelatorioProfissionalFastReport(cbProf);
+end;
+
+procedure TPagRelatorios.lblGerarProcClick(Sender: TObject);
+begin
+  if Assigned(RelatorioController) then begin
+    RelatorioController.GerarRelatorioProcedimentoFastReport(cbProc);
+  end;
 end;
 
 end.

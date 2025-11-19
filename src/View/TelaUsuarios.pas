@@ -576,16 +576,25 @@ begin
     pesquisarUsuario.Visible := False;
     btnNovoPesquisar.Visible := False;
   end;
-    btnAlterarNovo.Visible := False;
-    btnAddNovo.Visible := True;
-    btnNovoPesquisar.Visible := False;
-    btnRestaurarNovo.Visible := False;
-    btnConfirmarAlteracoes.Visible := False;
-    btnAdicionarUsuario.Visible := True;
-    pnlFormAddUsuarios.Visible := True;
-    imgLogoUsuarios2.Visible := True;
-    imgLogoUsuarios1.Visible := False;
+
+  if (sgUsuarios.Row <> 0) and (sgUsuarios.Col <> 0) then begin
+    edUsuario.Clear;
+    edSenhaUsuario.Clear;
+    cbAtivo.ItemIndex := -1;
+    cbGrupo.ItemIndex := -1;
     edUsuario.SetFocus;
+  end;
+
+  btnAlterarNovo.Visible := False;
+  btnAddNovo.Visible := True;
+  btnNovoPesquisar.Visible := False;
+  btnRestaurarNovo.Visible := False;
+  btnConfirmarAlteracoes.Visible := False;
+  btnAdicionarUsuario.Visible := True;
+  pnlFormAddUsuarios.Visible := True;
+  imgLogoUsuarios2.Visible := True;
+  imgLogoUsuarios1.Visible := False;
+  edUsuario.SetFocus;
 end;
 
 procedure TPagUsuarios.btnConfirmarAlteracoesClick(Sender: TObject);
@@ -594,6 +603,7 @@ begin
     ShowMessage('Selecione um Usuário para alterar');
     Exit;
   end;
+
   try
     Controller.AlterarUsuario(UsuarioIdalterar, edUsuario.Text,
       edSenhaUsuario.Text, cbGrupo.Text, cbAtivo.ItemIndex = 0);

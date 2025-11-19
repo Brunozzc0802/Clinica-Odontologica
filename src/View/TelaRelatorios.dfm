@@ -676,6 +676,7 @@ object PagRelatorios: TPagRelatorios
           Font.Name = 'Arial'
           Font.Style = []
           ParentFont = False
+          OnClick = lblGerarProcClick
           OnMouseEnter = lblGerarProcMouseEnter
           OnMouseLeave = lblGerarProcMouseLeave
           ExplicitWidth = 99

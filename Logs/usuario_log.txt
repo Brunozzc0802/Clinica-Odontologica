@@ -30,3 +30,8 @@ admin | Adicionou | Folly | Grupo | Profissional | 16:23:46 18-11-2025
 admin | Adicionou | Leonardo | Grupo | Recepcionista | 16:24:02 18-11-2025
 admin | Adicionou | Matheus | Grupo | Recepcionista | 16:24:13 18-11-2025
 admin | Adicionou | Crisele | Grupo | Recepcionista | 16:24:21 18-11-2025
+admin | Adicionou | Kleber | Grupo | Profissional | 15:35:02 19-11-2025
+admin | Alterou | Kleber123 | Grupo | Recepcionista | 15:35:11 19-11-2025
+admin | Deletou | Kleber123 | Grupo | Recepcionista | 15:35:31 19-11-2025
+admin | Restaurou | Kleber123 | Grupo | Recepcionista | 15:35:38 19-11-2025
+admin | Alterou |  | Grupo |  | 15:38:34 19-11-2025

@@ -58,7 +58,12 @@ begin
     with dmUsuarios.queryProcedimentos do begin
       Close;
       SQL.Clear;
-      SQL.Text := 'SELECT id, nome FROM procedimentos WHERE ativo = TRUE ORDER BY nome';
+      SQL.Text :=
+        'SELECT DISTINCT p.id, p.nome ' +
+        'FROM procedimentos p ' +
+        'INNER JOIN consultas c ON p.id = c.procedimento_id ' +
+        'WHERE p.ativo = TRUE AND c.ativo = TRUE ' +
+        'ORDER BY p.nome';
       Open;
 
       while not Eof do begin
@@ -120,7 +125,7 @@ begin
       'AND c.ativo = TRUE ' +
       'ORDER BY c.data, c.horas';
 
-    ParamByName('id_profissional').AsInteger := ProfissionalId;
+    ParamByName('profissional_id').AsInteger := ProfissionalId;
     ParamByName('data_inicio').AsDate := DataInicio;
     ParamByName('data_fim').AsDate := DataFim;
     Open;

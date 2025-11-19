@@ -24,6 +24,7 @@ type
     function GerarRelatorioConsultasPorData(DataSelecionada: TDateTime): TFDQuery;
     procedure GerarRelatorioConsultasFastReport(DataSelecionada: TDateTime);
     procedure GerarRelatorioProfissionalFastReport(ComboBox: TComboBox);
+    procedure GerarRelatorioProcedimentoFastReport(ComboBox: TComboBox);
     function ContarConsultasConcluidas: Integer;
     function ContarConsultasAgendadas: Integer;
     function ContarConsultasCanceladas: Integer;
@@ -264,6 +265,72 @@ begin
 
     dmUsuarios.frxReport2.LoadFromFile(RelatorioPath);
     dmUsuarios.frxReport2.ShowReport();
+
+  except
+    on E: Exception do
+      ShowMessage('Erro ao gerar relatório: ' + E.Message);
+  end;
+end;
+
+procedure TRelatoriosController.GerarRelatorioProcedimentoFastReport(ComboBox: TComboBox);
+var
+  RelatorioPath: string;
+  ProcedimentoId: Integer;
+begin
+  try
+    if not Assigned(ComboBox) or (ComboBox.ItemIndex < 0) then
+    begin
+      ShowMessage('Selecione um procedimento');
+      Exit;
+    end;
+
+    ProcedimentoId := Integer(ComboBox.Items.Objects[ComboBox.ItemIndex]);
+
+    with dmUsuarios.queryRelaProc do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Text :=
+        'SELECT ' +
+        '  p.id as procedimento_id, ' +
+        '  p.nome as procedimento_nome, ' +
+        '  p.valor as procedimento_valor, ' +
+        '  p.duracao as procedimento_duracao, ' +
+        '  c.id as consulta_id, ' +
+        '  c.data as data, ' +
+        '  c.horainicio as consulta_hora_inicio, ' +
+        '  c.horafim as consulta_hora_fim, ' +
+        '  pac.id as paciente_id, ' +
+        '  pac.nome as nome_paciente, ' +
+        '  pac.cpf as paciente_cpf, ' +
+        '  pac.telefone as paciente_telefone, ' +
+        '  prof.id as profissional_id, ' +
+        '  prof.nome as profissional_nome ' +
+        'FROM consultas c ' +
+        'INNER JOIN pacientes pac ON c.paciente_id = pac.id ' +
+        'INNER JOIN profissionais prof ON c.profissional_id = prof.id ' +
+        'INNER JOIN procedimentos p ON c.procedimento_id = p.id ' +
+        'WHERE p.id = :procedimento_id ' +
+        'ORDER BY c.data DESC, c.horainicio';
+
+      ParamByName('procedimento_id').AsInteger := ProcedimentoId;
+      Open();
+
+      // Se não encontrar consultas, apenas mostra o relatório vazio
+    end;
+
+    dmUsuarios.dtRelaProc.DataSet := dmUsuarios.queryRelaProc;
+
+    RelatorioPath := 'C:\Users\Bruno Tesser\Desktop\Clinica odontologica alves\Clinica-Odontologica\assets\Relatórios\RelatorioPorProcedimentos1.fr3';
+
+    if not FileExists(RelatorioPath) then
+    begin
+      ShowMessage('Arquivo de relatório não encontrado: ' + RelatorioPath);
+      Exit;
+    end;
+
+    dmUsuarios.frxReport3.LoadFromFile(RelatorioPath);
+    dmUsuarios.frxReport3.ShowReport();
 
   except
     on E: Exception do

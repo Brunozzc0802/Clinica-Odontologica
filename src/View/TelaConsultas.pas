@@ -237,6 +237,7 @@ begin
   ConsultaIdAlterar := 0;
   btnAlterar.Enabled := False;
   btnConfirmarAlteracoes.Visible := False;
+  Calendar1.Date := 21/11/2025;
 end;
 
 procedure TPagConsultas.FormShow(Sender: TObject);
@@ -967,18 +968,15 @@ var
 begin
   if ValidarCampos then begin
     try
-      // Obtém os IDs dos itens selecionados nos combos
       PacienteId := Integer(cbNomePaci.Items.Objects[cbNomePaci.ItemIndex]);
       ProfissionalId := Integer(cbNomeProf.Items.Objects[cbNomeProf.ItemIndex]);
       ProcedimentoId := Integer(cbNomeProc.Items.Objects[cbNomeProc.ItemIndex]);
       HoraInicio := ConverterParaHora(edHoraInicio.Text);
       HoraFim := ConverterParaHora(edHoraFim.Text);
 
-      // Chama o controller para alterar a consulta
       if Controller.AlterarConsulta(ConsultaIdAlterar, PacienteId,
         ProfissionalId, ProcedimentoId, DateTimePicker1.Date, HoraInicio,
         HoraFim) then begin
-        // Adicionar log
         if cbNomePaci.ItemIndex >= 0 then
           NomePaciente := cbNomePaci.Items[cbNomePaci.ItemIndex];
         if cbNomeProf.ItemIndex >= 0 then

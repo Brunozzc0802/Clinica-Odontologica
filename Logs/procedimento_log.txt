@@ -5,3 +5,5 @@ admin | Deletou | dddddddd | 15:51:14 10-11-2025
 admin | Deletou | ccccccccccc | 15:51:16 10-11-2025
 admin | Deletou | bbbbbb | 15:51:18 10-11-2025
 admin | Deletou | aaaaaaaaaaaaa | 15:51:21 10-11-2025
+admin | procedimento do ku | Adicionou | Valor: 200,00 | Duraço: 10:30:55 | 15:41:06 21-11-2025
+admin | Alterou | procedimento do ku | Valor: 150,   | Duraço: 00:01:00 | 15:41:57 21-11-2025

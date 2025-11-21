@@ -5,3 +5,5 @@ admin | Restaurou | Patrícia Ribeiro | Cpf | 161.161.161-61 | 16:32:00 18-11-202
 admin | Restaurou | Laura Martins | Cpf | 121.121.121-21 | 16:32:03 18-11-2025
 admin | Restaurou | Gabriela Melo | Cpf | 777.777.777-77 | 16:32:04 18-11-2025
 admin | Adicionou | Kleber | CPF | 11111256654 | 15:41:27 19-11-2025
+admin | Adicionou | Teste | CPF | 09128309821 | 13:55:47 21-11-2025
+admin | Adicionou | Gustavo | CPF | 12083912318 | 14:13:53 21-11-2025

@@ -63,7 +63,7 @@ object dmUsuarios: TdmUsuarios
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45975.689181979200000000
-    ReportOptions.LastChange = 45980.714712291660000000
+    ReportOptions.LastChange = 45982.599152800930000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -1433,7 +1433,7 @@ object dmUsuarios: TdmUsuarios
           Left = 166.299320000000000000
           Top = 157.740260000000000000
           Width = 838.677228820000000000
-          Height = 105.826840000000000000
+          Height = 113.385900000000000000
           ContentScaleOptions.Constraints.MaxIterationValue = 0
           ContentScaleOptions.Constraints.MinIterationValue = 0
           Font.Charset = DEFAULT_CHARSET
@@ -1452,7 +1452,7 @@ object dmUsuarios: TdmUsuarios
           Left = 309.921460000000000000
           Top = 158.740260000000000000
           Width = 838.677228820000000000
-          Height = 105.826840000000000000
+          Height = 113.385900000000000000
           ContentScaleOptions.Constraints.MaxIterationValue = 0
           ContentScaleOptions.Constraints.MinIterationValue = 0
           Font.Charset = DEFAULT_CHARSET
@@ -1471,7 +1471,7 @@ object dmUsuarios: TdmUsuarios
           Left = 496.457020000000000000
           Top = 158.740260000000000000
           Width = 838.677228820000000000
-          Height = 105.826840000000000000
+          Height = 113.385900000000000000
           ContentScaleOptions.Constraints.MaxIterationValue = 0
           ContentScaleOptions.Constraints.MinIterationValue = 0
           Font.Charset = DEFAULT_CHARSET
@@ -1490,7 +1490,7 @@ object dmUsuarios: TdmUsuarios
           Left = 635.299630000000000000
           Top = 158.740260000000000000
           Width = 838.677228820000000000
-          Height = 105.826840000000000000
+          Height = 113.385900000000000000
           ContentScaleOptions.Constraints.MaxIterationValue = 0
           ContentScaleOptions.Constraints.MinIterationValue = 0
           Font.Charset = DEFAULT_CHARSET
@@ -1598,7 +1598,7 @@ object dmUsuarios: TdmUsuarios
         FillGap.Bottom = 0
         FillGap.Right = 0
         Frame.Typ = []
-        Height = 31.787411340000000000
+        Height = 24.228351340000000000
         Top = 355.275820000000000000
         Width = 740.409927000000000000
         DataSet = dtRelaConsul
@@ -1607,7 +1607,7 @@ object dmUsuarios: TdmUsuarios
         object Memo11: TfrxMemoView
           AllowVectorExport = True
           Left = 70.661410000000000000
-          Top = -13.685017400000000000
+          Top = -9.685017400000000000
           Width = 42.307050000000000000
           Height = 18.897650000000000000
           ContentScaleOptions.Constraints.MaxIterationValue = 0
@@ -1627,7 +1627,7 @@ object dmUsuarios: TdmUsuarios
         object Memo12: TfrxMemoView
           AllowVectorExport = True
           Left = 225.456710000000000000
-          Top = -11.598403230000000000
+          Top = -7.598403230000000000
           Width = 59.102350000000000000
           Height = 18.897650000000000000
           ContentScaleOptions.Constraints.MaxIterationValue = 0
@@ -1647,7 +1647,7 @@ object dmUsuarios: TdmUsuarios
         object Memo13: TfrxMemoView
           AllowVectorExport = True
           Left = 394.842610000000000000
-          Top = -11.598403230000000000
+          Top = -6.598403230000000000
           Width = 61.866110000000000000
           Height = 18.897650000000000000
           ContentScaleOptions.Constraints.MaxIterationValue = 0
@@ -1668,7 +1668,7 @@ object dmUsuarios: TdmUsuarios
         object Memo14: TfrxMemoView
           AllowVectorExport = True
           Left = 533.299320000000000000
-          Top = -8.598403230000000000
+          Top = -4.598403230000000000
           Width = 74.220470000000000000
           Height = 18.897650000000000000
           ContentScaleOptions.Constraints.MaxIterationValue = 0
@@ -1689,7 +1689,7 @@ object dmUsuarios: TdmUsuarios
         object Memo15: TfrxMemoView
           AllowVectorExport = True
           Left = 657.874150000000000000
-          Top = -6.598403230000000000
+          Top = -3.598403230000000000
           Width = 78.000000000000000000
           Height = 18.897650000000000000
           ContentScaleOptions.Constraints.MaxIterationValue = 0
@@ -1707,48 +1707,10 @@ object dmUsuarios: TdmUsuarios
             '[dtRelaConsul."horafim"]')
           ParentFont = False
         end
-        object Memo28: TfrxMemoView
-          AllowVectorExport = True
-          Left = 166.299320000000000000
-          Top = -16.913363860000000000
-          Width = 63.873578820000000000
-          Height = 55.937015200000000000
-          ContentScaleOptions.Constraints.MaxIterationValue = 0
-          ContentScaleOptions.Constraints.MinIterationValue = 0
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = 9521152
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Color = 16755255
-          Frame.Typ = [ftLeft]
-          Frame.Width = 2.000000000000000000
-          ParentFont = False
-          Rotation = 45
-        end
-        object Memo29: TfrxMemoView
-          AllowVectorExport = True
-          Left = 309.921460000000000000
-          Top = -14.913363860000000000
-          Width = 838.677228820000000000
-          Height = 55.937015200000000000
-          ContentScaleOptions.Constraints.MaxIterationValue = 0
-          ContentScaleOptions.Constraints.MinIterationValue = 0
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = 9521152
-          Font.Height = -12
-          Font.Name = 'Arial'
-          Font.Style = []
-          Frame.Color = 16755255
-          Frame.Typ = [ftLeft]
-          Frame.Width = 2.000000000000000000
-          ParentFont = False
-          Rotation = 45
-        end
         object Memo31: TfrxMemoView
           AllowVectorExport = True
           Left = 635.520100000000000000
-          Top = -13.913363860000000000
+          Top = -16.913363860000000000
           Width = 838.677228820000000000
           Height = 55.937015200000000000
           ContentScaleOptions.Constraints.MaxIterationValue = 0
@@ -1786,7 +1748,7 @@ object dmUsuarios: TdmUsuarios
         object Memo30: TfrxMemoView
           AllowVectorExport = True
           Left = 496.677490000000000000
-          Top = -13.913363860000000000
+          Top = -16.913363860000000000
           Width = 838.677228820000000000
           Height = 55.937015200000000000
           ContentScaleOptions.Constraints.MaxIterationValue = 0
@@ -1805,7 +1767,7 @@ object dmUsuarios: TdmUsuarios
         object Memo34: TfrxMemoView
           AllowVectorExport = True
           Left = -1.779530000000000000
-          Top = 10.551210400000000000
+          Top = 31.551210400000000000
           Width = 740.409448820000000000
           Height = 4.535428190000000000
           ContentScaleOptions.Constraints.MaxIterationValue = 0
@@ -1839,6 +1801,44 @@ object dmUsuarios: TdmUsuarios
           ParentFont = False
           Rotation = 45
         end
+        object Memo29: TfrxMemoView
+          AllowVectorExport = True
+          Left = 309.921460000000000000
+          Top = -17.913363860000000000
+          Width = 838.677228820000000000
+          Height = 55.937015200000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = 9521152
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Color = 16755255
+          Frame.Typ = [ftLeft]
+          Frame.Width = 2.000000000000000000
+          ParentFont = False
+          Rotation = 45
+        end
+        object Memo28: TfrxMemoView
+          AllowVectorExport = True
+          Left = 166.299320000000000000
+          Top = -18.913363860000000000
+          Width = 63.873578820000000000
+          Height = 55.937015200000000000
+          ContentScaleOptions.Constraints.MaxIterationValue = 0
+          ContentScaleOptions.Constraints.MinIterationValue = 0
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = 9521152
+          Font.Height = -12
+          Font.Name = 'Arial'
+          Font.Style = []
+          Frame.Color = 16755255
+          Frame.Typ = [ftLeft]
+          Frame.Width = 2.000000000000000000
+          ParentFont = False
+          Rotation = 45
+        end
       end
       object PageFooter1: TfrxPageFooter
         FillType = ftBrush
@@ -1848,7 +1848,7 @@ object dmUsuarios: TdmUsuarios
         FillGap.Right = 0
         Frame.Typ = []
         Height = 23.677180000000000000
-        Top = 445.984540000000000000
+        Top = 438.425480000000000000
         Width = 740.409927000000000000
         object Memo16: TfrxMemoView
           AllowVectorExport = True
@@ -1959,7 +1959,7 @@ object dmUsuarios: TdmUsuarios
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45979.505537546300000000
-    ReportOptions.LastChange = 45979.608010717590000000
+    ReportOptions.LastChange = 45982.620750046300000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -3218,9 +3218,9 @@ object dmUsuarios: TdmUsuarios
         RowCount = 0
         object Memo6: TfrxMemoView
           AllowVectorExport = True
-          Left = 152.047310000000000000
-          Top = 13.677180000000000000
-          Width = 140.853858700000000000
+          Left = 106.692950000000000000
+          Top = 9.897650000000000000
+          Width = 246.680698700000000000
           Height = 18.897650000000000000
           ContentScaleOptions.Constraints.MaxIterationValue = 0
           ContentScaleOptions.Constraints.MinIterationValue = 0
@@ -3568,6 +3568,21 @@ object dmUsuarios: TdmUsuarios
     DataSetOptions = []
     Left = 592
     Top = 224
+    FieldDefs = <
+      item
+        FieldName = 'profissional_nome'
+        FieldType = fftString
+        Size = 100
+      end
+      item
+        FieldName = 'data'
+        FieldType = fftDateTime
+      end
+      item
+        FieldName = 'procedimento_nome'
+        FieldType = fftString
+        Size = 100
+      end>
   end
   object queryRelaProc: TFDQuery
     Active = True
@@ -3597,7 +3612,7 @@ object dmUsuarios: TdmUsuarios
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 45979.640956979200000000
-    ReportOptions.LastChange = 45979.650367638900000000
+    ReportOptions.LastChange = 45982.594678414350000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -3859,7 +3874,7 @@ object dmUsuarios: TdmUsuarios
         RowCount = 0
         object Memo6: TfrxMemoView
           AllowVectorExport = True
-          Left = 132.677180000000000000
+          Left = 98.661410000000000000
           Top = 7.559060000000000000
           Width = 188.976517770000000000
           Height = 18.897650000000000000
@@ -5191,5 +5206,20 @@ object dmUsuarios: TdmUsuarios
     DataSetOptions = []
     Left = 592
     Top = 288
+    FieldDefs = <
+      item
+        FieldName = 'profissional_nome'
+        FieldType = fftString
+        Size = 100
+      end
+      item
+        FieldName = 'data'
+        FieldType = fftDateTime
+      end
+      item
+        FieldName = 'procedimento_nome'
+        FieldType = fftString
+        Size = 100
+      end>
   end
 end

@@ -2632,6 +2632,7 @@ object PagConsultas: TPagConsultas
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnAlterarClick
           OnMouseEnter = btnAlterarMouseEnter
           OnMouseLeave = btnAlterarMouseLeave
           ExplicitWidth = 42
@@ -2672,6 +2673,7 @@ object PagConsultas: TPagConsultas
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnDeletarClick
           OnMouseEnter = btnDeletarMouseEnter
           OnMouseLeave = btnDeletarMouseLeave
           ExplicitWidth = 45
@@ -2753,6 +2755,7 @@ object PagConsultas: TPagConsultas
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnRestaurarClick
           OnMouseEnter = btnRestaurarMouseEnter
           OnMouseLeave = btnRestaurarMouseLeave
           ExplicitWidth = 58
@@ -3076,7 +3079,7 @@ object PagConsultas: TPagConsultas
           Margins.Bottom = 7
           Align = alClient
           Alignment = taCenter
-          Caption = 'Adicionar Paciente'
+          Caption = 'Agendar Consulta'
           Color = clCream
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
@@ -3085,9 +3088,10 @@ object PagConsultas: TPagConsultas
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          OnClick = btnadicionarClick
           OnMouseEnter = btnadicionarMouseEnter
           OnMouseLeave = btnadicionarMouseLeave
-          ExplicitWidth = 115
+          ExplicitWidth = 110
         end
       end
       object edHoraFim: TMaskEdit
@@ -3153,7 +3157,7 @@ object PagConsultas: TPagConsultas
       Width = 594
       Height = 440
       BorderColor = 14737632
-      Date = 45962.000000000000000000
+      Date = 45982.000000000000000000
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -20

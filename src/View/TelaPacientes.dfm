@@ -2899,48 +2899,7 @@ object PagPacientes: TPagPacientes
           end
         end
       end
-      object btnConsultas: TPanel
-        Left = 8
-        Top = 287
-        Width = 137
-        Height = 41
-        Cursor = crHandPoint
-        Color = 8142341
-        ParentBackground = False
-        TabOrder = 6
-        OnClick = btnConsultasClick
-        OnMouseEnter = btnConsultasMouseEnter
-        OnMouseLeave = btnConsultasMouseLeave
-        object lblConsultas: TLabel
-          AlignWithMargins = True
-          Left = 16
-          Top = 11
-          Width = 105
-          Height = 19
-          Cursor = crHandPoint
-          Margins.Left = 15
-          Margins.Top = 10
-          Margins.Right = 15
-          Margins.Bottom = 10
-          Align = alClient
-          Alignment = taCenter
-          Caption = 'Consultas'
-          Color = clCream
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -13
-          Font.Name = 'Segoe UI'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          OnClick = btnConsultasClick
-          OnMouseEnter = btnConsultasMouseEnter
-          OnMouseLeave = btnConsultasMouseLeave
-          ExplicitWidth = 60
-          ExplicitHeight = 17
-        end
-      end
-      object btnLimpar: TPanel
+      object btnSair: TPanel
         Left = 8
         Top = 334
         Width = 137
@@ -2948,48 +2907,7 @@ object PagPacientes: TPagPacientes
         Cursor = crHandPoint
         Color = 8142341
         ParentBackground = False
-        TabOrder = 7
-        OnClick = btnLimparClick
-        OnMouseEnter = btnLimparMouseEnter
-        OnMouseLeave = btnLimparMouseLeave
-        object lblLimpar: TLabel
-          AlignWithMargins = True
-          Left = 31
-          Top = 11
-          Width = 75
-          Height = 19
-          Cursor = crHandPoint
-          Margins.Left = 30
-          Margins.Top = 10
-          Margins.Right = 30
-          Margins.Bottom = 10
-          Align = alClient
-          Alignment = taCenter
-          Caption = 'Limpar'
-          Color = clCream
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -13
-          Font.Name = 'Segoe UI'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          OnClick = btnLimparClick
-          OnMouseEnter = btnLimparMouseEnter
-          OnMouseLeave = btnLimparMouseLeave
-          ExplicitWidth = 43
-          ExplicitHeight = 17
-        end
-      end
-      object btnSair: TPanel
-        Left = 8
-        Top = 381
-        Width = 137
-        Height = 41
-        Cursor = crHandPoint
-        Color = 8142341
-        ParentBackground = False
-        TabOrder = 8
+        TabOrder = 6
         OnClick = lblSairClick
         OnMouseEnter = btnSairMouseEnter
         OnMouseLeave = btnSairMouseLeave
@@ -3030,7 +2948,7 @@ object PagPacientes: TPagPacientes
         Cursor = crHandPoint
         Color = 16223019
         ParentBackground = False
-        TabOrder = 9
+        TabOrder = 7
         Visible = False
         OnClick = btnAlterarNovoClick
         object Label3: TLabel
@@ -3060,6 +2978,47 @@ object PagPacientes: TPagPacientes
           ExplicitHeight = 17
         end
       end
+      object btnLimpar: TPanel
+        Left = 8
+        Top = 287
+        Width = 137
+        Height = 41
+        Cursor = crHandPoint
+        Color = 8142341
+        ParentBackground = False
+        TabOrder = 8
+        OnClick = btnLimparClick
+        OnMouseEnter = btnLimparMouseEnter
+        OnMouseLeave = btnLimparMouseLeave
+        object lblLimpar: TLabel
+          AlignWithMargins = True
+          Left = 31
+          Top = 11
+          Width = 75
+          Height = 19
+          Cursor = crHandPoint
+          Margins.Left = 30
+          Margins.Top = 10
+          Margins.Right = 30
+          Margins.Bottom = 10
+          Align = alClient
+          Alignment = taCenter
+          Caption = 'Limpar'
+          Color = clCream
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -13
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          OnClick = btnLimparClick
+          OnMouseEnter = btnLimparMouseEnter
+          OnMouseLeave = btnLimparMouseLeave
+          ExplicitWidth = 43
+          ExplicitHeight = 17
+        end
+      end
     end
     object pnlAddPacientes: TPanel
       Left = 9
@@ -3070,7 +3029,7 @@ object PagPacientes: TPagPacientes
       ParentBackground = False
       TabOrder = 3
       Visible = False
-      OnClick = btnaddPacienteClick
+      OnClick = btnConfirmarAlteracoesClick
       object EdNomePaciente: TEdit
         Left = 8
         Top = 9

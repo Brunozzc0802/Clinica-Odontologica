@@ -2980,7 +2980,7 @@ object PagProfissionais: TPagProfissionais
           Margins.Bottom = 7
           Align = alClient
           Alignment = taCenter
-          Caption = 'Adicionar Paciente'
+          Caption = 'Adicionar Profissional'
           Color = clCream
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
@@ -2992,7 +2992,7 @@ object PagProfissionais: TPagProfissionais
           OnClick = btnadicionarClick
           OnMouseEnter = btnadicionarMouseEnter
           OnMouseLeave = btnadicionarMouseLeave
-          ExplicitWidth = 115
+          ExplicitWidth = 136
         end
       end
       object btnConfirmarAlteracoes: TPanel

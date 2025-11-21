@@ -658,6 +658,7 @@ object PagRelatorios: TPagRelatorios
         Color = 13204758
         ParentBackground = False
         TabOrder = 0
+        OnClick = lblGerarProcClick
         OnMouseEnter = lblGerarProcMouseEnter
         OnMouseLeave = lblGerarProcMouseLeave
         object lblGerarProc: TLabel

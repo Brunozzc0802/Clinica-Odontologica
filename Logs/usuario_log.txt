@@ -35,3 +35,18 @@ admin | Alterou | Kleber123 | Grupo | Recepcionista | 15:35:11 19-11-2025
 admin | Deletou | Kleber123 | Grupo | Recepcionista | 15:35:31 19-11-2025
 admin | Restaurou | Kleber123 | Grupo | Recepcionista | 15:35:38 19-11-2025
 admin | Alterou |  | Grupo |  | 15:38:34 19-11-2025
+admin | Adicionou | teste | Grupo | Profissional | 13:47:07 21-11-2025
+admin | Alterou | teste | Grupo | Profissional | 13:47:12 21-11-2025
+admin | Alterou | teste | Grupo | Profissional | 13:47:21 21-11-2025
+admin | Restaurou |  | Grupo |  | 13:47:43 21-11-2025
+admin | Alterou | aaaa | Grupo |  | 13:47:50 21-11-2025
+admin | Alterou | aaaa | Grupo |  | 13:48:38 21-11-2025
+admin | Alterou | aaaa | Grupo |  | 13:49:05 21-11-2025
+admin | Alterou | aaaa | Grupo |  | 13:49:07 21-11-2025
+admin | Alterou | aaaa | Grupo | Recepcionista | 13:49:14 21-11-2025
+admin | Alterou | aaaa | Grupo |  | 13:49:19 21-11-2025
+admin | Deletou | aaaa | Grupo |  | 13:49:45 21-11-2025
+admin | Alterou | Recep | Grupo | Recepcionista | 14:09:28 21-11-2025
+admin | Alterou | Recep | Grupo | Recepcionista | 14:09:29 21-11-2025
+admin | Adicionou | ku | Grupo | Profissional | 15:34:11 21-11-2025
+admin | Alterou | kuchma | Grupo | Profissional | 15:34:25 21-11-2025

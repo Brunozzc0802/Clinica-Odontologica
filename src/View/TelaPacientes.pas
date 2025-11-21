@@ -45,10 +45,6 @@ type
     lblRestaurar: TLabel;
     btnRestaurarNovo: TPanel;
     Label5: TLabel;
-    btnConsultas: TPanel;
-    lblConsultas: TLabel;
-    btnLimpar: TPanel;
-    lblLimpar: TLabel;
     btnSair: TPanel;
     lblSair: TLabel;
     pnlAddPacientes: TPanel;
@@ -70,6 +66,8 @@ type
     sgRestore: TStringGrid;
     btnCRestore: TPanel;
     lblRestore: TLabel;
+    btnLimpar: TPanel;
+    lblLimpar: TLabel;
     procedure btnXClick(Sender: TObject);
     procedure btnAddMouseEnter(Sender: TObject);
     procedure btnAddMouseLeave(Sender: TObject);
@@ -83,8 +81,6 @@ type
     procedure btnCancelarMouseLeave(Sender: TObject);
     procedure btnRestaurarMouseEnter(Sender: TObject);
     procedure btnRestaurarMouseLeave(Sender: TObject);
-    procedure btnConsultasMouseEnter(Sender: TObject);
-    procedure btnConsultasMouseLeave(Sender: TObject);
     procedure btnLimparMouseEnter(Sender: TObject);
     procedure btnLimparMouseLeave(Sender: TObject);
     procedure btnSairMouseEnter(Sender: TObject);
@@ -139,7 +135,6 @@ type
     procedure edEnderecoKeyPress(Sender: TObject; var Key: Char);
     procedure edDataNascKeyPress(Sender: TObject; var Key: Char);
     procedure pesquisarKeyPress(Sender: TObject; var Key: Char);
-    procedure btnConsultasClick(Sender: TObject);
 
   private
     PacienteIdalterar: Integer;
@@ -323,8 +318,6 @@ begin
 end;
 
 procedure TPagPacientes.adicionarPaciente;
-var
-  DataNascimento: TDate;
 begin
   if (EdNomePaciente.Text = '') or (edCPF.Text = '') or (edTelefone.Text = '')
     or (edCEP.Text = '') or (edDataNasc.Checked = False) then begin
@@ -332,9 +325,7 @@ begin
     Exit;
   end;
 
-  DataNascimento := edDataNasc.Date;
-  if DataNascimento > Date then begin
-    ShowMessage('Data de nascimento inv�lida!');
+  if not IdadeValida(edDataNasc.Date) then begin
     Exit;
   end;
 
@@ -608,22 +599,6 @@ begin
   btnConfirmarAlteracoes.Color := $007C3E05;
 end;
 
-procedure TPagPacientes.btnConsultasClick(Sender: TObject);
-begin
-  Close;
-  PagConsultas.Show;
-end;
-
-procedure TPagPacientes.btnConsultasMouseEnter(Sender: TObject);
-begin
-  btnConsultas.Color := $00F78B2B;
-end;
-
-procedure TPagPacientes.btnConsultasMouseLeave(Sender: TObject);
-begin
-  btnConsultas.Color := $007C3E05;
-end;
-
 procedure TPagPacientes.btnCRestoreClick(Sender: TObject);
 begin
   ConfirmarRestauracao;
@@ -876,27 +851,19 @@ begin
     btnRestaurar.Visible := False;
     btnLimpar.Visible := False;
     btnPesquisar.Visible := true;
-    btnConsultas.Visible := true;
     btnSair.Visible := true;
-
-    btnConsultas.Top := 5;
-    btnPesquisar.Top := 52;
-    btnCancelar.Top := 99;
-    btnSair.Top := 146;
+    btnPesquisar.Top := 6;
+    btnCancelar.Top := 53;
+    btnSair.Top := 100
   end
   else begin
     btnAdd.Visible := true;
     btnAlterar.Visible := true;
-    btnDeletar.Visible := true;
     btnRestaurar.Visible := true;
     btnPesquisar.Visible := true;
-    btnConsultas.Visible := true;
     btnLimpar.Visible := true;
     btnSair.Visible := true;
 
-    btnPesquisar.Top := 99;
-    btnConsultas.Top := 287;
-    btnSair.Top := 381;
   end;
 end;
 

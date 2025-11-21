@@ -34,7 +34,6 @@ type
     edUsuario: TEdit;
     edSenhaUsuario: TEdit;
     cbAtivo: TComboBox;
-    cbGrupo: TComboBox;
     btnRestaurarUsu: TPanel;
     lblRestaurar: TLabel;
     btnAdicionarUsuario: TPanel;
@@ -56,14 +55,15 @@ type
     pnlRestaurar: TPanel;
     btnRestaurarNovo: TPanel;
     Label5: TLabel;
-    btnConfirmarAlteracoes: TPanel;
-    lblConfirmarAlteracoes: TLabel;
     imgRestore: TImage;
     Label6: TLabel;
     imgXrestore: TImage;
     sgRestore: TStringGrid;
     btnCRestore: TPanel;
     lblRestore: TLabel;
+    cbGrupo: TComboBox;
+    btnConfirmarAlteracoes: TPanel;
+    lblConfirmarAlteracoes: TLabel;
     procedure btnXUsuariosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnAddUsuMouseEnter(Sender: TObject);
@@ -601,6 +601,12 @@ procedure TPagUsuarios.btnConfirmarAlteracoesClick(Sender: TObject);
 begin
   if UsuarioIdalterar = 0 then begin
     ShowMessage('Selecione um Usuário para alterar');
+    Exit;
+  end;
+
+  if (edUsuario.Text = '') or (edSenhaUsuario.Text = '') or
+    (cbAtivo.ItemIndex = -1) or (cbGrupo.ItemIndex = -1) then begin
+    ShowMessage('Preencha todos os campos');
     Exit;
   end;
 

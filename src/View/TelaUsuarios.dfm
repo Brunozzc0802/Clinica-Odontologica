@@ -3223,20 +3223,6 @@ object PagUsuarios: TPagUsuarios
         'True'
         'False')
     end
-    object cbGrupo: TComboBox
-      Left = 412
-      Top = 10
-      Width = 100
-      Height = 23
-      Style = csDropDownList
-      TabOrder = 3
-      TextHint = 'Grupo'
-      OnKeyPress = cbGrupoKeyPress
-      Items.Strings = (
-        'Adminstrador'
-        'Recepcionista'
-        'Profissional')
-    end
     object btnAdicionarUsuario: TPanel
       AlignWithMargins = True
       Left = 11
@@ -3250,24 +3236,23 @@ object PagUsuarios: TPagUsuarios
       Align = alClient
       Color = 8142341
       ParentBackground = False
-      TabOrder = 4
+      TabOrder = 3
       OnClick = btnAdicionarUsuarioClick
       OnMouseEnter = btnAdicionarUsuarioMouseEnter
       OnMouseLeave = btnAdicionarUsuarioMouseLeave
       object lblAdicionarUsuario: TLabel
         AlignWithMargins = True
-        Left = 221
+        Left = 200
         Top = 6
-        Width = 78
+        Width = 128
         Height = 18
         Cursor = crHandPoint
-        Margins.Left = 220
+        Margins.Left = 210
         Margins.Top = 5
         Margins.Right = 200
         Margins.Bottom = 6
-        Align = alClient
         Alignment = taCenter
-        Caption = 'Adicionar'
+        Caption = 'Adicionar Usu'#225'rio'
         Color = clCream
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
@@ -3279,9 +3264,30 @@ object PagUsuarios: TPagUsuarios
         OnClick = btnAdicionarUsuarioClick
         OnMouseEnter = btnAdicionarUsuarioMouseEnter
         OnMouseLeave = btnAdicionarUsuarioMouseLeave
-        ExplicitWidth = 59
-        ExplicitHeight = 17
       end
+    end
+    object cbGrupo: TComboBox
+      Left = 411
+      Top = 10
+      Width = 100
+      Height = 23
+      BevelEdges = []
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Style = csDropDownList
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 4
+      TextHint = 'Grupo:'
+      OnKeyPress = cbGrupoKeyPress
+      Items.Strings = (
+        'Administrador'
+        'Profissional'
+        'Recepcionista')
     end
     object btnConfirmarAlteracoes: TPanel
       AlignWithMargins = True
@@ -3301,6 +3307,8 @@ object PagUsuarios: TPagUsuarios
       OnClick = btnConfirmarAlteracoesClick
       OnMouseEnter = btnConfirmarAlteracoesMouseEnter
       OnMouseLeave = btnConfirmarAlteracoesMouseLeave
+      ExplicitLeft = 19
+      ExplicitTop = 73
       object lblConfirmarAlteracoes: TLabel
         AlignWithMargins = True
         Left = 191
@@ -3323,8 +3331,9 @@ object PagUsuarios: TPagUsuarios
         Font.Style = [fsBold]
         ParentColor = False
         ParentFont = False
-        OnMouseEnter = btnConfirmarAlteracoesClick
-        OnMouseLeave = btnConfirmarAlteracoesClick
+        OnClick = btnConfirmarAlteracoesClick
+        OnMouseEnter = btnConfirmarAlteracoesMouseEnter
+        OnMouseLeave = btnConfirmarAlteracoesMouseLeave
         ExplicitWidth = 130
         ExplicitHeight = 17
       end

@@ -3045,7 +3045,7 @@ object PagProcedimentos: TPagProcedimentos
           Margins.Bottom = 7
           Align = alClient
           Alignment = taCenter
-          Caption = 'Adicionar Paciente'
+          Caption = 'Adicionar Procedimento'
           Color = clCream
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
@@ -3057,7 +3057,7 @@ object PagProcedimentos: TPagProcedimentos
           OnClick = btnadicionarClick
           OnMouseEnter = btnadicionarMouseEnter
           OnMouseLeave = btnadicionarMouseLeave
-          ExplicitWidth = 115
+          ExplicitWidth = 149
         end
       end
       object btnConfirmarAlteracoes: TPanel

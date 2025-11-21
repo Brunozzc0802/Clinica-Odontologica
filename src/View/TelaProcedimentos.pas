@@ -208,8 +208,8 @@ begin
       sgProcedimentos.RowCount := Linha + 1;
       sgProcedimentos.Cells[0, Linha] := Procedimento.Id.ToString;
       sgProcedimentos.Cells[1, Linha] := Procedimento.Nome;
-      sgProcedimentos.Cells[2, i + 1] := FloatToStr(ProcedimentoLista[i].Valor);
-      sgProcedimentos.Cells[3, i + 1] :=
+      sgProcedimentos.Cells[2, Linha] := FloatToStr(ProcedimentoLista[i].Valor);
+      sgProcedimentos.Cells[3, Linha] :=
         TimeToStr(ProcedimentoLista[i].Duracao);
       Inc(Linha);
     end;

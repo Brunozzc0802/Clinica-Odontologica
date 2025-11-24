@@ -1,6 +1,6 @@
 object PagProcedimentos: TPagProcedimentos
-  Left = 674
-  Top = 208
+  Left = 613
+  Top = 187
   BorderStyle = bsNone
   Caption = 'PagProcedimentos'
   ClientHeight = 638
@@ -3016,6 +3016,45 @@ object PagProcedimentos: TPagProcedimentos
       ParentBackground = False
       TabOrder = 3
       Visible = False
+      object Label10: TLabel
+        Left = 218
+        Top = 5
+        Width = 30
+        Height = 15
+        Caption = 'Valor:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 6381921
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label4: TLabel
+        Left = 8
+        Top = 5
+        Width = 117
+        Height = 15
+        Caption = 'Nome Procedimento:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 6381921
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label7: TLabel
+        Left = 441
+        Top = 5
+        Width = 50
+        Height = 15
+        Caption = 'Dura'#231#227'o:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 6381921
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
       object btnadicionar: TPanel
         AlignWithMargins = True
         Left = 8
@@ -3107,17 +3146,16 @@ object PagProcedimentos: TPagProcedimentos
       end
       object EdNome: TEdit
         Left = 8
-        Top = 9
+        Top = 20
         Width = 169
         Height = 32
         AutoSize = False
         TabOrder = 2
-        TextHint = 'Nome do Procedimento:'
         OnKeyDown = EdNomeKeyDown
       end
       object edValor: TMaskEdit
         Left = 218
-        Top = 9
+        Top = 20
         Width = 164
         Height = 32
         AutoSize = False
@@ -3130,7 +3168,7 @@ object PagProcedimentos: TPagProcedimentos
       end
       object edHora: TMaskEdit
         Left = 440
-        Top = 9
+        Top = 20
         Width = 126
         Height = 23
         EditMask = '!90:00:00;1;_'

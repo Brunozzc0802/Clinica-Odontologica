@@ -62,6 +62,9 @@ type
     lblRestore: TLabel;
     Label2: TLabel;
     edHora: TMaskEdit;
+    Label10: TLabel;
+    Label4: TLabel;
+    Label7: TLabel;
     procedure btnAddMouseEnter(Sender: TObject);
     procedure btnAddMouseLeave(Sender: TObject);
     procedure btnPesquisarMouseEnter(Sender: TObject);

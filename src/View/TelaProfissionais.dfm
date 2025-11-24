@@ -1,6 +1,6 @@
 object PagProfissionais: TPagProfissionais
-  Left = 694
-  Top = 228
+  Left = 613
+  Top = 208
   BorderStyle = bsNone
   Caption = 'PagProfissionais'
   ClientHeight = 658
@@ -2923,38 +2923,114 @@ object PagProfissionais: TPagProfissionais
     end
     object pnlAdd: TPanel
       Left = 9
-      Top = 460
+      Top = 456
       Width = 592
-      Height = 147
+      Height = 150
       Color = 15790320
       ParentBackground = False
       TabOrder = 3
       Visible = False
+      object Label7: TLabel
+        Left = 8
+        Top = 3
+        Width = 37
+        Height = 15
+        Caption = 'Nome:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 6381921
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label4: TLabel
+        Left = 8
+        Top = 57
+        Width = 35
+        Height = 15
+        Caption = 'Email:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 6381921
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label8: TLabel
+        Left = 219
+        Top = 55
+        Width = 26
+        Height = 15
+        Caption = 'Cep:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 6381921
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label9: TLabel
+        Left = 432
+        Top = 55
+        Width = 56
+        Height = 15
+        Caption = 'Endere'#231'o:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 6381921
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label10: TLabel
+        Left = 219
+        Top = 4
+        Width = 27
+        Height = 15
+        Caption = 'CPF:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 6381921
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label11: TLabel
+        Left = 432
+        Top = 4
+        Width = 50
+        Height = 15
+        Caption = 'Telefone:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 6381921
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
       object EdNome: TEdit
         Left = 8
-        Top = 9
+        Top = 19
         Width = 169
         Height = 32
         AutoSize = False
         TabOrder = 0
-        TextHint = 'Digite o nome:'
         OnKeyDown = EdNomeKeyDown
         OnKeyPress = EdNomeKeyPress
       end
       object edEndereco: TEdit
         Left = 432
-        Top = 56
+        Top = 70
         Width = 147
-        Height = 33
+        Height = 34
         AutoSize = False
         TabOrder = 1
-        TextHint = 'Digite o Endere'#231'o:'
         OnKeyPress = edEnderecoKeyPress
       end
       object btnadicionar: TPanel
         AlignWithMargins = True
         Left = 8
-        Top = 100
+        Top = 110
         Width = 571
         Height = 32
         Margins.Left = 10
@@ -2998,7 +3074,7 @@ object PagProfissionais: TPagProfissionais
       object btnConfirmarAlteracoes: TPanel
         AlignWithMargins = True
         Left = 8
-        Top = 100
+        Top = 110
         Width = 571
         Height = 32
         Margins.Left = 10
@@ -3043,7 +3119,7 @@ object PagProfissionais: TPagProfissionais
       end
       object edTelefone: TMaskEdit
         Left = 432
-        Top = 9
+        Top = 19
         Width = 147
         Height = 32
         AutoSize = False
@@ -3057,7 +3133,7 @@ object PagProfissionais: TPagProfissionais
       end
       object edCPF: TMaskEdit
         Left = 219
-        Top = 9
+        Top = 19
         Width = 169
         Height = 32
         AutoSize = False
@@ -3071,20 +3147,19 @@ object PagProfissionais: TPagProfissionais
       end
       object edEmail: TEdit
         Left = 8
-        Top = 56
+        Top = 70
         Width = 169
         Height = 34
         AutoSize = False
         TabOrder = 6
-        TextHint = 'Digite o Email:'
         OnKeyDown = edEmailKeyDown
         OnKeyPress = edEmailKeyPress
       end
       object edCep: TMaskEdit
         Left = 219
-        Top = 56
+        Top = 70
         Width = 168
-        Height = 33
+        Height = 34
         AutoSize = False
         EditMask = '00000-000;1;_'
         MaxLength = 9
@@ -3336,7 +3411,7 @@ object PagProfissionais: TPagProfissionais
   end
   object NetHTTPClient1: TNetHTTPClient
     UserAgent = 'Embarcadero URI Client/1.0'
-    Left = 362
-    Top = 561
+    Left = 354
+    Top = 573
   end
 end

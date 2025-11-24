@@ -68,6 +68,12 @@ type
     lblRestore: TLabel;
     btnLimpar: TPanel;
     lblLimpar: TLabel;
+    Label4: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
     procedure btnXClick(Sender: TObject);
     procedure btnAddMouseEnter(Sender: TObject);
     procedure btnAddMouseLeave(Sender: TObject);

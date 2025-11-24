@@ -1,6 +1,6 @@
 object PagRelatorios: TPagRelatorios
   Left = 613
-  Top = 249
+  Top = 228
   BorderStyle = bsNone
   Caption = 'PagRelatorios'
   ClientHeight = 555

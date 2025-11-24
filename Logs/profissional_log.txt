@@ -8,3 +8,12 @@ Sistema | Adicionou Profissional | aaaaaaaa | CPF: 75575757755 | 75575757755 | 1
 Sistema | Adicionou Profissional | aaaaaaaaaaaa | CPF: 11112222666 | 11112222666 | 16:09:22 05-11-2025
 Sistema | Restaurou Profissional | Aux. Limpeza Fábio | CPF: 151.617.819-01 | 151.617.819-01 | 16:32:19 18-11-2025
 Sistema | Alterou Profissional | Dr Fábio | CPF: 151.617.819-01 | 151.617.819-01 | 15:43:31 21-11-2025
+Sistema | Alterou Profissional | Dr. João Santos | CPF: 333.444.555-66 | 333.444.555-66 | 13:55:02 24-11-2025
+Sistema | Alterou Profissional | Dra. Maria Costa | CPF: 444.555.666-77 | 444.555.666-77 | 13:55:13 24-11-2025
+Sistema | Alterou Profissional | Dra. Alice | CPF: 666.777.888-99 | 666.777.888-99 | 13:55:23 24-11-2025
+Sistema | Alterou Profissional | Dr. Carlos Paz | CPF: 000.111.222-33 | 000.111.222-33 | 13:55:37 24-11-2025
+Sistema | Alterou Profissional | Dr. Helena Silva | CPF: 121.314.516-71 | 121.314.516-71 | 13:55:45 24-11-2025
+Sistema | Alterou Profissional | Dr. Sérgio | CPF: 161.718.910-11 | 161.718.910-11 | 13:55:52 24-11-2025
+Sistema | Adicionou Profissional | Teste | CPF: 12312321321 | 12312321321 | 14:04:19 24-11-2025
+Sistema | Deletou Profissional | Teste | CPF: 12312321321 | 12312321321 | 14:04:24 24-11-2025
+Sistema | Adicionou Profissional | aaaaaaaa | CPF: 21471894892 | 21471894892 | 14:05:13 24-11-2025

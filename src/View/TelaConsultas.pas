@@ -68,6 +68,12 @@ type
     lblConfirmarAlteracoes: TLabel;
     tmrAtualizarStatus: TTimer;
     sgRestore: TStringGrid;
+    Label10: TLabel;
+    Label1: TLabel;
+    Label4: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label11: TLabel;
 
     procedure btnXClick(Sender: TObject);
     procedure btnAddClick(Sender: TObject);
@@ -125,7 +131,7 @@ type
 
   private
     Controller: TConsultaController;
-    ConsController: TLogController;
+    LogController: TLogController;
     ConsultaIdAlterar: Integer;
     procedure CarregarComboBox;
     procedure RecarregarComboBox;
@@ -237,7 +243,7 @@ begin
   ConsultaIdAlterar := 0;
   btnAlterar.Enabled := False;
   btnConfirmarAlteracoes.Visible := False;
-  Calendar1.Date := 21/11/2025;
+  Calendar1.Date := 21 / 11 / 2025;
 end;
 
 procedure TPagConsultas.FormShow(Sender: TObject);
@@ -898,13 +904,13 @@ begin
     if cbNomeProc.ItemIndex >= 0 then
       NomeProcedimento := cbNomeProc.Items[cbNomeProc.ItemIndex];
 
-    ConsController := TLogController.Create;
+    LogController := TLogController.Create;
     try
-      ConsController.RegistrarLog(UsuarioLogado.Nome, NomePaciente,
+      LogController.RegistrarLog(UsuarioLogado.Nome, NomePaciente,
         NomeProfissional, NomeProcedimento, FormatDateTime('dd/mm/yyyy', Data),
         FormatDateTime('hh:nn', HoraInicio), 'Agendou Consulta', '');
     finally
-      ConsController.Free;
+      LogController.Free;
     end;
 
     ShowMessage('Consulta agendada com sucesso!');
@@ -984,14 +990,14 @@ begin
         if cbNomeProc.ItemIndex >= 0 then
           NomeProcedimento := cbNomeProc.Items[cbNomeProc.ItemIndex];
 
-        ConsController := TLogController.Create;
+        LogController := TLogController.Create;
         try
-          ConsController.RegistrarLog(UsuarioLogado.Nome, NomePaciente,
+          LogController.RegistrarLog(UsuarioLogado.Nome, NomePaciente,
             NomeProfissional, NomeProcedimento, FormatDateTime('dd/mm/yyyy',
             DateTimePicker1.Date), FormatDateTime('hh:nn', HoraInicio),
             'Alterou Consulta', '');
         finally
-          ConsController.Free;
+          LogController.Free;
         end;
 
         ShowMessage('Consulta alterada com sucesso!');
@@ -1145,29 +1151,21 @@ begin
       ShowMessage('Consulta inválida!');
       Exit;
     end;
-
-    // Obter dados para o log
     NomePaciente := sgConsultas.Cells[1, Linha];
     NomeProfissional := sgConsultas.Cells[2, Linha];
     NomeProcedimento := sgConsultas.Cells[3, Linha];
     DataConsulta := sgConsultas.Cells[4, Linha];
     HoraInicio := sgConsultas.Cells[5, Linha];
-
-    // Chama o controller para desativar a consulta
     if Controller.DesativarConsulta(ConsultaId) then begin
-      // Registrar log
-      ConsController := TLogController.Create;
+      LogController := TLogController.Create;
       try
-        ConsController.RegistrarLog(UsuarioLogado.Nome, NomePaciente,
+        LogController.RegistrarLog(UsuarioLogado.Nome, NomePaciente,
           NomeProfissional, NomeProcedimento, DataConsulta, HoraInicio,
           'Cancelou Consulta', '');
       finally
-        ConsController.Free;
+        LogController.Free;
       end;
-
       ShowMessage('Consulta deletada com sucesso!');
-
-      // Recarrega o grid
       CarregarConsultas;
     end
     else begin
@@ -1295,17 +1293,15 @@ begin
     HoraInicio := sgRestore.Cells[5, Linha];
 
     if Controller.RestaurarConsulta(ConsultaId) then begin
-      ConsController := TLogController.Create;
+      LogController := TLogController.Create;
       try
-        ConsController.RegistrarLog(UsuarioLogado.Nome, NomePaciente,
+        LogController.RegistrarLog(UsuarioLogado.Nome, NomePaciente,
           NomeProfissional, NomeProcedimento, DataConsulta, HoraInicio,
           'Restaurou Consulta', '');
       finally
-        ConsController.Free;
+        LogController.Free;
       end;
-
       ShowMessage('Consulta restaurada com sucesso!');
-
       CarregarConsultasCanceladas;
       CarregarConsultas;
       sgRestore.Row := 0;

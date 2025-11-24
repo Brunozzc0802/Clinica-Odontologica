@@ -9,3 +9,4 @@ admin | procedimento do ku | Adicionou | Valor: 200,00 | Duraço: 10:30:55 | 15:4
 admin | Alterou | procedimento do ku | Valor: 150,   | Duraço: 00:01:00 | 15:41:57 21-11-2025
 admin | Deletou | procedimento do ku | 17:06:20 21-11-2025
 admin | Procedimento teste | Adicionou | Valor: 250,00 | Duraço: 10:00:00 | 17:15:37 21-11-2025
+admin | Deletou | Procedimento teste | 13:56:19 24-11-2025

@@ -2,7 +2,7 @@ object FormLogin: TFormLogin
   Left = 0
   Top = 0
   Caption = 'FormLogin'
-  ClientHeight = 876
+  ClientHeight = 1030
   ClientWidth = 1901
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -13,23 +13,23 @@ object FormLogin: TFormLogin
   KeyPreview = True
   Position = poDesigned
   WindowState = wsMaximized
-  OnCreate = FormCreate
   TextHeight = 15
   object pnlLogin: TPanel
     Left = 0
     Top = 0
     Width = 1901
-    Height = 876
+    Height = 1030
     Align = alClient
     TabOrder = 0
+    ExplicitHeight = 876
     DesignSize = (
       1901
-      876)
+      1030)
     object imgFundo: TImage
       Left = 1422
       Top = 1
       Width = 478
-      Height = 874
+      Height = 1028
       Align = alRight
       Picture.Data = {
         0A544A504547496D61676516630000FFD8FFE000104A46494600010100004800
@@ -834,19 +834,20 @@ object FormLogin: TFormLogin
       Left = 1
       Top = 1
       Width = 1421
-      Height = 874
+      Height = 1028
       Align = alClient
       Color = 13204758
       ParentBackground = False
       TabOrder = 0
+      ExplicitHeight = 874
       DesignSize = (
         1421
-        874)
+        1028)
       object imgLogoLogin: TImage
         Left = 124
         Top = 259
         Width = 1062
-        Height = 302
+        Height = 456
         Anchors = [akLeft, akTop, akRight, akBottom]
         Center = True
         Picture.Data = {
@@ -2630,10 +2631,10 @@ object FormLogin: TFormLogin
           Caption = 'Login'
           Color = clLime
           Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
+          Font.Color = 13204758
           Font.Height = -48
           Font.Name = 'Impact'
-          Font.Style = []
+          Font.Style = [fsUnderline]
           ParentColor = False
           ParentFont = False
           Transparent = True
@@ -3336,19 +3337,20 @@ object FormLogin: TFormLogin
     Left = 0
     Top = 0
     Width = 1901
-    Height = 876
+    Height = 1030
     Align = alClient
     TabOrder = 1
     Visible = False
+    ExplicitHeight = 876
     DesignSize = (
       1901
-      876)
+      1030)
     object pnlAzulPrincipal: TPanel
       AlignWithMargins = True
       Left = 279
       Top = 2
       Width = 1618
-      Height = 870
+      Height = 1024
       Cursor = crHandPoint
       Margins.Left = 278
       Margins.Top = 1
@@ -3356,15 +3358,18 @@ object FormLogin: TFormLogin
       Color = 13204758
       ParentBackground = False
       TabOrder = 0
+      ExplicitLeft = 282
+      ExplicitTop = 3
+      ExplicitHeight = 870
       DesignSize = (
         1618
-        870)
+        1024)
       object imgLogoPrincipal: TImage
         AlignWithMargins = True
         Left = 81
         Top = 51
         Width = 1486
-        Height = 768
+        Height = 922
         Margins.Left = 80
         Margins.Top = 50
         Margins.Right = 50
@@ -5087,11 +5092,11 @@ object FormLogin: TFormLogin
           831239F9E5C89163502227BF1C39720C4AE4E49723478E41899CFC72E4C83128
           91935F8E1C390625FE3FF554A820DEE964570000000049454E44AE426082}
         ExplicitLeft = 80
-        ExplicitWidth = 1452
+        ExplicitHeight = 768
       end
       object footerPrincipal: TPanel
         Left = 0
-        Top = 821
+        Top = 975
         Width = 1620
         Height = 59
         Anchors = [akLeft, akRight, akBottom]
@@ -5100,6 +5105,7 @@ object FormLogin: TFormLogin
         Color = 8142341
         ParentBackground = False
         TabOrder = 0
+        ExplicitTop = 821
         object Shape8: TShape
           Left = 1456
           Top = 7
@@ -5151,7 +5157,7 @@ object FormLogin: TFormLogin
           Left = 20
           Top = 9
           Width = 202
-          Height = 31
+          Height = 33
           BevelOuter = bvNone
           Color = 8142341
           ParentBackground = False
@@ -5159,38 +5165,42 @@ object FormLogin: TFormLogin
           object Image1: TImage
             Left = 1
             Top = 0
-            Width = 31
-            Height = 30
+            Width = 36
+            Height = 33
             Cursor = crHandPoint
             Picture.Data = {
               0954506E67496D61676589504E470D0A1A0A0000000D49484452000000200000
               00200806000000737A7AF4000000097048597300000EC300000EC301C76FA864
               0000001974455874536F667477617265007777772E696E6B73636170652E6F72
-              679BEE3C1A0000023E4944415478DAED974F48145118C0672C2DD02024153252
-              833C889446480751E962918120A2089AA2081E2412EDD225C14B91E449F0E0AA
-              7BF5B00441108446A05888E1FF8B09825EFC03824686B1FD3EF689CBFE71DE2E
-              6F10C1811FDFDB37DF7CEF376F66DECCDAD6296FF6B9C09913F0FBFD4F082D50
-              081760164660D4B66DBF6B020C7C9130080D51523E420D12BFDD12784378E990
-              E645E099710106BF41F805894EA9700F899FA6055A09039A355F23D06D5AA087
-              F04AB3E630024DA605BA086F356BBE47A0C3B44011614AB36625021F8C0A2889
-              31429943DA3C1420F0CF0D017912BE417694944D1164F045DD9A310928897482
-              AC07B57059751F820F3A197C2D967A310B0489A410F24056C70506DEA5AF9176
-              335C57691B30C43E8F71810842F5042FACC28AEABEA590CBF2D58800035D23E4
-              431A5C81658A4FD0FF85F66D81DF072A3789202FAE4FF4FD894B8022C984C7F0
-              14CA212324A58FE22FC85BA0BD4DBB24E478B9448FE033FBFE6A0B70A00CD40E
-              6D907A82A393C003C2A41578535645920813E0A02CC27748D7B82A6102B47369
-              DF0CCA9165B90E7EC04372F69C04E4ACFB35060F138052D83A61D6DE91DFE524
-              20EB786F3C026A06EED3CE09CAA95433B004C5E4ECB82A1052AB803003E350C1
-              FEFDD0026E0B5C2254832FD2E0D10462B9073C146EE6183943B9F172F97DA8EA
-              24C894C3C4519FAE80BC74A62DBDA7608EE27782BE98E66059ED93A7E1AE15CF
-              4A48C1ABD6F167B7D326C5E50C9F5B817741A6EA5F9719B2029729EAE7FAD9FB
-              63722E607AFB0F215DEE21321F90480000000049454E44AE426082}
+              679BEE3C1A000002C04944415478DABD975B4815511486F76452C1A930A23088
+              7CE876E882412F76430245A4FB8510D39420C2EAC9227C092AA5A05E2304B130
+              2BE8264412151111942FD2430F8946542FF6120452A95D4EDF6A56709C93E7EC
+              3D33B9E167ED99BD66AD6FEF73F69A3D9EB16CA9546A19A6196D429303C303E8
+              34EAF43C2F651B539A6799BC1AD386A6E670BD8D6A81F81A1B00C92B30F7509E
+              65CC2EB40B885F9101489EC0BC41736D67A46D2F0057E300388A39E7985C5A1F
+              00C938009E61D68500909604A22F2AC027CCAC90003B00E88A0A308C99121260
+              1F001D5101DE611684042807E05154804E4C7588E4DFD11C003E470528C73C08
+              017083E47B6C1C6D0AD17D4C854372A982C5000CC405301BF31C2DB288F71355
+              91FCA62DADEDBB4020AEE45889415447F2870EAB650790065286A941EB512192
+              3F99141BD9EF6D24FF82CF4CE3EF9C7C7DEC1B7ACBD87064801C70D33067D021
+              93F9BA1ED2B1B3C1D7759C001DBA3AD95A3D00976307207931E6A55E36A07612
+              8DE898FC244DC6AF27DBB8DFEB0440808598E528A92AD4A1025DD25BF8D4D1BF
+              84FAB95EE2029F014030F9F394A2CDAAA22CCF1F24612BCF1CA0DF8A7AB95E3D
+              CE44E440B3557DDE6700E03003538F1AD17CCB09B8006CC7DC411FD146FC5EFF
+              0150B253E8089AEEB27C8E0032A91E342F1D420064C6E71D136705E0BA405733
+              3FE02F054D7C65B5A5646F11806E3A9531039CA07FD2E2F90F0220A5B32C6680
+              A5C62F3C8980BF14A85548B6A614A4E3FF05E05F8E7AC2965C256814EDC6F7EE
+              44025461AEA52797FB13BD02B2DBBAF179FCF77E5480C304BB408CFDC6FF747B
+              C5F54A970002D06EFC2D13A649296E224629FD27C63F0B6EE05E4F60F6528476
+              A2638C0D06015618FFC493B0CB39A6BD20E01A624CA2FFD4F81F313F9054B951
+              F591E2B658FB0DF85F1C03A0844518A174FD0694D642D021AD74D7D1DA71FCE4
+              D052238796F49BBF01443B3AC0BF454FD30000000049454E44AE426082}
             OnClick = Image1Click
           end
           object lblBemVindo: TLabel
-            Left = 38
-            Top = 4
-            Width = 161
+            Left = 44
+            Top = 5
+            Width = 145
             Height = 20
             AutoSize = False
             Caption = 'aaa'
@@ -5208,12 +5218,13 @@ object FormLogin: TFormLogin
       Left = -6
       Top = 2
       Width = 283
-      Height = 874
+      Height = 1028
       Anchors = [akLeft, akTop, akBottom]
       Color = 8142341
       ParentBackground = False
       TabOrder = 1
       Visible = False
+      ExplicitHeight = 874
       object Shape1: TShape
         Left = 9
         Top = 481
@@ -5887,8 +5898,8 @@ object FormLogin: TFormLogin
           OnMouseLeave = pnlEncerrarSistemaMouseLeave
         end
         object imgEncerrarSistema: TImage
-          Left = -5
-          Top = -2
+          Left = -2
+          Top = -4
           Width = 273
           Height = 75
           Cursor = crHandPoint

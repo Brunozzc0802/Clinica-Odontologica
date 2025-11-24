@@ -64,6 +64,10 @@ type
     cbGrupo: TComboBox;
     btnConfirmarAlteracoes: TPanel;
     lblConfirmarAlteracoes: TLabel;
+    Label8: TLabel;
+    Label4: TLabel;
+    Label7: TLabel;
+    Label9: TLabel;
     procedure btnXUsuariosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnAddUsuMouseEnter(Sender: TObject);

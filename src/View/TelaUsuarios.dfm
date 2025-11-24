@@ -1,5 +1,5 @@
 object PagUsuarios: TPagUsuarios
-  Left = 613
+  Left = 674
   Top = 208
   BorderStyle = bsNone
   Caption = 'Usu'#225'rios'
@@ -3160,17 +3160,69 @@ object PagUsuarios: TPagUsuarios
     end
   end
   object pnlFormAddUsuarios: TPanel
-    Left = 8
-    Top = 500
+    Left = 10
+    Top = 499
     Width = 525
     Height = 132
     BevelOuter = bvNone
     Color = 15395562
     ParentBackground = False
     TabOrder = 4
+    object Label8: TLabel
+      Left = 10
+      Top = 3
+      Width = 101
+      Height = 15
+      Caption = 'Nome de Usu'#225'rio:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = 6381921
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 164
+      Top = 1
+      Width = 39
+      Height = 15
+      Caption = 'Senha:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = 6381921
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label7: TLabel
+      Left = 317
+      Top = 3
+      Width = 28
+      Height = 15
+      Caption = 'Ativo:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = 6381921
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label9: TLabel
+      Left = 412
+      Top = 3
+      Width = 37
+      Height = 15
+      Caption = 'Grupo:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = 6381921
+      Font.Height = -12
+      Font.Name = 'Arial'
+      Font.Style = []
+      ParentFont = False
+    end
     object edUsuario: TEdit
       Left = 10
-      Top = 11
+      Top = 18
       Width = 142
       Height = 31
       AutoSize = False
@@ -3182,12 +3234,11 @@ object PagUsuarios: TPagUsuarios
       Font.Style = []
       ParentFont = False
       TabOrder = 0
-      TextHint = 'Digite o nome de usu'#225'rio:'
       OnKeyPress = edUsuarioKeyPress
     end
     object edSenhaUsuario: TEdit
       Left = 163
-      Top = 11
+      Top = 18
       Width = 142
       Height = 31
       AutoSize = False
@@ -3198,12 +3249,11 @@ object PagUsuarios: TPagUsuarios
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      TextHint = 'Digite a senha:'
       OnKeyPress = edSenhaUsuarioKeyPress
     end
     object cbAtivo: TComboBox
       Left = 315
-      Top = 10
+      Top = 18
       Width = 83
       Height = 23
       BevelEdges = []
@@ -3217,7 +3267,6 @@ object PagUsuarios: TPagUsuarios
       Font.Style = []
       ParentFont = False
       TabOrder = 2
-      TextHint = 'Ativo:'
       OnKeyPress = cbAtivoKeyPress
       Items.Strings = (
         'True'
@@ -3244,8 +3293,8 @@ object PagUsuarios: TPagUsuarios
         AlignWithMargins = True
         Left = 200
         Top = 6
-        Width = 128
-        Height = 18
+        Width = 110
+        Height = 17
         Cursor = crHandPoint
         Margins.Left = 210
         Margins.Top = 5
@@ -3268,7 +3317,7 @@ object PagUsuarios: TPagUsuarios
     end
     object cbGrupo: TComboBox
       Left = 411
-      Top = 10
+      Top = 18
       Width = 100
       Height = 23
       BevelEdges = []
@@ -3282,11 +3331,9 @@ object PagUsuarios: TPagUsuarios
       Font.Style = []
       ParentFont = False
       TabOrder = 4
-      TextHint = 'Grupo:'
       OnKeyPress = cbGrupoKeyPress
       Items.Strings = (
         'Administrador'
-        'Profissional'
         'Recepcionista')
     end
     object btnConfirmarAlteracoes: TPanel
@@ -3307,13 +3354,12 @@ object PagUsuarios: TPagUsuarios
       OnClick = btnConfirmarAlteracoesClick
       OnMouseEnter = btnConfirmarAlteracoesMouseEnter
       OnMouseLeave = btnConfirmarAlteracoesMouseLeave
-      ExplicitLeft = 19
-      ExplicitTop = 73
+      ExplicitLeft = 9
       object lblConfirmarAlteracoes: TLabel
         AlignWithMargins = True
         Left = 191
         Top = 6
-        Width = 138
+        Width = 139
         Height = 18
         Cursor = crHandPoint
         Margins.Left = 190

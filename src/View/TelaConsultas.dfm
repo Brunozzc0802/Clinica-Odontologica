@@ -1,6 +1,6 @@
 object PagConsultas: TPagConsultas
-  Left = 572
-  Top = 166
+  Left = 592
+  Top = 208
   BorderStyle = bsNone
   Caption = 'PagConsultas'
   ClientHeight = 627
@@ -3003,9 +3003,87 @@ object PagConsultas: TPagConsultas
       ParentBackground = False
       TabOrder = 1
       Visible = False
+      object Label10: TLabel
+        Left = 8
+        Top = 4
+        Width = 119
+        Height = 15
+        Caption = 'Selecione o Paciente:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 6381921
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label1: TLabel
+        Left = 8
+        Top = 43
+        Width = 99
+        Height = 15
+        Caption = 'Data da Consulta:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 6381921
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label4: TLabel
+        Left = 216
+        Top = 4
+        Width = 137
+        Height = 15
+        Caption = 'Selecione o Profissional:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 6381921
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label8: TLabel
+        Left = 423
+        Top = 4
+        Width = 148
+        Height = 15
+        Caption = 'Selecione o Procedimento:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 6381921
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label9: TLabel
+        Left = 216
+        Top = 43
+        Width = 62
+        Height = 15
+        Caption = 'Hora In'#237'cio:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 6381921
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label11: TLabel
+        Left = 423
+        Top = 43
+        Width = 54
+        Height = 15
+        Caption = 'Hora Fim:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 6381921
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
       object cbNomePaci: TComboBox
         Left = 8
-        Top = 9
+        Top = 18
         Width = 161
         Height = 23
         Style = csDropDownList
@@ -3014,7 +3092,7 @@ object PagConsultas: TPagConsultas
       end
       object cbNomeProf: TComboBox
         Left = 216
-        Top = 8
+        Top = 18
         Width = 161
         Height = 23
         Style = csDropDownList
@@ -3023,7 +3101,7 @@ object PagConsultas: TPagConsultas
       end
       object cbNomeProc: TComboBox
         Left = 423
-        Top = 8
+        Top = 18
         Width = 163
         Height = 23
         Style = csDropDownList
@@ -3032,7 +3110,7 @@ object PagConsultas: TPagConsultas
       end
       object DateTimePicker1: TDateTimePicker
         Left = 8
-        Top = 43
+        Top = 58
         Width = 161
         Height = 23
         Date = 45658.000000000000000000
@@ -3041,7 +3119,7 @@ object PagConsultas: TPagConsultas
       end
       object edHoraInicio: TMaskEdit
         Left = 216
-        Top = 43
+        Top = 58
         Width = 160
         Height = 23
         EditMask = '!90:00;1;_'
@@ -3053,7 +3131,7 @@ object PagConsultas: TPagConsultas
       object btnadicionar: TPanel
         AlignWithMargins = True
         Left = 8
-        Top = 82
+        Top = 87
         Width = 578
         Height = 32
         Margins.Left = 10
@@ -3096,7 +3174,7 @@ object PagConsultas: TPagConsultas
       end
       object edHoraFim: TMaskEdit
         Left = 423
-        Top = 43
+        Top = 58
         Width = 163
         Height = 23
         EditMask = '!90:00;1;_'
@@ -3107,7 +3185,7 @@ object PagConsultas: TPagConsultas
       object btnConfirmarAlteracoes: TPanel
         AlignWithMargins = True
         Left = 8
-        Top = 82
+        Top = 87
         Width = 578
         Height = 32
         Margins.Left = 10

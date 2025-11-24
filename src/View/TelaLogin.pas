@@ -70,10 +70,8 @@ type
     Shape9: TShape;
     Panel2: TPanel;
     lblBemVindo: TLabel;
-    procedure FormCreate(Sender: TObject);
     procedure btnEntrarMouseEnter(Sender: TObject);
     procedure btnEntrarMouseLeave(Sender: TObject);
-    procedure btnEncerrarSistemaClick(Sender: TObject);
     procedure ImgOlhoFechadoClick(Sender: TObject);
     procedure ImgOlhoAbertoClick(Sender: TObject);
     procedure pnlUserMouseEnter(Sender: TObject);
@@ -131,13 +129,15 @@ begin
     end;
     Usuario := UserController.VerificarUsuario(edUsuario.Text,
       edSenha.Text, Msg);
+
     if Usuario = nil then begin
       ShowMessage(Msg);
       Exit;
     end;
+
     UsuarioLogado := Usuario;
+    Sleep(300);
     if Usuario.Grupo = 'Administrador' then begin
-      Sleep(300);
       pnlLogin.Visible := False;
       pnlTelaPrincipal.Visible := True;
       pnlFundoLateral.Visible := True;
@@ -158,34 +158,11 @@ begin
       pnlUser.Visible := False;
       pnlProfissionais.Visible := False;
       pnlProcedimentos.Visible := False;
-      lblBemVindo.Caption := 'Bem-vindo: ' + Usuario.Nome + '!';
-    end
-    else if Usuario.Grupo = 'Profissional' then begin
-      pnlConsultas.Visible := True;
-      pnlConsultas.Top := 8;
-      Shape4.Top := 5;
-      pnlPacientes.Visible := True;
-      pnlPacientes.Top := 86;
-      Shape6.Top := 83;
-      pnlEncerrarSistema.Visible := True;
-      pnlEncerrarSistema.Top := 164;
-      Shape1.Top := 161;
-      pnlUser.Visible := False;
-      pnlProfissionais.Visible := False;
-      pnlProcedimentos.Visible := False;
-      pnlRelatorios.Visible := False;
-      Shape2.Visible := False;
-      Shape7.Visible := False;
-      Shape5.Visible := False;
-      Shape3.Visible := False;
-      lblBemVindo.Caption := 'Bem-vindo: ' + Usuario.Nome + '!';
-    end
-    else
-      Sleep(300);
-    pnlLogin.Visible := False;
-    pnlTelaPrincipal.Visible := True;
-    pnlFundoLateral.Visible := True;
-    lblBemVindo.Caption := 'Bem-vindo: ' + Usuario.Nome + '!';
+      pnlLogin.Visible := False;
+      pnlTelaPrincipal.Visible := True;
+      pnlFundoLateral.Visible := True;
+      lblBemVindo.Caption := 'Bem-vindo, ' + Usuario.Nome + '!';
+    end;
   finally
     UserController.Free;
   end;
@@ -215,11 +192,6 @@ begin
     Key := #0;
     edSenha.SetFocus;
   end;
-end;
-
-procedure TFormLogin.FormCreate(Sender: TObject);
-begin
-  lblLogin.font.Color := $00C97D16;
 end;
 
 procedure TFormLogin.Image1Click(Sender: TObject);
@@ -406,13 +378,6 @@ end;
 procedure TFormLogin.Timer1Timer(Sender: TObject);
 begin
   lblDataHora.Caption := FormatDateTime('dd/mm/yyyy hh:nn:ss', Now);
-end;
-
-procedure TFormLogin.btnEncerrarSistemaClick(Sender: TObject);
-begin
-  ShowMessage('Encerrando sistema');
-  Sleep(800);
-  Close;
 end;
 
 end.

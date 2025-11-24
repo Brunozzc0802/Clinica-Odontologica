@@ -67,6 +67,12 @@ type
     btnX: TImage;
     NetHTTPClient1: TNetHTTPClient;
     edCep: TMaskEdit;
+    Label7: TLabel;
+    Label4: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
     procedure CarregarGrid;
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -189,6 +195,10 @@ begin
       (edCep.Text = '') or (edEmail.Text = '') or (edEndereco.Text = '') then
     begin
       ShowMessage('Preencha todos os campos');
+      Exit;
+    end;
+
+    if buscarCEP(edCep.Text) then begin
       Exit;
     end;
 
@@ -620,6 +630,7 @@ begin
       sgProfissionais.Cells[5, I + 1] := ProfissionaisLista[I].endereco;
       sgProfissionais.Cells[6, I + 1] := ProfissionaisLista[I].Email;
     end;
+    OrdenarGrid;
   finally
   end;
 end;
@@ -628,6 +639,10 @@ procedure TPagProfissionais.ConfirmarAlteracoes(Sender: TObject);
 begin
   if ProfissionalIdalterar = 0 then begin
     ShowMessage('Selecione um Profissional para alterar');
+    Exit;
+  end;
+
+  if buscarCEP(edCep.Text) then begin
     Exit;
   end;
   try
@@ -770,6 +785,8 @@ begin
   sgProfissionais.ColWidths[4] := 110;
   sgProfissionais.ColWidths[5] := 185;
   sgProfissionais.ColWidths[6] := 157;
+
+  OrdenarGrid;
 end;
 
 procedure TPagProfissionais.FormDestroy(Sender: TObject);

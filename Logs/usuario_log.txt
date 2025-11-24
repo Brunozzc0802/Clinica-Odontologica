@@ -50,3 +50,4 @@ admin | Alterou | Recep | Grupo | Recepcionista | 14:09:28 21-11-2025
 admin | Alterou | Recep | Grupo | Recepcionista | 14:09:29 21-11-2025
 admin | Adicionou | ku | Grupo | Profissional | 15:34:11 21-11-2025
 admin | Alterou | kuchma | Grupo | Profissional | 15:34:25 21-11-2025
+admin | Adicionou | recep | Grupo | Recepcionista | 13:52:56 24-11-2025

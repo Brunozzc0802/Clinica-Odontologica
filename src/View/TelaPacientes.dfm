@@ -1,5 +1,5 @@
 object PagPacientes: TPagPacientes
-  Left = 674
+  Left = 613
   Top = 208
   BorderStyle = bsNone
   Caption = 'PagPacientes'
@@ -3022,47 +3022,124 @@ object PagPacientes: TPagPacientes
     end
     object pnlAddPacientes: TPanel
       Left = 9
-      Top = 460
+      Top = 456
       Width = 592
-      Height = 147
+      Height = 151
       Color = 15790320
       ParentBackground = False
       TabOrder = 3
       Visible = False
       OnClick = btnConfirmarAlteracoesClick
+      object Label4: TLabel
+        Left = 9
+        Top = 5
+        Width = 37
+        Height = 15
+        Caption = 'Nome:'
+        Color = clLightgray
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 6381921
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
+      object Label7: TLabel
+        Left = 9
+        Top = 58
+        Width = 26
+        Height = 15
+        Caption = 'Cep:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 6381921
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label8: TLabel
+        Left = 219
+        Top = 7
+        Width = 27
+        Height = 15
+        Caption = 'CPF:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 6381921
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label9: TLabel
+        Left = 432
+        Top = 7
+        Width = 50
+        Height = 15
+        Caption = 'Telefone:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 6381921
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label10: TLabel
+        Left = 219
+        Top = 59
+        Width = 56
+        Height = 15
+        Caption = 'Endere'#231'o:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 6381921
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
+      object Label11: TLabel
+        Left = 432
+        Top = 58
+        Width = 114
+        Height = 15
+        Caption = 'Data de nascimento:'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = 6381921
+        Font.Height = -12
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+      end
       object EdNomePaciente: TEdit
         Left = 8
-        Top = 9
+        Top = 22
         Width = 169
         Height = 32
         AutoSize = False
         TabOrder = 0
-        TextHint = 'Digite o nome:'
         OnKeyDown = EdNomePacienteKeyDown
       end
       object edCEP: TEdit
         Left = 8
-        Top = 57
+        Top = 73
         Width = 169
         Height = 32
         AutoSize = False
         TabOrder = 1
-        TextHint = 'Digite o Cep:'
         OnKeyDown = edCEPKeyDown
       end
       object edEndereco: TEdit
         Left = 219
-        Top = 57
+        Top = 73
         Width = 169
         Height = 32
         AutoSize = False
         TabOrder = 2
-        TextHint = 'Digite o Endere'#231'o:'
       end
       object btnaddPaciente: TPanel
         AlignWithMargins = True
         Left = 8
-        Top = 100
+        Top = 114
         Width = 571
         Height = 32
         Margins.Left = 10
@@ -3106,7 +3183,7 @@ object PagPacientes: TPagPacientes
       object btnConfirmarAlteracoes: TPanel
         AlignWithMargins = True
         Left = 8
-        Top = 100
+        Top = 113
         Width = 571
         Height = 32
         Margins.Left = 10
@@ -3151,16 +3228,16 @@ object PagPacientes: TPagPacientes
       end
       object edDataNasc: TDateTimePicker
         Left = 432
-        Top = 56
+        Top = 73
         Width = 147
-        Height = 33
+        Height = 32
         Date = 45962.000000000000000000
         Time = 0.641822141202283100
         TabOrder = 5
       end
       object edTelefone: TMaskEdit
         Left = 432
-        Top = 9
+        Top = 22
         Width = 147
         Height = 32
         AutoSize = False
@@ -3168,12 +3245,11 @@ object PagPacientes: TPagPacientes
         MaxLength = 15
         TabOrder = 6
         Text = '(  )      -    '
-        TextHint = 'Digite o Telefone:'
         OnKeyDown = edTelefoneKeyDown
       end
       object edCPF: TMaskEdit
         Left = 219
-        Top = 9
+        Top = 22
         Width = 168
         Height = 32
         AutoSize = False
@@ -3181,7 +3257,6 @@ object PagPacientes: TPagPacientes
         MaxLength = 14
         TabOrder = 7
         Text = ''
-        TextHint = 'Digite o CPF:'
         OnKeyDown = edCPFKeyDown
       end
     end
@@ -3321,6 +3396,6 @@ object PagPacientes: TPagPacientes
   object NetHTTPClient1: TNetHTTPClient
     UserAgent = 'Embarcadero URI Client/1.0'
     Left = 242
-    Top = 561
+    Top = 574
   end
 end

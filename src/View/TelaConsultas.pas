@@ -182,7 +182,7 @@ begin
       sgConsultas.Cells[5, I] := FormatDateTime('hh:nn', Consulta.HoraInicio);
       sgConsultas.Cells[6, I] := FormatDateTime('hh:nn', Consulta.HoraFim);
 
-      // Determinar status baseado no campo ativo e na data/hora
+      // Determinar status baseado na data/hora
       if Consulta.Ativo then begin
         if (Consulta.Data > Date) or
           ((Consulta.Data = Date) and (Consulta.HoraInicio > Time)) then
@@ -310,7 +310,6 @@ var
   SelectedIndexPaci, SelectedIndexProf, SelectedIndexProc: Integer;
   SelectedNamePaci, SelectedNameProf, SelectedNameProc: string;
 begin
-  // Salvar as seleções atuais
   SelectedIndexPaci := cbNomePaci.ItemIndex;
   SelectedIndexProf := cbNomeProf.ItemIndex;
   SelectedIndexProc := cbNomeProc.ItemIndex;
@@ -326,7 +325,6 @@ begin
   if SelectedIndexProc >= 0 then
     SelectedNameProc := cbNomeProc.Items[SelectedIndexProc];
 
-  // Limpar os comboboxes
   cbNomePaci.Clear;
   cbNomeProf.Clear;
   cbNomeProc.Clear;
@@ -359,7 +357,6 @@ begin
       ListaProcedimentos.Free;
     end;
 
-  // Restaurar as seleções
   cbNomePaci.ItemIndex := -1;
   cbNomeProf.ItemIndex := -1;
   cbNomeProc.ItemIndex := -1;
@@ -381,7 +378,6 @@ begin
   if cbNomeProc.ItemIndex = -1 then
     Exit;
 
-  // Usar nossa funcao de conversao
   HoraInicio := ConverterParaHora(edHoraInicio.Text);
 
   if (HoraInicio = 0) and (edHoraInicio.Text <> '') then begin
@@ -778,7 +774,6 @@ begin
     Exit;
   TextoLimpo := StringReplace(TextoLimpo, ':', '', [rfReplaceAll]);
 
-  // Tentar converter digitos para numeros
   try
     if Length(TextoLimpo) >= 2 then begin
       Hora := StrToInt(Copy(TextoLimpo, 1, 2));

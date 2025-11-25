@@ -19,8 +19,7 @@ type
     function BuscarProcedimentos: TObjectList<TProcedimento>;
     procedure CarregarProfissionaisNoComboBox(ComboBox: TComboBox);
     procedure CarregarProcedimentosNoComboBox(ComboBox: TComboBox);
-    function GerarRelatorioConsultas(DataInicio, DataFim: TDateTime): TFDQuery;
-        function GerarRelatorioProcedimento(ProcedimentoId: integer; DataInicio, DataFim: TDateTime): TFDQuery;
+    function GerarRelatorioProcedimento(ProcedimentoId: integer; DataInicio, DataFim: TDateTime): TFDQuery;
     function GerarRelatorioConsultasPorData(DataSelecionada: TDateTime): TFDQuery;
     procedure GerarRelatorioConsultasFastReport(DataSelecionada: TDateTime);
     procedure GerarRelatorioProfissionalFastReport(ComboBox: TComboBox);
@@ -115,13 +114,6 @@ begin
   end;
 end;
 
-function TRelatoriosController.GerarRelatorioConsultas(DataInicio, DataFim: TDateTime): TFDQuery;
-begin
-  if not ValidarDatasRelatorio(DataInicio, DataFim) then
-    raise Exception.Create('Data de início não pode ser maior que a data de fim');
-
-  Result := RepoRela.GerarRelatorioConsultasPorPeriodo(DataInicio, DataFim);
-end;
 
 
 function TRelatoriosController.GerarRelatorioProcedimento(ProcedimentoId: integer; DataInicio, DataFim: TDateTime): TFDQuery;

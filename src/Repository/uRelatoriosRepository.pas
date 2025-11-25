@@ -11,7 +11,6 @@ type
   public
     function BuscarProfissionaisAtivos: TObjectList<TProfissionais>;
     function BuscarProcedimentosAtivos: TObjectList<TProcedimento>;
-    function GerarRelatorioConsultasPorPeriodo(DataInicio, DataFim: TDateTime): TFDQuery;
     function GerarRelatorioPorProfissional(ProfissionalId: integer; DataInicio, DataFim: TDateTime): TFDQuery;
     function GerarRelatorioPorProcedimento(ProcedimentoId: integer; DataInicio, DataFim: TDateTime): TFDQuery;
     function GerarRelatorioConsultasPorData(DataSelecionada: TDateTime): TFDQuery;
@@ -81,30 +80,6 @@ begin
   end;
 end;
 
-function TRelatoriosRepository.GerarRelatorioConsultasPorPeriodo(DataInicio, DataFim: TDateTime): TFDQuery;
-begin
-  Result := TFDQuery.Create(nil);
-  Result.Connection := dmUsuarios.FDConnection1;
-
-  with Result do begin
-    Close;
-    SQL.Clear;
-    SQL.Text :=
-      'SELECT c.data, c.horas, p.nome as paciente_nome, prof.nome as profissional_nome, ' +
-      'proc.nome as procedimento_nome, proc.valor ' +
-      'FROM consultas c ' +
-      'INNER JOIN pacientes p ON c.paciente_id = p.id ' +
-      'INNER JOIN profissionais prof ON c.profissional_id = prof.id ' +
-      'INNER JOIN procedimentos proc ON c.procedimento_id = proc.id ' +
-      'WHERE c.data BETWEEN :data_inicio AND :data_fim ' +
-      'AND c.ativo = TRUE ' +
-      'ORDER BY c.data, c.horas';
-
-    ParamByName('data_inicio').AsDate := DataInicio;
-    ParamByName('data_fim').AsDate := DataFim;
-    Open;
-  end;
-end;
 
 function TRelatoriosRepository.GerarRelatorioPorProfissional(ProfissionalId: integer; DataInicio, DataFim: TDateTime): TFDQuery;
 begin
